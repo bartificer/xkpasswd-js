@@ -71,15 +71,43 @@ When altering the code you may find links to the documentation for the various t
 
 * Mozilla's Excellent JavaScript documentation — [developer.mozilla.org/…](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * Documentation for the NPN (Node Package Manager) CLI — https://docs.npmjs.com/cli/v9/
-* JSDoc & DocDash
+* Documentation for the JSDoc syntax — [jsdoc.app/…](https://jsdoc.app/)
+  * The best available documentation for the DocDash JSDoc theme — [github.com/…](https://github.com/clenemt/docdash)
+* Documentation for the Mermaid diagram markup language — [mermaid-js.github.io/…](https://mermaid-js.github.io/mermaid/#/)
 * Documentation for the project's code linter, ESLint — [eslint.org/…](https://eslint.org/docs/latest/)
 * Documentation for Jest, the project's code testing tool — [jestjs.io/…](https://jestjs.io/docs/getting-started)
-* Documentation the prokect's bundler, Webpack — [webpack.js.org/…](https://webpack.js.org/concepts/)
+* Documentation for the project's bundler, Webpack — [webpack.js.org/…](https://webpack.js.org/concepts/)
 
-### Versioning & Source Control Policy
+### Versioning Policy
 
-TO DO
+This module is versioned using the Semantic Versioning System, or [SemVer](https://semver.org/).
+
+### Source Control Policy
+
+1. Git commits to be merged into the `main` branch will be titled in line with the [Conventional Commits](https://www.conventionalcommits.org/) approapch.
+2. Commit messages will abe in the active voice in line with Git best practices.
+3. All contributions will be submitted via Pull request
+   * Until the project reaches version 1.0.0 any contributions that make progress towards the initial implemenation can be merged into the `main` branch
+   * Once the project reaches version 1.0.0 all contribtions must be *atomic*, i.e. must be a complete unit. For code contributions that means:
+     1. All tests must pass
+     2. News tests must be included to cover all new functionality
+     3. The Doc Comments must be updated as appropriate
+     4. The code must be in the project's style
 
 ### Style Guide
 
-TO DO
+As a general rule, take your lead from the existing content. If your contributions look out of place, they're unlikely to be accepted as they are.
+
+When writting documentation, try keep your additions in the same voice as the existing docs. Additionaly, when writting Markdown please use the following conventions:
+
+1. Use `*` as the bullet symbol.
+2. Use `**` for bold.
+3. Use `_` for italics.
+4. Use `#` symobls for all headings, even top level headings, i.e. don't use the post-fixed `:` notation.
+5. When adding multi-line code blocks, include a language specifier. Use `js` to specifiy JavaScript.
+
+When contributing to Mermaid Diagrams, add all class members inside the class definition block, don't use the alternaive syntax that allows single members be added in separate statements.
+
+When writting code, be sure to have ESLint enabled in your editor so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
+
+When writting code make sure it's in line with the project's ESLint configuation, and try to choose variable names that are in line with others in the surrounding code.
