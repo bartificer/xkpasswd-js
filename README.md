@@ -15,7 +15,7 @@ The plan is to develop this port in the following broad stages:
    * Outcomes:
      * ULM Class Diagram defining the API for the direct port
      * Contribution guides for developers including a project code style, a Git branching policy, and a style guide for Git commits
-     * Configuration files for the project tooling, specically WebPack (bundler), JSLint (code linter), JSDoc (documentation generator), and Jest (test suite)
+     * Configuration files for the project tooling, specifically WebPack (bundler), JSLint (code linter), JSDoc (documentation generator), and Jest (test suite)
      * Automations/Scripts to build the project, run the test suite, and build the documentation
 2. **Direct Port** — implementation of a feature-for-feature port of the Perl module to JavaScript
    * Pull requests implementing the documented design and following the contribution guidelines will be gratefully accepted
@@ -24,37 +24,37 @@ The plan is to develop this port in the following broad stages:
      * An ES6 JavaScript module implementing the documented API
      * Detailed documentation
      * A Jest test suite with full code coverage
-     * An officual NPM package for the module
+     * An official NPM package for the module
 3. **Maintenance & Enhancement** — bug fixes, security patches, and feature enhancements
-   * Details to be agreed later based on the experiences from phase 2.
+   * Details to be agreed upon later based on the experiences from phase 2.
 
 **The project is currently in phase 1 — project skeleton**.
 
 ## Repository Structure
 
-Fundamentally, the repository is a NodeJS project, so it contains the standard NodeJS files. In addition to these standard files, the projects assets are stored in the following structure:
+Fundamentally, the repository is a NodeJS project, so it contains the standard NodeJS files. In addition to these standard files, the project's assets are stored in the following structure:
 
 * `/buildScripts/` — the folder containing the scripts used to build the bundled versions of the module and the module's documentation site, including its UML diagrams.
 * `/dist/` — the target folder into which the build scripts will publish the bundled versions of the module, ready for distribution. **Do not edit the contents of this folder directly!**
-* `/docs/` — the target folder into which the build scripts will publish the generated documentation. This folder's contents will be published as the project's website. **Do not edit the contents of this folder directly!**
+* `/docs/` — the target folder into which the build scripts will publish the generated documentation. This folder's contents will be published at the project's website. **Do not edit the contents of this folder directly!**
 * `/docs-static/` — the folder containing the parts of the documentation that are not generated from documentation comments.
 * `/docs-static/diagrams/` — the target folder into which the build scripts will publish PNG versions of the project's UML diagrams. The source for these diagrams are the Mermaid files in `/src-diagrams/`.
 * `/src/` — the folder containing the module's source code and test suite.
-* `/src-diagrams/` — the folder containing the source code for the UML diagrams describing the module. These files will be in Mermaid format, and will be transformed into PNG files in `/docs-static/diagrams/` by a build script.
+* `/src-diagrams/` — the folder containing the source code for the UML diagrams describing the module. These files will be in Mermaid format and will be transformed into PNG files in `/docs-static/diagrams/` by a build script.
 
 ## Contributor & Developer Resources & Guides
 
-This project is managed through GitHub. To contribute by starting or commentong on feature requests or bug reports you'll need [a free GitHub account](https://github.com/signup). The project's home on GitHub is at [github.com/bartificer/xkpasswd-js](https://github.com/bartificer/xkpasswd-js/).
+This project is managed through GitHub. To contribute by starting or commenting on feature requests or bug reports you'll need [a free GitHub account](https://github.com/signup). The project's home on GitHub is at [github.com/bartificer/xkpasswd-js](https://github.com/bartificer/xkpasswd-js/).
 
-### Prerequistes
+### Prerequisites
 
-If you download the raq code you'll need the following to build the project, i.e. transform the raw code into a usable JavaScript modules with documentation, you'll need:
+If you download the raw code you'll need the following to build the project, i.e. transform the raw code into a usable JavaScript module with documentation, you'll need:
 
 1. The most recent LTS (Long Term Support) version of the NodeJS runtime available at [nodejs.org](https://nodejs.org/)
 2. A POSIX-compliant shell and terminal app capable of running Bash scripts — standard on Linux & Mac, and available for Windows through the Windows Subsystem for Linux (WSL) .
    * Microsoft's documentation for installing WSL — [learn.microsoft.com/…](https://learn.microsoft.com/en-us/windows/wsl/install)
-   * The offocial Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
-3. Sufficient confidence on the commandline to navigate to a folder and run basic commands
+   * The official Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
+3. Sufficient confidence on the command line to navigate to a folder and run basic commands
    * (you might find [the Taming the Terminal series](https://pbs.bartificer.net/) helpful 😉)
 
 To contribute documentation or code changes back to the project you'll also need:
@@ -67,7 +67,7 @@ To contribute documentation or code changes back to the project you'll also need
 
 ### Relevant Documentation
 
-When altering the code you may find links to the documentation for the various technologies used within the project's code and tool chain useful:
+When altering the code you may find links to the documentation for the various technologies used within the project's code and toolchain useful:
 
 * Mozilla's Excellent JavaScript documentation — [developer.mozilla.org/…](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * Documentation for the NPN (Node Package Manager) CLI — https://docs.npmjs.com/cli/v9/
@@ -85,10 +85,10 @@ This module is versioned using the Semantic Versioning System, or [SemVer](https
 ### Source Control Policy
 
 1. Git commits to be merged into the `main` branch will be titled in line with the [Conventional Commits](https://www.conventionalcommits.org/) approapch.
-2. Commit messages will abe in the active voice in line with Git best practices.
+2. Commit messages will be in the active voice in line with Git best practices.
 3. All contributions will be submitted via Pull request
-   * Until the project reaches version 1.0.0 any contributions that make progress towards the initial implemenation can be merged into the `main` branch
-   * Once the project reaches version 1.0.0 all contribtions must be *atomic*, i.e. must be a complete unit. For code contributions that means:
+   * Until the project reaches version 1.0.0 any contributions that make progress towards the initial implementation can be merged into the `main` branch
+   * Once the project reaches version 1.0.0 all contributions must be *atomic*, i.e. must be a complete unit. For code contributions that means:
      1. All tests must pass
      2. News tests must be included to cover all new functionality
      3. The Doc Comments must be updated as appropriate
@@ -98,21 +98,21 @@ This module is versioned using the Semantic Versioning System, or [SemVer](https
 
 As a general rule, take your lead from the existing content. If your contributions look out of place, they're unlikely to be accepted as they are.
 
-When writting documentation, try keep your additions in the same voice as the existing docs. Additionaly, when writting Markdown please use the following conventions:
+When writing documentation, try to keep your additions in the same voice as the existing docs. Additionally, when writing Markdown please use the following conventions:
 
 1. Use `*` as the bullet symbol.
 2. Use `**` for bold.
 3. Use `_` for italics.
-4. Use `#` symobls for all headings, even top level headings, i.e. don't use the post-fixed `:` notation.
-5. When adding multi-line code blocks, include a language specifier. Use `js` to specifiy JavaScript.
+4. Use `#` symobls for all headings, even toplevel headings, i.e. don't use the post-fixed `:` notation.
+5. When adding multi-line code blocks, include a language specifier. Use `js` to specify JavaScript.
 
-When contributing to Mermaid Diagrams, add all class members inside the class definition block, don't use the alternaive syntax that allows single members be added in separate statements.
+When contributing to Mermaid Diagrams, add all class members inside the class definition block; don't use the alternative syntax that allows single members to be added in separate statements.
 
-When writting code, be sure to have ESLint enabled in your editor so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
+When writing code, be sure to have ESLint enabled in your editor so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
 
-When writting code make sure it's in line with the project's ESLint configuation, and try to choose variable names that are in line with others in the surrounding code.
+When writing code, make sure it's in line with the project's ESLint configuration, and try to choose variable names that are in line with others in the surrounding code.
 
-When writting doc comments:
+When writing doc comments:
 
 1. Use `@param` to specifiy parameters (don't use `@args`).
 2. Use `@returns` to describe return values (don't use `@return`).
