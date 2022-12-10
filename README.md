@@ -111,3 +111,8 @@ When contributing to Mermaid Diagrams, add all class members inside the class de
 When writting code, be sure to have ESLint enabled in your editor so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
 
 When writting code make sure it's in line with the project's ESLint configuation, and try to choose variable names that are in line with others in the surrounding code.
+
+When writting doc comments:
+
+1. Use `@param` to specifiy parameters (don't use `@args`).
+2. Use `@returns` to describe return values (don't use `@return`).
