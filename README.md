@@ -51,7 +51,7 @@ This project is managed through GitHub. To contribute by starting or commenting 
 If you download the raw code you'll need the following to build the project, i.e. transform the raw code into a usable JavaScript module with documentation, you'll need:
 
 1. The most recent LTS (Long Term Support) version of the NodeJS runtime available at [nodejs.org](https://nodejs.org/)
-2. A POSIX-compliant shell and terminal app capable of running Bash scripts — standard on Linux & Mac, and available for Windows through the Windows Subsystem for Linux (WSL) .
+2. A POSIX-compliant shell and terminal app capable of running Bash scripts — standard on Linux & Mac, and available for Windows through the Windows Subsystem for Linux (WSL).
    * Microsoft's documentation for installing WSL — [learn.microsoft.com/…](https://learn.microsoft.com/en-us/windows/wsl/install)
    * The official Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
 3. Sufficient confidence on the command line to navigate to a folder and run basic commands
@@ -114,5 +114,5 @@ When writing code, make sure it's in line with the project's ESLint configuratio
 
 When writing doc comments:
 
-1. Use `@param` to specifiy parameters (don't use `@args`).
+1. Use `@param` to specify parameters (don't use `@args`).
 2. Use `@returns` to describe return values (don't use `@return`).
