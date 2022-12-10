@@ -42,3 +42,44 @@ Fundamentally, the repository is a NodeJS project, so it contains the standard N
 * `/src/` — the folder containing the module's source code and test suite.
 * `/src-diagrams/` — the folder containing the source code for the UML diagrams describing the module. These files will be in Mermaid format, and will be transformed into PNG files in `/docs-static/diagrams/` by a build script.
 
+## Contributor & Developer Resources & Guides
+
+This project is managed through GitHub. To contribute by starting or commentong on feature requests or bug reports you'll need [a free GitHub account](https://github.com/signup). The project's home on GitHub is at [github.com/bartificer/xkpasswd-js](https://github.com/bartificer/xkpasswd-js/).
+
+### Prerequistes
+
+If you download the raq code you'll need the following to build the project, i.e. transform the raw code into a usable JavaScript modules with documentation, you'll need:
+
+1. The most recent LTS (Long Term Support) version of the NodeJS runtime available at [nodejs.org](https://nodejs.org/)
+2. A POSIX-compliant shell and terminal app capable of running Bash scripts — standard on Linux & Mac, and available for Windows through the Windows Subsystem for Linux (WSL) .
+   * Microsoft's documentation for installing WSL — [learn.microsoft.com/…](https://learn.microsoft.com/en-us/windows/wsl/install)
+   * The offocial Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
+3. Sufficient confidence on the commandline to navigate to a folder and run basic commands
+   * (you might find [the Taming the Terminal series](https://pbs.bartificer.net/) helpful 😉)
+
+To contribute documentation or code changes back to the project you'll also need:
+
+1. A supported version of the Git versioning system, and optionally a Git GUI of your choice.
+   * Git's official download page — [git-scm.com/…](https://git-scm.com/downloads)
+2. A working understanding of the Markdown markup language
+3. A code editor, ideally with Markdown and/or JavaScript syntax highlighting.
+   * To contribute code your editor of choice must support [ESLint](https://eslint.org/).
+
+### Relevant Documentation
+
+When altering the code you may find links to the documentation for the various technologies used within the project's code and tool chain useful:
+
+* Mozilla's Excellent JavaScript documentation — [developer.mozilla.org/…](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+* Documentation for the NPN (Node Package Manager) CLI — https://docs.npmjs.com/cli/v9/
+* JSDoc & DocDash
+* Documentation for the project's code linter, ESLint — [eslint.org/…](https://eslint.org/docs/latest/)
+* Documentation for Jest, the project's code testing tool — [jestjs.io/…](https://jestjs.io/docs/getting-started)
+* Documentation the prokect's bundler, Webpack — [webpack.js.org/…](https://webpack.js.org/concepts/)
+
+### Versioning & Source Control Policy
+
+TO DO
+
+### Style Guide
+
+TO DO
