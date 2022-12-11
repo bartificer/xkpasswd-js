@@ -38,7 +38,7 @@ Fundamentally, the repository is a NodeJS project, so it contains the standard N
 * `/dist/` — the target folder into which the build scripts will publish the bundled versions of the module, ready for distribution. **Do not edit the contents of this folder directly!**
 * `/docs/` — the target folder into which the build scripts will publish the generated documentation. This folder's contents will be published at the project's website. **Do not edit the contents of this folder directly!**
 * `/docs-static/` — the folder containing the parts of the documentation that are not generated from documentation comments.
-* `/docs-static/diagrams/` — the target folder into which the build scripts will publish PNG versions of the project's UML diagrams. The source for these diagrams are the Mermaid files in `/src-diagrams/`.
+* `/docs-static/diagrams/` — the target folder into which the build scripts will publish PNG versions of the project's UML diagrams. The source for these diagrams are the Mermaid files in `/src-diagrams/`. **Do not edit the contents of this folder directly!**
 * `/src/` — the folder containing the module's source code and test suite.
 * `/src-diagrams/` — the folder containing the source code for the UML diagrams describing the module. These files will be in Mermaid format and will be transformed into PNG files in `/docs-static/diagrams/` by a build script.
 
