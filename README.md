@@ -13,7 +13,7 @@ The plan is to develop this port in the following broad stages:
 1. **Project Skeleton** — project infrastructure and specification for direct port
    * Bart will work mostly solo with only typo-like pull requests accepted
    * Outcomes:
-     * ULM Class Diagram defining the API for the direct port
+     * UML Class Diagram defining the API for the direct port
      * Contribution guides for developers including a project code style, a Git branching policy, and a style guide for Git commits
      * Configuration files for the project tooling, specifically WebPack (bundler), JSLint (code linter), JSDoc (documentation generator), and Jest (test suite)
      * Automations/Scripts to build the project, run the test suite, and build the documentation
@@ -84,7 +84,7 @@ This module is versioned using the Semantic Versioning System, or [SemVer](https
 
 ### Source Control Policy
 
-1. Git commits to be merged into the `main` branch will be titled in line with the [Conventional Commits](https://www.conventionalcommits.org/) approapch.
+1. Git commits to be merged into the `main` branch will be titled in line with the [Conventional Commits](https://www.conventionalcommits.org/) approach.
 2. Commit messages will be in the active voice in line with Git best practices.
 3. All contributions will be submitted via Pull request
    * Until the project reaches version 1.0.0 any contributions that make progress towards the initial implementation can be merged into the `main` branch
