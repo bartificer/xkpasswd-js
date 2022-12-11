@@ -13,7 +13,7 @@ The plan is to develop this port in the following broad stages:
 1. **Project Skeleton** — project infrastructure and specification for direct port
    * Bart will work mostly solo with only typo-like pull requests accepted
    * Outcomes:
-     * ULM Class Diagram defining the API for the direct port
+     * UML Class Diagram defining the API for the direct port
      * Contribution guides for developers including a project code style, a Git branching policy, and a style guide for Git commits
      * Configuration files for the project tooling, specifically WebPack (bundler), JSLint (code linter), JSDoc (documentation generator), and Jest (test suite)
      * Automations/Scripts to build the project, run the test suite, and build the documentation
