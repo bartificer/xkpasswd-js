@@ -57,7 +57,7 @@ If you download the raw code you'll need the following to build the project, i.e
    * Microsoft's documentation for installing WSL — [learn.microsoft.com/…](https://learn.microsoft.com/en-us/windows/wsl/install)
    * The official Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
 3. Sufficient confidence on the command line to navigate to a folder and run basic commands
-   * (you might find [the Taming the Terminal series](https://pbs.bartificer.net/) helpful 😉)
+   * (you might find [the Taming the Terminal series](https://ttt.bartificer.net/book.html) helpful 😉)
 
 To contribute documentation or code changes back to the project you'll also need:
 
@@ -72,8 +72,8 @@ To contribute documentation or code changes back to the project you'll also need
 When altering the code you may find links to the documentation for the various technologies used within the project's code and toolchain useful:
 
 * Mozilla's Excellent JavaScript documentation — [developer.mozilla.org/…](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-* Documentation for the NPN (Node Package Manager) CLI — https://docs.npmjs.com/cli/v9/
 * Documentation for the JSDoc syntax — [jsdoc.app/…](https://jsdoc.app/)
+* Documentation for the NPM (Node Package Manager) CLI — https://docs.npmjs.com/cli/v9/
   * The best available documentation for the DocDash JSDoc theme — [github.com/…](https://github.com/clenemt/docdash)
 * Documentation for the Mermaid diagram markup language — [mermaid-js.github.io/…](https://mermaid-js.github.io/mermaid/#/)
 * Documentation for the project's code linter, ESLint — [eslint.org/…](https://eslint.org/docs/latest/)
