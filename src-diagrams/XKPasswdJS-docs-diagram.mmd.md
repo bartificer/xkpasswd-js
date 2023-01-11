@@ -1,3 +1,4 @@
+```mermaid
 %%{ init: { 'flowchart': { 'curve': 'basis' } } }%%
 
 flowchart TD
@@ -23,3 +24,4 @@ flowchart TD
 	class docs doNotEdit; 
 	class srcDiagrams inputSrc;
 	class docsOtherDiagrams doNotEdit;
+```

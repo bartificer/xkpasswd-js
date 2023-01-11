@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     Helper <|-- XKPasswd
     Helper <|-- Dictionary
@@ -192,3 +193,4 @@ classDiagram
         +sanitise_dictionary_file()
         +dictionary_from_text_file()
     }
+```
