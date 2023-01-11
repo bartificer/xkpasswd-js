@@ -1,5 +1,5 @@
 ```mermaid
-classDiagram
+classDiagram-v2
     Helper <|-- XKPasswd
     Helper <|-- Dictionary
     Helper <|-- RNG_Basic
