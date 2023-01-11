@@ -10,11 +10,6 @@ classDiagram-v2
     Helper <|-- Types
     Helper <|-- Util
     
-    RNG <|-- RNG_Basic
-    RNG <|-- Data_Entropy
-    RNG <|-- DevUrandom
-    RNG <|-- Math_Random_Secure
-    RNG <|-- RandomDotOrg
 
     Dictionary <|-- Dict_Basic
     Dictionary <|-- System
@@ -25,6 +20,12 @@ classDiagram-v2
     Dictionary <|-- IT
     Dictionary <|-- NL
     Dictionary <|-- PT
+
+    RNG <|-- RNG_Basic
+    RNG <|-- Data_Entropy
+    RNG <|-- DevUrandom
+    RNG <|-- Math_Random_Secure
+    RNG <|-- RandomDotOrg
 
     XKPasswd *-- Dictionary 
     XKPasswd *-- Types
@@ -90,6 +91,22 @@ classDiagram-v2
         -_update_entropystats_cache()
         -_render_bigint()
         -_grapheme_length()
+    }
+    class Types {
+        +var_to_string()
+        -_config_keys()
+        -_presets()
+        -_config_key_message()
+        -_extract_invalid_valued_keys()
+        -_extract_missing_required_keys()
+        -_extract_unfulfilled_key_interdependencies()
+
+    }
+    class Util {
+        +test_presets()
+        +print_preset_samples()
+        +sanitise_dictionary_file()
+        +dictionary_from_text_file()
     }
     class Helper {
         -_do_debug()
@@ -177,20 +194,5 @@ classDiagram-v2
     class RandomDotOrg {
         +random_numbers()
     }
-    class Types {
-        +var_to_string()
-        -_config_keys()
-        -_presets()
-        -_config_key_message()
-        -_extract_invalid_valued_keys()
-        -_extract_missing_required_keys()
-        -_extract_unfulfilled_key_interdependencies()
 
-    }
-    class Util {
-        +test_presets()
-        +print_preset_samples()
-        +sanitise_dictionary_file()
-        +dictionary_from_text_file()
-    }
 ```
