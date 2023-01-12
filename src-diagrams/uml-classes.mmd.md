@@ -94,106 +94,121 @@ classDiagram-v2
         -_grapheme_length(string s)$ int 
     }
     class Types {
-        +var_to_string()
-        -_config_keys()
-        -_presets()
-        -_config_key_message()
-        -_extract_invalid_valued_keys()
-        -_extract_missing_required_keys()
-        -_extract_unfulfilled_key_interdependencies()
-
+        +var_to_string(string variable) string
+        -_config_keys() hashref
+        -_presets() hashref
+        -_config_key_message(obj invalid_value, string config_key, string description) string 
+        -_extract_invalid_valued_keys(hash) string[] 
+        -_extract_missing_required_keys(hash) string[]
+        -_extract_unfulfilled_key_interdependencies(hash) string[]
     }
     class Util {
-        +test_presets()
-        +print_preset_samples()
-        +sanitise_dictionary_file()
-        +dictionary_from_text_file()
+        +test_presets(Dictionary dict)$ void
+        +print_preset_samples(Dictionary dict)$ void
+        +sanitise_dictionary_file(string file_path, string encoding)$ void
+        +dictionary_from_text_file(string module_name, string file_path, string encoding, string version)$ string
     }
     class Helper {
-        -_do_debug()
-        -_debug()
-        -_warn()
-        -_error()
-        -_force_class()
-        -_force_instance()
-        -__calling_package()
-        -__interal_calling_packages()
-        -__log()
+        -_do_debug() boolean
+        -_debug(string msg) void
+        -_warn(string msg) void
+        -_error(string msg) void
+        -_force_class(Class class_to_test) void
+        -_force_instance(instance_to_test) void
+        -__calling_package() string
+        -__interal_calling_packages() string[]
+        -__log(string severity, string msg, object stack_increment) void
     }
     class Dictionary {
-        +clone()
-        +word_list()
-        +source()
-        +print_words()
-        +distil_to_words()
+        +new()$ void
+        +clone() void
+        +word_list() void
+        +source() class
+        +print_words() void
+        +distil_to_words(string[] arg)$ string[] 
     }
     class Dict_Basic {
-        +clone()
-        +word_list()
-        +source()
-        +empty()
-        +add_words()
+        new(string file_path, string[] words)$ Dict_Basic
+        +clone() Dict_Basic
+        +word_list() string[]
+        +source() string[]
+        +empty() Dict_Basic
+        +add_words(string file_path, string[] words, string encoding) Dict_Basic
     }
     class System {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ System
+        +clone() System
+        +word_list() string[]
+        +source() string[]
     }
     class DE {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ DE
+        +clone() DE
+        +word_list() string[]
+        +source() string[]
     }
     class EN {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ EN
+        +clone() EN
+        +word_list() string[]
+        +source() string[]
     }
     class ES {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ ES
+        +clone() ES
+        +word_list() string[]
+        +source() string[]
     }
     class FR {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ FR
+        +clone() FR
+        +word_list() string[]
+        +source() string[]
     }
     class IT {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ IT
+        +clone() IT
+        +word_list() string[]
+        +source() string[]
     }
     class NL {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ NL
+        +clone() NL
+        +word_list() string[]
+        +source() string[]
     }
     class PT {
-        +clone()
-        +word_list()
-        +source()
+        +new()$ PT
+        +clone() PT
+        +word_list() string[]
+        +source() string[]
     }
 
     class RNG {
         <<abstract>>
-        +random_numbers()
+        +new()$ void
+        +random_numbers(int number_of_random_numbers) void
     }
     class RNG_Basic {
-        +random_numbers()
+        +new()$ RNG_Basic
+        +random_numbers(int number_of_random_numbers) decimal[]
     }
     class Data_Entropy {
-        +random_numbers()
+        +new()$ Data_Entropy
+        +random_numbers(int number_of_random_numbers) decimal[]
     }
     class DevUrandom {
-        -_rand()
-        +random_numbers()
+        +new()$ DevUrandom
+        +random_numbers(int number_of_random_numbers) decimal[]
+        -_rand()$ decimal
     }
     class Math_Random_Secure {
-        +random_numbers()
+        +new()$ Math_Random_Secure
+        +random_numbers(int number_of_random_numbers) decimal[]
     }
     class RandomDotOrg {
-        +random_numbers()
+        new(string email, int num_passwords, int num_absolute, int timeout)$ RandomDotOrg
+        +random_numbers(int number_of_random_numbers) decimal[]
     }
 
 ```
