@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" 
+    crossorigin="anonymous"></script>
+  <link href="assets/site.css" rel="stylesheet" />
+  <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <section id="main" class="col order-2">
+        <header class="row">
+          <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient">
+            <div class="container-fluid">
+              <!-- <a class="navbar-brand text-white" href="#"><img class="img-responsive" src="assets/logo.png"><br /><small class="fs-6">Password Generator</small></a> -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Actions
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Import Config</a></li>
+                      <li><a class="dropdown-item" href="#">Export Config</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#about" href="#">About</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#donate" href="#">Please
+                      donate</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <section id="content" class="row">
+          <div class="accordion mt-3 mb-5" id="passwordConfig">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Config
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
+                <div class="accordion-body">
+                  <strong>To be done</strong> This section will contain the Config
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="generatePassword">
+
+            <h3>Generate Password(s)</h3>
+            <form>
+              <div class="row">
+                <div class="col-9 mb-3">
+                  <label class="visually-hidden" for="selectAmount">No. of passwords</label>
+                  <div class="input-group">
+                    <span class="input-group-text">No. of passwords</span>
+                    <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
+                      id="selectAmount" />
+                  </div>
+                  <div class="form-text">Select the number of passwords to be generated</div>
+                </div>
+
+                <div class="col-3 ">
+                  <button type="submit" class="btn btn-primary" aria-label="generate passwords">Generate</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="card mt-5">
+              <div class="card-header d-flex align-items-center">
+                <span class=" text-uppercase">Passwords</span>
+                <div class="d-flex ms-auto">
+                  <div class="bd-clipboard">
+                    <button type="button" class="btn-clipboard border-0 mt-0 me-0" aria-label="Copy to clipboard"
+                      data-bs-original-title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Copy to clipboard">
+                      <i class="bi bi-clipboard"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace"
+                  id="generated_password">This is where the passwords appear</textarea>
+                <div id="password_stats_container">
+                  <i class="bi bi-graph-up"></i>
+                  Stats go here
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="error" id="generate_password_error_container">
+                  <span class="text-danger fs-2"><i class="bi bi-exclamation-square-fill"></i></span>
+
+                  <span id="generate_password_errors"> Errors go here</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section id="sidebar-left" class="col-2 order-1">
+        <img class="img-fluid" src="assets/sideBanner.png" alt="XKPasswd - A Secure Memorable Password Generator" />
+      </section>
+    </div>
+    <footer class="row bg-primary-subtle py-3 mt-3 rounded">
+      <div class="col">
+        Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a
+          href="https://www.grc.com/haystack.htm" target="_blank">Password Hay Stacks</a> |
+        Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal about -->
+  <div class="modal fade" id="about" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="aboutLabel">About this tool</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="h3">THE COMIC THAT INSPIRED THIS TOOL</h1>
+          <p>
+            <a href="http://xkcd.com/936/" target="_blank"><img class="img-fluid" alt="XKCD - Password Strength"
+                src="assets/password_strength.png"></a>
+          </p>
+          <h1 class="h3">CREDITS</h1>
+          <ul>
+            <li>
+              Website and underlying password generation library (XKPasswd.pm) by Bart Busschots.
+            </li>
+            <li>
+              Banner by Stu Helm (incorporating artwork from the <a href="http://xkcd.com/">XKCD Web Comic</a>).
+            </li>
+            <li>
+              Web Interface powered by Bootstrap 5.
+            </li>
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal donait -->
+  <div class="modal fade" id="donate" tabindex="-1" aria-labelledby="donateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="donateLabel">Please donate</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          This service is provided entirely for free and without ads, but
+          the server is not free to run. Please consider making a small contribution towards those costs.
+          <div id="donation_button">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="HEYHNGKY8EASE">
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
+                name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"
+                uw93k0037="">
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
