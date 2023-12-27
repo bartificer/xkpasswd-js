@@ -1,5 +1,24 @@
 {
   "dependencies": {
-    "@mermaid-js/mermaid-cli": "^9.2.2"
+    "@mermaid-js/mermaid-cli": "^9.2.2",
+    "bootstrap-icons": "^1.11.2"
+  },
+  "devDependencies": {
+    "docdash": "^2.0.2",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^29.3.1",
+    "jsdoc": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-node",
+    "transform": {},
+    "testMatch": [
+      "**/?*.test.mjs"
+    ]
+  },
+  "scripts": {
+    "docs": "docDir='./docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --template node_modules/docdash",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   }
 }
