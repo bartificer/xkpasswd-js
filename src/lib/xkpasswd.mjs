@@ -4,6 +4,8 @@
  * @module XKPasswd
  */
 
+import * as randomString from 'randomstring';
+
 /**
  * Main class
  * @class XKPasswd
@@ -15,7 +17,8 @@ class XKPasswd {
  * @return {string}
  */
   password() {
-    return 'ABC';
+    const randomStr = randomString.generate();
+    return randomStr;
   }
 }
 
