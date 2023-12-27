@@ -1,12 +1,27 @@
-// This javascript only handles the update of the webapp.
-// The actual password generation is done in the xkpasswd library
-// add a document ready event handler
+/**
+ * @file This file only handles the update of the webapp.
+ *
+ * The actual password generation is done in the xkpasswd library.
+ *
+ * setup of this file inspired by: https://learn.jquery.com/code-organization/
+ *
+ */
 
-// setup of this file inspired by: https://learn.jquery.com/code-organization/
 
-
+/**
+ * Object defining all custom variables and functions
+ * @namespace XKP
+ *
+ */
 const XKP = {
 
+  /**
+   * init function that sets up the variables and the initial
+   * page elements.
+   *
+   * @function init
+   * @memberof XKP
+   */
   init: () => {
     // setup variables for key parts of the website
     XKP.config = {
@@ -16,10 +31,16 @@ const XKP = {
     XKP.setup();
   },
 
-  // Generate passwords
-  //
-  // To do: call the xkpasswd library to generate the password(s)
-  // update the text area
+  /**
+   * Handle the password generation.
+   * This is the function that is called when clicking the `Generate` button.
+   *
+   * TODO: call the xkpasswd library to generate the password(s)
+   *
+   * @function generatePasswords
+   * @memberof XKP
+   * @param e - event
+   */
 
   generatePasswords: (e) => {
     e.preventDefault();
@@ -33,17 +54,23 @@ const XKP = {
     e.stopPropagation(); // stop the event bubbling
   },
 
-  // set up the generate button click
-
+  /**
+   * Setup the eventhandlers
+   *
+   * @function setup
+   * @memberof XKP
+   */
   setup: () => {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
   },
 };
 
+/**
+ * Document ready setup
+ */
 $(document).ready(function() {
   // enable tooltips
-
   const tooltipTriggerList =
   document.querySelectorAll('[data-bs-toggle="tooltip"]');
   [...tooltipTriggerList].map(

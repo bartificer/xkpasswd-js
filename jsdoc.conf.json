@@ -1,0 +1,23 @@
+{
+  "opts": {
+    "encoding": "utf8",
+    "pedantic": true,
+    "readme": "./README.md"
+  },
+  "source": {
+    "include": [
+      "./src/"
+    ],
+    "includePattern": ".+\\.(mjs|js|jsdoc)$"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "tags": {
+    "allowUnknownTags": false,
+    "dictionaries": [
+      "jsdoc",
+      "closure"
+    ]
+  }
+}
