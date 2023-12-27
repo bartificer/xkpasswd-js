@@ -1,22 +1,21 @@
-// This javascript only handles the update of the webapp. 
+// This javascript only handles the update of the webapp.
 // The actual password generation is done in the xkpasswd library
 // add a document ready event handler
 
 // setup of this file inspired by: https://learn.jquery.com/code-organization/
 
 
-
 const XKP = {
 
   init: () => {
-   // setup variables for key parts of the website
+    // setup variables for key parts of the website
     XKP.config = {
-      passwordArea: $('textarea#generated_password')
+      passwordArea: $('textarea#generated_password'),
     };
 
     XKP.setup();
   },
- 
+
   // Generate passwords
   //
   // To do: call the xkpasswd library to generate the password(s)
@@ -29,7 +28,8 @@ const XKP = {
     const passwords = '123';
 
     XKP.config.passwordArea.val(passwords);
-    console.log('DEBUG texarea value changed to [' + XKP.config.passwordArea.val() + ']');
+    console.log('DEBUG texarea value changed to [' +
+    XKP.config.passwordArea.val() + ']');
     e.stopPropagation(); // stop the event bubbling
   },
 
@@ -38,13 +38,16 @@ const XKP = {
   setup: () => {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
-  }
+  },
 };
 
-$(document).ready(function () {
+$(document).ready(function() {
   // enable tooltips
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+  const tooltipTriggerList =
+  document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
 
   XKP.init();
 });
