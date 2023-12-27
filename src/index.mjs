@@ -7,6 +7,7 @@
  *
  */
 
+import {XKPasswd} from './lib/xkpasswd.mjs';
 
 /**
  * Object defining all custom variables and functions
@@ -26,6 +27,7 @@ const XKP = {
     // setup variables for key parts of the website
     XKP.config = {
       passwordArea: $('textarea#generated_password'),
+      xkpasswd: new XKPasswd(),
     };
 
     XKP.setup();
@@ -46,7 +48,7 @@ const XKP = {
     e.preventDefault();
 
     // call generatePasswords from library
-    const passwords = '123';
+    const passwords = XKP.config.xkpasswd.password();
 
     XKP.config.passwordArea.val(passwords);
     console.log('DEBUG texarea value changed to [' +
@@ -66,8 +68,11 @@ const XKP = {
   },
 };
 
+
 /**
  * Document ready setup
+ *
+ * @param {any} document
  */
 $(document).ready(function() {
   // enable tooltips
