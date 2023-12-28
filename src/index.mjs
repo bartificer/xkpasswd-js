@@ -7,6 +7,7 @@
  *
  */
 
+import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
 
 /**
