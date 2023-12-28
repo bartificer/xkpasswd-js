@@ -10,8 +10,9 @@
 // import bootstrap plugins
 import { Tooltip, Modal, Popover } from 'bootstrap';
 
-// import bootstrap CSS
+// import bootstrap CSS and icons
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
