@@ -14,6 +14,12 @@ import { Tooltip } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+// import webfont
+import '@fontsource/noto-sans/100.css';
+import '@fontsource/noto-sans/200.css';
+import '@fontsource/noto-sans/400.css';
+import '@fontsource/noto-sans/600.css';
+
 import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
 
