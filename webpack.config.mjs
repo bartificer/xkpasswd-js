@@ -9,25 +9,19 @@ import CopyPlugin from 'copy-webpack-plugin';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PATH = {
-  src: './src',
-  src_assets: './src/assets',
-  dist: './dist',
-  dist_assets: './dist/assets',
-};
 
 export default {
   mode: 'development',
-  entry: `${PATH.src}/index.mjs`,
+  entry: './src/index.mjs',
   devtool: 'inline-source-map',
   devServer: {
-    static: `${PATH.dist}`,
+    static: './dist',
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Development',
       hash: false,
-      template: `${PATH.src}/index.html`,
+      template: './src/index.html',
       filename: 'index.html',
       inject: true,
       collapseWhitespace: true,
