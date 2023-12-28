@@ -69,13 +69,11 @@ const XKP = {
   },
 };
 
-
 /**
- * Document ready setup
- *
- * @param {any} document
+ * JQuery Document ready setup
  */
-$(document).ready(function() {
+
+$(() => {
   // enable tooltips
   const tooltipTriggerList =
   document.querySelectorAll('[data-bs-toggle="tooltip"]');

@@ -3,12 +3,15 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CopyPlugin from 'copy-webpack-plugin';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Hack to import Webpack plugins in ES6 mode
+// Hint comes from error message of Webpack itself
+import webpack from 'webpack';
+
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 export default {
   mode: 'development',
@@ -29,11 +32,21 @@ export default {
     }),
     new CopyPlugin({
       patterns: [
+        // copy all images as is to dist,
+        // this notation is used to avoid copying the entire path
         {
           from: 'src/assets/*.(png|ico|webmanifest)',
           to: 'assets/[name][ext]',
         },
       ],
+    }),
+    // add jQuery as a global setting,
+    // so we don't have to import it everywhere
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery',
+      'window.$': 'jquery',
+      'window.jQuery': 'jquery',
     }),
   ],
   output: {
