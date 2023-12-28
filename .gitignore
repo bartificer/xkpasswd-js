@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# VScode workspace file
+xkpasswd-js.code-workspace
+.vscode
+
+# JSDocs directory
+docs
