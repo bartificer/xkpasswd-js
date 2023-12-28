@@ -7,6 +7,12 @@
  *
  */
 
+// import bootstrap plugins
+import { Tooltip, Modal, Popover } from 'bootstrap';
+
+// import bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
 
@@ -78,7 +84,7 @@ $(() => {
   const tooltipTriggerList =
   document.querySelectorAll('[data-bs-toggle="tooltip"]');
   [...tooltipTriggerList].map(
-    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
+    (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
   XKP.init();
 });
