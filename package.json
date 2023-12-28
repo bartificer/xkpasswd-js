@@ -1,4 +1,9 @@
 {
+  "name": "xkpasswdjs",
+  "version": "0.1.0",
+  "description": "The Official JavaScript Port of Crypt::HSXKPasswd",
+  "author": "Bartificer creations",
+  "license": "ISC",
   "dependencies": {
     "@mermaid-js/mermaid-cli": "^9.2.2",
     "bootstrap-icons": "^1.11.2",
