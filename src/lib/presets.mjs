@@ -38,6 +38,7 @@ const presets = {
 class Presets {
   // private var holds the current preset
   #current;
+  #presetName;
 
   /**
    * Constructor: set either the
@@ -49,8 +50,10 @@ class Presets {
   constructor(preset) {
     if (is.undefined(preset)) {
       this.#current = presets.DEFAULT;
+      this.#presetName = 'DEFAULT';
     } else {
       this.#current = preset;
+      this.#presetName = 'CUSTOM';
     }
   }
   /**
@@ -88,6 +91,16 @@ class Presets {
   description() {
     return this.#current.description;
   }
+
+  /**
+   * Get the name of the preset
+   *
+   * @return {string} - the name of the preset
+   */
+  name() {
+    return this.#presetName;
+  }
+
 
   /**
    * Get the list of separator characters
