@@ -68,6 +68,8 @@ class RandomBasic {
     return parseInt(t) % 2;
   }
 
+  /* eslint-disable max-len */
+
   /**
    * Generate an array of numbers between 0 and 9
    * Array length = parameter `num`
@@ -92,6 +94,8 @@ class RandomBasic {
     }
     return new Array(num).fill(0).map(() => this.__randomInt(0, 9));
   }
+
+  /* eslint-enable max-len */
 
 
   /**
