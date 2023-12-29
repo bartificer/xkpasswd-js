@@ -5,6 +5,7 @@
  */
 
 import { RandomBasic } from './randombasic.mjs';
+import is from 'is-it-check';
 /**
  * Main class
  * @class XKPasswd
