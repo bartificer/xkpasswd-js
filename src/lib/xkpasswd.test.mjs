@@ -58,6 +58,23 @@ describe('Test XKPassword class', () => {
     });
   });
 
+  describe('Test internal __adaptivePadding function', () => {
+    test('it add padding when maxLen is bigger', () => {
+      const passwd = 'abcdef';
+      const pw = me.__adaptivePadding(passwd, '+', 10);
+
+      expect(pw.length).toBe(10);
+      expect(pw).toBe(passwd + '++++');
+    });
+
+    test('it to truncate when maxLen is smaller', () => {
+      const passwd = 'abcdefghijklmnop';
+      const pw = me.__adaptivePadding(passwd, '+', 5);
+
+      expect(pw.length).toBe(5);
+      expect(pw).toBe('abcde'); ;
+    });
+  });
   describe('Test password function', () => {
     test('Check if the password function returns a string', () => {
       expect(typeof me.password()).toEqual(expect.any(String));
