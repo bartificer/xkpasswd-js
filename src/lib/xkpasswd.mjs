@@ -43,7 +43,7 @@ class XKPasswd {
       //
       // start by generating the needed parts of the password
       //
-      log.debug('starting to generate random words');
+      log.trace('starting to generate random words');
       const words = this.__randomWords();
       log.trace(`got random words = ${words}`);
 
@@ -183,7 +183,7 @@ class XKPasswd {
     const numWords = this.__config.num_words;
     const maxDict = this.__dictionary.length;
 
-    log.debug(`about to generate ${numWords} words`);
+    log.trace(`about to generate ${numWords} words`);
 
     let list = new Array(numWords).fill('').map(
       () => this.__dictionary[this.__rng.randomInt(maxDict)],
