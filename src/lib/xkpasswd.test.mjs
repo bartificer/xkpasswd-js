@@ -132,7 +132,6 @@ describe('Test XKPassword class', () => {
       const r = me.__paddingChar('-');
       expect(r).toBe('');
     });
-
   });
 
   describe('Test internal __adaptivePadding function', () => {
