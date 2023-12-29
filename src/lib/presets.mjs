@@ -62,7 +62,7 @@ class Presets {
    * @return {object} - the preset
    */
   static getDefault() {
-    return presets['DEFAULT'];
+    return presets.DEFAULT;
   }
 
   /**
@@ -72,7 +72,6 @@ class Presets {
   getCurrent() {
     return this.#current;
   }
-
 
   /**
    * Get the config part of the preset
