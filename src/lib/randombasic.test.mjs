@@ -3,8 +3,47 @@
  */
 import {RandomBasic} from './randombasic.mjs';
 
+/* helper function to find duplicates */
+const findDuplicates = (ar) =>
+  ar.filter((item, index) => ar.indexOf(item) !== index);
+
 describe('Test RandomBasic', () => {
   const me = new RandomBasic();
+
+  describe('Check function randomDigits', () => {
+    test('it returns string of integers of given length', () => {
+      const value = me.randomDigits(5);
+      expect(typeof value).toBe('string');
+      expect(value.length).toBe(5);
+      expect(value).toMatch(/\d\d\d\d\d/);
+    });
+
+    test('it returns an empty string if max is not given', () => {
+      const value = me.randomDigits();
+      expect(typeof value).toBe('string');
+      expect(value).toBe('');
+    });
+
+    test('it throws an error if max is not a number', () => {
+      expect(() => me.randomDigits('string')).toThrow(Error);
+    });
+  });
+
+  describe('Check function toss', () => {
+    test('if it gives random numbers', () => {
+      /*
+       * We check this by getting a number 10 times and check if they are
+       * different or the same.
+       * Success is when they are not always the same.
+       */
+      const nums = new Array(10).fill(-1).map(() => me.toss());
+
+      expect(nums.length).toBe(10);
+      expect(typeof nums[0]).toBe('number');
+      console.debug('nums = ' + nums);
+      expect(findDuplicates(nums).length).toBeLessThan(10);
+    });
+  });
 
   describe('Check internal function __randomFloat', () => {
     test('it returns a float', () => {
@@ -19,6 +58,22 @@ describe('Test RandomBasic', () => {
       const r = me.__randomFloat();
       expect(r).toBeGreaterThanOrEqual(0);
       expect(r).toBeLessThanOrEqual(1);
+    });
+  });
+
+  describe('Check internal function __randomInt', () => {
+    test('it returns an integer between min and max', () => {
+      const r = me.__randomInt(1, 5);
+
+      expect(r).toBeGreaterThanOrEqual(1);
+      expect(r).toBeLessThanOrEqual(5);
+    });
+
+    test('it returns an integer in range when min > max', () => {
+      const r = me.__randomInt(10, 5);
+
+      expect(r).toBeGreaterThanOrEqual(5);
+      expect(r).toBeLessThanOrEqual(10);
     });
   });
 
@@ -60,9 +115,6 @@ describe('Test RandomBasic', () => {
        */
       const nums = [];
       nums.push(me.randomNumbers(10));
-
-      const findDuplicates = (ar) =>
-        ar.filter((item, index) => ar.indexOf(item) !== index);
 
       const duplicates = findDuplicates(nums);
       // console.log('DEBUG ' + nums);
