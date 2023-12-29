@@ -18,6 +18,7 @@ class XKPasswd {
 
   /**
    * constructor
+   * @constructor
    */
   constructor() {
     this.__preset = new Presets();

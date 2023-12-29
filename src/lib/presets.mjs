@@ -1,5 +1,7 @@
 /**
  * Class with all presets
+ *
+ * @module Presets
  */
 
 import {RandomBasic} from './randombasic.mjs';
@@ -44,6 +46,7 @@ class Presets {
    * Constructor: set either the
    * default preset or a preset
    * that is passed in.
+   * @constructor
    *
    * @param {object} preset
    */
