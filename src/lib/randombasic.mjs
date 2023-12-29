@@ -62,7 +62,7 @@ class RandomBasic {
    */
   toss() {
     const t = cryptoRandomString({
-      length: 20,
+      length: 10,
       type: 'numeric',
     });
     return parseInt(t) % 2;
