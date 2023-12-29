@@ -32,6 +32,19 @@ class XKPasswd {
   }
 
   /**
+   * Set a different preset to work with
+   *
+   * @param {any} preset
+   *
+   */
+  setPreset(preset) {
+    this.__preset = new Presets(preset);
+    this.__config = this.__preset.config();
+    this.__description = this.__preset.description();
+  }
+
+
+  /**
    * Return a password that adheres to the
    * chosen preset
    *
