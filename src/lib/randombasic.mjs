@@ -155,43 +155,12 @@ class RandomBasic {
     min = (min > max ? max : min);
     return Math.floor(this.__randomFloat() * range + min);
   }
-  /**
-   * Generate random numbers, the unsafe way
-   *
-   * This is an internal function
-   *
-   * @param {integer} length
-   * @return {Array} a list of random numbers, list.length = 'length'
-   *
-   */
-  __unsafeRandomBytes(length) {
-    const stack = [];
-    for (let i = 0; i < length; i++) {
-      stack.push(Math.floor(Math.random() * 255));
-    }
 
-    return {
-      length,
-      readUInt8: function(index) {
-        return stack[index];
-      },
-    };
-  }
 
   /**
-   * Generate random numbers, the safe way
    *
-   * This is an internal function
-   *
-   * @param {integer} length
-   * @return {Array} a list of random numbers, list.length = 'length'
    *
    */
-  __safeRandomBytes(length) {
-    try {
-      return randomBytes(length);
-    } catch (e) {
-      return __unsafeRandomBytes(length);
     }
   }
 }
