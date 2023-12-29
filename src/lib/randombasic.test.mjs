@@ -40,7 +40,6 @@ describe('Test RandomBasic', () => {
 
       expect(nums.length).toBe(10);
       expect(typeof nums[0]).toBe('number');
-      console.debug('nums = ' + nums);
       expect(findDuplicates(nums).length).toBeLessThan(10);
     });
   });
