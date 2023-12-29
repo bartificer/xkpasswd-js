@@ -70,25 +70,20 @@ class XKPasswd {
 
       // then finally add the padding characters
 
-      if (this.__config.padding_type == 'FIXED') {
+      switch (this.__config.padding_type) {
+      case 'FIXED':
         // simple fixed padding
         passwd = this.__padWithChar(passwd, padChar);
-      } else {
-        if (this.__config.padding_type == 'ADAPTIVE') {
-          // adaptive padding
-          const pwlen = passwd.length;
-          if (pwlen < this.__config.pad_to_length) {
-            // if the password is shorter than the target length, padd it out
-            while (passwd.length < this.__config.pad_to_length) {
-              passwd += padChar;
-            }
-          } else
-            if (pwlen > this.__config.pad_to_length) {
-              // if the password is too long, trim it
-              passwd = passwd.substring(0, this.__config.pad_to_length);
-            }
-        }
-        log.debug(`added padding (as configured): ${passwd}`);
+        break;
+
+      case 'ADAPTIVE':
+        // adaptive padding
+        passwd = this.__adaptivePadding(passwd, padChar,
+          this.__config.pad_to_length);
+        break;
+
+      default:
+        break;
       }
 
 
@@ -102,6 +97,31 @@ class XKPasswd {
 
     // increment the passwords generated counter
     this.#passwordCounter++;
+  }
+
+
+  /**
+   * Pad the password with padChar until the given length
+   *
+   * This is an internal function
+   *
+   * @param {string} passwd - password to be padded
+   * @param {character} padChar - padding character
+   * @param  {integer} maxLen - max length of password
+   * @return {string} - padded password
+   */
+  __adaptivePadding(passwd, padChar, maxLen) {
+    const pwlen = passwd.length;
+    if (pwlen < maxLen) {
+      // if the password is shorter than the target length, padd it out
+      while (passwd.length < maxLen) {
+        passwd += padChar;
+      }
+    } else if (pwlen > maxLen) {
+      // if the password is too long, trim it
+      passwd = passwd.substring(0, maxLen);
+    }
+    return passwd;
   }
 
   /**
