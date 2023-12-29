@@ -85,6 +85,7 @@ class XKPasswd {
       default:
         break;
       }
+      log.trace(`added padding (as configured): ${passwd}`);
 
 
       // return the finished password
