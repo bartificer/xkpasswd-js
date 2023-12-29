@@ -164,40 +164,34 @@ class XKPasswd {
       return words;
 
     case 'UPPER':
-      return words.forEach((element) => {
-        element = element.toUpperCase();
-      });
+      return words.map((el) => el = el.toUpperCase());
+
     case 'LOWER':
-      return words.forEach((element) => {
-        element = element.toLowerCase();
-      });
+      return words.map((el) => el = el.toLowerCase());
+
     case 'CAPITALIZE':
-      return words.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-        return letter.toUpperCase();
-      });
+      return words.map((el) =>
+        el = el.toLowerCase().
+          replaceAll(/(?:^|\s|-)\S/g, (x) => x.toUpperCase()));
+
     case 'INVERT':
       // return words in uppercase but first letter is lowercase
-      return words.toUpperCase().replace(/\b[A-Z]/g, function(letter) {
-        return letter.toLowerCase();
-      });
+      return words.map((el) =>
+        el = el.toUpperCase().
+          replaceAll(/(?:^|\s|-)\S/g, (x) => x.toLowerCase()));
+
     case 'ALTERNATE':
-      return words.forEach((element, index) => {
-        if (index % 2 == 0) {
-          element = element.toLowerCase();
-        } else {
-          element = element.toUpperCase();
-        }
-      });
+      return words.map((el, index) =>
+        el = (index % 2 == 0) ? el.toLowerCase() : el.toUpperCase(),
+      );
+
     case 'RANDOM':
-      return words.forEach((element) => {
-        if (this.__rng.toss()) {
-          element = element.toLowerCase();
-        } else {
-          element = element.toUpperCase();
-        }
-      });
+      return words.map((el) =>
+        el = (this.__rng.toss()) ? el.toLowerCase() : el.toUpperCase(),
+      );
+
     default:
-      break;
+      return words;
     }
   }
 
