@@ -68,36 +68,6 @@ class RandomBasic {
     return parseInt(t) % 2;
   }
 
-  /* eslint-disable max-len */
-
-  /**
-   * Generate an array of numbers between 0 and 9
-   * Array length = parameter `num`
-   *
-   * TODO in the Perl version this function was only used to fill a cache of random numbers
-   * ? so probably it's not needed anymore.
-   *
-   * @param {Integer} num - number of random numbers to generate,
-   *  defaults to 1 if not given
-   * @return {Array}
-   * @throws Exception when parameter is not a number
-   */
-  randomNumbers(num) {
-    // default to 1
-    if (is.null(num) || is.undefined(num) || num <= 0) {
-      num = 1;
-    }
-    if (is.not.integer(num)) {
-      const errMsg = 'Parameter "num" is not an integer! [' + num + ']';
-      // log.error('ERROR', errMsg);
-      throw new Error(errMsg);
-    }
-    return new Array(num).fill(0).map(() => this.__randomInt(0, 9));
-  }
-
-  /* eslint-enable max-len */
-
-
   /**
    * Generate a random integer greater than 0 and less than a given
    * maximum value.
@@ -156,13 +126,33 @@ class RandomBasic {
     return Math.floor(this.__randomFloat() * range + min);
   }
 
+  /* eslint-disable max-len */
 
   /**
+   * Generate an array of numbers between 0 and 9
+   * Array length = parameter `num`
    *
+   * TODO in the Perl version this function was only used to fill a cache of random numbers
+   * ? so probably it's not needed anymore.
    *
+   * @param {Integer} num - number of random numbers to generate,
+   *  defaults to 1 if not given
+   * @return {Array}
+   * @throws Exception when parameter is not a number
    */
+  randomNumbers(num) {
+    // default to 1
+    if (is.null(num) || is.undefined(num) || num <= 0) {
+      num = 1;
     }
+    if (is.not.integer(num)) {
+      const errMsg = 'Parameter "num" is not an integer! [' + num + ']';
+      // log.error('ERROR', errMsg);
+      throw new Error(errMsg);
+    }
+    return new Array(num).fill(0).map(() => this.__randomInt(0, 9));
   }
 }
 
 export {RandomBasic};
+
