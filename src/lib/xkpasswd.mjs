@@ -17,16 +17,20 @@ import {DictionaryEN} from './dictionaryEN.mjs';
 class XKPasswd {
   #passwordCounter;
 
+  #preset; // current preset
+  #config; // config section of preset, convenience variable
+  #rng; // random generator
+  #dictionary; // current directory
+
   /**
    * constructor
    * @constructor
    */
   constructor() {
-    this.__preset = new Presets();
-    this.__config = this.__preset.config();
-    this.__description = this.__preset.description();
-    this.__rng = new RandomBasic();
-    this.__dictionary = [];
+    this.#preset = new Presets();
+    this.#config = this.#preset.config();
+    this.#rng = new RandomBasic();
+    this.#dictionary = new DictionaryEN();
 
     // the number of passwords this instance has generated
     this.#passwordCounter = 0;
@@ -40,9 +44,8 @@ class XKPasswd {
    *
    */
   setPreset(preset) {
-    this.__preset = new Presets(preset);
-    this.__config = this.__preset.config();
-    this.__description = this.__preset.description();
+    this.#preset = new Presets(preset);
+    this.#config = this.#preset.config();
   }
 
 
@@ -85,7 +88,7 @@ class XKPasswd {
 
       // then finally add the padding characters
 
-      switch (this.__config.padding_type) {
+      switch (this.#config.padding_type) {
       case 'FIXED':
         // simple fixed padding
         passwd = this.__padWithChar(passwd, padChar);
@@ -94,7 +97,7 @@ class XKPasswd {
       case 'ADAPTIVE':
         // adaptive padding
         passwd = this.__adaptivePadding(passwd, padChar,
-          this.__config.pad_to_length);
+          this.#config.pad_to_length);
         break;
 
       default:
@@ -158,7 +161,7 @@ class XKPasswd {
       throw new Error('parameter words is not an array');
     }
 
-    const transformation = this.__config.case_transform;
+    const transformation = this.#config.case_transform;
 
     switch (transformation) {
     case 'NONE':
@@ -189,7 +192,7 @@ class XKPasswd {
 
     case 'RANDOM':
       return words.map((el) =>
-        el = (this.__rng.toss()) ? el.toLowerCase() : el.toUpperCase(),
+        el = (this.#rng.toss()) ? el.toLowerCase() : el.toUpperCase(),
       );
 
     default:
@@ -210,13 +213,13 @@ class XKPasswd {
    * @return {Array} - list of words
    */
   __randomWords() {
-    const numWords = this.__config.num_words;
-    const maxDict = this.__dictionary.length;
+    const numWords = this.#config.num_words;
+    const maxDict = this.#dictionary.getLength();
 
     log.trace(`about to generate ${numWords} words`);
 
-    let list = new Array(numWords).fill('').map(
-      () => this.__dictionary[this.__rng.randomInt(maxDict)],
+    const list = new Array(numWords).fill('').map(
+      () => this.#dictionary.word(this.#rng.randomInt(maxDict)),
     );
     return list;
   }
@@ -232,14 +235,14 @@ class XKPasswd {
    */
   __separator() {
     // figure out the separator character
-    const sep = this.__config.separator_character;
+    const sep = this.#config.separator_character;
 
     if (sep == 'NONE') {
       return '';
     }
     if (sep == 'RANDOM') {
-      const alphabet = this.__preset.getSeparatorAlphabet();
-      return this.__rng.randomChar(alphabet);
+      const alphabet = this.#preset.getSeparatorAlphabet();
+      return this.#rng.randomChar(alphabet);
     }
     return '';
   }
@@ -262,14 +265,14 @@ class XKPasswd {
       separator = '';
     }
 
-    switch (this.__config.padding_character) {
+    switch (this.#config.padding_character) {
     case 'NONE':
       return '';
     case 'SEPARATOR':
       return separator;
     case 'RANDOM':
-      const alphabet = this.__preset.getPaddingAlphabet();
-      return this.__rng.randomChar(alphabet);
+      const alphabet = this.#preset.getPaddingAlphabet();
+      return this.#rng.randomChar(alphabet);
     default:
       return '';
     }
@@ -295,13 +298,13 @@ class XKPasswd {
    * @return {any} - the padded password
    */
   __padWithDigits(passwd, separator) {
-    if (this.__config.padding_digits_before > 0) {
-      passwd = this.__rng.randomDigits(this.__config.padding_digits_before) +
+    if (this.#config.padding_digits_before > 0) {
+      passwd = this.#rng.randomDigits(this.#config.padding_digits_before) +
         separator + passwd;
     }
-    if (this.__config.padding_digits_after > 0) {
+    if (this.#config.padding_digits_after > 0) {
       passwd = passwd + separator +
-        this.__rng.randomDigits(this.__config.padding_digits_after);
+        this.#rng.randomDigits(this.#config.padding_digits_after);
     }
     return passwd;
   }
@@ -314,13 +317,13 @@ class XKPasswd {
    * @return {any} - the padded password
    */
   __padWithChar(passwd, padChar) {
-    if (this.__config.padding_characters_before > 0) {
-      for (let c = 1; c <= this.__config.padding_characters_before; c++) {
+    if (this.#config.padding_characters_before > 0) {
+      for (let c = 1; c <= this.#config.padding_characters_before; c++) {
         passwd = padChar + passwd;
       }
     }
-    if (this.__config.padding_characters_after > 0) {
-      for (let c = 1; c <= this.__config.padding_characters_after; c++) {
+    if (this.#config.padding_characters_after > 0) {
+      for (let c = 1; c <= this.#config.padding_characters_after; c++) {
         passwd += padChar;
       }
     }
