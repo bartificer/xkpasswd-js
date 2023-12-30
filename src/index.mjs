@@ -30,6 +30,14 @@ import {XKPasswd} from './lib/xkpasswd.mjs';
  */
 const XKP = {
 
+  // set the Bootstrap classes for the various values
+  stats_classes: {
+    GOOD: 'btn-outline-success',
+    OK: 'btn-outline-warning',
+    POOR: 'btn-outline-danger',
+    UNKNOWN: 'btn-danger',
+  },
+
   /**
    * init function that sets up the variables and the initial
    * page elements.
@@ -41,6 +49,7 @@ const XKP = {
     // setup variables for key parts of the website
     XKP.config = {
       passwordArea: $('textarea#generated_password'),
+      passwordErrorContainer: $('#passwordErrorContainer'),
       xkpasswd: new XKPasswd(),
     };
 
@@ -63,6 +72,27 @@ const XKP = {
 
     // call generatePasswords from library
     const passwords = XKP.config.xkpasswd.password();
+  /**
+   * Show an alert with an error message
+   * @param {string} msg - the error message
+   */
+  __renderPaswordError: (msg) => {
+    // write the error message to the alert and show it
+
+    /* eslint-disable max-len */
+    const alertBox = [
+      `<div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">`,
+      `  <span class="text-danger"><i class="bi bi-exclamation-square-fill"></i>&nbsp;</span>`,
+      `  <div id="generate_password_errors">${msg}</div>`,
+      `  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
+      '</div>',
+    ].join('');
+    /* eslint-enable max-len */
+
+    XKP.config.passwordErrorContainer.append(alertBox);
+
+    XKP.__hideStats();
+  },
 
     XKP.config.passwordArea.val(passwords);
     console.log('DEBUG texarea value changed to [' +
