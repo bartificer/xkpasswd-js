@@ -152,6 +152,12 @@ describe('Test XKPassword class', () => {
     });
   });
 
+  describe('Test function toTitleCase', () => {
+    test('string is lowercase', () => {
+      expect(me.toTitleCase('lowercase')).toBe('Lowercase');
+    });
+  });
+
   describe('Test internal function __transformCase', () => {
     const words = ['apple', 'mac', 'ipad'];
 

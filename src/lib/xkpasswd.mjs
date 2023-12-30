@@ -201,11 +201,11 @@ class XKPasswd {
 
   /**
    * Turn the string into a title case
-   * @param {string} s - string to be converted
+   * @param {string} str - string to be converted
    * @return {string} - converted string
    */
-  toTitleCase(s) {
-    return s.toLowerCase().
+  toTitleCase(str) {
+    return str.toLowerCase().
       replaceAll(/(?:^|\s|-)\S/g, (x) => x.toUpperCase());
   }
 
