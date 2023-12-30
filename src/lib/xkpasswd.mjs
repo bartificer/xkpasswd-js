@@ -8,6 +8,7 @@ import {RandomBasic} from './randombasic.mjs';
 import {Presets} from './presets.mjs';
 import is from 'is-it-check';
 import log from 'loglevel';
+import {DictionaryEN} from './dictionaryEN.mjs';
 
 /**
  * Main class
@@ -217,7 +218,6 @@ class XKPasswd {
     let list = new Array(numWords).fill('').map(
       () => this.__dictionary[this.__rng.randomInt(maxDict)],
     );
-    list = ['apple', 'mac', 'ipad'];
     return list;
   }
 
