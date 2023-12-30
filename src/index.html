@@ -107,16 +107,26 @@
               <div class="card-body">
                 <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace"
                   id="generated_password"></textarea>
-                <div id="password_stats_container">
-                  <i class="bi bi-graph-up"></i>
-                  Stats go here
-                </div>
-              </div>
-              <div class="card-footer">
                 <div class="error" id="generate_password_error_container">
                   <span class="text-danger fs-2"><i class="bi bi-exclamation-square-fill"></i></span>
-
                   <span id="generate_password_errors"> Errors go here</span>
+                </div>
+
+              </div>
+              <div class="card-footer">
+                <div id="password_stats_container" class="pt-1 fs-6">
+                  <h6><i class="bi bi-graph-up"></i> Statistics</h6>
+                  <p class="fw-lighter lh-1 ">
+                    <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-outline-success"
+                      id="password_strength">test</span>
+                  </p>
+                  <p class="fw-lighter">
+                    <span class="fw-bolder">Entropy</span><span id="entropy_blind">
+                    </span> blind & <span
+                      class="btn btn-stats btn-outline-warning" id="entropy_seen">seen</span>&nbsp;with full knowledge
+                    <br />
+                    <em id="entropy_suggestion">(suggest keeping blind entropy above 78bits & seen above 52bits)</em>
+                  </p>
                 </div>
               </div>
             </div>

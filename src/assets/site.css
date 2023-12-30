@@ -58,4 +58,10 @@ body {
   margin-right: .75rem
 }
 
+.btn-stats {
+  --bs-btn-padding-y: .15rem;
+  --bs-btn-padding-x: .5rem;
+  --bs-btn-font-size: .85rem;
 
+  font-weight: 200;
+}
