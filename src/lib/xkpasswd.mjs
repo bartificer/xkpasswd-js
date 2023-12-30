@@ -175,9 +175,7 @@ class XKPasswd {
       return words.map((el) => el = el.toLowerCase());
 
     case 'CAPITALIZE':
-      return words.map((el) =>
-        el = el.toLowerCase().
-          replaceAll(/(?:^|\s|-)\S/g, (x) => x.toUpperCase()));
+      return words.map((el) => el = this.toTitleCase(el));
 
     case 'INVERT':
       // return words in uppercase but first letter is lowercase
@@ -198,6 +196,16 @@ class XKPasswd {
     default:
       return words;
     }
+  };
+
+  /**
+   * Turn the string into a title case
+   * @param {string} s - string to be converted
+   * @return {string} - converted string
+   */
+  toTitleCase(s) {
+    return s.toLowerCase().
+      replaceAll(/(?:^|\s|-)\S/g, (x) => x.toUpperCase());
   }
 
   /**
