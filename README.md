@@ -78,7 +78,8 @@ When altering the code you may find links to the documentation for the various t
 * Documentation for the Mermaid diagram markup language — [mermaid-js.github.io/…](https://mermaid-js.github.io/mermaid/#/) - [PBS 141](https://pbs.bartificer.net/pbs141)
 * Documentation for the project's code linter, ESLint — [eslint.org/…](https://eslint.org/docs/latest/) - [PBS129](https://pbs.bartificer.net/pbs129)
 * Documentation for Jest, the project's code testing tool — [jestjs.io/…](https://jestjs.io/docs/getting-started) - [PBS135](https://pbs.bartificer.net/pbs136), [PBS135](https://pbs.bartificer.net/pbs136)
-* Documentation for the project's bundler, Webpack — [webpack.js.org/…](https://webpack.js.org/concepts/) - [PBS 137](https://pbs.bartificer.net/pbs137), [PBS 138](https://pbs.bartificer.net/pbs138),[PBS 139](https://pbs.bartificer.net/pbs139)
+* Documentation for the project's bundler, Webpack — [webpack.js.org/…](https://webpack.js.org/concepts/) - [PBS 137](https://pbs.bartificer.net/pbs137), [PBS 138](https://pbs.bartificer.net/pbs138), [PBS 139](https://pbs.bartificer.net/pbs139)
+* Searchable index for all of Programming by Stealth - [PBS Index](https://www.podfeet.com/blog/pbs-index/)
 
 ### Versioning Policy
 
