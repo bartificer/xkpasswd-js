@@ -20,6 +20,8 @@ import '@fontsource/noto-sans/200.css';
 import '@fontsource/noto-sans/400.css';
 import '@fontsource/noto-sans/600.css';
 
+import log from 'loglevel';
+
 import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
 
@@ -50,6 +52,8 @@ const XKP = {
     XKP.config = {
       passwordArea: $('textarea#generated_password'),
       passwordErrorContainer: $('#passwordErrorContainer'),
+      passwordStatsContainer: $('#password_stats_container'),
+      passwordStrength: $('#password_strength'),
       xkpasswd: new XKPasswd(),
     };
 
@@ -60,8 +64,6 @@ const XKP = {
    * Handle the password generation.
    * This is the function that is called when clicking the `Generate` button.
    *
-   * TODO: call the xkpasswd library to generate the password(s)
-   *
    * @function generatePasswords
    * @memberof XKP
    * @param e - event
@@ -71,7 +73,18 @@ const XKP = {
     e.preventDefault();
 
     // call generatePasswords from library
-    const passwords = XKP.config.xkpasswd.password();
+
+    try {
+      const passAndStats = XKP.config.xkpasswd.generatePassword();
+      XKP.__renderPassword(passAndStats);
+    } catch (error) {
+      log.error(`Password generation threw an error ${error}`);
+      XKP.__renderPaswordError('ERROR password generation failed!');
+    } finally {
+      e.stopPropagation(); // stop the event bubbling
+    }
+  },
+
   /**
    * Show an alert with an error message
    * @param {string} msg - the error message
@@ -94,10 +107,24 @@ const XKP = {
     XKP.__hideStats();
   },
 
-    XKP.config.passwordArea.val(passwords);
-    console.log('DEBUG texarea value changed to [' +
-    XKP.config.passwordArea.val() + ']');
-    e.stopPropagation(); // stop the event bubbling
+  __renderPassword: (passAndStats) => {
+    // render the password(s)
+    const passwds = passAndStats.passwords.join('\n');
+    if (passwds) {
+      XKP.config.passwordArea.val(passwds);
+      log.debug(
+        `texarea value changed to [${XKP.config.passwordArea.val()}]`);
+    } else {
+      XKP.__renderPasswordError('ERROR - server returned no passwords');
+      return;
+    }
+
+
+    // XKP.__renderDetailedStats(passAndStats.stats);
+  },
+
+  __renderDetailedStats: (stats) => {
+  },
   },
 
   /**

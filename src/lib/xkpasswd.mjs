@@ -10,6 +10,7 @@ import log from 'loglevel';
 import {RandomBasic} from './randombasic.mjs';
 import {Presets} from './presets.mjs';
 import {DictionaryEN} from './dictionaryEN.mjs';
+import {Statistics} from './statistics.mjs';
 
 /**
  * Main class
@@ -21,6 +22,7 @@ class XKPasswd {
   #preset; // current preset
   #config; // config section of preset, convenience variable
   #rng; // random generator
+  #statsClass; // Statistics class
   #dictionary; // current directory
 
   /**
@@ -32,6 +34,7 @@ class XKPasswd {
     this.#config = this.#preset.config();
     this.#rng = new RandomBasic();
     this.#dictionary = new DictionaryEN();
+    this.#statsClass = new Statistics(this.#config);
 
     // the number of passwords this instance has generated
     this.#passwordCounter = 0;
@@ -49,6 +52,19 @@ class XKPasswd {
     this.#config = this.#preset.config();
   }
 
+  /**
+   * Generate the password(s) and stats
+   *
+   * @return {object} - contains the passwords and the stats
+   */
+  generatePassword() {
+    const passwords = [this.password()];
+    const stats = this.#statsClass.calculateStats();
+    return {
+      passwords: passwords,
+      stats: stats,
+    };
+  }
 
   /**
    * Return a password that adheres to the
@@ -106,6 +122,8 @@ class XKPasswd {
       }
       log.trace(`added padding (as configured): ${passwd}`);
 
+      // increment the passwords generated counter
+      this.#passwordCounter++;
 
       // return the finished password
       return passwd;
@@ -115,8 +133,6 @@ class XKPasswd {
       );
     };
 
-    // increment the passwords generated counter
-    this.#passwordCounter++;
   }
 
 
