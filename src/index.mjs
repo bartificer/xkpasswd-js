@@ -124,7 +124,13 @@ const XKP = {
   },
 
   __renderDetailedStats: (stats) => {
+
+  __hideStats() {
+    XKP.config.passwordStatsContainer.addClass('d-none');
   },
+
+  __showStats() {
+    XKP.config.passwordStatsContainer.removeClass('d-none');
   },
 
   /**
@@ -136,6 +142,7 @@ const XKP = {
   setup: () => {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
+    XKP.__hideStats();
   },
 };
 
