@@ -1290,12 +1290,12 @@ class DictionaryEN extends Dictionary {
 
   /**
    * Clone thyself
+   * TODO do we really need this?
    * @return {any}
    */
-  clone() {
-  // not sure why we need this
-    return this;
-  }
+  // clone() {
+  //   return this;
+  // }
 
   /**
    * Return the word list of this dictionary
