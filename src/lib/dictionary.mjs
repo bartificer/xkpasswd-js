@@ -64,9 +64,9 @@ class Dictionary {
   /**
    * Set the length of the word list
    *
-   * Internal function
-   *
    * @param {integer} len - length of the list
+   *
+   * @private
    */
   __setLength(len) {
     this.#wordListLength = len;

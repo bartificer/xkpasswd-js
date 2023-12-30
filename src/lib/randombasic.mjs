@@ -93,9 +93,9 @@ class RandomBasic {
   /**
    * Return values in the range of [0, 1]
    *
-   * This is an internal function
-   *
    * @return {number} - a random number between 0 and 1
+   *
+   * @private
    */
   __randomFloat() {
     // const float = crypto.getRandomValues(new Uint32Array(1))[0];
@@ -114,11 +114,11 @@ class RandomBasic {
    * Return integers in the range of [min, max]
    * If min > max then swap min and max
    *
-   * This is an internal function
-   *
    * @param {int} min - minimum value
    * @param {int} max - maximum value
    * @return {int} a random value between min and max
+   *
+   * @private
    */
   __randomInt(min, max) {
     const range = Math.abs(max - min);

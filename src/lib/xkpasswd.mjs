@@ -122,12 +122,12 @@ class XKPasswd {
   /**
    * Pad the password with padChar until the given length
    *
-   * This is an internal function
-   *
    * @param {string} passwd - password to be padded
    * @param {character} padChar - padding character
    * @param  {integer} maxLen - max length of password
    * @return {string} - padded password
+   *
+   * @private
    */
   __adaptivePadding(passwd, padChar, maxLen) {
     const pwlen = passwd.length;
@@ -215,10 +215,9 @@ class XKPasswd {
    * Notes: The number of words generated is determined by the num_words
    *        config key.
    *
-   *
-   * This is an internal function
-   *
    * @return {Array} - list of words
+   *
+   * @private
    */
   __randomWords() {
     const numWords = this.#config.num_words;
@@ -237,9 +236,10 @@ class XKPasswd {
    *
    * Notes: The character returned is controlled by the config variable
    *  `separator_character`
-   * This is an internal function
    *
    * @return {character} separator (could be an empty string)
+   *
+   * @private
    */
   __separator() {
     // figure out the separator character
@@ -262,11 +262,11 @@ class XKPasswd {
    *  The character returned is determined by a combination of the
    *  padding_type & padding_character config variables.
    *
-   * This is an internal function
-   *
    * @param {character} separator -
    *  the separator character being used to generate the password
    * @return {character} the padding character, could be an empty string
+   *
+   * @private
    */
   __paddingChar(separator) {
     if (is.undefined(separator)) {
