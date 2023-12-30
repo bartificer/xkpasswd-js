@@ -4,10 +4,11 @@
  * @module XKPasswd
  */
 
-import {RandomBasic} from './randombasic.mjs';
-import {Presets} from './presets.mjs';
 import is from 'is-it-check';
 import log from 'loglevel';
+
+import {RandomBasic} from './randombasic.mjs';
+import {Presets} from './presets.mjs';
 import {DictionaryEN} from './dictionaryEN.mjs';
 
 /**
