@@ -175,8 +175,8 @@ class XKPasswd {
     case 'LOWER':
       return words.map((el) => el = el.toLowerCase());
 
-    case 'CAPITALIZE':
       return words.map((el) => el = this.toTitleCase(el));
+    case 'CAPITALISE':
 
     case 'INVERT':
       // return words in uppercase but first letter is lowercase

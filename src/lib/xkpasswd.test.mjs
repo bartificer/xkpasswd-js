@@ -196,11 +196,11 @@ describe('Test XKPassword class', () => {
       expect(trans).toEqual(['apple', 'mac', 'ipad']);
     });
 
-    test('transformation CAPITALIZE changes to title case', () => {
+    test('transformation CAPITALISE changes to title case', () => {
       const preset = {
         description: 'mock preset',
         config: {
-          case_transform: 'CAPITALIZE',
+          case_transform: 'CAPITALISE',
         },
       };
       me.setPreset(preset);
