@@ -62,7 +62,6 @@ class XKPasswd {
   generatePassword() {
     const passwords = [this.password()];
     const stats = this.#statsClass.calculateStats();
-    stats.password.passwordStrength = this.__passwordStrength(stats);
 
     this.#stats = stats;
 
