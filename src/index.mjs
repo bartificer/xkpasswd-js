@@ -54,6 +54,9 @@ const XKP = {
       passwordErrorContainer: $('#passwordErrorContainer'),
       passwordStatsContainer: $('#password_stats_container'),
       passwordStrength: $('#password_strength'),
+      blindEntropy: $('#entropy_blind'),
+      seenEntropy: $('#entropy_seen'),
+      entropySuggestion: $('#entropy_suggestion'),
       xkpasswd: new XKPasswd(),
     };
 
@@ -118,12 +121,71 @@ const XKP = {
       XKP.__renderPasswordError('ERROR - server returned no passwords');
       return;
     }
-
-
-    // XKP.__renderDetailedStats(passAndStats.stats);
+    XKP.__renderDetailedStats(passAndStats.stats);
   },
 
   __renderDetailedStats: (stats) => {
+    XKP.__renderPasswordStrength(stats);
+
+    // Render the detailed stats
+
+    let template = {};
+    const minEntropyBlind = stats.entropy.minEntropyBlind;
+    const maxEntropyBlind = stats.entropy.maxEntropyBlind;
+
+    // first the blind entropy
+
+    /* eslint-disable max-len */
+
+    if (minEntropyBlind.equal) {
+      // make a template for one value
+
+      template = [
+        `<span class="btn btn-stats ${XKP.__getStatsClass(minEntropyBlind.state)}"`,
+        `id="entropy_min">${minEntropyBlind.value} bits</span>`,
+      ].join('');
+    } else {
+      // make a template for two values
+      template = [
+        `&nbsp;between <span class="btn btn-stats ${XKP.__getStatsClass(minEntropyBlind.state)}"`,
+        `id="entropy_min">${minEntropyBlind.value} bits</span> and `,
+        `<span class="btn btn-stats ${XKP.__getStatsClass(maxEntropyBlind.state)}"`,
+        `id="entropy_max">${maxEntropyBlind.value} bits</span>`,
+      ].join('');
+    }
+    /* eslint-enable max-len */
+
+    XKP.config.blindEntropy.empty().append(template);
+
+    // seen entropy
+    XKP.config.seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
+      .addClass(XKP.__getStatsClass(stats.entropy.entropySeen.state));
+
+    const suggestion =
+      // eslint-disable-next-line max-len
+      `(suggest keeping blind entropy above ${stats.entropy.blindThreshold} bits ` +
+      `and seen above ${stats.entropy.seenThreshold} bits)`;
+    XKP.config.entropySuggestion.html(suggestion);
+
+    XKP.__showStats();
+  },
+
+  __getStatsClass(state) {
+    const cls = XKP.stats_classes[state];
+    return cls;
+  },
+
+  __renderPasswordStrength: (stats) => {
+    // we assume that the strength indicator is already calculated
+
+    const statsText = XKP.config.xkpasswd
+      .toTitleCase(stats.password.passwordStrength);
+    const statsClass = XKP.__getStatsClass(stats.password.passwordStrength);
+
+    // render strength
+    XKP.config.passwordStrength.text(statsText);
+    XKP.config.passwordStrength.addClass(statsClass);
+  },
 
   __hideStats() {
     XKP.config.passwordStatsContainer.addClass('d-none');

@@ -246,6 +246,8 @@ class Statistics {
     };
 
     stats.entropy = entropyStats;
+    stats.entropy.blindThreshold = this.#entropyBlindThreshold;
+    stats.entropy.seenThreshold = this.#entropySeenThreshold;
 
     // deal with password counter
     // TODO this should probably be moved to XKPasswd

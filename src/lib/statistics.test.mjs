@@ -464,6 +464,8 @@ describe('Test class Statistics', () => {
             value: 31,
             state: 'POOR',
           },
+          blindThreshold: 78,
+          seenThreshold: 52,
         },
         password: {
           minLength: 24,
