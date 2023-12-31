@@ -123,7 +123,7 @@ describe('Test class Statistics', () => {
     });
   });
 
-  describe('Test function __dictionaryStats', () => {
+  describe('Test function __calculateDictionaryStats', () => {
     test('TODO add something meaningful', () => {
       const mockConfig = {
         num_words: 1,
@@ -136,7 +136,17 @@ describe('Test class Statistics', () => {
 
       const me = new Statistics(mockConfig);
 
-      expect(me.__calculateDictionaryStats).toBeDefined();
+      const result = me.__calculateDictionaryStats();
+      expect(result).toBeDefined();
+      expect(result).toEqual({
+        source: '',
+        numWordsTotal: 0,
+        numWordsFiltered: 0,
+        percentWordsAvailable: 0,
+        filterMinLength: 0,
+        filterMaxLength: 0,
+        containsAccents: false,
+      });
     });
   });
 
@@ -200,6 +210,42 @@ describe('Test class Statistics', () => {
         minEntropyBlind: 143,
       });
       /* eslint-enable max-len */
+    });
+  });
+
+  describe('Test calculateStats', () => {
+    test('on mock (DEFAULT) preset', () => {
+      const me = new Statistics(mock.config);
+
+      /* eslint-disable max-len */
+
+      const expected = {
+        dictionary: {
+          source: '',
+          numWordsTotal: 0,
+          numWordsFiltered: 0,
+          percentWordsAvailable: 0,
+          filterMinLength: 0,
+          filterMaxLength: 0,
+          containsAccents: false,
+        },
+        password: {
+          minLength: 24,
+          maxLength: 36,
+          randomNumbersRequired: 9,
+          minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+          maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+          permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          permutationsSeen: 1399680000n,
+          entropyBlind: 179,
+          entropySeen: 31,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 143,
+        },
+      };
+      /* eslint-enable max-len */
+
+      expect(me.calculateStats()).toEqual(expected);
     });
   });
 });
