@@ -288,5 +288,102 @@ describe('Test XKPassword class', () => {
       // console.log('DEBUG ' + pwds);
       expect(duplicates.length).toBe(0);
     });
+  describe('Test internal function __passwordStrength', () => {
+    test('on DEFAULT preset', () => {
+      /* eslint-disable max-len */
+
+      const stats = {
+        dictionary: {
+          source: '',
+          numWordsTotal: 0,
+          numWordsFiltered: 0,
+          percentWordsAvailable: 0,
+          filterMinLength: 0,
+          filterMaxLength: 0,
+          containsAccents: false,
+        },
+        password: {
+          minLength: 24,
+          maxLength: 36,
+          randomNumbersRequired: 9,
+          minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+          maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+          permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          permutationsSeen: 1399680000n,
+          entropyBlind: 179,
+          entropySeen: 31,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 143,
+        },
+      };
+      /* eslint-enable max-len */
+
+      expect(me.__passwordStrength(stats)).toBe('OK');
+    });
+
+    test('with good password strength', () => {
+      /* eslint-disable max-len */
+
+      const stats = {
+        dictionary: {
+          source: '',
+          numWordsTotal: 0,
+          numWordsFiltered: 0,
+          percentWordsAvailable: 0,
+          filterMinLength: 0,
+          filterMaxLength: 0,
+          containsAccents: false,
+        },
+        password: {
+          minLength: 24,
+          maxLength: 36,
+          randomNumbersRequired: 9,
+          minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+          maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+          permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          permutationsSeen: 1399680000n,
+          entropyBlind: 179,
+          entropySeen: 60,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 143,
+        },
+      };
+      /* eslint-enable max-len */
+
+      expect(me.__passwordStrength(stats)).toBe('GOOD');
+    });
+
+    test('with good password strength', () => {
+      /* eslint-disable max-len */
+
+      const stats = {
+        dictionary: {
+          source: '',
+          numWordsTotal: 0,
+          numWordsFiltered: 0,
+          percentWordsAvailable: 0,
+          filterMinLength: 0,
+          filterMaxLength: 0,
+          containsAccents: false,
+        },
+        password: {
+          minLength: 24,
+          maxLength: 36,
+          randomNumbersRequired: 9,
+          minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+          maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+          permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          permutationsSeen: 1399680000n,
+          entropyBlind: 179,
+          entropySeen: 20,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 50,
+        },
+      };
+      /* eslint-enable max-len */
+
+      expect(me.__passwordStrength(stats)).toBe('POOR');
+    });
+
   });
 });

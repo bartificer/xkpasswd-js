@@ -24,6 +24,11 @@ class XKPasswd {
   #rng; // random generator
   #statsClass; // Statistics class
   #dictionary; // current dictionary
+  #stats; // current stats
+
+  // entropy thresholds
+  #entropyBlindThreshold = 78;
+  #entropySeenThreshold = 52;
 
   /**
    * constructor
@@ -35,6 +40,7 @@ class XKPasswd {
     this.#rng = new RandomBasic();
     this.#dictionary = new DictionaryEN();
     this.#statsClass = new Statistics(this.#config);
+    this.#stats = {};
 
     // the number of passwords this instance has generated
     this.#passwordCounter = 0;
@@ -60,6 +66,9 @@ class XKPasswd {
   generatePassword() {
     const passwords = [this.password()];
     const stats = this.#statsClass.calculateStats();
+    stats.password.passwordStrength = this.__passwordStrength(stats);
+    this.#stats = stats;
+
     return {
       passwords: passwords,
       stats: stats,
@@ -133,6 +142,33 @@ class XKPasswd {
       );
     };
 
+  /**
+   * Find out the password strength
+   * @param {object} stats - object holding the entropies
+   * @return {string} - password strength code
+   *
+   * @private
+   */
+  __passwordStrength(stats) {
+    const blindEntropyMin = stats.password.minEntropyBlind;
+    const seenEntropy = stats.password.entropySeen;
+
+    const entropyBlindThreshold = this.#entropyBlindThreshold;
+    const entropySeenThreshold = this.#entropySeenThreshold;
+
+    // mix of good and bad
+    let passwordStrength = 'OK';
+
+    if (blindEntropyMin >= entropyBlindThreshold &&
+      seenEntropy >= entropySeenThreshold) {
+      // all good
+      passwordStrength = 'GOOD';
+    } else if (blindEntropyMin < entropyBlindThreshold &&
+      seenEntropy < entropySeenThreshold) {
+      // all bad
+      passwordStrength = 'POOR';
+    }
+    return passwordStrength;
   }
 
 
