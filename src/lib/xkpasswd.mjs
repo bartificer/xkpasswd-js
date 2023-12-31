@@ -144,6 +144,9 @@ class XKPasswd {
 
   /**
    * Find out the password strength
+   *
+   * TODO move this to Statistics?
+   *
    * @param {object} stats - object holding the entropies
    * @return {string} - password strength code
    *
