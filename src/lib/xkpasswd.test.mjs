@@ -31,7 +31,7 @@ describe('Test XKPassword class', () => {
     test('it returns a character', () => {
       const r = me.__separator();
       expect(typeof r).toBe('string');
-      expect(r.length).toBe(1);
+      expect(r).toHaveLength(1);
     });
 
     test('it returns a character in the alphabet list', () => {
@@ -77,7 +77,7 @@ describe('Test XKPassword class', () => {
     test('Check if it returns a character', () => {
       const r = me.__paddingChar('+');
       expect(typeof r).toBe('string');
-      expect(r.length).toBe(1);
+      expect(r).toHaveLength(1);
     });
 
     test('Check if it returns a character in the alphabet list', () => {
@@ -139,7 +139,7 @@ describe('Test XKPassword class', () => {
       const passwd = 'abcdef';
       const pw = me.__adaptivePadding(passwd, '+', 10);
 
-      expect(pw.length).toBe(10);
+      expect(pw).toHaveLength(10);
       expect(pw).toBe(passwd + '++++');
     });
 
@@ -147,7 +147,7 @@ describe('Test XKPassword class', () => {
       const passwd = 'abcdefghijklmnop';
       const pw = me.__adaptivePadding(passwd, '+', 5);
 
-      expect(pw.length).toBe(5);
+      expect(pw).toHaveLength(5);
       expect(pw).toBe('abcde'); ;
     });
   });
@@ -248,7 +248,7 @@ describe('Test XKPassword class', () => {
       me.setPreset(preset);
       const trans = me.__transformCase(words);
       expect(trans).toBeDefined();
-      expect(trans.length).toBe(words.length);
+      expect(trans).toHaveLength(words.length);
       for (let i = 0; i < words.length; i++) {
         expect(trans[i].toLowerCase()).toBe(words[i].toLowerCase());
       }
@@ -286,7 +286,7 @@ describe('Test XKPassword class', () => {
 
       const duplicates = findDuplicates(pwds);
       // console.log('DEBUG ' + pwds);
-      expect(duplicates.length).toBe(0);
+      expect(duplicates).toHaveLength(0);
     });
 
     test('it should return a truncated string of pad_to_length length', () => {
@@ -298,7 +298,7 @@ describe('Test XKPassword class', () => {
 
       me.setPreset(preset);
       const password = me.password();
-      expect(password.length).toBe(20);
+      expect(password).toHaveLength(20);
       const lastChar = password[password.length - 1];
       expect(lastChar).not.toBe(preset.config.padding_character);
     });
@@ -314,7 +314,7 @@ describe('Test XKPassword class', () => {
 
       me.setPreset(preset);
       const password = me.password();
-      expect(password.length).toBe(50);
+      expect(password).toHaveLength(50);
       const lastChar = password[password.length - 1];
       const expectedChar = '+'; // me.__paddingChar(me.__separator())
       expect(lastChar).toBe(expectedChar);
