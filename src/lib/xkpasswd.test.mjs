@@ -320,4 +320,47 @@ describe('Test XKPassword class', () => {
       expect(lastChar).toBe(expectedChar);
     });
   });
+
+  describe('Test passwords function', () => {
+    test('it should return an array with 1 password when num = 1', () => {
+      const pwArray = me.passwords(1);
+
+      expect(pwArray).toHaveLength(1);
+      expect(typeof pwArray[0]).toBe('string');
+    });
+
+    /* eslint-disable-next-line max-len */
+    test('it should return an array with 2 different passwords when num = 2', () => {
+      const pwArray = me.passwords(2);
+
+      expect(pwArray).toHaveLength(2);
+      expect(typeof pwArray[0]).toBe('string');
+      expect(typeof pwArray[1]).toBe('string');
+      expect(pwArray[0]).not.toBe(pwArray[1]);
+    });
+
+    /* eslint-disable-next-line max-len */
+    test('it should return an array with 1 password when num = 0', () => {
+      const pwArray = me.passwords(1);
+
+      expect(pwArray).toHaveLength(1);
+      expect(typeof pwArray[0]).toBe('string');
+    });
+
+    /* eslint-disable-next-line max-len */
+    test('it should return an array with 1 password when num is undefined', () => {
+      const pwArray = me.passwords();
+
+      expect(pwArray).toHaveLength(1);
+      expect(typeof pwArray[0]).toBe('string');
+    });
+
+    /* eslint-disable-next-line max-len */
+    test('it should return an array with 1 password when num is not a number', () => {
+      const pwArray = me.passwords('string');
+
+      expect(pwArray).toHaveLength(1);
+      expect(typeof pwArray[0]).toBe('string');
+    });
+  });
 });

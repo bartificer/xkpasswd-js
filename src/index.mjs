@@ -32,6 +32,10 @@ import {XKPasswd} from './lib/xkpasswd.mjs';
  */
 const XKP = {
 
+  // set time to show/hide elements
+
+  aniTime: 250,
+
   // set the Bootstrap classes for the various values
   stats_classes: {
     GOOD: 'btn-outline-success',
@@ -57,6 +61,7 @@ const XKP = {
       blindEntropy: $('#entropy_blind'),
       seenEntropy: $('#entropy_seen'),
       entropySuggestion: $('#entropy_suggestion'),
+      numberOfPasswords: $('#selectAmount'),
       xkpasswd: new XKPasswd(),
     };
 
@@ -78,7 +83,10 @@ const XKP = {
     // call generatePasswords from library
 
     try {
-      const passAndStats = XKP.config.xkpasswd.generatePassword();
+      const num = parseInt(XKP.config.numberOfPasswords.val());
+
+      const passAndStats = XKP.config.xkpasswd.generatePassword(num);
+
       XKP.__renderPassword(passAndStats);
     } catch (error) {
       log.error(`Password generation threw an error ${error}`);

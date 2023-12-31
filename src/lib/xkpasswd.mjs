@@ -57,10 +57,11 @@ class XKPasswd {
   /**
    * Generate the password(s) and stats
    *
+   * @param {integer} num - number of passwords to generate
    * @return {object} - contains the passwords and the stats
    */
-  generatePassword() {
-    const passwords = [this.password()];
+  generatePassword(num) {
+    const passwords = this.passwords(num);
     const stats = this.#statsClass.calculateStats();
 
     this.#stats = stats;
@@ -145,9 +146,14 @@ class XKPasswd {
    * @return {array} - the array with num passwords
    */
   passwords(num) {
-    const passwords = new Array(num).map(
-      () => this.password(),
-    );
+
+    if (is.undefined(num) || is.not.number(num) || num < 1) {
+      num = 1;
+    }
+
+    /* eslint-disable-next-line max-len */
+    const passwords = new Array(num).fill('').map( () => this.password() );
+    ;
 
     return passwords;
   }
