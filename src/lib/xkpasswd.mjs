@@ -23,7 +23,7 @@ class XKPasswd {
   #config; // config section of preset, convenience variable
   #rng; // random generator
   #statsClass; // Statistics class
-  #dictionary; // current directory
+  #dictionary; // current dictionary
 
   /**
    * constructor

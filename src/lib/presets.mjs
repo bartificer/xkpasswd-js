@@ -95,7 +95,7 @@ class Presets {
   }
 
   /**
-   * Get the name of the preset
+   * Get the name of the preset, e.g. DEFAULT
    *
    * @return {string} - the name of the preset
    */
