@@ -229,10 +229,7 @@ describe('Test class Statistics', () => {
           filterMaxLength: 0,
           containsAccents: false,
         },
-        password: {
-          minLength: 24,
-          maxLength: 36,
-          randomNumbersRequired: 9,
+        entropy: {
           minPermutationsBlind: 10408797222153426578715765348940396820955136n,
           maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
           permutationsBlind: 591222134364399413463902591994678504204696392694759424n,

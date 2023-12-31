@@ -153,8 +153,8 @@ class XKPasswd {
    * @private
    */
   __passwordStrength(stats) {
-    const blindEntropyMin = stats.password.minEntropyBlind;
-    const seenEntropy = stats.password.entropySeen;
+    const minEntropyBlind = stats.password.minEntropyBlind;
+    const entropySeen = stats.password.entropySeen;
 
     const entropyBlindThreshold = this.#entropyBlindThreshold;
     const entropySeenThreshold = this.#entropySeenThreshold;
@@ -162,18 +162,81 @@ class XKPasswd {
     // mix of good and bad
     let passwordStrength = 'OK';
 
-    if (blindEntropyMin >= entropyBlindThreshold &&
-      seenEntropy >= entropySeenThreshold) {
+    if (minEntropyBlind >= entropyBlindThreshold &&
+      entropySeen >= entropySeenThreshold) {
       // all good
       passwordStrength = 'GOOD';
-    } else if (blindEntropyMin < entropyBlindThreshold &&
-      seenEntropy < entropySeenThreshold) {
+    } else if (minEntropyBlind < entropyBlindThreshold &&
+      entropySeen < entropySeenThreshold) {
       // all bad
       passwordStrength = 'POOR';
     }
     return passwordStrength;
   }
 
+  /**
+   * Get the entropy information together
+   *
+   * TODO move this to Statistics?
+
+  * @param {object} stats
+   * @return {object} - entropy information
+   *
+   * @private
+   */
+  __entropyStats(stats) {
+    const minEntropyBlind = stats.entropy.minEntropyBlind;
+    const maxEntropyBlind = stats.entropy.maxEntropyBlind;
+    const entropySeen = stats.entropy.entropySeen;
+
+    const entropyBlindThreshold = this.#entropyBlindThreshold;
+    const entropySeenThreshold = this.#entropySeenThreshold;
+
+    const entropy = {
+      minEntropyBlind: {
+        value: minEntropyBlind,
+        state: 'OK',
+      },
+      maxEntropyBlind: {
+        value: maxEntropyBlind,
+        state: 'OK',
+      },
+      entropySeen: {
+        value: entropySeen,
+        state: 'OK',
+      },
+    };
+
+    // first the blind entropy
+    if (minEntropyBlind == maxEntropyBlind) {
+      entropy.minEntropyBlind.equal = true;
+      if (minEntropyBlind >= entropyBlindThreshold) {
+        entropy.minEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.minEntropyBlind.state = 'POOR';
+      }
+    } else {
+      entropy.minEntropyBlind.equal = false;
+      if (minEntropyBlind >= entropyBlindThreshold) {
+        entropy.minEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.minEntropyBlind.state = 'POOR';
+      }
+      if (maxEntropyBlind >= entropyBlindThreshold) {
+        entropy.maxEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.maxEntropyBlind.state = 'POOR';
+      }
+    }
+
+    // seen entropy
+    if (entropySeen >= entropySeenThreshold) {
+      entropy.entropySeen.state = 'GOOD';
+    } else {
+      entropy.entropySeen.state = 'POOR';
+    }
+    return entropy;
+  }
 
   /**
    * Pad the password with padChar until the given length

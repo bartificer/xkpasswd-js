@@ -227,18 +227,20 @@ class Statistics {
 
     stats.dictionary = dictStats;
 
-    // deal with the entropy stats
-    const entropyStats = this.__calculateEntropyStats();
-    stats.password = entropyStats;
-
     // deal with the config-specific stats
     const configStats = this.configStats();
 
+    // deal with the entropy stats
+    const entropyStats = this.__calculateEntropyStats();
+
     // add them to the password object
-    stats.password.minLength = configStats.minLength;
-    stats.password.maxLength = configStats.maxLength;
-    stats.password.randomNumbersRequired =
-         configStats.randomNumbersRequired;
+    stats.password = {
+      minLength: configStats.minLength,
+      maxLength: configStats.maxLength,
+      randomNumbersRequired: configStats.randomNumbersRequired,
+    };
+
+    stats.entropy = entropyStats;
 
     // deal with password counter
     // TODO this should probably be moved to XKPasswd
