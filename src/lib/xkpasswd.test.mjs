@@ -288,6 +288,39 @@ describe('Test XKPassword class', () => {
       // console.log('DEBUG ' + pwds);
       expect(duplicates.length).toBe(0);
     });
+
+    test('it should return a truncated string of pad_to_length length', () => {
+      const preset = Presets.getDefault();
+
+      preset.description = 'mock preset'; // just to make things clear
+      preset.config.padding_type = 'ADAPTIVE';
+      preset.config.pad_to_length = 20;
+
+      me.setPreset(preset);
+      const password = me.password();
+      expect(password.length).toBe(20);
+      const lastChar = password[password.length - 1];
+      expect(lastChar).not.toBe(preset.config.padding_character);
+    });
+
+    test('it should return a padded string of pad_to_length length', () => {
+      const preset = Presets.getDefault();
+
+      preset.description = 'mock preset'; // just to make things clear
+      preset.config.separator_alphabet = ['+'];
+      preset.config.padding_type = 'ADAPTIVE';
+      preset.config.pad_to_length = 50;
+      preset.config.padding_character = 'SEPARATOR';
+
+      me.setPreset(preset);
+      const password = me.password();
+      expect(password.length).toBe(50);
+      const lastChar = password[password.length - 1];
+      const expectedChar = '+'; // me.__paddingChar(me.__separator())
+      expect(lastChar).toBe(expectedChar);
+    });
+  });
+
   describe('Test internal function __passwordStrength', () => {
     test('on DEFAULT preset', () => {
       /* eslint-disable max-len */
@@ -386,6 +419,157 @@ describe('Test XKPassword class', () => {
 
       expect(me.__passwordStrength(stats)).toBe('POOR');
     });
+  });
 
+  describe('Test internal function __entropyStats', () => {
+    test('on DEFAULT preset', () => {
+      // only use the relevant keys
+      const stats = {
+        entropy: {
+          entropyBlind: 179,
+          entropySeen: 31,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 143,
+        },
+      };
+
+      const expected = {
+        minEntropyBlind: {
+          value: 143,
+          state: 'GOOD',
+          equal: false,
+        },
+        maxEntropyBlind: {
+          value: 215,
+          state: 'GOOD',
+        },
+        entropySeen: {
+          value: 31,
+          state: 'POOR',
+        },
+      };
+
+      expect(me.__entropyStats(stats)).toEqual(expected);
+    });
+
+    test('when min and max are equal', () => {
+      // only use the relevant keys
+      const stats = {
+        entropy: {
+          entropyBlind: 215,
+          entropySeen: 31,
+          maxEntropyBlind: 215,
+          minEntropyBlind: 215,
+        },
+      };
+
+      const expected = {
+        minEntropyBlind: {
+          value: 215,
+          state: 'GOOD',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 215,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 31,
+          state: 'POOR',
+        },
+      };
+
+      expect(me.__entropyStats(stats)).toEqual(expected);
+    });
+
+    test('when equal and less than threshold should result in POOR', () => {
+      // only use the relevant keys
+      const stats = {
+        entropy: {
+          entropyBlind: 20,
+          entropySeen: 31,
+          maxEntropyBlind: 20,
+          minEntropyBlind: 20,
+        },
+      };
+
+      const expected = {
+        minEntropyBlind: {
+          value: 20,
+          state: 'POOR',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 20,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 31,
+          state: 'POOR',
+        },
+      };
+
+      expect(me.__entropyStats(stats)).toEqual(expected);
+    });
+
+    test('when seen is above threshold should result in GOOD', () => {
+      // only use the relevant keys
+      const stats = {
+        entropy: {
+          entropyBlind: 20,
+          entropySeen: 60,
+          maxEntropyBlind: 20,
+          minEntropyBlind: 20,
+        },
+      };
+
+      const expected = {
+        minEntropyBlind: {
+          value: 20,
+          state: 'POOR',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 20,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 60,
+          state: 'GOOD',
+        },
+      };
+
+      expect(me.__entropyStats(stats)).toEqual(expected);
+    });
+
+    test('when max is below threshold should result in POOR', () => {
+      // only use the relevant keys
+      const stats = {
+        entropy: {
+          entropyBlind: 20,
+          entropySeen: 60,
+          maxEntropyBlind: 20,
+          minEntropyBlind: 18,
+        },
+      };
+
+      const expected = {
+        minEntropyBlind: {
+          value: 18,
+          state: 'POOR',
+          equal: false,
+        },
+        maxEntropyBlind: {
+          value: 20,
+          state: 'POOR',
+        },
+        entropySeen: {
+          value: 60,
+          state: 'GOOD',
+        },
+      };
+
+      expect(me.__entropyStats(stats)).toEqual(expected);
+    });
   });
 });
