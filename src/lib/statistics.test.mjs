@@ -239,6 +239,11 @@ describe('Test class Statistics', () => {
           maxEntropyBlind: 215,
           minEntropyBlind: 143,
         },
+        password: {
+          minLength: 24,
+          maxLength: 36,
+          randomNumbersRequired: 9,
+        },
       };
       /* eslint-enable max-len */
 
