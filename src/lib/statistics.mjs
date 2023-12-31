@@ -36,7 +36,7 @@ class Statistics {
     };
     this.configStats(true);
 
-    log.setLevel('debug');
+    log.setLevel('warn');
   }
 
   /**
