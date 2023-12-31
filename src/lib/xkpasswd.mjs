@@ -67,6 +67,13 @@ class XKPasswd {
     const passwords = [this.password()];
     const stats = this.#statsClass.calculateStats();
     stats.password.passwordStrength = this.__passwordStrength(stats);
+    const entropy = this.__entropyStats(stats);
+
+    // update the entropy fields with value + state
+    stats.entropy.minEntropyBlind = entropy.minEntropyBlind;
+    stats.entropy.maxEntropyBlind = entropy.maxEntropyBlind;
+    stats.entropy.entropySeen = entropy.entropySeen;
+
     this.#stats = stats;
 
     return {
