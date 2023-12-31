@@ -26,10 +26,6 @@ class XKPasswd {
   #dictionary; // current dictionary
   #stats; // current stats
 
-  // entropy thresholds
-  #entropyBlindThreshold = 78;
-  #entropySeenThreshold = 52;
-
   /**
    * constructor
    * @constructor
@@ -67,12 +63,6 @@ class XKPasswd {
     const passwords = [this.password()];
     const stats = this.#statsClass.calculateStats();
     stats.password.passwordStrength = this.__passwordStrength(stats);
-    const entropy = this.__entropyStats(stats);
-
-    // update the entropy fields with value + state
-    stats.entropy.minEntropyBlind = entropy.minEntropyBlind;
-    stats.entropy.maxEntropyBlind = entropy.maxEntropyBlind;
-    stats.entropy.entropySeen = entropy.entropySeen;
 
     this.#stats = stats;
 
@@ -148,102 +138,21 @@ class XKPasswd {
         `Failed to generate password with the following error: ${e}`,
       );
     };
-
-  /**
-   * Find out the password strength
-   *
-   * TODO move this to Statistics?
-   *
-   * @param {object} stats - object holding the entropies
-   * @return {string} - password strength code
-   *
-   * @private
-   */
-  __passwordStrength(stats) {
-    const minEntropyBlind = stats.password.minEntropyBlind;
-    const entropySeen = stats.password.entropySeen;
-
-    const entropyBlindThreshold = this.#entropyBlindThreshold;
-    const entropySeenThreshold = this.#entropySeenThreshold;
-
-    // mix of good and bad
-    let passwordStrength = 'OK';
-
-    if (minEntropyBlind >= entropyBlindThreshold &&
-      entropySeen >= entropySeenThreshold) {
-      // all good
-      passwordStrength = 'GOOD';
-    } else if (minEntropyBlind < entropyBlindThreshold &&
-      entropySeen < entropySeenThreshold) {
-      // all bad
-      passwordStrength = 'POOR';
-    }
-    return passwordStrength;
   }
 
   /**
-   * Get the entropy information together
-   *
-   * TODO move this to Statistics?
-
-  * @param {object} stats
-   * @return {object} - entropy information
-   *
-   * @private
+   * Generate the requested number of passwords
+   * @param {integer} num - the number of passwords requested
+   * @return {array} - the array with num passwords
    */
-  __entropyStats(stats) {
-    const minEntropyBlind = stats.entropy.minEntropyBlind;
-    const maxEntropyBlind = stats.entropy.maxEntropyBlind;
-    const entropySeen = stats.entropy.entropySeen;
+  passwords(num) {
+    const passwords = new Array(num).map(
+      () => this.password(),
+    );
 
-    const entropyBlindThreshold = this.#entropyBlindThreshold;
-    const entropySeenThreshold = this.#entropySeenThreshold;
-
-    const entropy = {
-      minEntropyBlind: {
-        value: minEntropyBlind,
-        state: 'OK',
-      },
-      maxEntropyBlind: {
-        value: maxEntropyBlind,
-        state: 'OK',
-      },
-      entropySeen: {
-        value: entropySeen,
-        state: 'OK',
-      },
-    };
-
-    // first the blind entropy
-    if (minEntropyBlind == maxEntropyBlind) {
-      entropy.minEntropyBlind.equal = true;
-      if (minEntropyBlind >= entropyBlindThreshold) {
-        entropy.minEntropyBlind.state = 'GOOD';
-      } else {
-        entropy.minEntropyBlind.state = 'POOR';
-      }
-    } else {
-      entropy.minEntropyBlind.equal = false;
-      if (minEntropyBlind >= entropyBlindThreshold) {
-        entropy.minEntropyBlind.state = 'GOOD';
-      } else {
-        entropy.minEntropyBlind.state = 'POOR';
-      }
-      if (maxEntropyBlind >= entropyBlindThreshold) {
-        entropy.maxEntropyBlind.state = 'GOOD';
-      } else {
-        entropy.maxEntropyBlind.state = 'POOR';
-      }
-    }
-
-    // seen entropy
-    if (entropySeen >= entropySeenThreshold) {
-      entropy.entropySeen.state = 'GOOD';
-    } else {
-      entropy.entropySeen.state = 'POOR';
-    }
-    return entropy;
+    return passwords;
   }
+
 
   /**
    * Pad the password with padChar until the given length

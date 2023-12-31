@@ -12,6 +12,10 @@ class Statistics {
   #config; // the config that needs to be calculated
   #cache; // a cache of stats
 
+  // entropy thresholds
+  #entropyBlindThreshold = 78;
+  #entropySeenThreshold = 52;
+
   /**
  * Constructor
  * @constructor
@@ -238,6 +242,7 @@ class Statistics {
       minLength: configStats.minLength,
       maxLength: configStats.maxLength,
       randomNumbersRequired: configStats.randomNumbersRequired,
+      passwordStrength: this.__passwordStrength(entropyStats),
     };
 
     stats.entropy = entropyStats;
@@ -275,10 +280,16 @@ class Statistics {
    *   * permutationsSeen - the number of permutations to be tested
    *        by an attacker with full knowledge of the dictionary file and
    *        configuration used (as BigInt)
-   *   * minEntropyBlind - minPermutationsBlind converted to bits
-   *   * maxEntropyBlind - maxPermutationsBlind converted to bits
+   *   * minEntropyBlind - object
+   *          - value - minPermutationsBlind converted to bits
+   *          - state - POOR | OK | GOOD
+   *   * maxEntropyBlind - object
+   *          - value - maxPermutationsBlind converted to bits
+   *          - state - POOR | OK | GOOD
    *   * entropyBlind - permutationsBlind converted to bits
-   *   * entropySeen - permutationsSeen converted to bits
+   *   * entropySeen - object
+   *          - value - permutationsSeen converted to bits
+   *          - state - POOR | OK | GOOD
    *
    * Notes: This function uses configStats() to determine the longest and
    *       shortest password lengths, so the caveat that function has
@@ -452,17 +463,68 @@ class Statistics {
     // which comes down to log2(largeNumber) =
     // BigInt(largeNumber.toString()).toString(2).length
 
-    stats.minEntropyBlind = statsBigInt.minPermutationsBlind.toString(2).length;
+    const minEntropyBlind = statsBigInt.minPermutationsBlind.toString(2).length;
     log.debug('got minEntropyBlind=' + stats.minEntropyBlind);
 
-    stats.maxEntropyBlind = statsBigInt.maxPermutationsBlind.toString(2).length;
+    const maxEntropyBlind = statsBigInt.maxPermutationsBlind.toString(2).length;
     log.debug('got maxEntropyBlind=' + stats.maxEntropyBlind);
 
     stats.entropyBlind = statsBigInt.permutationsBlind.toString(2).length;
     log.debug('got entropyBlind=' + stats.entropyBlind);
 
-    stats.entropySeen = stats.permutationsSeen.toString(2).length;
-    log.debug('got entropySeen=' +stats.entropySeen);
+    const entropySeen = stats.permutationsSeen.toString(2).length;
+    log.debug('got entropySeen=' + entropySeen);
+
+    const entropyBlindThreshold = this.#entropyBlindThreshold;
+    const entropySeenThreshold = this.#entropySeenThreshold;
+
+    const entropy = {
+      minEntropyBlind: {
+        value: minEntropyBlind,
+        state: 'OK',
+      },
+      maxEntropyBlind: {
+        value: maxEntropyBlind,
+        state: 'OK',
+      },
+      entropySeen: {
+        value: entropySeen,
+        state: 'OK',
+      },
+    };
+
+    // first the blind entropy
+    if (minEntropyBlind == maxEntropyBlind) {
+      entropy.minEntropyBlind.equal = true;
+      if (minEntropyBlind >= entropyBlindThreshold) {
+        entropy.minEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.minEntropyBlind.state = 'POOR';
+      }
+    } else {
+      entropy.minEntropyBlind.equal = false;
+      if (minEntropyBlind >= entropyBlindThreshold) {
+        entropy.minEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.minEntropyBlind.state = 'POOR';
+      }
+      if (maxEntropyBlind >= entropyBlindThreshold) {
+        entropy.maxEntropyBlind.state = 'GOOD';
+      } else {
+        entropy.maxEntropyBlind.state = 'POOR';
+      }
+    }
+
+    // seen entropy
+    if (entropySeen >= entropySeenThreshold) {
+      entropy.entropySeen.state = 'GOOD';
+    } else {
+      entropy.entropySeen.state = 'POOR';
+    }
+
+    stats.minEntropyBlind = entropy.minEntropyBlind;
+    stats.maxEntropyBlind = entropy.maxEntropyBlind;
+    stats.entropySeen = entropy.entropySeen;
 
     this.#cache.entropy.stats = stats;
     this.#cache.entropy.valid = true;
@@ -470,6 +532,40 @@ class Statistics {
     // return the stats
     return this.#cache.entropy.stats;
   } // __calculateEntropyStats
+
+  /**
+   * Find out the password strength
+   *
+   * Notes: the stats object passed are just
+   * the entropies, not the full stats object
+   *
+   * @param {object} stats - object holding the entropies
+   * @return {string} - password strength code
+   *
+   * @private
+   */
+  __passwordStrength(stats) {
+    const minEntropyBlind = stats.minEntropyBlind;
+    const entropySeen = stats.entropySeen;
+
+    const entropyBlindThreshold = this.#entropyBlindThreshold;
+    const entropySeenThreshold = this.#entropySeenThreshold;
+
+    // mix of good and bad
+    let passwordStrength = 'OK';
+
+    if (minEntropyBlind >= entropyBlindThreshold &&
+      entropySeen >= entropySeenThreshold) {
+      // all good
+      passwordStrength = 'GOOD';
+    } else if (minEntropyBlind < entropyBlindThreshold &&
+      entropySeen < entropySeenThreshold) {
+      // all bad
+      passwordStrength = 'POOR';
+    }
+    return passwordStrength;
+  }
+
 
   /**
    * Calculate the number of random numbers needed to generate a

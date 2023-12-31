@@ -205,13 +205,229 @@ describe('Test class Statistics', () => {
         permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
         permutationsSeen: 1399680000n,
         entropyBlind: 179,
-        entropySeen: 31,
-        maxEntropyBlind: 215,
-        minEntropyBlind: 143,
+        minEntropyBlind: {
+          value: 143,
+          state: 'GOOD',
+          equal: false,
+        },
+        maxEntropyBlind: {
+          value: 215,
+          state: 'GOOD',
+        },
+        entropySeen: {
+          value: 31,
+          state: 'POOR',
+        },
       });
       /* eslint-enable max-len */
     });
+
+    test('when min and max are equal', () => {
+      // only use the relevant keys
+      const mockConfig = {
+        symbol_alphabet: ['!', '@'],
+        word_length_min: 4,
+        word_length_max: 4,
+        num_words: 3,
+        separator_character: 'RANDOM',
+        padding_digits_before: 2,
+        padding_digits_after: 2,
+        padding_type: 'FIXED',
+        padding_character: 'RANDOM',
+        padding_characters_before: 2,
+        padding_characters_after: 2,
+        case_transform: 'ALTERNATE',
+      };
+
+      const me = new Statistics(mockConfig);
+
+      const expected = {
+        minEntropyBlind: {
+          value: 143,
+          state: 'GOOD',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 143,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 25,
+          state: 'POOR',
+        },
+      };
+
+      const result = me.__calculateEntropyStats();
+      expect(result.minEntropyBlind).toEqual(expected.minEntropyBlind);
+      expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
+      expect(result.entropySeen).toEqual(expected.entropySeen);
+    });
+
+    test('when equal and less than threshold should result in POOR', () => {
+      // only use the relevant keys
+      const mockConfig = {
+        symbol_alphabet: ['!', '@'],
+        word_length_min: 4,
+        word_length_max: 4,
+        num_words: 2,
+        separator_character: '+',
+        padding_digits_before: 0,
+        padding_digits_after: 0,
+        padding_type: 'NONE',
+        padding_character: 'NONE',
+        padding_characters_before: 0,
+        padding_characters_after: 0,
+        case_transform: 'UPPER',
+      };
+
+      const me = new Statistics(mockConfig);
+
+      const expected = {
+        minEntropyBlind: {
+          value: 38,
+          state: 'POOR',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 38,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 3,
+          state: 'POOR',
+        },
+      };
+
+      const result = me.__calculateEntropyStats();
+      expect(result.minEntropyBlind).toEqual(expected.minEntropyBlind);
+      expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
+      expect(result.entropySeen).toEqual(expected.entropySeen);
+    });
+
+    test('when seen is above threshold should result in GOOD', () => {
+      // only use the relevant keys
+      const mockConfig = {
+      // eslint-disable-next-line max-len
+        symbol_alphabet: ['!', '@', '$', '%', '^', '&', '*', '-', '_', '+', '=', ':', '|', '~', '?', '/', '.', ';'],
+        word_length_min: 4,
+        word_length_max: 8,
+        num_words: 4,
+        separator_character: 'RANDOM',
+        padding_digits_before: 20,
+        padding_digits_after: 20,
+        padding_type: 'FIXED',
+        padding_character: 'RANDOM',
+        padding_characters_before: 2,
+        padding_characters_after: 2,
+        case_transform: 'RANDOM',
+      };
+
+      const me = new Statistics(mockConfig);
+
+      const expected = {
+        minEntropyBlind: {
+          value: 20,
+          state: 'POOR',
+          equal: true,
+        },
+        maxEntropyBlind: {
+          value: 20,
+          state: 'OK',
+        },
+        entropySeen: {
+          value: 154,
+          state: 'GOOD',
+        },
+      };
+
+      const result = me.__calculateEntropyStats();
+      expect(result.entropySeen).toEqual(expected.entropySeen);
+    });
+
+    test('when max is below threshold should result in POOR', () => {
+      // only use the relevant keys
+      const mockConfig = {
+        symbol_alphabet: ['-'],
+        word_length_min: 4,
+        word_length_max: 5,
+        num_words: 3,
+        separator_character: 'NONE',
+        padding_digits_before: 0,
+        padding_digits_after: 0,
+        padding_type: 'FIXED',
+        padding_character: 'SEPARATOR',
+        padding_characters_before: 0,
+        padding_characters_after: 0,
+        case_transform: 'LOWER',
+      };
+
+      const me = new Statistics(mockConfig);
+
+
+      const expected = {
+        minEntropyBlind: {
+          value: 18,
+          state: 'POOR',
+          equal: false,
+        },
+        maxEntropyBlind: {
+          value: 71,
+          state: 'POOR',
+        },
+        entropySeen: {
+          value: 5,
+          state: 'POOR',
+        },
+      };
+
+      const result = me.__calculateEntropyStats();
+      expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
+      expect(result.entropySeen).toEqual(expected.entropySeen);
+    });
   });
+
+  describe('Test internal function __passwordStrength', () => {
+    const me = new Statistics(mock.config);
+
+    test('on DEFAULT preset', () => {
+      // these are just the entropies
+      const stats = {
+        entropyBlind: 179,
+        minEntropyBlind: 143,
+        maxEntropyBlind: 215,
+        entropySeen: 31,
+      };
+
+      /* eslint-enable max-len */
+
+      expect(me.__passwordStrength(stats)).toBe('OK');
+    });
+
+    test('with poor password strength', () => {
+      // these are just the entropies
+      const stats = {
+        entropyBlind: 179,
+        minEntropyBlind: 20,
+        maxEntropyBlind: 215,
+        entropySeen: 20,
+      };
+
+      expect(me.__passwordStrength(stats)).toBe('POOR');
+    });
+
+    test('with good password strength', () => {
+      // these are just the entropies
+      const stats = {
+        entropyBlind: 179,
+        minEntropyBlind: 143,
+        maxEntropyBlind: 215,
+        entropySeen: 60,
+      };
+
+      expect(me.__passwordStrength(stats)).toBe('GOOD');
+    });
+  });
+
 
   describe('Test calculateStats', () => {
     test('on mock (DEFAULT) preset', () => {
@@ -235,14 +451,25 @@ describe('Test class Statistics', () => {
           permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
           permutationsSeen: 1399680000n,
           entropyBlind: 179,
-          entropySeen: 31,
-          maxEntropyBlind: 215,
-          minEntropyBlind: 143,
+          minEntropyBlind: {
+            value: 143,
+            state: 'GOOD',
+            equal: false,
+          },
+          maxEntropyBlind: {
+            value: 215,
+            state: 'GOOD',
+          },
+          entropySeen: {
+            value: 31,
+            state: 'POOR',
+          },
         },
         password: {
           minLength: 24,
           maxLength: 36,
           randomNumbersRequired: 9,
+          passwordStrength: 'OK',
         },
       };
       /* eslint-enable max-len */
