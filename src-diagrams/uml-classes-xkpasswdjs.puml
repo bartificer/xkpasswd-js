@@ -1,0 +1,160 @@
+@startuml
+class RandomBasic {
+  +randomChar()
+  +randomInt()
+  +randomDigits()
+  +toss()
+  +randomNumbers()
+
+  .. private functions ..
+
+  ~__randomFloat()
+  ~__randomInt()
+}
+
+class Preset {
+    #current
+    #presetName
+    constructor(preset)
+    {static} getDefault()
+    +getCurrent()
+    +config()
+    +description()
+    +name()
+    +getSeparatorAlphabet()
+    +getPaddingAlphabet()
+
+'    +preset_definition(string preset)$ hash
+'    +preset_definitions()$ hash
+'    +preset_description(string preset)$ string
+'    +config(hashref config, JSON config_json) hashref
+
+}
+
+abstract class Dictionary {
+    +wordList()
+
+    ~__setLength()
+
+'    +source() class
+'    +print_words() void
+'    +distil_to_words(string[] arg)$ string[]
+}
+class DictionaryEN {
+    ~THE_WORDS
+    +wordList()
+'    +source() string[]
+}
+
+class Statistics {
+  +constructor(config)
+  +configStats(suppress_warnings)
+  +calculateStats()
+
+  .. private functions ..
+
+  ~__calculateEntropyStats()
+  ~__calculateDictStats()
+  ~__randomNumbersRequired()
+
+'    +config_random_numbers_required(hashref config)$ int
+'    +config_stats(hashref config, boolean suppress_warnings)$ hash
+'    -_calculate_entropy_stats() hash
+'    -_calculate_dictionary_stats() hash
+
+}
+
+class XKPasswd {
+    #Dictionary dictionary
+    #RNG RandomBasic
+    #Preset preset
+    +toTitleCase()
+    +generatePassword()
+    +password()
+    +passwords(num)
+
+    .. private functions ..
+
+    ~__adaptivePadding()
+    ~__entropyStats()
+    ~__paddingChar()
+    ~__padWithChar()
+    ~__padWithDigits()
+    ~__passwordStrength()
+    ~__randomWords()
+    ~__separator()
+    ~__substituteCharacters()
+    ~__transformCase()
+
+'    Dictionary dictionary
+'    RNG RandomBasic
+'    +password() string
+'    +passwords(int number_of_passwords) string[]
+'    -_random_words() string[]
+'    -_separator() string
+'    -_padding_char(string separator) string
+'    -_transform_case(string[] words) void
+
+
+}
+
+class XKPasswd-OLD $oldClass {
+    +new()$ XKPasswd
+    +module_config(string key, string value)$ string
+    +defined_config_keys()$ string[]
+    +config_key_definition(string key)$ hash
+    +config_key_definitions()$ hash
+    +default_config(hashref config)$ hashref
+    +preset_config(string preset, hashref override)$ hashref
+    +presets_json()$ JSON
+    +clone_config(hashref config)$ hashref
+    +distil_to_config_keys(hashref config, string[] args)$ hashref
+    +distil_to_symbol_alphabet(string[] symbols, int warn)$ string[]
+    +distil_to_words(string[] words, boolean warn)$ string[]
+    +is_valid_config(hashref config)$ boolean
+    +config_to_json(hashref config)$ JSON
+    +config_to_string(hashref config)$ string
+    +defined_presets()$ string[]
+    +presets_to_string()$ string
+    +dictionary() Dictionary
+    +config_as_json() JSON
+    +config_as_string() string
+    +update_config(hashref config) XKPasswd
+    +caches_state() string
+    +passwords_json(int number_of_passwords) JSON
+    +stats() hash
+    +status() string
+    +hsxkpasswd() string
+    -_clone_config() hashref
+    -_distil_alphabets_inplace(hashref config)$ void
+    -_filter_word_list()$ string[]
+    -_contains_accented_letters(string[] word_list)$ boolean
+    -_increment_random_cache() void
+    -_substitute_characters(string[] words) void
+    -_check_config_key_definitions() void
+    -_check_preset_definitions() void
+    -_best_available_rng()$ RNG
+    -_passwords_will_contain_symbol() boolean
+    -_update_entropystats_cache() void
+    -_render_bigint(BigInt int)$ string
+    -_grapheme_length(string s)$ int
+}
+
+
+XKPasswd *-- Dictionary
+XKPasswd *-- RandomBasic
+XKPasswd *-- Preset
+XKPasswd *-- Statistics
+
+Dictionary <|-- DictionaryEN
+
+title: HKPasswd-js version
+note as N1
+ The giant XKPasswd class
+ is refactored into multiple classes
+end note
+
+note right of DictionaryEN : The word list is part of the package
+
+remove $oldClass
+@enduml
