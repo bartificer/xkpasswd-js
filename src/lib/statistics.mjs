@@ -40,7 +40,7 @@ class Statistics {
     };
     this.configStats(true);
 
-    log.setLevel('warn');
+    log.setLevel('error');
   }
 
   /**
@@ -327,6 +327,8 @@ class Statistics {
       alphabetCount += 10;
     }
 
+    log.setLevel('warn');
+
     log.debug('alphabetCount: ' + alphabetCount);
 
     // TODO replace pseudocode with real code
@@ -531,6 +533,7 @@ class Statistics {
     this.#cache.entropy.stats = stats;
     this.#cache.entropy.valid = true;
 
+    log.setLevel('debug');
     // return the stats
     return this.#cache.entropy.stats;
   } // __calculateEntropyStats
