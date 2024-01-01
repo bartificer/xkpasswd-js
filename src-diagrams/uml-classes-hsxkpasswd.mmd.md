@@ -1,4 +1,7 @@
 ```mermaid
+---
+title: HSXKPasswd Perl version
+---
 classDiagram-v2
     Helper <|-- XKPasswd
     Helper <|-- Dictionary
@@ -9,7 +12,7 @@ classDiagram-v2
     Helper <|-- RandomDotOrg
     Helper <|-- Types
     Helper <|-- Util
-    
+
 
     Dictionary <|-- Dict_Basic
     Dictionary <|-- System
@@ -27,7 +30,7 @@ classDiagram-v2
     RNG <|-- Math_Random_Secure
     RNG <|-- RandomDotOrg
 
-    XKPasswd *-- Dictionary 
+    XKPasswd *-- Dictionary
     XKPasswd *-- Types
     XKPasswd *-- RNG
 
@@ -66,7 +69,7 @@ classDiagram-v2
         +caches_state() string
         +password() string
         +passwords(int number_of_passwords) string[]
-        +passwords_json(int number_of_passwords) JSON 
+        +passwords_json(int number_of_passwords) JSON
         +stats() hash
         +status() string
         +hsxkpasswd(Dictionary dictionary, string[] dictionary_list, string dictionary_file, string dictionary_file_encoding, hashref config, JSON config_json, Preset preset, hashref preset_overrides, RNG rng ) string
@@ -75,14 +78,14 @@ classDiagram-v2
         -_filter_word_list(string[], int min_length, int max_length, boolean allow_accents)$ string[]
         -_contains_accented_letters(string[] word_list)$ boolean
         -_random_int(int min_value) int
-        -_random_digits(int number_of_int) int[] 
+        -_random_digits(int number_of_int) int[]
         -_rand() decimal
         -_increment_random_cache() void
         -_random_words() string[]
         -_separator() string
-        -_padding_char(string separator) string 
-        -_transform_case(string[] words) void 
-        -_substitute_characters(string[] words) void 
+        -_padding_char(string separator) string
+        -_transform_case(string[] words) void
+        -_substitute_characters(string[] words) void
         -_check_config_key_definitions() void
         -_check_preset_definitions() void
         -_best_available_rng()$ RNG
@@ -91,14 +94,14 @@ classDiagram-v2
         -_passwords_will_contain_symbol() boolean
         -_update_entropystats_cache() void
         -_render_bigint(BigInt int)$ string
-        -_grapheme_length(string s)$ int 
+        -_grapheme_length(string s)$ int
     }
     class Types {
         +var_to_string(string variable) string
         -_config_keys() hashref
         -_presets() hashref
-        -_config_key_message(obj invalid_value, string config_key, string description) string 
-        -_extract_invalid_valued_keys(hash) string[] 
+        -_config_key_message(obj invalid_value, string config_key, string description) string
+        -_extract_invalid_valued_keys(hash) string[]
         -_extract_missing_required_keys(hash) string[]
         -_extract_unfulfilled_key_interdependencies(hash) string[]
     }
@@ -125,7 +128,7 @@ classDiagram-v2
         +word_list() void
         +source() class
         +print_words() void
-        +distil_to_words(string[] arg)$ string[] 
+        +distil_to_words(string[] arg)$ string[]
     }
     class Dict_Basic {
         new(string file_path, string[] words)$ Dict_Basic
