@@ -146,14 +146,12 @@ class XKPasswd {
    * @return {array} - the array with num passwords
    */
   passwords(num) {
-
     if (is.undefined(num) || is.not.number(num) || num < 1) {
       num = 1;
     }
 
-    /* eslint-disable-next-line max-len */
-    const passwords = new Array(num).fill('').map( () => this.password() );
-    ;
+    const passwords =
+    new Array(num).fill('').map( () => this.password() );
 
     return passwords;
   }
