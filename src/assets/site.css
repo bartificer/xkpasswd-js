@@ -17,6 +17,10 @@ body {
   max-height: 4rem;
 }
 
+textarea {
+  resize: none;
+}
+
 .bd-clipboard,.bd-edit {
   position: relative;
   display: none;
