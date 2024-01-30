@@ -84,6 +84,8 @@ const XKP = {
 
     try {
       const num = parseInt(XKP.config.numberOfPasswords.val());
+      // Set passwordArea height to accomodate number of passwords
+      generated_password.rows = num;
 
       const passAndStats = XKP.config.xkpasswd.generatePassword(num);
 
