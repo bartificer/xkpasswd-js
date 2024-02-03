@@ -1,4 +1,4 @@
-![XKPasswdJS](https://github.com/bartificer/xkpasswd-js/actions/xspasswd.yml/badge.svg)
+![XKPasswdJS](https://github.com/bartificer/xkpasswd-js/actions/xkpasswd.yml/badge.svg)
 
 # XKPasswdJS — The Official JavaScript Port of Crypt::HSXKPasswd
 
@@ -7,6 +7,10 @@
 ![To anyone who understands information theory and security and is in an infuriating argument with someone who does not (possibly involving mixed case), I sincerely apologize.](https://imgs.xkcd.com/comics/password_strength.png)
 
 Bart is leading this port of the Perl module to JavaScript with the [NosillaCast community](https://podfeet.com/slack) as part of the on-going Programming By Stealth blog/podcast series](https://pbs.bartificer.net) he produces with [Allison Sheridan](https://www.podfeet.com/blog/about/).
+
+<div style="border: 2px solid green; border-radius: 5px; padding: 1em">
+For anyone interesting in just playing with the current version, which is rather limited in functionality, you can check out the app here: <a href="https://bartificer.github.io/xkpasswd-js/">XKPasswd</a>
+</div>
 
 ## Project Plan
 
