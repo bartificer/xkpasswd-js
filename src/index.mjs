@@ -197,10 +197,16 @@ const XKP = {
     XKP.config.passwordStrength.addClass(statsClass);
   },
 
+  /**
+   * hide statistics section
+   */
   __hideStats() {
     XKP.config.passwordStatsContainer.addClass('d-none');
   },
 
+  /**
+   * show statistics section
+   */
   __showStats() {
     XKP.config.passwordStatsContainer.removeClass('d-none');
   },
