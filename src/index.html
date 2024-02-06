@@ -16,7 +16,7 @@
     <div class="row">
       <section id="main" class="col order-2">
         <header class="row">
-          <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient">
+          <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient col-11 col-md">
             <div class="container-fluid">
               <!-- <a class="navbar-brand text-white" href="#"><img class="img-responsive" src="assets/logo.png"><br /><small class="fs-6">Password Generator</small></a> -->
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,7 +53,7 @@
           </nav>
         </header>
         <section id="content" class="row">
-          <div class="accordion mt-3 mb-5" id="passwordConfig">
+          <div class="accordion mt-3 mb-3 mb-lg-5 col-11 col-md" id="passwordConfig">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -74,12 +74,12 @@
             <h3>Generate Password(s)</h3>
             <form id="generatePasswords">
               <div class="row">
-                <div class="col-9 mb-3">
+                <div class="col-8 col-md-9 mb-3">
                   <label class="visually-hidden" for="selectAmount">No. of passwords</label>
                   <div class="input-group">
                     <span class="input-group-text">No. of passwords</span>
                     <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
-                      id="selectAmount" />
+                    id="selectAmount" />
                   </div>
                   <div class="form-text">Select the number of passwords to be generated</div>
                 </div>
@@ -88,10 +88,14 @@
                   <button id="generate" type="submit" class="btn btn-primary"
                     aria-label="generate passwords">Generate</button>
                 </div>
-              </div>
+
+                <!-- Test radio buttons to remove readonly -->
+                <!-- <div><input type="radio" id="makePasswordEditableNo" value="no"><span>No</span> -->
+                  <!-- <input type="radio" id="makePasswordEditableYes" value="yes"><span>Yes</span></div> -->
+              <!-- </div> -->
             </form>
 
-            <div class="card mt-5">
+            <div class="card mt-3 mt-lg-5 col-11 col-md">
               <div class="card-header d-flex align-items-center">
                 <span class=" text-uppercase">Passwords</span>
                 <div class="d-flex ms-auto">
