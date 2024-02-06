@@ -63,7 +63,6 @@ const XKP = {
       entropySuggestion: $('#entropy_suggestion'),
       numberOfPasswords: $('#selectAmount'),
       xkpasswd: new XKPasswd(),
-      passwordEditableAttribute: $('generated_password'),
     };
 
     XKP.setup();
@@ -85,7 +84,6 @@ const XKP = {
 
     try {
       const num = parseInt(XKP.config.numberOfPasswords.val());
-
       // Set passwordArea height to accomodate number of passwords
       generated_password.rows = num;
 
@@ -217,7 +215,6 @@ const XKP = {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
     XKP.__hideStats();
-
   },
 };
 

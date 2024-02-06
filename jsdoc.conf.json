@@ -6,7 +6,8 @@
   },
   "source": {
     "include": [
-      "./src/"
+      "./src/",
+      "./src/lib/"
     ],
     "includePattern": ".+\\.(mjs|js|jsdoc)$"
   },
@@ -19,9 +20,5 @@
       "jsdoc",
       "closure"
     ]
-  },
-  "scripts": {
-    "docs": "npx jsdoc -c ./jsdoc.conf.json --destination ./docs",
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
