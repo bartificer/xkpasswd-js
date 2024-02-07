@@ -109,4 +109,5 @@ xkpasswd-js.code-workspace
 
 # JSDocs directory
 # docs
+docs/index.mjs.html
 archive
