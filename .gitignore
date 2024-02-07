@@ -109,6 +109,4 @@ xkpasswd-js.code-workspace
 
 # JSDocs directory
 # docs
-# ignore index.mjs.html so GitHub pages will see index.html
-docs/index.mjs.html
 archive
