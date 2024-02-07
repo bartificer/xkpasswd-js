@@ -13,12 +13,9 @@
 
 <body>
   <div class="container mt-3">
-    <div class="row">
-      <section id="sidebar-left" class="col-2 order-1">
-        <img class="img-fluid" src="assets/sideBanner.png" alt="XKPasswd - A Secure Memorable Password Generator" />
-      </section>
-      <section id="main" class="col order-2">
-        <header class="row">
+    <div class="row"> <!-- open row for all content above footer -->
+      <section id="main" class="col order-2"> <!-- open section for content right of graphic -->
+        <header class="row"> <!-- open row for nav -->
           <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient col-11 col-md">
             <div class="container-fluid">
               <!-- <a class="navbar-brand text-white" href="#"><img class="img-responsive" src="assets/logo.png"><br /><small class="fs-6">Password Generator</small></a> -->
@@ -54,9 +51,9 @@
               </div>
             </div>
           </nav>
-        </header>
-        <section id="content" class="row">
-          <div class="accordion mt-3 mb-3 mb-lg-5 col-11 col-md" id="passwordConfig">
+        </header> <!-- close row for nav -->
+        <section id="content" class="row"> <!-- open row for content below nav -->
+          <div class="accordion mt-3 mb-3 mb-lg-5 col-11 col-md" id="passwordConfig"> <!-- open config col -->
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -70,12 +67,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> <!-- close config col -->
 
-          <div id="generatePassword">
+          <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
 
             <h3>Generate Password(s)</h3>
-            <form id="generatePasswords">
+            <form id="generatePasswords"> <!-- open input area for gen pw -->
               <div class="row">
                 <div class="col-8 col-md-9 mb-3">
                   <label class="visually-hidden" for="selectAmount">No. of passwords</label>
@@ -96,9 +93,9 @@
                 <!-- <div><input type="radio" id="makePasswordEditableNo" value="no"><span>No</span> -->
                   <!-- <input type="radio" id="makePasswordEditableYes" value="yes"><span>Yes</span></div> -->
               <!-- </div> -->
-            </form>
+            </form> <!-- close input area for gen pw -->
 
-            <div class="card mt-3 mt-lg-5 col-11 col-md">
+            <div class="card mt-3 mt-lg-5 col-11 col-md"> <!-- open password card with stats -->
               <div class="card-header d-flex align-items-center">
                 <span class=" text-uppercase">Passwords</span>
                 <div class="d-flex ms-auto">
@@ -135,11 +132,15 @@
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-      </section>
-    </div>
+            </div><!-- close password card with stats -->
+          </div> <!-- close generate pw -->
+        </section> <!-- close section for content below nav -->
+      </section> <!-- close section for content right of graphic -->
+      <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
+        <img class="img-fluid" src="assets/sideBanner.png" alt="XKPasswd - A Secure Memorable Password Generator" />
+      </section> <!-- close section for graphic -->
+    </div> <!-- close opening row -->
+
     <footer class="row bg-primary-subtle py-3 mt-3 rounded">
       <div class="col">
         Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a
