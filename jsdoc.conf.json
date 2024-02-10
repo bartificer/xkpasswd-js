@@ -9,8 +9,10 @@
       "./src/",
       "./src/lib/"
     ],
-    "includePattern": ".+\\.(mjs|js|jsdoc)$"
+    "includePattern": ".+\\.(mjs|js|jsdoc)$",
+    "excludePattern": ".*statistics.*"
   },
+  "sourceType": "module",
   "plugins": [
     "plugins/markdown"
   ],
