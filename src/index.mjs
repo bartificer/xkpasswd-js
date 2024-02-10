@@ -200,14 +200,14 @@ const XKP = {
   /**
    * hide statistics section
    */
-  __hideStats() {
+  __hideStats: () => {
     XKP.config.passwordStatsContainer.addClass('d-none');
   },
 
   /**
    * show statistics section
    */
-  __showStats() {
+  __showStats: () => {
     XKP.config.passwordStatsContainer.removeClass('d-none');
   },
 
