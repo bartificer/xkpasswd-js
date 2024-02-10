@@ -74,7 +74,7 @@ const XKP = {
    *
    * @function generatePasswords
    * @memberof XKP
-   * @param e - event
+   * @param {event} e - event
    */
 
   generatePasswords: (e) => {
@@ -210,6 +210,7 @@ const XKP = {
   __showStats() {
     XKP.config.passwordStatsContainer.removeClass('d-none');
   },
+
 
   /**
    * Setup the eventhandlers
