@@ -224,7 +224,7 @@ class Presets {
       this.#presetName = 'DEFAULT';
     } else {
       if (is.string(preset)) {
-        preset = preset.toUppercase();
+        preset = preset.toUpperCase();
         if (this.#presets.indexOf(preset) > -1) {
           this.#current = thePresets[preset];
           this.#presetName = preset;
