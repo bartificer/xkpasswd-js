@@ -62,6 +62,8 @@ const XKP = {
       seenEntropy: $('#entropy_seen'),
       entropySuggestion: $('#entropy_suggestion'),
       numberOfPasswords: $('#selectAmount'),
+      presetGroup: $('#collapsePresets .btn-group'),
+      presetHeader: $('#currentPreset'),
       xkpasswd: new XKPasswd(),
     };
 
@@ -96,6 +98,31 @@ const XKP = {
     } finally {
       e.stopPropagation(); // stop the event bubbling
     }
+  },
+
+  /**
+   * Select the preset
+   * This is the function that is called
+   * when one of the preset buttons is clicked
+   *
+   * @function selectPreset
+   * @memberof XKP
+   *
+   * @param {event} e - event
+   */
+  selectPreset: (e) => {
+    e.stopPropagation();
+    const button = $(e.currentTarget);
+    const preset = button.data('preset').toString();
+    // make all buttons inactive
+    XKP.config.presetGroup.find('button').removeClass('active');
+    // make the selected button active
+    button.addClass('active');
+    // update the preset header
+    XKP.__setPresetHeader(preset);
+    // tell the library which preset to make current
+    XKP.config.xkpasswd.setPreset(preset);
+    console.debug(`Preset clicked ${JSON.stringify(preset)}`);
   },
 
   /**
@@ -198,6 +225,33 @@ const XKP = {
   },
 
   /**
+   * Build the preset buttons
+   */
+  __buildPresetButtons: () => {
+    // get the presets from the library
+    const names = XKP.config.xkpasswd.getPresets();
+    // build the buttons
+    names.forEach((presetName) => {
+      /* eslint-disable max-len */
+      const btn = `<button type="button" class="btn btn-outline-primary" data-preset="${presetName}">${presetName}</button>`;
+      /* eslint-enable max-len */
+      const button = $(btn)
+        .on('click', XKP.selectPreset);
+      XKP.config.presetGroup.append(button);
+    });
+    // add the eventhandlers
+  },
+
+  /**
+   * Set the selected preset in the header
+   *
+   * @param {string} preset - the selected preset
+   */
+  __setPresetHeader: (preset) => {
+    XKP.config.presetHeader.html(`&mdash; ${preset}`);
+  },
+
+  /**
    * hide statistics section
    */
   __hideStats: () => {
@@ -222,6 +276,7 @@ const XKP = {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
     XKP.__hideStats();
+    XKP.__buildPresetButtons();
   },
 };
 
