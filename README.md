@@ -1,10 +1,16 @@
+![XKPasswdJS](https://github.com/bartificer/xkpasswd-js/actions/workflows/xkpasswd.yml/badge.svg)
+
 # XKPasswdJS — The Official JavaScript Port of Crypt::HSXKPasswd
 
 [Bart Busschots](https://www.bartb.ie/) created the [Crypt::HSXKPasswd](https://metacpan.org/pod/Crypt::HSXKPasswd) Perl module to be a liberally licensed ([2-clause BSD](https://opensource.org/licenses/BSD-2-Clause)) password generator for producing secure but memorable passwords using the word-based approach made famous by the [*Correct Horse Battery Staple* XKCD comic](https://xkcd.com/936/).
 
 ![To anyone who understands information theory and security and is in an infuriating argument with someone who does not (possibly involving mixed case), I sincerely apologize.](https://imgs.xkcd.com/comics/password_strength.png)
- 
+
 Bart is leading this port of the Perl module to JavaScript with the [NosillaCast community](https://podfeet.com/slack) as part of the on-going Programming By Stealth blog/podcast series](https://pbs.bartificer.net) he produces with [Allison Sheridan](https://www.podfeet.com/blog/about/).
+
+## Current version of the app
+
+For anyone interesting in just playing with the current version, which is rather limited in functionality, you can check out the app here: <a href="https://bartificer.github.io/xkpasswd-js/">XKPasswd</a>
 
 ## Project Plan
 

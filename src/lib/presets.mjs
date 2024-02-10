@@ -224,7 +224,7 @@ class Presets {
       this.#presetName = 'DEFAULT';
     } else {
       if (is.string(preset)) {
-        preset = preset.toUppercase();
+        preset = preset.toUpperCase();
         if (this.#presets.indexOf(preset) > -1) {
           this.#current = thePresets[preset];
           this.#presetName = preset;
@@ -243,6 +243,8 @@ class Presets {
       }
     }
   }
+
+
   /**
    * Get the default preset
    *
@@ -287,6 +289,14 @@ class Presets {
     return this.#presetName;
   }
 
+  /**
+   * Get the list of available presets
+   *
+   * @return {Array} keys of presets
+   */
+  getPresets() {
+    return this.#presets;
+  }
 
   /**
    * Get the list of separator characters
