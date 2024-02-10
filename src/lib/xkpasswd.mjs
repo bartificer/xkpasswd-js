@@ -55,6 +55,16 @@ class XKPasswd {
   }
 
   /**
+   * Get all available presets
+   *
+   * @return {array} keys - names of the Presets
+   */
+  getPresets() {
+    const keys = new Presets().getPresets();
+    return keys;
+  }
+
+  /**
    * Generate the password(s) and stats
    *
    * @param {integer} num - number of passwords to generate

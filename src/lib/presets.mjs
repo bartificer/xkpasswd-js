@@ -289,6 +289,14 @@ class Presets {
     return this.#presetName;
   }
 
+  /**
+   * Get the list of available presets
+   *
+   * @return {Array} keys of presets
+   */
+  getPresets() {
+    return this.#presets;
+  }
 
   /**
    * Get the list of separator characters
