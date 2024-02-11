@@ -62,7 +62,7 @@ const XKP = {
       seenEntropy: $('#entropy_seen'),
       entropySuggestion: $('#entropy_suggestion'),
       numberOfPasswords: $('#selectAmount'),
-      presetGroup: $('#collapsePresets .btn-group'),
+      presetGroup: $('#preset-btn-group'),
       presetHeader: $('#currentPreset'),
       xkpasswd: new XKPasswd(),
     };
