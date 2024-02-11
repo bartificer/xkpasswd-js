@@ -21,6 +21,15 @@ textarea {
   resize: none;
 }
 
+.container {
+  height: 350px;
+}
+.container .img-fluid {
+  display: block;
+  width: auto;
+  max-height: 350px;
+}
+
 .bd-clipboard,.bd-edit {
   position: relative;
   display: none;
