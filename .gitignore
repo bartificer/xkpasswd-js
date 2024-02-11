@@ -107,6 +107,5 @@ dist
 xkpasswd-js.code-workspace
 .vscode
 
-# JSDocs directory
-docs
+# JSDocs directory is under dist
 archive
