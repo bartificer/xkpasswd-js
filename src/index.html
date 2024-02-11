@@ -77,7 +77,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="accordion-item">
+                    <!-- <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDict" aria-expanded="false" aria-controls="collapseDict">
                           Dictionaries
@@ -89,15 +89,189 @@
                            This part contains the selection of the available dictionaries.
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConf" aria-expanded="false" aria-controls="collapseConf">
-                          Configuration
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+                          Settings
                         </button>
                       </h2>
-                      <div id="collapseConf" class="accordion-collapse collapse" data-bs-parent="#configOptions">
+                      <div id="collapseSettings" class="accordion-collapse collapse" data-bs-parent="#configOptions">
                         <div class="accordion-body">
+
+                           <!-- password settings -->
+                           <fieldset>
+                            <legend>Settings</legend>
+
+                            <!-- wrap the form elements in a DIV so it can be enabled and disabled as appropriate -->
+                            <div id="password_form_container">
+                             <!-- overlay div for enabling/disabling use of the form -->
+                             <div id="form_overlay"></div>
+
+                             <!-- word settings -->
+                             <div id="section_words" class="section_container">
+                              <div class="section_header"><span class="section_title">Words:</span></div>
+                              <div class="section_body">
+                               <label for="dict">Dictionary:</label>
+                               <select id="dict">
+                                <option value="english" selected="selected">English</option>
+                               </select>
+                               <label for="num_words">Number of Words:</label>
+                               <select id="num_words">
+                                <option value="2">2</option>
+                                <option value="3" selected="selected">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                               </select>
+                               <label for="word_length_min">Minimum Length:</label>
+                               <select id="word_length_min">
+                                <option value="4" selected="selected">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                               </select>
+                               <label for="word_length_max">Maximum Length:</label>
+                               <select id="word_length_max">
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8" selected="selected">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                               </select>
+                              </div>
+                             </div>
+
+                             <!-- Word Transformations -->
+                             <div id="section_transformations" class="section_container">
+                              <div class="section_header"><span class="section_title">Transformations:</span></div>
+                              <div class="section_body">
+                               <label for="case_transform">Case Transformation:</label>
+                               <select id="case_transform">
+                                <option value="NONE">-none-</option>
+                                <option value="ALTERNATE" selected="selected">alternating WORD case</option>
+                                <option value="CAPITALISE">Capitalise First Letter</option>
+                                <option value="INVERT">cAPITALISE eVERY lETTER eXCEPT tHe fIRST</option>
+                                <option value="LOWER">lower case</option>
+                                <option value="UPPER">UPPER CASE</option>
+                                <option value="RANDOM">EVERY word randomly CAPITALISED or NOT</option>
+                               </select>
+                              </div>
+                             </div>
+
+                             <!-- Separator -->
+                             <div id="section_separator" class="section_container">
+                              <div class="section_header"><span class="section_title">Separator:</span></div>
+                              <div class="section_body">
+                               <label for="separator_type">Type:</label>
+                               <select id="separator_type">
+                                <option value="NONE" selected="selected">-none-</option>
+                                <option value="CHAR">Specified Character</option>
+                                <option value="RANDOM">Random Character</option>
+                               </select>
+                               <span id="separator_type_char" style="display:none"><label for="separator_type_char_tb">Character:</label>
+                                <input type="text" size="1" maxlength="1" id="separator_type_char_tb" value="-" />
+                                <span id="separator_type_char_tb_err" class="validation_error">must enter exactly 1 character</span>
+                               </span>
+                               <span id="separator_type_random" style="display:none"><label>Separator Alphabet:</label>
+                                <span id="separator_type_random_tbset" class="tbset"><input type="text" size="1" maxlength="1" id="separator_type_random_1" value="-" /><input type="text" size="1" maxlength="1" id="separator_type_random_2" value="+" /><input type="text" size="1" maxlength="1" id="separator_type_random_3" value="=" /><input type="text" size="1" maxlength="1" id="separator_type_random_4" value="*" /><input type="text" size="1" maxlength="1" id="separator_type_random_5" value="," /><input type="text" size="1" maxlength="1" id="separator_type_random_6" value="_" /></span>
+                                <span id="separator_type_random_err" class="validation_error">must enter at least 2 characters</span>
+                               </span>
+                              </div>
+                             </div>
+
+                             <!-- Digit Padding -->
+                             <div id="section_padding_digits" class="section_container">
+                              <div class="section_header"><span class="section_title">Padding Digits:</span></div>
+                              <div class="section_body">
+                               <label for="padding_digits_before">Digit(s) Before:</label>
+                               <select id="padding_digits_before">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2" selected="selected">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                               </select>
+                               <label for="padding_digits_after">Digit(s) After:</label>
+                               <select id="padding_digits_after">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2" selected="selected">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                               </select>
+                              </div>
+                             </div>
+
+                             <!-- Symbol Padding -->
+                             <div id="section_padding_symbols" class="section_container">
+                              <div class="section_header"><span class="section_title">Padding Symbols:</span></div>
+                              <div class="section_body">
+                               <label for="padding_type">Padding Type:</label>
+                               <select id="padding_type">
+                                <option value="NONE" selected="selected">-none-</option>
+                                <option value="FIXED">Fixed</option>
+                                <option value="ADAPTIVE">Adaptive</option>
+                               </select>
+                               <span id="padding_type_fixed" style="display:none">
+                                <label for="padding_characters_before">Symbol(s) Before:</label>
+                                <select id="padding_characters_before">
+                                 <option value="0">0</option>
+                                 <option value="1">1</option>
+                                 <option value="2" selected="selected">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                                 <option value="5">5</option>
+                                </select>
+                                <label for="padding_characters_after">Symbol(s) After:</label>
+                                <select id="padding_characters_after">
+                                 <option value="0">0</option>
+                                 <option value="1">1</option>
+                                 <option value="2" selected="selected">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                                 <option value="5">5</option>
+                                </select>
+                               </span>
+                               <span id="padding_type_adaptive" style="display:none">
+                                <label for="pad_to_length">Pad to Length:</label>
+                                <input type="number" size="3" id="pad_to_length" value="32" min="8" max="999" /> <span id="pad_to_length_err" class="validation_error">must be an integer between 8 and 999</span>
+                               </span>
+                               <div id="padding_char_container" style="display:none">
+                                <label for="padding_char_type">Padding Character:</label>
+                                <select id="padding_char_type">
+                                 <option value="SEPARATOR" id="padding_char_type_separator" disabled="disabled">Use Separator Character</option>
+                                 <option value="CHAR" selected="selected">Specified Character</option>
+                                 <option value="RANDOM">Random Character</option>
+                                </select>
+                                <span id="padding_char_type_char"><label for="padding_character">Padding Character:</label>
+                                 <input type="text" size="1" maxlength="1" value="*" id="padding_character" />
+                                 <span id="padding_character_err" class="validation_error">must enter exactly 1 character</span>
+                                </span>
+                                <span id="padding_char_type_random" style="display:none"><label>Padding Character Alphabet:</label>
+                                 <span id="padding_char_type_random_tbset" class="tbset"><input type="text" size="1" maxlength="1" id="padding_char_type_random_1" value="!" /><input type="text" size="1" maxlength="1" id="padding_char_type_random_2" value="*" /><input type="text" size="1" maxlength="1" id="padding_char_type_random_3" value="=" /><input type="text" size="1" maxlength="1" id="padding_char_type_random_4" value="+" /><input type="text" size="1" maxlength="1" id="padding_char_type_random_5" value="-" /></span>
+                                 <span id="padding_char_type_random_err" class="validation_error">must enter at least 2 characters</span>
+                                </span>
+                               </div>
+                              </div>
+                             </div>
+                            </div>
+
                           <strong>TO BE DONE</strong>
                            This part contains the detailed configuration
                         </div>
