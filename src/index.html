@@ -37,7 +37,7 @@
                       <li>
                         <hr class="dropdown-divider">
                       </li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="docs/index.html">Developer docs</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
@@ -56,14 +56,54 @@
           <div class="accordion mt-3 mb-3 mb-lg-5 col-11 col-md" id="passwordConfig"> <!-- open config col -->
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConfig"
+                  aria-expanded="true" aria-controls="collapseConfig">
                   Config
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
+              <div id="collapseConfig" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
                 <div class="accordion-body">
-                  <strong>To be done</strong> This section will contain the Config
+                  <div class="accordion" id="configOptions">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePresets" aria-expanded="true" aria-controls="collapsePresets">
+                          <span>Presets</span>&nbsp;<span class="fst-italic" id="currentPreset"></span>
+                        </button>
+                      </h2>
+                      <div id="collapsePresets" class="accordion-collapse collapse show" data-bs-parent="#configOptions">
+                        <div class="accordion-body">
+                          <div class="btn-group" role="group" aria-label="Preset group">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDict" aria-expanded="false" aria-controls="collapseDict">
+                          Dictionaries
+                        </button>
+                      </h2>
+                      <div id="collapseDict" class="accordion-collapse collapse" data-bs-parent="#configOptions">
+                        <div class="accordion-body">
+                          <strong>TO BE DONE</strong>
+                           This part contains the selection of the available dictionaries.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConf" aria-expanded="false" aria-controls="collapseConf">
+                          Configuration
+                        </button>
+                      </h2>
+                      <div id="collapseConf" class="accordion-collapse collapse" data-bs-parent="#configOptions">
+                        <div class="accordion-body">
+                          <strong>TO BE DONE</strong>
+                           This part contains the detailed configuration
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
