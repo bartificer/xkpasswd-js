@@ -6,7 +6,8 @@
   },
   "source": {
     "include": [
-      "./src/"
+      "./src/",
+      "./src/lib/"
     ],
     "includePattern": ".+\\.(mjs|js|jsdoc)$",
     "excludePattern": ".*statistics.*"
