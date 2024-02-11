@@ -55,6 +55,14 @@ class XKPasswd {
   }
 
   /**
+   * Get the current preset
+   *
+   * @return {Preset} the current preset
+   */
+  getPreset() {
+    return this.#preset;
+  }
+  /**
    * Get all available presets
    *
    * @return {array} keys - names of the Presets

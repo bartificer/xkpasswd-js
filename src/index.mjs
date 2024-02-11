@@ -66,6 +66,9 @@ const XKP = {
       presetHeader: $('#currentPreset'),
       xkpasswd: new XKPasswd(),
     };
+    XKP.state = {
+      presetChanged: true,
+    };
 
     XKP.setup();
   },
@@ -123,6 +126,30 @@ const XKP = {
     // tell the library which preset to make current
     XKP.config.xkpasswd.setPreset(preset);
     console.debug(`Preset clicked ${JSON.stringify(preset)}`);
+    XKP.state.presetChanged = true;
+    XKP.__updateSettings();
+  },
+
+  /**
+   * Update the fields in the settings with
+   * the contents of the current preset
+   */
+
+  __updateSettings: () => {
+    if (!XKP.state.presetChanged) {
+      // nothing changed
+      return;
+    };
+
+    // get the current preset
+    const preset = XKP.config.xkpasswd.getPreset().config();
+    const keys = Object.keys(preset);
+    // update all fields
+
+    keys.forEach((key) => {
+      $(`#${key}`).val(preset[key]);
+    });
+    XKP.state.presetChanged = false;
   },
 
   /**
