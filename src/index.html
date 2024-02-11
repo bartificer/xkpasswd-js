@@ -56,8 +56,8 @@
           <div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md" id="passwordConfig"> <!-- open config col -->
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConfig"
-                  aria-expanded="true" aria-controls="collapseConfig">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseConfig" aria-expanded="true" aria-controls="collapseConfig">
                   Config
                 </button>
               </h2>
@@ -66,11 +66,13 @@
                   <div class="accordion" id="configOptions">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePresets" aria-expanded="true" aria-controls="collapsePresets">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#collapsePresets" aria-expanded="true" aria-controls="collapsePresets">
                           <span>Presets</span>&nbsp;<span class="fst-italic" id="currentPreset"></span>
                         </button>
                       </h2>
-                      <div id="collapsePresets" class="accordion-collapse collapse show" data-bs-parent="#configOptions">
+                      <div id="collapsePresets" class="accordion-collapse collapse show"
+                        data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <div id="preset-btn-group" class="btn-group" role="group" aria-label="Preset group">
                           </div>
@@ -92,7 +94,8 @@
                     </div> -->
                     <div class="accordion-item">
                       <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
                           Settings
                         </button>
                       </h2>
@@ -168,9 +171,9 @@
                                 <option value="LOWER">lower case</option>
                                 <option value="UPPER">UPPER CASE</option>
                                 <option value="RANDOM">EVERY word randomly CAPITALISED or NOT</option>
-                               </select>
-                              </div>
-                             </div>
+                              </select>
+                            </div>
+                          </div>
 
                              <!-- Separator -->
                              <div id="section_separator" class="section_container">
@@ -281,88 +284,91 @@
                 </div>
               </div>
             </div>
-          </div> <!-- close config col -->
 
-          <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
 
-            <h3>Generate Password(s)</h3>
-            <form id="generatePasswords"> <!-- open input area for gen pw -->
-              <div class="row">
-                <div class="col-8 col-md-6 mb-3">
-                  <label class="visually-hidden" for="selectAmount">No. of passwords</label>
-                  <div class="input-group">
-                    <span class="input-group-text">No. of passwords</span>
-                    <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
-                    id="selectAmount" />
-                  </div>
-                  <div class="form-text">Enter the number of passwords to be generated</div> <!-- doesn't show as stepper on iOS or Chromium -->
-                </div>
+    </div> <!-- close config col -->
 
-                <div class="col-3 "> <!-- open col for Generate -->
-                  <button id="generate" type="submit" class="btn btn-primary"
-                    aria-label="generate passwords">Generate</button>
-                </div>
-              </div>
-            </form> <!-- close input area for gen pw -->
+    <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
 
-          </div> <!-- close generate pw -->
-        </section> <!-- close section for content below nav -->
-      </section> <!-- close section for content right of graphic -->
-      <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
-        <img class="img-fluid" "height=300px" src="assets/sideBanner.png" alt="XKPasswd - A Secure Memorable Password Generator" />
-      </section> <!-- close section for graphic -->
-    </div> <!-- close opening row -->
-    <div class="row"> <!-- open row for password card -->
-      <section id="password-card" class="order-3"> 
-        <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
-          <div class="card-header d-flex align-items-center">
-            <span class=" text-uppercase">Passwords</span>
-            <div class="d-flex ms-auto">
-              <div class="bd-clipboard">
-                <button type="button" class="btn-clipboard border-0 mt-0 me-0" aria-label="Copy to clipboard"
-                  data-bs-original-title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                  data-bs-title="Copy to clipboard">
-                  <i class="bi bi-clipboard"></i>
-                </button>
-              </div>
+      <h3>Generate Password(s)</h3>
+      <form id="generatePasswords"> <!-- open input area for gen pw -->
+        <div class="row">
+          <div class="col-8 col-md-6 mb-3">
+            <label class="visually-hidden" for="selectAmount">No. of passwords</label>
+            <div class="input-group mt-2">
+              <span class="input-group-text">No. of passwords</span>
+              <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
+                id="selectAmount" />
+            </div>
+            <div class="form-text">Enter the number of passwords to be generated</div>
+            <!-- doesn't show as stepper on iOS or Chromium -->
+          </div>
+
+          <div class="col-3 "> <!-- open col for Generate -->
+            <button id="generate" type="submit" class="btn btn-primary"
+              aria-label="generate passwords">Generate</button>
+          </div>
+        </div>
+      </form> <!-- close input area for gen pw -->
+
+    </div> <!-- close generate pw -->
+    </section> <!-- close section for content below nav -->
+    </section> <!-- close section for content right of graphic -->
+    <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
+      <img class="img-fluid" "height=300px" src="assets/sideBanner.png"
+        alt="XKPasswd - A Secure Memorable Password Generator" />
+    </section> <!-- close section for graphic -->
+  </div> <!-- close opening row -->
+  <div class="row"> <!-- open row for password card -->
+    <section id="password-card" class="order-3">
+      <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
+        <div class="card-header d-flex align-items-center">
+          <span class=" text-uppercase">Passwords</span>
+          <div class="d-flex ms-auto">
+            <div class="bd-clipboard">
+              <button type="button" class="btn-clipboard border-0 mt-0 me-0" aria-label="Copy to clipboard"
+                data-bs-original-title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Copy to clipboard">
+                <i class="bi bi-clipboard"></i>
+              </button>
             </div>
           </div>
-          <div class="card-body">
-            <textarea type="text" readonly
-            class="form-control form-control-plaintext border-0 font-monospace mb-3" rows="3"
-              id="generated_password"></textarea>
-  
-              <div id="passwordErrorContainer"></div>
-  
-          </div>
-          <div class="card-footer">
-            <div id="password_stats_container" class="pt-1 fs-6">
-              <h6><i class="bi bi-graph-up"></i> Statistics</h6>
-              <p class="fw-lighter lh-1 ">
-                <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-outline-success"
-                  id="password_strength">test</span>
-              </p>
-              <p class="fw-lighter">
-                <span class="fw-bolder">Entropy</span><span id="entropy_blind">
-                </span> blind & <span
-                  class="btn btn-stats btn-outline-warning" id="entropy_seen">seen</span>&nbsp;with full knowledge
-                <br />
-                <span class="fst-italic" id="entropy_suggestion"></span>
-              </p>
-            </div>
-          </div>
-        </div><!-- close password card with stats -->
-        </section>
+        </div>
+        <div class="card-body">
+          <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
+            rows="3" id="generated_password"></textarea>
 
+          <div id="passwordErrorContainer"></div>
+
+        </div>
+        <div class="card-footer">
+          <div id="password_stats_container" class="pt-1 fs-6">
+            <h6><i class="bi bi-graph-up"></i> Statistics</h6>
+            <p class="fw-lighter lh-1 ">
+              <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-outline-success"
+                id="password_strength">test</span>
+            </p>
+            <p class="fw-lighter">
+              <span class="fw-bolder">Entropy</span><span id="entropy_blind">
+              </span> blind & <span class="btn btn-stats btn-outline-warning" id="entropy_seen">seen</span>&nbsp;with
+              full knowledge
+              <br />
+              <span class="fst-italic" id="entropy_suggestion"></span>
+            </p>
+          </div>
+        </div>
+      </div><!-- close password card with stats -->
+    </section>
+
+  </div>
+
+  <footer class="row bg-primary-subtle py-3 mt-3 rounded">
+    <div class="col">
+      Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a href="https://www.grc.com/haystack.htm"
+        target="_blank">Password Hay Stacks</a> |
+      Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
     </div>
-
-    <footer class="row bg-primary-subtle py-3 mt-3 rounded">
-      <div class="col">
-        Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a
-          href="https://www.grc.com/haystack.htm" target="_blank">Password Hay Stacks</a> |
-        Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
-      </div>
-    </footer>
+  </footer>
   </div>
 
   <!-- Modal about -->
