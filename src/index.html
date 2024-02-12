@@ -201,30 +201,39 @@
                               <div id="pad_to_length_err" class="invalid-feedback">must be an integer between 8 and
                                 999</div>
                             </div>
-                            <div id="character-type" class="input-group mt-2">
-                              <!-- character type -->
-                              <label for="padding_char_type" class="input-group-text">Padding Character</label>
-                              <select id="padding_char_type" class="form-select">
-                                <option value="SEPARATOR" disabled="disabled">Use Separator Character</option>
-                                <option value="CHAR" selected="selected">Specified Character</option>
-                                <option value="RANDOM">Random Character</option>
-                              </select>
+
+                            <!-- character type -->
+                            <div id="padding_char_container">
+                              <div id="character-type" class="input-group mt-2">
+                                <label for="padding_char_type" class="input-group-text">Padding Type</label>
+                                <select id="padding_char_type" class="form-select">
+                                  <option value="SEPARATOR">Use Separator Character</option>
+                                  <option value="CHAR" selected="selected">Specified Character</option>
+                                  <option value="RANDOM">Random Character</option>
+                                </select>
+                              </div>
 
                               <!-- padding character -->
-                              <label for="padding_character" class="input-group-text">Padding
-                                Character</label>
-                              <input class="form-control" type="text" size="1" maxlength="1" value="*"
-                                id="padding_character" />
-                              <div id="padding_character_err" class="invalid-feedback">must enter exactly 1
-                                character</div>
+                              <div class="input-group mt-2">
+                                <label for="padding_character" class="input-group-text">Padding
+                                  Character</label>
+                                <input class="form-control" type="text" size="1" maxlength="1" value="*"
+                                  id="padding_character" />
+                                <div id="padding_character_err" class="invalid-feedback">must enter exactly 1
+                                  character</div>
+                              </div>
 
                               <!-- padding character alphabet -->
-                              <label for="padding_char_type_random" class="input-group-text">Padding Character Alphabet</label>
-                              <input id="padding_char_type_random" class="form-control" type="text" size="6"
-                                minlength="2" maxlength="6" value="!*=+-" />
-                              <div id="padding_char_type_random_err" class="invalid-feedback">must enter at least 2
-                                characters</div>
-                            </div>
+                              <div class="input-group mt-2">
+                                <label for="padding_char_type_random" class="input-group-text">Padding Character
+                                  Alphabet</label>
+                                <input id="padding_char_type_random" class="form-control" type="text" size="6"
+                                  minlength="2" maxlength="6" value="!*=+-" />
+                                <div id="padding_char_type_random_err" class="invalid-feedback">must enter at least 2
+                                  characters</div>
+                              </div>
+                            </div> <!-- /padding_char_container -->
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -232,92 +241,91 @@
                 </div>
               </div>
             </div>
-          </div>
 
 
-    </div> <!-- close config col -->
+          </div> <!-- close config col -->
 
-    <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
+          <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
 
-      <h3>Generate Password(s)</h3>
-      <form id="generatePasswords"> <!-- open input area for gen pw -->
-        <div class="row">
-          <div class="col-8 col-md-6 mb-3">
-            <label class="visually-hidden" for="selectAmount">No. of passwords</label>
-            <div class="input-group mt-2">
-              <span class="input-group-text">No. of passwords</span>
-              <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
-                id="selectAmount" />
+            <h3>Generate Password(s)</h3>
+            <form id="generatePasswords"> <!-- open input area for gen pw -->
+              <div class="row">
+                <div class="col-8 col-md-6 mb-3">
+                  <label class="visually-hidden" for="selectAmount">No. of passwords</label>
+                  <div class="input-group mt-2">
+                    <span class="input-group-text">No. of passwords</span>
+                    <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
+                      id="selectAmount" />
+                  </div>
+                  <div class="form-text">Enter the number of passwords to be generated</div>
+                  <!-- doesn't show as stepper on iOS or Chromium -->
+                </div>
+
+                <div class="col-3 "> <!-- open col for Generate -->
+                  <button id="generate" type="submit" class="btn btn-primary"
+                    aria-label="generate passwords">Generate</button>
+                </div>
+              </div>
+            </form> <!-- close input area for gen pw -->
+
+          </div> <!-- close generate pw -->
+        </section> <!-- close section for content below nav -->
+      </section> <!-- close section for content right of graphic -->
+      <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
+        <img class="img-fluid" "height=300px" src="assets/sideBanner.png"
+          alt="XKPasswd - A Secure Memorable Password Generator" />
+      </section> <!-- close section for graphic -->
+    </div> <!-- close opening row -->
+    <div class="row"> <!-- open row for password card -->
+      <section id="password-card" class="order-3">
+        <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
+          <div class="card-header d-flex align-items-center">
+            <span class=" text-uppercase">Passwords</span>
+            <div class="d-flex ms-auto">
+              <div class="bd-clipboard">
+                <button type="button" class="btn-clipboard border-0 mt-0 me-0" aria-label="Copy to clipboard"
+                  data-bs-original-title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  data-bs-title="Copy to clipboard">
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </div>
             </div>
-            <div class="form-text">Enter the number of passwords to be generated</div>
-            <!-- doesn't show as stepper on iOS or Chromium -->
           </div>
+          <div class="card-body">
+            <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
+              rows="3" id="generated_password"></textarea>
 
-          <div class="col-3 "> <!-- open col for Generate -->
-            <button id="generate" type="submit" class="btn btn-primary"
-              aria-label="generate passwords">Generate</button>
+            <div id="passwordErrorContainer"></div>
+
           </div>
-        </div>
-      </form> <!-- close input area for gen pw -->
-
-    </div> <!-- close generate pw -->
-    </section> <!-- close section for content below nav -->
-    </section> <!-- close section for content right of graphic -->
-    <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
-      <img class="img-fluid" "height=300px" src="assets/sideBanner.png"
-        alt="XKPasswd - A Secure Memorable Password Generator" />
-    </section> <!-- close section for graphic -->
-  </div> <!-- close opening row -->
-  <div class="row"> <!-- open row for password card -->
-    <section id="password-card" class="order-3">
-      <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
-        <div class="card-header d-flex align-items-center">
-          <span class=" text-uppercase">Passwords</span>
-          <div class="d-flex ms-auto">
-            <div class="bd-clipboard">
-              <button type="button" class="btn-clipboard border-0 mt-0 me-0" aria-label="Copy to clipboard"
-                data-bs-original-title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                data-bs-title="Copy to clipboard">
-                <i class="bi bi-clipboard"></i>
-              </button>
+          <div class="card-footer">
+            <div id="password_stats_container" class="pt-1 fs-6">
+              <h6><i class="bi bi-graph-up"></i> Statistics</h6>
+              <p class="fw-lighter lh-1 ">
+                <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-outline-success"
+                  id="password_strength">test</span>
+              </p>
+              <p class="fw-lighter">
+                <span class="fw-bolder">Entropy</span><span id="entropy_blind">
+                </span> blind & <span class="btn btn-stats btn-outline-warning" id="entropy_seen">seen</span>&nbsp;with
+                full knowledge
+                <br />
+                <span class="fst-italic" id="entropy_suggestion"></span>
+              </p>
             </div>
           </div>
-        </div>
-        <div class="card-body">
-          <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
-            rows="3" id="generated_password"></textarea>
+        </div><!-- close password card with stats -->
+      </section>
 
-          <div id="passwordErrorContainer"></div>
-
-        </div>
-        <div class="card-footer">
-          <div id="password_stats_container" class="pt-1 fs-6">
-            <h6><i class="bi bi-graph-up"></i> Statistics</h6>
-            <p class="fw-lighter lh-1 ">
-              <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-outline-success"
-                id="password_strength">test</span>
-            </p>
-            <p class="fw-lighter">
-              <span class="fw-bolder">Entropy</span><span id="entropy_blind">
-              </span> blind & <span class="btn btn-stats btn-outline-warning" id="entropy_seen">seen</span>&nbsp;with
-              full knowledge
-              <br />
-              <span class="fst-italic" id="entropy_suggestion"></span>
-            </p>
-          </div>
-        </div>
-      </div><!-- close password card with stats -->
-    </section>
-
-  </div>
-
-  <footer class="row bg-primary-subtle py-3 mt-3 rounded">
-    <div class="col">
-      Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a href="https://www.grc.com/haystack.htm"
-        target="_blank">Password Hay Stacks</a> |
-      Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
     </div>
-  </footer>
+
+    <footer class="row bg-primary-subtle py-3 mt-3 rounded">
+      <div class="col">
+        Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a
+          href="https://www.grc.com/haystack.htm" target="_blank">Password Hay Stacks</a> |
+        Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
+      </div>
+    </footer>
   </div>
 
   <!-- Modal about -->
