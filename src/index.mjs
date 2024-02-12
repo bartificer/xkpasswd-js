@@ -125,7 +125,7 @@ const XKP = {
     XKP.__setPresetHeader(preset);
     // tell the library which preset to make current
     XKP.config.xkpasswd.setPreset(preset);
-    console.debug(`Preset clicked ${JSON.stringify(preset)}`);
+    log.debug(`Preset clicked ${JSON.stringify(preset)}`);
     XKP.state.presetChanged = true;
     XKP.__updateSettings();
   },
@@ -144,12 +144,117 @@ const XKP = {
     // get the current preset
     const preset = XKP.config.xkpasswd.getPreset().config();
     const keys = Object.keys(preset);
-    // update all fields
 
+    // update all fields
     keys.forEach((key) => {
       $(`#${key}`).val(preset[key]);
     });
+
+    // hide everything that should not be visible
+    XKP.__togglePaddingType(preset.padding_type);
     XKP.state.presetChanged = false;
+  },
+
+  /**
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
+  __togglePaddingType(e) {
+    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    log.debug(`__toggleCharPaddingType: ${paddingType}`);
+    switch (paddingType) {
+    case 'NONE':
+      $('label[for="padding_characters_before"]').hide(XKP.aniTime);
+      $('#padding_characters_before').hide(XKP.aniTime);
+      $('label[for="padding_characters_after"]').hide(XKP.aniTime);
+      $('#padding_characters_after').hide(XKP.aniTime);
+      $('label[for="pad_to_length"]').hide(XKP.aniTime);
+      $('#pad_to_length').hide(XKP.aniTime);
+      $('div#padding_char_container').hide(XKP.aniTime);
+      break;
+
+    case 'FIXED':
+      $('label[for="padding_characters_before"]').show(XKP.aniTime);
+      $('#padding_characters_before').show(XKP.aniTime);
+      $('label[for="padding_characters_after"]').show(XKP.aniTime);
+      $('#padding_characters_after').show(XKP.aniTime);
+      $('label[for="pad_to_length"]').hide(XKP.aniTime);
+      $('#pad_to_length').hide(XKP.aniTime);
+      $('div#padding_char_container').show(XKP.aniTime);
+      break;
+
+    case 'ADAPTIVE':
+      $('label[for="padding_characters_before"]').hide(XKP.aniTime);
+      $('#padding_characters_before').hide(XKP.aniTime);
+      $('label[for="padding_characters_after"]').hide(XKP.aniTime);
+      $('#padding_characters_after').hide(XKP.aniTime);
+      $('label[for="pad_to_length"]').hide(XKP.aniTime);
+      $('#pad_to_length').hide(XKP.aniTime);
+      $('div#padding_char_container').show(XKP.aniTime);
+      break;
+
+    default:
+      try {
+        log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
+      } catch (e) {};
+      break;
+    }
+    if (typeof e != 'string') {
+      e.stopPropagation();
+    }
+  },
+
+  /**
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
+  __togglePaddingCharType(e) {
+    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    log.debug(`__togglePaddingCharType: ${paddingType}`);
+    switch (paddingType) {
+    case 'CHAR':
+      $('label[for="padding_character"]').show(XKP.aniTime);
+      $('#padding_character').show(XKP.aniTime);
+      $('label[for="padding_char_type_random"]').hide(XKP.aniTime);
+      $('#padding_char_type_random').hide(XKP.aniTime);
+      break;
+
+    case 'RANDOM':
+      $('label[for="padding_character"]').hide(XKP.aniTime);
+      $('#padding_character').hide(XKP.aniTime);
+      $('label[for="padding_char_type_random"]').show(XKP.aniTime);
+      $('#padding_char_type_random').show(XKP.aniTime);
+      break;
+
+    case 'SEPARATOR':
+      // only allow this option be selected
+      // when there is a separator character,
+      // if not, switch to single separator char
+      if ($('#separator_type').val() == 'NONE') {
+        $('#padding_char_type').val('CHAR');
+        return;
+      }
+      // if it is OK to select this option, update the UI appropriately
+      $('label[for="padding_character"]').hide(XKP.aniTime);
+      $('#padding_character').hide(XKP.aniTime);
+      $('label[for="padding_char_type_random"]').hide(XKP.aniTime);
+      $('#padding_char_type_random').hide(XKP.aniTime);
+      break;
+    default:
+      try {
+        log.log(`WARNING - Received invalid padding_type=${paddingType}`);
+      } catch (e) {};
+      break;
+    };
+    if (typeof e != 'string') {
+      e.stopPropagation();
+    }
   },
 
   /**
@@ -302,8 +407,12 @@ const XKP = {
   setup: () => {
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
+    $('#padding_type').on('change', XKP.__togglePaddingType);
+    $('#padding_char_type').on('change', XKP.__togglePaddingCharType);
     XKP.__hideStats();
     XKP.__buildPresetButtons();
+    XKP.__togglePaddingType('NONE');
+    XKP.__togglePaddingCharType('CHAR');
   },
 };
 
