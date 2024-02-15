@@ -13,20 +13,22 @@
 
 <body>
   <div class="container mt-3">
-
-    <div class="row">  <!-- open row for topBanner on mobile screens -->
-      <section id="top-art" class="col order-4 d-flex d-md-none">
-        <picture>
-          <!-- show this up to sm -->
-          <source media="(max-width: 596px)" srcset="/assets/topBanner.png">
-        </picture>
-      </section>
-    </div> <!-- close row for topBanner on mobile screens -->
-
     <div class="row"> <!-- open row for all content above footer -->
       <section id="main" class="col order-2"> <!-- open section for content right of graphic -->
+
+        <div class="row">  <!-- open row for topBanner on mobile screens -->
+          <section id="top-art" class="col order-4 d-inline-flex d-md-none">
+            <picture>
+              <!-- show this up to sm -->
+              <source media="(max-width: 596px)" srcset="/assets/topBanner.png">
+              <!-- else show this -->
+              <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="/assets/sideBanner.png">
+            </picture>
+          </section>
+        </div> <!-- close row for topBanner on mobile screens -->
+        
         <header class="row"> <!-- open row for nav -->
-          <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient col-11 col-md">
+          <nav class="navbar navbar-expand-lg rounded bg-primary bg-gradient col-11 col-md mx-auto">
             <div class="container-fluid">
               <!-- <a class="navbar-brand text-white" href="#"><img class="img-responsive" src="assets/logo.png"><br /><small class="fs-6">Password Generator</small></a> -->
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
