@@ -144,8 +144,13 @@
           </div> <!-- close generate pw -->
         </section> <!-- close section for content below nav -->
       </section> <!-- close section for content right of graphic -->
-      <section id="sidebar-left" class="col-2 order-1"> <!-- open section for graphic -->
-        <img class="img-fluid" "height=300px" src="assets/sideBanner.png" alt="XKPasswd - A Secure Memorable Password Generator" />
+      <section id="sidebar-left" class="col-2 order-1 d-inline-none d-md-inline"> <!-- open section for graphic -->
+        <picture>
+          <!-- else show this -->
+        <source media="(max-width: 768px)" srcset="/assets/sideBanner.png">
+        <!-- else show this -->
+        <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="/assets/sideBanner.png">
+        </picture>
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
     <div class="row"> <!-- open row for password card -->
