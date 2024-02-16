@@ -24,6 +24,8 @@ import log from 'loglevel';
 
 import './assets/site.css';
 import {XKPasswd} from './lib/xkpasswd.mjs';
+import {PresetView} from './web/presetview.mjs';
+import { PresetController } from './web/presetcontroller.mjs';
 
 /**
  * Object defining all custom variables and functions
@@ -44,6 +46,8 @@ const XKP = {
     UNKNOWN: 'btn-danger',
   },
 
+  presetController: {},
+
   /**
    * init function that sets up the variables and the initial
    * page elements.
@@ -62,8 +66,6 @@ const XKP = {
       seenEntropy: $('#entropy_seen'),
       entropySuggestion: $('#entropy_suggestion'),
       numberOfPasswords: $('#selectAmount'),
-      presetGroup: $('#preset-btn-group'),
-      presetHeader: $('#currentPreset'),
       xkpasswd: new XKPasswd(),
     };
     XKP.state = {
@@ -72,6 +74,7 @@ const XKP = {
 
     XKP.setup();
   },
+
 
   /**
    * Handle the password generation.
@@ -113,22 +116,6 @@ const XKP = {
    *
    * @param {event} e - event
    */
-  selectPreset: (e) => {
-    e.stopPropagation();
-    const button = $(e.currentTarget);
-    const preset = button.data('preset').toString();
-    // make all buttons inactive
-    XKP.config.presetGroup.find('button').removeClass('active');
-    // make the selected button active
-    button.addClass('active');
-    // update the preset header
-    XKP.__setPresetHeader(preset);
-    // tell the library which preset to make current
-    XKP.config.xkpasswd.setPreset(preset);
-    log.debug(`Preset clicked ${JSON.stringify(preset)}`);
-    XKP.state.presetChanged = true;
-    XKP.__updateSettings();
-  },
 
   /**
    * Update the fields in the settings with
@@ -359,29 +346,12 @@ const XKP = {
   /**
    * Build the preset buttons
    */
-  __buildPresetButtons: () => {
-    // get the presets from the library
-    const names = XKP.config.xkpasswd.getPresets();
-    // build the buttons
-    names.forEach((presetName) => {
-      /* eslint-disable max-len */
-      const btn = `<button type="button" class="btn btn-outline-primary" data-preset="${presetName}">${presetName}</button>`;
-      /* eslint-enable max-len */
-      const button = $(btn)
-        .on('click', XKP.selectPreset);
-      XKP.config.presetGroup.append(button);
-    });
-    // add the eventhandlers
-  },
 
   /**
    * Set the selected preset in the header
    *
    * @param {string} preset - the selected preset
    */
-  __setPresetHeader: (preset) => {
-    XKP.config.presetHeader.html(`&mdash; ${preset}`);
-  },
 
   /**
    * hide statistics section
@@ -405,12 +375,14 @@ const XKP = {
    * @memberof XKP
    */
   setup: () => {
+    XKP.presetController =
+      new PresetController(XKP.config.xkpasswd, new PresetView());
+
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
     $('#padding_type').on('change', XKP.__togglePaddingType);
     $('#padding_char_type').on('change', XKP.__togglePaddingCharType);
     XKP.__hideStats();
-    XKP.__buildPresetButtons();
     XKP.__togglePaddingType('NONE');
     XKP.__togglePaddingCharType('CHAR');
   },
