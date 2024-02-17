@@ -18,8 +18,13 @@ class SettingsView {
   constructor() {
     this.__togglePaddingType('NONE');
     this.__togglePaddingCharType('CHAR');
-    $('#padding_type').on('change', this.__togglePaddingType);
-    $('#padding_char_type').on('change', this.__togglePaddingCharType);
+
+    $('#padding_type').on('change', (e) => {
+      this.__togglePaddingType(e);
+    });
+    $('#padding_char_type').on('change', (e) => {
+      this.__togglePaddingCharType(e);
+    });
   };
 
   /**
