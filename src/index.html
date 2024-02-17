@@ -124,7 +124,7 @@
                                   <option value="english" selected="selected">English</option>
                                 </select>
                                 <label for="num_words" class="input-group-text">No of Words</label>
-                                <input type="number" min="1" max="10" step="1" value="3" class="form-control"
+                                <input type="number" min="1" max="10" step="1" value="1" class="form-control"
                                   name="num_words" id="num_words" />
                               </div>
                               <div class="input-group mt-2">
@@ -132,7 +132,7 @@
                                 <input type="number" min="4" max="12" step="1" value="4" class="form-control"
                                   name="word_length_min" id="word_length_min" />
                                 <label for="word_length_max" class="input-group-text">Max Length</label>
-                                <input type="number" min="4" max="12" step="1" value="8" class="form-control"
+                                <input type="number" min="4" max="12" step="1" value="4" class="form-control"
                                   name="word_length_max" id="word_length_max" />
                               </div>
                             </div> <!-- section_words -->
@@ -143,7 +143,7 @@
                               <div class="input-group mt-2">
                                 <label for="case_transform" class="input-group-text">Case Transformation</label>
                                 <select id="case_transform" class="form-select">
-                                  <option value="NONE">-none-</option>
+                                  <option value="NONE" selected="selected">-none-</option>
                                   <option value="ALTERNATE" selected="selected">alternating WORD case</option>
                                   <option value="CAPITALISE">Capitalise First Letter</option>
                                   <option value="INVERT">cAPITALISE eVERY lETTER eXCEPT tHe fIRST</option>
@@ -166,14 +166,16 @@
                                 </select>
                                 <!-- specific character -->
                                 <label for="separator_type_char" class="input-group-text">Character</label>
+                                <!-- value="-" -->
                                 <input id="separator_type_char" class="form-control" type="text" size="1" maxlength="1"
-                                  value="-" />
+                                  value="" />
                                 <div id="separator_type_char_err" class="invalid-feedback">must enter exactly 1
                                   character</div>
                                 <!-- random characters -->
                                 <label for="separator_type_random" class="input-group-text">Alphabet</label>
+                                <!-- value="-+=*,_" -->
                                 <input id="separator_type_random" class="form-control" type="text" size="6"
-                                  minlength="2" maxlength="6" value="-+=*,_" />
+                                  minlength="2" maxlength="6" value="" />
                                 <div id="separator_type_random_err" class="invalid-feedback">must enter at least 2
                                   characters and no more than 6</div>
                               </div>
@@ -203,13 +205,13 @@
                                   <option value="ADAPTIVE">Adaptive</option>
                                 </select>
                                 <label for="padding_characters_before" class="input-group-text">Symbol(s) Before</label>
-                                <input type="number" min="0" max="5" step="1" value="2" class="form-control"
+                                <input type="number" min="0" max="5" step="1" value="0" class="form-control"
                                   name="padding_characters_before" id="padding_characters_before" />
                                 <label for="padding_characters_after" class="input-group-text">Symbol(s) After</label>
-                                <input type="number" min="0" max="5" step="1" value="2" class="form-control"
+                                <input type="number" min="0" max="5" step="1" value="0" class="form-control"
                                   name="padding_characters_after" id="padding_characters_after" />
                                 <label for="pad_to_length" class="input-group-text">Pad to Length</label>
-                                <input type="number" size="3" id="pad_to_length" value="32" min="8" max="999"
+                                <input type="number" size="3" id="pad_to_length" value="8" min="8" max="999"
                                   class="form-control" />
                                 <div id="pad_to_length_err" class="invalid-feedback">must be an integer between 8 and
                                   999</div>
@@ -230,7 +232,8 @@
                                 <div class="input-group mt-2">
                                   <label for="padding_character" class="input-group-text">Padding
                                     Character</label>
-                                  <input class="form-control" type="text" size="1" maxlength="1" value="*"
+                                    <!-- value="*" -->
+                                  <input class="form-control" type="text" size="1" maxlength="1" value=""
                                     id="padding_character" />
                                   <div id="padding_character_err" class="invalid-feedback">must enter exactly 1
                                     character</div>
@@ -240,8 +243,9 @@
                                 <div class="input-group mt-2">
                                   <label for="padding_char_type_random" class="input-group-text">Padding Character
                                     Alphabet</label>
+                                    <!-- value="!*=+-" -->
                                   <input id="padding_char_type_random" class="form-control" type="text" size="6"
-                                    minlength="2" maxlength="6" value="!*=+-" />
+                                    minlength="2" maxlength="6" value="" />
                                   <div id="padding_char_type_random_err" class="invalid-feedback">must enter at least 2
                                     characters</div>
                                 </div>
