@@ -69,16 +69,11 @@ class PasswordView {
   renderPassword(passAndStats, num) {
     // render the password(s)
     const passwds = passAndStats.passwords.join('\n');
-    if (passwds) {
-      this.#passwordArea.val(passwds);
-      // Set passwordArea height to accommodate number of passwords
-      this.#passwordArea.attr('rows', num);
-      log.debug(
-        `texarea value changed to [${this.#passwordArea.val()}]`);
-    } else {
-      this.Error('ERROR - server returned no passwords');
-      return;
-    }
+    this.#passwordArea.val(passwds);
+    // Set passwordArea height to accommodate number of passwords
+    this.#passwordArea.attr('rows', num);
+    log.debug(
+      `texarea value changed to [${this.#passwordArea.val()}]`);
     this.__renderDetailedStats(passAndStats.stats);
   };
 

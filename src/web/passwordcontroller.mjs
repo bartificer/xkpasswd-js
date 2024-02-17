@@ -42,7 +42,7 @@ class PasswordController {
 
       if (!passAndStats) {
         // something went wrong
-        throw new Error('No passwords generated');
+        throw new Error('ERROR - server returned no passwords');
       }
       this.#view.__renderPassword(passAndStats, num);
     } catch (error) {
