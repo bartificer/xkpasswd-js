@@ -51,10 +51,12 @@ class PresetView {
    * This is the function that is called
    * when one of the preset buttons is clicked
    *
+   * @private
+   *
    * @param {Object} btn - preset button
    * @param {function} handle - pass control to the Controller
    */
-  bindSelectPreset(btn, handle) {
+  __bindSelectPreset(btn, handle) {
     log.debug(`bindSelectPreset for ${btn}`);
     $(btn).on('click', (e) => {
       e.stopPropagation();
@@ -68,7 +70,7 @@ class PresetView {
       button.addClass('active');
 
       // update the preset header
-      this.setPresetHeader(preset);
+      this.__setPresetHeader(preset);
 
       // pass control to the Controller
       handle(preset);
@@ -80,9 +82,11 @@ class PresetView {
   /**
    * Set the selected preset in the header
    *
+   * @private
+   *
    * @param {string} preset - the selected preset
    */
-  setPresetHeader(preset) {
+  __setPresetHeader(preset) {
     this.#presetHeader.html(`&mdash; ${preset}`);
   };
 };
