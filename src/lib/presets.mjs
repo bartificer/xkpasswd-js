@@ -185,6 +185,8 @@ const thePresets = {
 
 /**
  * Class that handles all presets
+ *
+ * @class Presets
  */
 class Presets {
   // private var holds the current preset
