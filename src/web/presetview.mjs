@@ -27,6 +27,27 @@ class PresetView {
   };
 
   /**
+   * Build the preset buttons and add the
+   * eventhandler
+   *
+   * @param {Array} names - list of preset names
+   * @param {function} handler - handle the change in the Controller
+   */
+  buildPresetButtons(names, handler) {
+    // build the buttons
+    names.forEach((presetName) => {
+      /* eslint-disable max-len */
+      const btn = `<button type="button" class="btn btn-outline-primary"
+      data-preset="${presetName}">${presetName}</button>`;
+      /* eslint-enable max-len */
+
+      // add the eventhandlers
+      const button = $(btn);
+      this.__bindSelectPreset(button, handler);
+      this.#presetGroup.append(button);
+    });
+  };
+  /**
    * This is the function that is called
    * when one of the preset buttons is clicked
    *
@@ -63,28 +84,6 @@ class PresetView {
    */
   setPresetHeader(preset) {
     this.#presetHeader.html(`&mdash; ${preset}`);
-  };
-
-  /**
-   * Build the preset buttons and add the
-   * eventhandler
-   *
-   * @param {Array} names - list of preset names
-   * @param {function} handler - handle the change in the Controller
-   */
-  buildPresetButtons(names, handler) {
-    // build the buttons
-    names.forEach((presetName) => {
-      /* eslint-disable max-len */
-      const btn = `<button type="button" class="btn btn-outline-primary"
-      data-preset="${presetName}">${presetName}</button>`;
-      /* eslint-enable max-len */
-
-      // add the eventhandlers
-      const button = $(btn);
-      this.bindSelectPreset(button, handler);
-      this.#presetGroup.append(button);
-    });
   };
 };
 
