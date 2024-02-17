@@ -1,6 +1,9 @@
 import log from 'loglevel';
 
 /**
+ * This class handles the rendering of
+ * and interaction with the preset buttons
+ *
  * @class PresetView
  */
 class PresetView {
@@ -21,7 +24,7 @@ class PresetView {
     this.#presetHeader = $('#currentPreset');
 
     log.debug('PresetView constructor executed');
-  }
+  };
 
   /**
    * This is the function that is called
@@ -83,6 +86,6 @@ class PresetView {
       this.#presetGroup.append(button);
     });
   };
-}
+};
 
 export {PresetView};

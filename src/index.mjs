@@ -23,6 +23,8 @@ import '@fontsource/noto-sans/600.css';
 import log from 'loglevel';
 
 import './assets/site.css';
+
+// import all app related classes
 import {XKPasswd} from './lib/xkpasswd.mjs';
 import {PresetView} from './web/presetview.mjs';
 import { PresetController } from './web/presetcontroller.mjs';
