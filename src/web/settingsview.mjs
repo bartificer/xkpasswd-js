@@ -28,7 +28,7 @@ class SettingsView {
    *
    * @param {object} preset - settings beloning by the current preset
    */
-  updateSettings(preset) {
+  renderSettings(preset) {
     // if (!XKP.state.presetChanged) {
     //   // nothing changed
     //   return;

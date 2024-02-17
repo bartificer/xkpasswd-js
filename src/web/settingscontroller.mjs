@@ -33,7 +33,7 @@ class SettingsController {
    *
    */
   updateSettings(config) {
-    this.#view.updateSettings(config);
+    this.#view.renderSettings(config);
   }
 }
 
