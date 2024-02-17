@@ -47,8 +47,6 @@ class PresetController {
     // tell the library which preset to make current
     this.#model.setPreset(preset);
 
-    // XKP.state.presetChanged = true;
-
     // Tell the SettingsController to update
     const config = this.#model.getPreset().config();
     this.#settingsController.updateSettings(config);
