@@ -117,7 +117,11 @@ class SettingsView {
      */
   __togglePaddingCharType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    if (typeof e != 'string') {
+      e.stopPropagation();
+    }
     log.debug(`__togglePaddingCharType: ${paddingType}`);
+
     switch (paddingType) {
     case 'CHAR':
       $('label[for="padding_character"]').show(this.#aniTime);
@@ -153,9 +157,6 @@ class SettingsView {
       } catch (e) {};
       break;
     };
-    if (typeof e != 'string') {
-      e.stopPropagation();
-    }
   };
 };
 
