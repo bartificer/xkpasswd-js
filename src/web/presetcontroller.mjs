@@ -15,19 +15,21 @@ class PresetController {
   #view;
 
   /**
-   * @private xkpasswd - reference to the XKPasswd library
+   * @private settings - reference to SettingsController
    */
-  #xkpasswd;
+  #settingsController;
 
   /**
    * @constructor
    *
-   * @param {PresetModel} model - new PresetModel
-   * @param {PresetView} view - new PresetView
+   * @param {PresetModel} model - reference to PresetModel
+   * @param {PresetView} view - reference to PresetView
+   * @param {SettingsController} sc - reference to SettingsController
    */
-  constructor(model, view) {
+  constructor(model, view, sc) {
     this.#model = model;
     this.#view = view;
+    this.#settingsController = sc;
 
     // get the presets from the library
     const names = this.#model.getPresets();
@@ -48,7 +50,8 @@ class PresetController {
     // XKP.state.presetChanged = true;
 
     // Tell the SettingsController to update
-    // XKP.__updateSettings();
+    const config = this.#model.getPreset().config();
+    this.#settingsController.updateSettings(config);
   };
 }
 

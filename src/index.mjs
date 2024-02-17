@@ -27,7 +27,9 @@ import './assets/site.css';
 // import all app related classes
 import {XKPasswd} from './lib/xkpasswd.mjs';
 import {PresetView} from './web/presetview.mjs';
-import { PresetController } from './web/presetcontroller.mjs';
+import {PresetController} from './web/presetcontroller.mjs';
+import {SettingsView} from './web/settingsview.mjs';
+import {SettingsController} from './web/settingscontroller.mjs';
 
 /**
  * Object defining all custom variables and functions
@@ -35,10 +37,6 @@ import { PresetController } from './web/presetcontroller.mjs';
  *
  */
 const XKP = {
-
-  // set time to show/hide elements
-
-  aniTime: 250,
 
   // set the Bootstrap classes for the various values
   stats_classes: {
@@ -49,6 +47,7 @@ const XKP = {
   },
 
   presetController: {},
+  settingsController: {},
 
   /**
    * init function that sets up the variables and the initial
@@ -105,144 +104,6 @@ const XKP = {
       XKP.__renderPaswordError('ERROR password generation failed!');
     } finally {
       e.stopPropagation(); // stop the event bubbling
-    }
-  },
-
-  /**
-   * Select the preset
-   * This is the function that is called
-   * when one of the preset buttons is clicked
-   *
-   * @function selectPreset
-   * @memberof XKP
-   *
-   * @param {event} e - event
-   */
-
-  /**
-   * Update the fields in the settings with
-   * the contents of the current preset
-   */
-
-  __updateSettings: () => {
-    if (!XKP.state.presetChanged) {
-      // nothing changed
-      return;
-    };
-
-    // get the current preset
-    const preset = XKP.config.xkpasswd.getPreset().config();
-    const keys = Object.keys(preset);
-
-    // update all fields
-    keys.forEach((key) => {
-      $(`#${key}`).val(preset[key]);
-    });
-
-    // hide everything that should not be visible
-    XKP.__togglePaddingType(preset.padding_type);
-    XKP.state.presetChanged = false;
-  },
-
-  /**
-   * Toggle visibility of padding type related
-   * elements
-   *
-   * @param {Event | string } e - either the
-   * event or the type value
-   */
-  __togglePaddingType(e) {
-    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
-    log.debug(`__toggleCharPaddingType: ${paddingType}`);
-    switch (paddingType) {
-    case 'NONE':
-      $('label[for="padding_characters_before"]').hide(XKP.aniTime);
-      $('#padding_characters_before').hide(XKP.aniTime);
-      $('label[for="padding_characters_after"]').hide(XKP.aniTime);
-      $('#padding_characters_after').hide(XKP.aniTime);
-      $('label[for="pad_to_length"]').hide(XKP.aniTime);
-      $('#pad_to_length').hide(XKP.aniTime);
-      $('div#padding_char_container').hide(XKP.aniTime);
-      break;
-
-    case 'FIXED':
-      $('label[for="padding_characters_before"]').show(XKP.aniTime);
-      $('#padding_characters_before').show(XKP.aniTime);
-      $('label[for="padding_characters_after"]').show(XKP.aniTime);
-      $('#padding_characters_after').show(XKP.aniTime);
-      $('label[for="pad_to_length"]').hide(XKP.aniTime);
-      $('#pad_to_length').hide(XKP.aniTime);
-      $('div#padding_char_container').show(XKP.aniTime);
-      break;
-
-    case 'ADAPTIVE':
-      $('label[for="padding_characters_before"]').hide(XKP.aniTime);
-      $('#padding_characters_before').hide(XKP.aniTime);
-      $('label[for="padding_characters_after"]').hide(XKP.aniTime);
-      $('#padding_characters_after').hide(XKP.aniTime);
-      $('label[for="pad_to_length"]').hide(XKP.aniTime);
-      $('#pad_to_length').hide(XKP.aniTime);
-      $('div#padding_char_container').show(XKP.aniTime);
-      break;
-
-    default:
-      try {
-        log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
-      } catch (e) {};
-      break;
-    }
-    if (typeof e != 'string') {
-      e.stopPropagation();
-    }
-  },
-
-  /**
-   * Toggle visibility of padding type related
-   * elements
-   *
-   * @param {Event | string } e - either the
-   * event or the type value
-   */
-  __togglePaddingCharType(e) {
-    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
-    log.debug(`__togglePaddingCharType: ${paddingType}`);
-    switch (paddingType) {
-    case 'CHAR':
-      $('label[for="padding_character"]').show(XKP.aniTime);
-      $('#padding_character').show(XKP.aniTime);
-      $('label[for="padding_char_type_random"]').hide(XKP.aniTime);
-      $('#padding_char_type_random').hide(XKP.aniTime);
-      break;
-
-    case 'RANDOM':
-      $('label[for="padding_character"]').hide(XKP.aniTime);
-      $('#padding_character').hide(XKP.aniTime);
-      $('label[for="padding_char_type_random"]').show(XKP.aniTime);
-      $('#padding_char_type_random').show(XKP.aniTime);
-      break;
-
-    case 'SEPARATOR':
-      // only allow this option be selected
-      // when there is a separator character,
-      // if not, switch to single separator char
-      if ($('#separator_type').val() == 'NONE') {
-        $('#padding_char_type').val('CHAR');
-        return;
-      }
-      // if it is OK to select this option, update the UI appropriately
-      $('label[for="padding_character"]').hide(XKP.aniTime);
-      $('#padding_character').hide(XKP.aniTime);
-      $('label[for="padding_char_type_random"]').hide(XKP.aniTime);
-      $('#padding_char_type_random').hide(XKP.aniTime);
-      break;
-    default:
-      try {
-        log.log(`WARNING - Received invalid padding_type=${paddingType}`);
-      } catch (e) {};
-      break;
-    };
-    if (typeof e != 'string') {
-      e.stopPropagation();
     }
   },
 
@@ -345,15 +206,6 @@ const XKP = {
     XKP.config.passwordStrength.addClass(statsClass);
   },
 
-  /**
-   * Build the preset buttons
-   */
-
-  /**
-   * Set the selected preset in the header
-   *
-   * @param {string} preset - the selected preset
-   */
 
   /**
    * hide statistics section
@@ -377,16 +229,17 @@ const XKP = {
    * @memberof XKP
    */
   setup: () => {
-    XKP.presetController =
-      new PresetController(XKP.config.xkpasswd, new PresetView());
+    XKP.settingsController =
+      new SettingsController(XKP.config.xkpasswd, new SettingsView());
+    XKP.presetController = new PresetController(
+      XKP.config.xkpasswd,
+      new PresetView(),
+      XKP.settingsController);
 
     XKP.config.passwordArea.val('');
     $('form#generatePasswords').on('submit', XKP.generatePasswords);
-    $('#padding_type').on('change', XKP.__togglePaddingType);
-    $('#padding_char_type').on('change', XKP.__togglePaddingCharType);
+
     XKP.__hideStats();
-    XKP.__togglePaddingType('NONE');
-    XKP.__togglePaddingCharType('CHAR');
   },
 };
 
