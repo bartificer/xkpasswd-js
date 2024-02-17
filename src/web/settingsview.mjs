@@ -34,11 +34,6 @@ class SettingsView {
    * @param {object} preset - settings beloning by the current preset
    */
   renderSettings(preset) {
-    // if (!XKP.state.presetChanged) {
-    //   // nothing changed
-    //   return;
-    // };
-
     // get the current preset
     const keys = Object.keys(preset);
 
@@ -49,7 +44,6 @@ class SettingsView {
 
     // hide everything that should not be visible
     this.__togglePaddingType(preset.padding_type);
-    // XKP.state.presetChanged = false;
   };
 
   /**
