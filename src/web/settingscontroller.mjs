@@ -35,6 +35,6 @@ class SettingsController {
   updateSettings(config) {
     this.#view.renderSettings(config);
   }
-}
+};
 
 export {SettingsController};
