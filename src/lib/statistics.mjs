@@ -261,14 +261,13 @@ class Statistics {
     // }
 
     // return the stats
+    log.trace(`returning the stats: ${JSON.stringify(stats)}`);
     return stats;
   }
 
-  /**
-   * Gather entropy stats for the combination
-   * of the loaded config and dictionary.
+  /* 2024-02-18 the documentation below is taken out,
+   * because the BigInts are not necessary and cause problems
    *
-   * Returns: A stats object indexed by:
    *   * minPermutationsBlind - the number of permutations to be
    *        tested by an attacker with no knowledge of the dictionary file
    *        used, or the config used, assuming the minimum possible
@@ -282,6 +281,14 @@ class Statistics {
    *   * permutationsSeen - the number of permutations to be tested
    *        by an attacker with full knowledge of the dictionary file and
    *        configuration used (as BigInt)
+  */
+
+
+  /**
+   * Gather entropy stats for the combination
+   * of the loaded config and dictionary.
+   *
+   * Returns: A stats object indexed by:
    *   * minEntropyBlind - object
    *          - value - minPermutationsBlind converted to bits
    *          - state - POOR | OK | GOOD
@@ -451,14 +458,17 @@ class Statistics {
     const stats = {};
 
     // Note these stats keys will hold BigInt variables
-    stats.permutationsSeen = seenPermutationsBigInt;
-    log.debug('got permutationsSeen=' + stats.permutationsSeen);
+    // 2024-02-18 not sure we need them and they cause
+    // all kinds of problems
 
-    stats.minPermutationsBlind = statsBigInt.minPermutationsBlind;
+    // stats.permutationsSeen = seenPermutationsBigInt;
+    // log.debug('got permutationsSeen=' + stats.permutationsSeen);
 
-    stats.maxPermutationsBlind = statsBigInt.maxPermutationsBlind;
+    // stats.minPermutationsBlind = statsBigInt.minPermutationsBlind;
 
-    stats.permutationsBlind = statsBigInt.permutationsBlind;
+    // stats.maxPermutationsBlind = statsBigInt.maxPermutationsBlind;
+
+    // stats.permutationsBlind = statsBigInt.permutationsBlind;
 
     // calculate the entropy values based on the permutations
 
@@ -468,15 +478,15 @@ class Statistics {
     // BigInt(largeNumber.toString()).toString(2).length
 
     const minEntropyBlind = statsBigInt.minPermutationsBlind.toString(2).length;
-    log.debug('got minEntropyBlind=' + stats.minEntropyBlind);
+    log.debug('got minEntropyBlind=' + minEntropyBlind);
 
     const maxEntropyBlind = statsBigInt.maxPermutationsBlind.toString(2).length;
-    log.debug('got maxEntropyBlind=' + stats.maxEntropyBlind);
+    log.debug('got maxEntropyBlind=' + maxEntropyBlind);
 
     stats.entropyBlind = statsBigInt.permutationsBlind.toString(2).length;
     log.debug('got entropyBlind=' + stats.entropyBlind);
 
-    const entropySeen = stats.permutationsSeen.toString(2).length;
+    const entropySeen = seenPermutationsBigInt.toString(2).length;
     log.debug('got entropySeen=' + entropySeen);
 
     const entropyBlindThreshold = this.#entropyBlindThreshold;
@@ -533,6 +543,7 @@ class Statistics {
     this.#cache.entropy.stats = stats;
     this.#cache.entropy.valid = true;
 
+    log.trace(`returning entropy stats: ${JSON.stringify(stats)}`);
     log.setLevel('debug');
     // return the stats
     return this.#cache.entropy.stats;
