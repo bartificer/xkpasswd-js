@@ -18,12 +18,16 @@ class SettingsView {
   constructor() {
     this.__togglePaddingType('NONE');
     this.__togglePaddingCharType('CHAR');
+    this.__toggleSeparatorType('NONE');
 
     $('#padding_type').on('change', (e) => {
       this.__togglePaddingType(e);
     });
     $('#padding_char_type').on('change', (e) => {
       this.__togglePaddingCharType(e);
+    });
+    $('#separator_character').on('change', (e) => {
+      this.__toggleSeparatorType(e);
     });
   };
 
@@ -44,6 +48,53 @@ class SettingsView {
 
     // hide everything that should not be visible
     this.__togglePaddingType(preset.padding_type);
+    this.__toggleSeparatorType(preset.separator_character);
+  };
+
+  /**
+     * Toggle visibility of separator type related
+     * elements
+     *
+     * @private
+     *
+     * @param {Event | string } e - either the
+     * event or the type value
+     */
+  __toggleSeparatorType = (e) => {
+    const separatorType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    log.trace(`__toggleCharSeparatorType: ${separatorType}`);
+    switch (separatorType) {
+    case 'NONE':
+      $('label[for="separator_type_char"]').hide(this.#aniTime);
+      $('#separator_type_char').hide(this.#aniTime);
+      $('label[for="separator_alphabet"]').hide(this.#aniTime);
+      $('#separator_alphabet').hide(this.#aniTime);
+      break;
+
+    case 'CHAR':
+      $('label[for="separator_type_char"]').show(this.#aniTime);
+      $('#separator_type_char').show(this.#aniTime);
+      $('label[for="separator_alphabet"]').hide(this.#aniTime);
+      $('#separator_alphabet').hide(this.#aniTime);
+      break;
+
+    case 'RANDOM':
+      $('label[for="separator_type_char"]').hide(this.#aniTime);
+      $('#separator_type_char').hide(this.#aniTime);
+      $('label[for="separator_alphabet"]').show(this.#aniTime);
+      $('#separator_alphabet').show(this.#aniTime);
+      break;
+
+    default:
+      try {
+        log.warn(`WARNING - Received invalid separator_character=
+        ${separatorType}`);
+      } catch (e) {};
+      break;
+    }
+    if (typeof e != 'string') {
+      e.stopPropagation();
+    }
   };
 
   /**

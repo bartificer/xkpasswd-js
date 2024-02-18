@@ -158,8 +158,8 @@
                             <div id="section_separator" class="container-fluid mb-3">
                               <label class="h5">Separator</label>
                               <div class="input-group mt-2">
-                                <label for="separator_type" class="input-group-text">Type</label>
-                                <select id="separator_type" class="form-control">
+                                <label for="separator_character" class="input-group-text">Type</label>
+                                <select id="separator_character" class="form-control">
                                   <option value="NONE" selected="selected">-none-</option>
                                   <option value="CHAR">Specified Character</option>
                                   <option value="RANDOM">Random Character</option>
@@ -172,11 +172,11 @@
                                 <div id="separator_type_char_err" class="invalid-feedback">must enter exactly 1
                                   character</div>
                                 <!-- random characters -->
-                                <label for="separator_type_random" class="input-group-text">Alphabet</label>
+                                <label for="separator_alphabet" class="input-group-text">Alphabet</label>
                                 <!-- value="-+=*,_" -->
-                                <input id="separator_type_random" class="form-control" type="text" size="6"
+                                <input id="separator_alphabet" class="form-control" type="text" size="6"
                                   minlength="2" maxlength="6" value="" />
-                                <div id="separator_type_random_err" class="invalid-feedback">must enter at least 2
+                                <div id="separator_alphabet_err" class="invalid-feedback">must enter at least 2
                                   characters and no more than 6</div>
                               </div>
                             </div> <!-- /section_separator -->
