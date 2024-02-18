@@ -44,10 +44,10 @@ class PasswordController {
         // something went wrong
         throw new Error('ERROR - server returned no passwords');
       }
-      this.#view.__renderPassword(passAndStats, num);
+      this.#view.renderPassword(passAndStats, num);
     } catch (error) {
       log.error(`Password generation threw an error ${error}`);
-      this.#view.__renderPaswordError('ERROR password generation failed!');
+      this.#view.renderPasswordError('ERROR password generation failed!');
     }
   };
 };

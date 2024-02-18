@@ -116,9 +116,8 @@ class PasswordView {
    * Show an alert with an error message
    * @param {string} msg - the error message
    *
-   * @private
    */
-  __renderPasswordError(msg) {
+  renderPasswordError(msg) {
     // write the error message to the alert and show it
 
     /* eslint-disable max-len */
