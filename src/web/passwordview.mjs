@@ -63,12 +63,13 @@ class PasswordView {
 
   /**
    * Render the password and statistics
+   *
    * @param {Object} passAndStats - object with passwords and stats
    * @param {number} num - number of passwords generated
    */
   renderPassword(passAndStats, num) {
-    // render the password(s)
     log.trace(`renderPassword: ${JSON.stringify(passAndStats)}`);
+
     const passwds = passAndStats.passwords.join('\n');
     this.#passwordArea.val(passwds);
     // Set passwordArea height to accommodate number of passwords
