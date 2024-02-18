@@ -336,7 +336,7 @@ class Statistics {
 
     log.setLevel('warn');
 
-    log.debug('alphabetCount: ' + alphabetCount);
+    log.trace('alphabetCount: ' + alphabetCount);
 
     // TODO replace pseudocode with real code
     //  if($self->_passwords_will_contain_symbol()
@@ -354,21 +354,21 @@ class Statistics {
     const lengthAverage =
         Math.round((configStats.minLength + configStats.maxLength) / 2);
 
-    log.debug(`DEBUG: lengthAverage = ${lengthAverage}`);
+    log.trace(`DEBUG: lengthAverage = ${lengthAverage}`);
 
     statsBigInt.alphabetCount = BigInt(alphabetCount);
     statsBigInt.minPermutationsBlind =
       (statsBigInt.alphabetCount ** BigInt(minLength));
 
-    log.debug('minPermutationsBlind=' + statsBigInt.minPermutationsBlind);
+    log.trace('minPermutationsBlind=' + statsBigInt.minPermutationsBlind);
 
     statsBigInt.maxPermutationsBlind =
     (statsBigInt.alphabetCount ** BigInt(maxLength));
-    log.debug('maxPermutationsBlind=' + statsBigInt.maxPermutationsBlind);
+    log.trace('maxPermutationsBlind=' + statsBigInt.maxPermutationsBlind);
 
     statsBigInt.permutationsBlind =
       (statsBigInt.alphabetCount ** BigInt(lengthAverage));
-    log.debug('permutationsBlind=' + statsBigInt.permutationsBlind);
+    log.trace('permutationsBlind=' + statsBigInt.permutationsBlind);
 
     // calculate the seen permutations
 
@@ -462,7 +462,7 @@ class Statistics {
     // all kinds of problems
 
     // stats.permutationsSeen = seenPermutationsBigInt;
-    // log.debug('got permutationsSeen=' + stats.permutationsSeen);
+    // log.trace('got permutationsSeen=' + stats.permutationsSeen);
 
     // stats.minPermutationsBlind = statsBigInt.minPermutationsBlind;
 
@@ -478,16 +478,16 @@ class Statistics {
     // BigInt(largeNumber.toString()).toString(2).length
 
     const minEntropyBlind = statsBigInt.minPermutationsBlind.toString(2).length;
-    log.debug('got minEntropyBlind=' + minEntropyBlind);
+    log.trace('got minEntropyBlind=' + minEntropyBlind);
 
     const maxEntropyBlind = statsBigInt.maxPermutationsBlind.toString(2).length;
-    log.debug('got maxEntropyBlind=' + maxEntropyBlind);
+    log.trace('got maxEntropyBlind=' + maxEntropyBlind);
 
     stats.entropyBlind = statsBigInt.permutationsBlind.toString(2).length;
-    log.debug('got entropyBlind=' + stats.entropyBlind);
+    log.trace('got entropyBlind=' + stats.entropyBlind);
 
     const entropySeen = seenPermutationsBigInt.toString(2).length;
-    log.debug('got entropySeen=' + entropySeen);
+    log.trace('got entropySeen=' + entropySeen);
 
     const entropyBlindThreshold = this.#entropyBlindThreshold;
     const entropySeenThreshold = this.#entropySeenThreshold;

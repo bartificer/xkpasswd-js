@@ -23,7 +23,7 @@ class PresetView {
     this.#presetGroup = $('#preset-btn-group');
     this.#presetHeader = $('#currentPreset');
 
-    log.debug('PresetView constructor executed');
+    log.trace('PresetView constructor executed');
   };
 
   /**
@@ -57,7 +57,7 @@ class PresetView {
    * @param {function} handle - pass control to the Controller
    */
   __bindSelectPreset(btn, handle) {
-    log.debug(`bindSelectPreset for ${btn}`);
+    log.trace(`bindSelectPreset for ${btn}`);
     $(btn).on('click', (e) => {
       e.stopPropagation();
       const button = $(e.currentTarget);
@@ -75,7 +75,7 @@ class PresetView {
       // pass control to the Controller
       handle(preset);
 
-      log.debug(`Preset clicked ${JSON.stringify(preset)}`);
+      log.trace(`Preset clicked ${JSON.stringify(preset)}`);
     });
   };
 

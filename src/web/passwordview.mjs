@@ -68,11 +68,12 @@ class PasswordView {
    */
   renderPassword(passAndStats, num) {
     // render the password(s)
+    log.trace(`renderPassword: ${JSON.stringify(passAndStats)}`);
     const passwds = passAndStats.passwords.join('\n');
     this.#passwordArea.val(passwds);
     // Set passwordArea height to accommodate number of passwords
     this.#passwordArea.attr('rows', num);
-    log.debug(
+    log.trace(
       `texarea value changed to [${this.#passwordArea.val()}]`);
     this.__renderDetailedStats(passAndStats.stats);
   };
@@ -82,7 +83,7 @@ class PasswordView {
    * @param {Function} handle - pass control to the Controller
    */
   bindGeneratePassword(handle) {
-    log.debug('bindGeneratePassword');
+    log.trace('bindGeneratePassword');
 
     $('form#generatePasswords').on('submit', (e) => {
       e.preventDefault();
@@ -142,35 +143,41 @@ class PasswordView {
    * @private
    */
   __renderDetailedStats(stats) {
+    log.trace(`entering __renderDetailedStats`);
+    log.trace(`stats: ${JSON.stringify(stats)}`);
+
     this.__renderPasswordStrength(stats.password.passwordStrength);
 
     // Render the detailed stats
 
     let template = {};
-    const minEntropyBlind = stats.entropy.minEntropyBlind;
-    const maxEntropyBlind = stats.entropy.maxEntropyBlind;
+    const min = stats.entropy.minEntropyBlind;
+    const max = stats.entropy.maxEntropyBlind;
 
     // first the blind entropy
 
     /* eslint-disable max-len */
 
-    if (minEntropyBlind.equal) {
+    if (min.equal) {
       // make a template for one value
 
       template = [
-        `<span class="btn btn-stats ${this.__getStatsClass([minEntropyBlind.state])}"`,
-        `id="entropy_min">${minEntropyBlind.value} bits</span>`,
+        `<span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `id="entropy_min">${min.value} bits</span>`,
       ].join('');
     } else {
       // make a template for two values
       template = [
-        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass([minEntropyBlind.state])}"`,
-        `id="entropy_min">${minEntropyBlind.value} bits</span> and `,
-        `<span class="btn btn-stats ${this.__getStatsClass([maxEntropyBlind.state])}"`,
-        `id="entropy_max">${maxEntropyBlind.value} bits</span>`,
+        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `id="entropy_min">${min.value} bits</span> and `,
+        `<span class="btn btn-stats ${this.__getStatsClass([max.state])}"`,
+        `id="entropy_max">${max.value} bits</span>`,
       ].join('');
     }
     /* eslint-enable max-len */
+
+    log.trace(`template built: ${template}`);
+
 
     this.#blindEntropy.empty().append(template);
 

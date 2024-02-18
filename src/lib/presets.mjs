@@ -6,6 +6,7 @@
 
 import {RandomBasic} from './randombasic.mjs';
 import is from 'is-it-check';
+import log from 'loglevel';
 
 /**
  * This object contains all predefined config sets
@@ -243,7 +244,8 @@ class Presets {
           this.#presetName = 'DEFAULT';
         }
       }
-    }
+    };
+    log.trace(`Preset constructor set to ${this.#presetName}`);
   }
 
 

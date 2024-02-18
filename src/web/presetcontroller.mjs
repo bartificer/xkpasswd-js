@@ -36,7 +36,7 @@ class PresetController {
 
     // initialize
     this.#view.buildPresetButtons(names, this.onPresetChanged);
-    log.debug('PresetController constructor executed');
+    log.trace('PresetController constructor executed');
   }
 
   /**

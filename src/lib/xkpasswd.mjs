@@ -82,6 +82,7 @@ class XKPasswd {
     const passwords = this.passwords(num);
     const stats = this.#statsClass.calculateStats();
 
+    log.trace(`generatePassword.stats ${JSON.stringify(stats)}`);
     this.#stats = stats;
 
     return {

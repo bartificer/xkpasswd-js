@@ -25,7 +25,7 @@ class PasswordController {
     this.#view = view;
 
     this.#view.bindGeneratePassword(this.generatePasswords);
-    log.debug('PasswordController constructor executed');
+    log.trace('PasswordController constructor executed');
   }
 
   /**
@@ -40,6 +40,8 @@ class PasswordController {
     try {
       const passAndStats = this.#model.generatePassword(num);
 
+      log.trace(`generatePasswords: ${JSON.stringify(passAndStats.passwords)}`);
+      log.trace(`stats ${JSON.stringify(passAndStats.stats)}`);
       if (!passAndStats) {
         // something went wrong
         throw new Error('ERROR - server returned no passwords');

@@ -24,7 +24,7 @@ class SettingsController {
     this.#model = model;
     this.#view = view;
 
-    log.debug('SettingsController constructor executed');
+    log.trace('SettingsController constructor executed');
   }
 
   /**
