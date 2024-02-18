@@ -203,8 +203,8 @@ class PasswordView {
   __renderPasswordStrength(passwordStrength) {
     // we assume that the strength indicator is already calculated
 
-    const statsText = this.__getStatsDisplay(stats.password.passwordStrength);
-    const statsClass = this.__getStatsClass([stats.password.passwordStrength]);
+    const statsText = this.__getStatsDisplay(passwordStrength);
+    const statsClass = this.__getStatsClass([passwordStrength]);
 
     // render strength
     this.#passwordStrength.text(statsText);
