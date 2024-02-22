@@ -86,6 +86,7 @@
                           <span>Presets</span>&nbsp;<span class="fst-italic" id="currentPreset"></span>
                         </button>
                       </h2>
+                      <!-- This section (id = collapesPresets) is handled by the PresetController and the PresetView -->
                       <div id="collapsePresets" class="accordion-collapse collapse show"
                         data-bs-parent="#configOptions">
                         <div class="accordion-body">
@@ -114,6 +115,7 @@
                           Settings
                         </button>
                       </h2>
+                      <!-- This section (id = collapesSettings) is handled by the SettingsController and the SettingsView -->
                       <div id="collapseSettings" class="accordion-collapse collapse" data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <form id="passwordSettings">
@@ -266,6 +268,7 @@
 
           </div> <!-- close config col -->
 
+          <!-- this section (id = generatePassword) is handled by the PasswordController and the PasswordView -->
           <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
 
             <h3>Generate Password(s)</h3>
@@ -304,6 +307,8 @@
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
     <div class="row"> <!-- open row for password card -->
+
+      <!-- this section (id = password-card) is handled by the PasswordController and the PasswordView -->
       <section id="password-card" class="order-3">
         <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
           <div class="card-header d-flex align-items-center">
