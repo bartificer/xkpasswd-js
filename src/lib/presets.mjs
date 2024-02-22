@@ -250,21 +250,6 @@ class Presets {
     this.#current.config.separator_alphabet = this.getSeparatorAlphabet();
     this.#current.config.padding_alphabet = this.getPaddingAlphabet();
 
-    // split the separator_character into a proper type and char
-    switch (this.#current.config.separator_character) {
-    case 'RANDOM':
-    case 'CHAR':
-    case 'NONE':
-      // don't do anything
-      break;
-    default:
-      // separator_character contains a character
-      this.#current.config.separator_type_char =
-        this.#current.config.separator_character;
-      this.#current.config.separator_character = 'CHAR';
-      break;
-    }
-
     log.trace(`Preset constructor set to ${this.#presetName}`);
   }
 
