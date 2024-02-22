@@ -47,8 +47,9 @@ class SettingsView {
     });
 
     // hide everything that should not be visible
-    this.__togglePaddingType(preset.padding_type);
     this.__toggleSeparatorType(preset.separator_character);
+    this.__togglePaddingType(preset.padding_type);
+    this.__togglePaddingCharType(preset.padding_char_type);
   };
 
   /**
@@ -135,8 +136,8 @@ class SettingsView {
       $('#padding_characters_before').hide(this.#aniTime);
       $('label[for="padding_characters_after"]').hide(this.#aniTime);
       $('#padding_characters_after').hide(this.#aniTime);
-      $('label[for="pad_to_length"]').hide(this.#aniTime);
-      $('#pad_to_length').hide(this.#aniTime);
+      $('label[for="pad_to_length"]').show(this.#aniTime);
+      $('#pad_to_length').show(this.#aniTime);
       $('div#padding_char_container').show(this.#aniTime);
       break;
 
@@ -169,15 +170,15 @@ class SettingsView {
 
     switch (paddingType) {
     case 'CHAR':
-      $('label[for="padding_character"]').show(this.#aniTime);
-      $('#padding_character').show(this.#aniTime);
+      $('label[for="padding_char_type_char"]').show(this.#aniTime);
+      $('#padding_char_type_char').show(this.#aniTime);
       $('label[for="padding_char_type_random"]').hide(this.#aniTime);
       $('#padding_char_type_random').hide(this.#aniTime);
       break;
 
     case 'RANDOM':
-      $('label[for="padding_character"]').hide(this.#aniTime);
-      $('#padding_character').hide(this.#aniTime);
+      $('label[for="padding_char_type_char"]').hide(this.#aniTime);
+      $('#padding_char_type_char').hide(this.#aniTime);
       $('label[for="padding_char_type_random"]').show(this.#aniTime);
       $('#padding_char_type_random').show(this.#aniTime);
       break;
@@ -191,8 +192,8 @@ class SettingsView {
         return;
       }
       // if it is OK to select this option, update the UI appropriately
-      $('label[for="padding_character"]').hide(this.#aniTime);
-      $('#padding_character').hide(this.#aniTime);
+      $('label[for="padding_char_type_char"]').hide(this.#aniTime);
+      $('#padding_char_type_char').hide(this.#aniTime);
       $('label[for="padding_char_type_random"]').hide(this.#aniTime);
       $('#padding_char_type_random').hide(this.#aniTime);
       break;
