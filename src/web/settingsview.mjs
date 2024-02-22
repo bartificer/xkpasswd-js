@@ -26,7 +26,7 @@ class SettingsView {
     $('#padding_char_type').on('change', (e) => {
       this.__togglePaddingCharType(e);
     });
-    $('#separator_character').on('change', (e) => {
+    $('#separator_char_type').on('change', (e) => {
       this.__toggleSeparatorType(e);
     });
   };
@@ -47,7 +47,7 @@ class SettingsView {
     });
 
     // hide everything that should not be visible
-    this.__toggleSeparatorType(preset.separator_character);
+    this.__toggleSeparatorType(preset.separator_type);
     this.__togglePaddingType(preset.padding_type);
     this.__togglePaddingCharType(preset.padding_char_type);
   };

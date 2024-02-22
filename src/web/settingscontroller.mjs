@@ -53,13 +53,13 @@ class SettingsController {
     switch (renderConfig.separator_character) {
     case 'RANDOM':
     case 'NONE':
-      // don't do anything
+      renderConfig.separator_type =
+              renderConfig.separator_character;
       break;
     default:
       // separator_character contains a character
-      renderConfig.separator_type_char =
-              renderConfig.separator_character;
-      renderConfig.separator_character = 'CHAR';
+      renderConfig.separator_type = 'CHAR';
+      renderConfig.separator_type_char = renderConfig.separator_character;
       break;
     }
 
@@ -75,9 +75,9 @@ class SettingsController {
       break;
     default:
       // padding_character contains a character
+      renderConfig.padding_char_type = 'CHAR';
       renderConfig.padding_char_type_char =
                     renderConfig.padding_character;
-      renderConfig.padding_char_type = 'CHAR';
       break;
     }
     return renderConfig;

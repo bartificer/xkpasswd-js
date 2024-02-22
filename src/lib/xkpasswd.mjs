@@ -309,7 +309,7 @@ class XKPasswd {
       const alphabet = this.#preset.getSeparatorAlphabet();
       return this.#rng.randomChar(alphabet);
     }
-    return '';
+    return sep;
   }
 
   /**
