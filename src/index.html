@@ -12,7 +12,9 @@
 </head>
 
 <body>
-  <div class="container mt-3">
+  <!-- Main page -->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="container mt-3" fouc="true" style="visibility: hidden;">
     <div class="row"> <!-- open row for all content above footer -->
       <section id="main" class="col order-2"> <!-- open section for content right of graphic -->
 
@@ -354,8 +356,9 @@
     </footer>
   </div>
 
-  <!-- Modal about -->
-  <div class="modal fade" id="about" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true">
+  <!-- Modal about-->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="modal fade" id="about" fouc="true" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true" style="visibility: hidden;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -390,7 +393,8 @@
   </div>
 
   <!-- Modal donate -->
-  <div class="modal fade" id="donate" tabindex="-1" aria-labelledby="donateLabel" aria-hidden="true">
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="modal fade" id="donate" fouc="true" tabindex="-1" aria-labelledby="donateLabel" aria-hidden="true" style="visibility: hidden;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
