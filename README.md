@@ -43,7 +43,7 @@ Fundamentally, the repository is a NodeJS project, so it contains the standard N
 * `/buildScripts/` — the folder containing the scripts used to build the bundled versions of the module and the module's documentation site, including its UML diagrams.
 * `/dist/` — the target folder into which the build scripts will publish the bundled versions of the module, ready for distribution. **Do not edit the contents of this folder directly!**
 * `/docs/` — the target folder into which the build scripts will publish the generated documentation. This folder's contents will be published at the project's website. **Do not edit the contents of this folder directly!**
-* `/docs-other/` — the folder containing the parts of the documentation that are not generated from documentation comments.
+* `/docs-other/` — the folder containing the parts of the documentation that are not generated from documentation comments. This folder also includes a **README** file that includes instructions on how to get started.
 * `/docs-other/diagrams/` — the target folder into which the build scripts will publish PNG versions of the project's UML diagrams. The source for these diagrams are the Mermaid files in `/src-diagrams/`. **Do not edit the contents of this folder directly!**
 * `/src/` — the folder containing the module's source code and test suite.
 * `/src-diagrams/` — the folder containing the source code for the UML diagrams describing the module. These files will be in Mermaid format and will be transformed into PNG files in `/docs-other/diagrams/` by a build script.
@@ -99,7 +99,7 @@ This module is versioned using the Semantic Versioning System, or [SemVer](https
    * Until the project reaches version 1.0.0 any contributions that make progress towards the initial implementation can be merged into the `main` branch
    * Once the project reaches version 1.0.0 all contributions must be *atomic*, i.e. must be a complete unit. For code contributions that means:
      1. All tests must pass
-     2. News tests must be included to cover all new functionality
+     2. New tests must be included to cover all new functionality
      3. The Doc Comments must be updated as appropriate
      4. The code must be in the project's style
 
