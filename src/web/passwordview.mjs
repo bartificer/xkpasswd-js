@@ -19,15 +19,15 @@ class PasswordView {
   #stats_classes = {
     GOOD: {
       display: 'Good',
-      class: 'btn-outline-success',
+      class: 'btn-success',
     },
     OK: {
       display: 'OK',
-      class: 'btn-outline-warning',
+      class: 'btn-warning',
     },
     POOR: {
       display: 'Poor',
-      class: 'btn-outline-danger',
+      class: 'btn-danger',
     },
     UNKNOWN: {
       display: 'Unknown',
