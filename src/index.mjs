@@ -78,5 +78,15 @@ $(() => {
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
   XKP.init();
-});
 
+  // Now that the DOM is ready, find all of the 'div' elements that
+  // were identified to have the potential to flash unstyled content
+  // as the page loads and make them visible.
+  const foucElements = document.querySelectorAll('div[fouc=\'true\']');
+  for (const fouc of foucElements) {
+    if (fouc.style !== null) {
+      // Make the element visible.
+      fouc.style.visibility = 'visible';
+    }
+  }
+});
