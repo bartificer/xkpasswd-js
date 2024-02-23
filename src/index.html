@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
   <link rel="manifest" href="assets/site.webmanifest">
-
+  <title>XKPasswd</title>
 </head>
 
 <body>
@@ -22,9 +22,9 @@
           <section id="top-art" class="col order-4 d-inline-flex d-lg-none">
             <picture>
               <!-- show this up to lg -->
-              <source media="(max-width: 768px)" srcset="/assets/topBanner.png">
+              <source media="(max-width: 768px)" srcset="assets/topBanner.png">
               <!-- else show this -->
-              <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="/assets/topBanner.png">
+              <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
             </picture>
           </section>
         </div> <!-- close row for topBanner on mobile screens -->
@@ -86,7 +86,7 @@
                           <span>Presets</span>&nbsp;<span class="fst-italic" id="currentPreset"></span>
                         </button>
                       </h2>
-                      <!-- This section (id = collapesPresets) is handled by the PresetController and the PresetView -->
+                      <!-- This section (id = collapsePresets) is handled by the PresetController and the PresetView -->
                       <div id="collapsePresets" class="accordion-collapse collapse show"
                         data-bs-parent="#configOptions">
                         <div class="accordion-body">
@@ -115,7 +115,7 @@
                           Settings
                         </button>
                       </h2>
-                      <!-- This section (id = collapesSettings) is handled by the SettingsController and the SettingsView -->
+                      <!-- This section (id = collapseSettings) is handled by the SettingsController and the SettingsView -->
                       <div id="collapseSettings" class="accordion-collapse collapse" data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <form id="passwordSettings">
@@ -148,7 +148,7 @@
                                 <label for="case_transform" class="input-group-text">Case Transformation</label>
                                 <select id="case_transform" class="form-select">
                                   <option value="NONE" selected="selected">-none-</option>
-                                  <option value="ALTERNATE" selected="selected">alternating WORD case</option>
+                                  <option value="ALTERNATE">alternating WORD case</option>
                                   <option value="CAPITALISE">Capitalise First Letter</option>
                                   <option value="INVERT">cAPITALISE eVERY lETTER eXCEPT tHe fIRST</option>
                                   <option value="LOWER">lower case</option>
@@ -170,14 +170,12 @@
                                 </select>
                                 <!-- specific character -->
                                 <label for="separator_type_char" class="input-group-text">Character</label>
-                                <!-- value="-" -->
                                 <input id="separator_type_char" class="form-control" type="text" size="1" maxlength="1"
                                   value="" />
                                 <div id="separator_type_char_err" class="invalid-feedback">must enter exactly 1
                                   character</div>
                                 <!-- random characters -->
                                 <label for="separator_alphabet" class="input-group-text">Alphabet</label>
-                                <!-- value="-+=*,_" -->
                                 <input id="separator_alphabet" class="form-control" type="text" size="6"
                                   minlength="2" maxlength="6" value="" />
                                 <div id="separator_alphabet_err" class="invalid-feedback">must enter at least 2
@@ -300,9 +298,9 @@
       <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline"> <!-- open section for graphic -->
         <picture>
           <!-- show this on large and above -->
-        <source media="(max-width: 992px)" srcset="/assets/sideBanner.png">
+        <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
         <!-- else show this -->
-        <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="/assets/sideBanner.png">
+        <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
         </picture>
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
@@ -353,7 +351,7 @@
 
     <footer class="row bg-primary-subtle py-3 mt-3 rounded">
       <div class="col">
-        Inspired by <a href="http://xkcd.com/936/" target="_blank">XKCD</a> and <a
+        Inspired by <a href="https://xkcd.com/936/" target="_blank">XKCD</a> and <a
           href="https://www.grc.com/haystack.htm" target="_blank">Password Hay Stacks</a> |
         Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank">XKPasswd on GitHub</a>
       </div>
@@ -372,7 +370,7 @@
         <div class="modal-body">
           <h1 class="h3">THE COMIC THAT INSPIRED THIS TOOL</h1>
           <p>
-            <a href="http://xkcd.com/936/" target="_blank"><img class="img-fluid" alt="XKCD - Password Strength"
+            <a href="https://xkcd.com/936/" target="_blank"><img class="img-fluid" alt="XKCD - Password Strength"
                 src="assets/password_strength.png"></a>
           </p>
           <h1 class="h3">CREDITS</h1>
@@ -381,7 +379,7 @@
               Website and underlying password generation library (XKPasswd.pm) by Bart Busschots.
             </li>
             <li>
-              Banner by Stu Helm (incorporating artwork from the <a href="http://xkcd.com/">XKCD Web Comic</a>).
+              Banner by Stu Helm (incorporating artwork from the <a href="https://xkcd.com/">XKCD Web Comic</a>).
             </li>
             <li>
               Web Interface powered by Bootstrap 5.
@@ -412,7 +410,7 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick">
               <input type="hidden" name="hosted_button_id" value="HEYHNGKY8EASE">
-              <input type="image" border="0" name="submit"
+              <input type="image" name="submit"
                 src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
                 alt="PayPal - The safer, easier way to pay online!">
 
