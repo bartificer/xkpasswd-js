@@ -62,6 +62,7 @@ class XKPasswd {
   getPreset() {
     return this.#preset;
   }
+
   /**
    * Get all available presets
    *
