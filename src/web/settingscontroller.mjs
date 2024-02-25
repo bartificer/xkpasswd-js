@@ -24,6 +24,7 @@ class SettingsController {
     this.#model = model;
     this.#view = view;
 
+    this.#view.bindSaveSettings(this.saveSettings);
     log.trace('SettingsController constructor executed');
   }
 
@@ -36,6 +37,51 @@ class SettingsController {
     const renderConfig = this.__prepareForRendering(config);
 
     this.#view.renderSettings(renderConfig);
+  }
+
+  /**
+   * Convert the rendered settings back to the model and pass it on
+   * to the XKpasswd class to use for password generation
+   *
+   * @param {Object} settings - the object containing the new settings
+   */
+  saveSettings = (settings) => {
+    log.debug(`controller saveSettings: ${JSON.stringify(settings)}`);
+
+    // fix the separator character
+    switch (settings.separator_type) {
+    case 'RANDOM':
+    case 'NONE':
+      settings.separator_character = settings.separator_type;
+      break;
+    case 'CHAR':
+      settings.separator_character = settings.separator_type_char;
+      break;
+    };
+
+    // fix the padding character
+    switch (settings.padding_char_type) {
+    case 'SEPARATOR':
+    case 'RANDOM':
+      settings.padding_character = settings.padding_char_type;
+      break;
+    case 'CHAR':
+      settings.padding_character = settings.padding_char_type_char;
+    };
+
+    // convert characters back to numbers
+    settings.sep_before_before = parseInt(settings.sep_before_before);
+    settings.sep_before_after = parseInt(settings.sep_before_after);
+    settings.padding_digits_before = parseInt(settings.padding_digits_before);
+    settings.padding_digits_after = parseInt(settings.padding_digits_after);
+    settings.padding_characters_before = parseInt(settings.padding_characters_before);
+    settings.padding_characters_after = parseInt(settings.padding_characters_after);
+    settings.pad_to_length = parseInt(settings.pad_to_length);
+
+    this.#model.setPreset({
+      description: 'Custom preset',
+      config: settings
+    });
   }
 
   /**

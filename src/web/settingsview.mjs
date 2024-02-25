@@ -52,6 +52,33 @@ class SettingsView {
     this.__togglePaddingCharType(preset.padding_char_type);
   };
 
+    /**
+   * Bind the form to the event handler
+   *
+   * Save the modified settings to generate passwords
+   * based on these new settings
+   *
+   * @param {Function} handle - pass control to the Controller
+   */
+  bindSaveSettings(handle) {
+
+    $('form#passwordSettings').on('submit', (e) => {
+      e.preventDefault();
+      e.stopPropagation(); // stop the event bubbling
+
+      const formData = new FormData(e.target);
+      const data = {};
+      [...formData.keys()].forEach((key) => {
+        log.trace(`formData.key = ${key}`);
+        const values = formData.getAll(key);
+        data[key] = (values.length > 1) ? values : values.join();
+      });
+      log.trace(JSON.stringify(data));
+      handle(data);
+    });
+  }
+
+
   /**
      * Toggle visibility of separator type related
      * elements
