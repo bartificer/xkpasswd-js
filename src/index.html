@@ -121,7 +121,7 @@
                           <form id="passwordSettings">
                             <!-- word settings -->
                             <div id="section_words" class="container-fluid mb-3">
-                              <label class="h5">Words</label>
+                              <h5>Words</h5>
                               <div class="input-group mt-2">
                                 <label for="dict" class="input-group-text">Dictionary</label>
                                 <select name="dict" id="dict" class="form-select">
@@ -143,7 +143,7 @@
 
                             <!-- Word Transformations -->
                             <div id="section_transformations" class="container-fluid mb-3">
-                              <label class="h5">Transformations</label>
+                              <h5>Transformations</h5>
                               <div class="input-group mt-2">
                                 <label for="case_transform" class="input-group-text">Case Transformation</label>
                                 <select name="case_transform" id="case_transform" class="form-select">
@@ -160,7 +160,7 @@
 
                             <!-- Separator -->
                             <div id="section_separator" class="container-fluid mb-3">
-                              <label class="h5">Separator</label>
+                              <h5>Separator</h5>
                               <div class="input-group mt-2">
                                 <label for="separator_type" class="input-group-text">Type</label>
                                 <select name="separator_type" id="separator_type" class="form-control">
@@ -185,7 +185,7 @@
 
                             <!-- Digit Padding -->
                             <div id="section_padding_digits" class="container-fluid mb-3">
-                              <label class="h5">Padding</label>
+                              <h5>Padding</h5>
                               <div class="input-group mt-2">
                                 <!-- padding before -->
                                 <label for="padding_digits_before" class="input-group-text">Digit(s) Before</label>
@@ -323,6 +323,7 @@
             </div>
           </div>
           <div class="card-body">
+            <label for="generated_password" class="visually-hidden">Password Area</label>
             <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
               rows="3" id="generated_password"></textarea>
 
