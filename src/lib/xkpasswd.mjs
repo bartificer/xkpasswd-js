@@ -168,9 +168,10 @@ class XKPasswd {
     if (is.undefined(num) || is.not.number(num) || num < 1) {
       num = 1;
     }
-
-    const passwords =
-    new Array(num).fill('').map( () => this.password() );
+    const passwords = [];
+    for (let i = 0; i < num ; i++) {
+      passwords.push(this.password());
+    }
 
     return passwords;
   }
