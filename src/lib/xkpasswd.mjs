@@ -75,7 +75,7 @@ class XKPasswd {
   /**
    * Generate the password(s) and stats
    *
-   * @param {integer} num - number of passwords to generate
+   * @param {number} num - number of passwords to generate
    * @return {object} - contains the passwords and the stats
    */
   generatePassword(num) {
@@ -161,7 +161,7 @@ class XKPasswd {
 
   /**
    * Generate the requested number of passwords
-   * @param {integer} num - the number of passwords requested
+   * @param {number} num - the number of passwords requested
    * @return {array} - the array with num passwords
    */
   passwords(num) {
@@ -180,7 +180,7 @@ class XKPasswd {
    * Pad the password with padChar until the given length
    *
    * @param {string} passwd - password to be padded
-   * @param {character} padChar - padding character
+   * @param {string} padChar - padding character
    * @param  {integer} maxLen - max length of password
    * @return {string} - padded password
    *
