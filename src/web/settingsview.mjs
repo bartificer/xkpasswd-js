@@ -26,7 +26,7 @@ class SettingsView {
     $('#padding_char_type').on('change', (e) => {
       this.__togglePaddingCharType(e);
     });
-    $('#separator_char_type').on('change', (e) => {
+    $('#separator_type').on('change', (e) => {
       this.__toggleSeparatorType(e);
     });
   };
@@ -89,7 +89,7 @@ class SettingsView {
      * event or the type value
      */
   __toggleSeparatorType = (e) => {
-    const separatorType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    const separatorType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
     switch (separatorType) {
     case 'NONE':
