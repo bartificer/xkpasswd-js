@@ -182,7 +182,7 @@ class XKPasswd {
    *
    * @param {string} passwd - password to be padded
    * @param {string} padChar - padding character
-   * @param  {integer} maxLen - max length of password
+   * @param  {number} maxLen - max length of password
    * @return {string} - padded password
    *
    * @private
@@ -295,7 +295,7 @@ class XKPasswd {
    * Notes: The character returned is controlled by the config variable
    *  `separator_character`
    *
-   * @return {character} separator (could be an empty string)
+   * @return {string} separator (could be an empty string)
    *
    * @private
    */
@@ -320,9 +320,9 @@ class XKPasswd {
    *  The character returned is determined by a combination of the
    *  padding_type & padding_character config variables.
    *
-   * @param {character} separator -
+   * @param {string} separator -
    *  the separator character being used to generate the password
-   * @return {character} the padding character, could be an empty string
+   * @return {string} the padding character, could be an empty string
    *
    * @private
    */
