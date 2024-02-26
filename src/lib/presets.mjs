@@ -338,6 +338,6 @@ class Presets {
       thePresets.DEFAULT.symbol_alphabet : alphabet);
     return alphabet;
   }
-};
+}
 
 export {Presets};
