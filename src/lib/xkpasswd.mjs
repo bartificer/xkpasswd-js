@@ -283,9 +283,10 @@ class XKPasswd {
 
     log.trace(`about to generate ${numWords} words`);
 
-    const list = new Array(numWords).fill('').map(
-      () => this.#dictionary.word(this.#rng.randomInt(maxDict)),
-    );
+    const list = [];
+    for (let i = 0; i < numWords; i++) {
+      list.push(this.#dictionary.word(this.#rng.randomInt(maxDict)));
+    };
     return list;
   }
 
