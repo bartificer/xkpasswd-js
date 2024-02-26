@@ -304,10 +304,10 @@ class XKPasswd {
     // figure out the separator character
     const sep = this.#config.separator_character;
 
-    if (sep == 'NONE') {
+    if (sep === 'NONE') {
       return '';
     }
-    if (sep == 'RANDOM') {
+    if (sep === 'RANDOM') {
       const alphabet = this.#preset.getSeparatorAlphabet();
       return this.#rng.randomChar(alphabet);
     }
