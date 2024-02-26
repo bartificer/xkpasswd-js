@@ -334,8 +334,8 @@ class Presets {
           (is.not.undefined(this.#current.config.padding_alphabet) ?
             this.#current.config.padding_alphabet :
             this.#current.config.symbol_alphabet);
-    alphabet = (is.undefined(alphabet) ?
-      thePresets.DEFAULT.symbol_alphabet : alphabet);
+    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
   }
 }
