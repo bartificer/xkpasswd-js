@@ -243,7 +243,7 @@ class XKPasswd {
 
     case 'ALTERNATE':
       return words.map((el, index) =>
-        el = (index % 2 == 0) ? el.toLowerCase() : el.toUpperCase(),
+        el = ((index % 2) === 0) ? el.toLowerCase() : el.toUpperCase(),
       );
 
     case 'RANDOM':
