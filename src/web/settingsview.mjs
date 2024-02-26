@@ -199,15 +199,15 @@ class SettingsView {
     case 'CHAR':
       $('label[for="padding_char_type_char"]').show(this.#aniTime);
       $('#padding_char_type_char').show(this.#aniTime);
-      $('label[for="padding_char_type_random"]').hide(this.#aniTime);
-      $('#padding_char_type_random').hide(this.#aniTime);
+      $('label[for="padding_alphabet"]').hide(this.#aniTime);
+      $('#padding_alphabet').hide(this.#aniTime);
       break;
 
     case 'RANDOM':
       $('label[for="padding_char_type_char"]').hide(this.#aniTime);
       $('#padding_char_type_char').hide(this.#aniTime);
-      $('label[for="padding_char_type_random"]').show(this.#aniTime);
-      $('#padding_char_type_random').show(this.#aniTime);
+      $('label[for="padding_alphabet"]').show(this.#aniTime);
+      $('#padding_alphabet').show(this.#aniTime);
       break;
 
     case 'SEPARATOR':
@@ -221,8 +221,8 @@ class SettingsView {
       // if it is OK to select this option, update the UI appropriately
       $('label[for="padding_char_type_char"]').hide(this.#aniTime);
       $('#padding_char_type_char').hide(this.#aniTime);
-      $('label[for="padding_char_type_random"]').hide(this.#aniTime);
-      $('#padding_char_type_random').hide(this.#aniTime);
+      $('label[for="padding_alphabet"]').hide(this.#aniTime);
+      $('#padding_alphabet').hide(this.#aniTime);
       break;
     default:
       try {
