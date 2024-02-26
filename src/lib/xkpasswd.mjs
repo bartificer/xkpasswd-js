@@ -69,8 +69,7 @@ class XKPasswd {
    * @return {array} keys - names of the Presets
    */
   getPresets() {
-    const keys = new Presets().getPresets();
-    return keys;
+    return new Presets().getPresets();
   }
 
   /**
