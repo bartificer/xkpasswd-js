@@ -345,7 +345,7 @@ class XKPasswd {
       const alphabet = this.#preset.getPaddingAlphabet();
       return this.#rng.randomChar(alphabet);
     default:
-      return '';
+      return this.#config.padding_character;
     }
   }
 
