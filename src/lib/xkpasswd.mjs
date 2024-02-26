@@ -311,6 +311,9 @@ class XKPasswd {
       const alphabet = this.#preset.getSeparatorAlphabet();
       return this.#rng.randomChar(alphabet);
     }
+    if (sep.length > 1) {
+      return '';
+    }
     return sep;
   }
 
