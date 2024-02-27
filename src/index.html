@@ -266,7 +266,8 @@
           </div> <!-- close config col -->
 
           <div id="generatePassword"> <!-- open generate pw - need to split pw box out -->
-            <label for="selectAmount" class="h3">Generate Passwords</label>
+
+            <h3>Generate Password(s)</h3>
             <form id="generatePasswords"> <!-- open input area for gen pw -->
               <div class="row">
                 <div class="col-8 col-md-6 mb-3">
@@ -289,6 +290,7 @@
             </form> <!-- close input area for gen pw -->
 
           </div> <!-- close generate pw -->
+
         </section> <!-- close section for content below nav -->
       </section> <!-- close section for content right of graphic -->
 
@@ -316,6 +318,7 @@
               </div>
             </div>
           </div>
+          <label class="visually-hidden" for="generated_password">Generated Passwords</label>
           <div class="card-body">
             <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
               rows="3" id="generated_password"></textarea>
