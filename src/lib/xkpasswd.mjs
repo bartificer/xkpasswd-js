@@ -104,11 +104,11 @@ class XKPasswd {
       // start by generating the needed parts of the password
       //
       log.trace('starting to generate random words');
-      const words = this.__randomWords();
+      let words = this.__randomWords();
       log.trace(`got random words = ${words}`);
 
-      this.__transformCase(words);
-      this.__substituteCharacters(words);
+      words = this.__transformCase(words);
+      words = this.__substituteCharacters(words);
       const separator = this.__separator();
       log.trace(`got separator = ${separator}`);
 
