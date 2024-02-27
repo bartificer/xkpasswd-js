@@ -63,6 +63,19 @@ describe('Test XKPassword class', () => {
       const r = me.__separator();
       expect(r).toBe('');
     });
+
+    test('character in separator returns character', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          separator_character: 'x',
+        },
+      };
+      me.setPreset(preset);
+      const r = me.__separator();
+      expect(r).toBe('x');
+    });
+
   });
 
   describe('Test internal __paddingChar function', () => {
@@ -81,6 +94,19 @@ describe('Test XKPassword class', () => {
     });
 
     test('Check if it returns a character in the alphabet list', () => {
+      const r = me.__paddingChar('');
+      expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
+    });
+
+    test('Check if it returns a character from the DEFAULT.symbol_alphabet if alphabet is empty', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          padding_character: 'RANDOM',
+          padding_alphabet: '',
+        },
+      };
+      me.setPreset(preset);
       const r = me.__paddingChar('');
       expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
     });
@@ -131,6 +157,19 @@ describe('Test XKPassword class', () => {
       me.setPreset(preset);
       const r = me.__paddingChar('-');
       expect(r).toBe('');
+    });
+
+    test('character in padding char returns character', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          padding_character: 'q',
+        },
+      };
+      me.setPreset(preset);
+      const r = me.__paddingChar('-');
+      expect(r).toBe('q');
+
     });
   });
 
