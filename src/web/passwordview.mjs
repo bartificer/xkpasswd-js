@@ -19,15 +19,15 @@ class PasswordView {
   #stats_classes = {
     GOOD: {
       display: 'Good',
-      class: 'btn-outline-success',
+      class: 'btn-success',
     },
     OK: {
       display: 'OK',
-      class: 'btn-outline-warning',
+      class: 'btn-warning',
     },
     POOR: {
       display: 'Poor',
-      class: 'btn-outline-danger',
+      class: 'btn-danger',
     },
     UNKNOWN: {
       display: 'Unknown',
@@ -182,14 +182,14 @@ class PasswordView {
 
     this.#blindEntropy.empty().append(template);
 
-    // seen entropy
+    // full knowledge (seen) entropy
     this.#seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
       .addClass(this.#stats_classes[stats.entropy.entropySeen.state]);
 
     const suggestion =
       // eslint-disable-next-line max-len
       `(suggest keeping blind entropy above ${stats.entropy.blindThreshold} bits ` +
-      `and seen above ${stats.entropy.seenThreshold} bits)`;
+      `and full knowledge above ${stats.entropy.seenThreshold} bits)`;
     this.#entropySuggestion.html(suggestion);
 
     this.__showStats();
