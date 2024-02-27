@@ -272,9 +272,10 @@
             <form id="generatePasswords"> <!-- open input area for gen pw -->
               <div class="row">
                 <div class="col-8 col-md-6 mb-3">
-                  <label class="visually-hidden" for="selectAmount">No. of passwords</label>
+                  <!-- Technically the label should be there but it's an audible repeat of span class -->
+                  <!-- <label class="visually-hidden" for="selectAmount">Number of passwords</label> -->
                   <div class="input-group mt-2">
-                    <span class="input-group-text">No. of passwords</span>
+                    <span class="input-group-text"># of passwords</span>
                     <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
                       id="selectAmount" />
                   </div>
