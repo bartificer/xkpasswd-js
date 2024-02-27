@@ -221,6 +221,7 @@ class XKPasswd {
     }
 
     const transformation = this.#config.case_transform;
+    log.trace(`__transformCase: ${transformation} on ${words}`);
 
     switch (transformation) {
     case 'NONE':
