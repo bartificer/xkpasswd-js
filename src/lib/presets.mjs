@@ -245,6 +245,11 @@ class Presets {
         }
       }
     };
+
+    // fix the padding and separator alphabet
+    this.#current.config.separator_alphabet = this.getSeparatorAlphabet();
+    this.#current.config.padding_alphabet = this.getPaddingAlphabet();
+
     log.trace(`Preset constructor set to ${this.#presetName}`);
   }
 
@@ -309,10 +314,12 @@ class Presets {
    * @return {Array} the list of characters
    */
   getSeparatorAlphabet() {
-    const alphabet =
+    let alphabet =
         (is.not.undefined(this.#current.config.separator_alphabet) ?
           this.#current.config.separator_alphabet :
           this.#current.config.symbol_alphabet);
+    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
   }
 
@@ -323,12 +330,14 @@ class Presets {
    * @return {Array} the list of characters
    */
   getPaddingAlphabet() {
-    const alphabet =
+    let alphabet =
           (is.not.undefined(this.#current.config.padding_alphabet) ?
             this.#current.config.padding_alphabet :
             this.#current.config.symbol_alphabet);
+    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
   }
-};
+}
 
 export {Presets};

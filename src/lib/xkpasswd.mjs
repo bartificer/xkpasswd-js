@@ -62,20 +62,20 @@ class XKPasswd {
   getPreset() {
     return this.#preset;
   }
+
   /**
    * Get all available presets
    *
    * @return {array} keys - names of the Presets
    */
   getPresets() {
-    const keys = new Presets().getPresets();
-    return keys;
+    return new Presets().getPresets();
   }
 
   /**
    * Generate the password(s) and stats
    *
-   * @param {integer} num - number of passwords to generate
+   * @param {number} num - number of passwords to generate
    * @return {object} - contains the passwords and the stats
    */
   generatePassword(num) {
@@ -104,11 +104,11 @@ class XKPasswd {
       // start by generating the needed parts of the password
       //
       log.trace('starting to generate random words');
-      const words = this.__randomWords();
+      let words = this.__randomWords();
       log.trace(`got random words = ${words}`);
 
-      this.__transformCase(words);
-      this.__substituteCharacters(words);
+      words = this.__transformCase(words);
+      words = this.__substituteCharacters(words);
       const separator = this.__separator();
       log.trace(`got separator = ${separator}`);
 
@@ -161,16 +161,17 @@ class XKPasswd {
 
   /**
    * Generate the requested number of passwords
-   * @param {integer} num - the number of passwords requested
+   * @param {number} num - the number of passwords requested
    * @return {array} - the array with num passwords
    */
   passwords(num) {
     if (is.undefined(num) || is.not.number(num) || num < 1) {
       num = 1;
     }
-
-    const passwords =
-    new Array(num).fill('').map( () => this.password() );
+    const passwords = [];
+    for (let i = 0; i < num ; i++) {
+      passwords.push(this.password());
+    }
 
     return passwords;
   }
@@ -180,16 +181,17 @@ class XKPasswd {
    * Pad the password with padChar until the given length
    *
    * @param {string} passwd - password to be padded
-   * @param {character} padChar - padding character
-   * @param  {integer} maxLen - max length of password
+   * @param {string} padChar - padding character
+   * @param  {number} maxLen - max length of password
    * @return {string} - padded password
    *
    * @private
    */
   __adaptivePadding(passwd, padChar, maxLen) {
     const pwlen = passwd.length;
+    padChar = (padChar.length === 0) ? ' ' : padChar;
     if (pwlen < maxLen) {
-      // if the password is shorter than the target length, padd it out
+      // if the password is shorter than the target length, pad it out
       while (passwd.length < maxLen) {
         passwd += padChar;
       }
@@ -219,6 +221,7 @@ class XKPasswd {
     }
 
     const transformation = this.#config.case_transform;
+    log.trace(`__transformCase: ${transformation} on ${words}`);
 
     switch (transformation) {
     case 'NONE':
@@ -242,7 +245,7 @@ class XKPasswd {
 
     case 'ALTERNATE':
       return words.map((el, index) =>
-        el = (index % 2 == 0) ? el.toLowerCase() : el.toUpperCase(),
+        el = ((index % 2) === 0) ? el.toLowerCase() : el.toUpperCase(),
       );
 
     case 'RANDOM':
@@ -277,14 +280,32 @@ class XKPasswd {
    * @private
    */
   __randomWords() {
+
     const numWords = this.#config.num_words;
     const maxDict = this.#dictionary.getLength();
 
-    log.trace(`about to generate ${numWords} words`);
+    log.trace(`__randomwords, mindict: ${this.#dictionary.getMinWordLength()}
+    maxdict: ${this.#dictionary.getMaxWordLength()}`);
+    // get the minimum of the 2 input variables and the longest dictionary word
+    let minLength = Math.min(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMaxWordLength());
 
-    const list = new Array(numWords).fill('').map(
-      () => this.#dictionary.word(this.#rng.randomInt(maxDict)),
-    );
+    // get the maximum of the 2 input variables and the shortest dictionary word
+    let maxLength = Math.max(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMinWordLength());
+
+    minLength = Math.max(minLength, this.#dictionary.getMinWordLength());
+    maxLength = Math.min(maxLength, this.#dictionary.getMaxWordLength());
+
+    log.trace(`about to generate ${numWords} words ${minLength} - ${maxLength}`);
+
+    const list = [];
+    for (let i = 0; i < numWords; i++) {
+      let word = '';
+      do {
+        word = this.#dictionary.word(this.#rng.randomInt(maxDict));
+      }
+      while (word.length < minLength || word.length > maxLength );
+      list.push(word);
+    };
     return list;
   }
 
@@ -294,7 +315,7 @@ class XKPasswd {
    * Notes: The character returned is controlled by the config variable
    *  `separator_character`
    *
-   * @return {character} separator (could be an empty string)
+   * @return {string} separator (could be an empty string)
    *
    * @private
    */
@@ -302,14 +323,17 @@ class XKPasswd {
     // figure out the separator character
     const sep = this.#config.separator_character;
 
-    if (sep == 'NONE') {
+    if (sep === 'NONE') {
       return '';
     }
-    if (sep == 'RANDOM') {
+    if (sep === 'RANDOM') {
       const alphabet = this.#preset.getSeparatorAlphabet();
       return this.#rng.randomChar(alphabet);
     }
-    return '';
+    if (sep.length > 1) {
+      return '';
+    }
+    return sep;
   }
 
   /**
@@ -319,9 +343,9 @@ class XKPasswd {
    *  The character returned is determined by a combination of the
    *  padding_type & padding_character config variables.
    *
-   * @param {character} separator -
+   * @param {string} separator -
    *  the separator character being used to generate the password
-   * @return {character} the padding character, could be an empty string
+   * @return {string} the padding character, could be an empty string
    *
    * @private
    */
@@ -339,7 +363,10 @@ class XKPasswd {
       const alphabet = this.#preset.getPaddingAlphabet();
       return this.#rng.randomChar(alphabet);
     default:
-      return '';
+      if (this.#config.padding_character.length > 1) {
+        return '';
+      }
+      return this.#config.padding_character;
     }
   }
 
