@@ -46,7 +46,7 @@ class SettingsController {
    * @param {Object} settings - the object containing the new settings
    */
   saveSettings = (settings) => {
-    log.debug(`controller saveSettings: ${JSON.stringify(settings)}`);
+    log.trace(`controller saveSettings: ${JSON.stringify(settings)}`);
 
     // fix the separator character
     switch (settings.separator_type) {
