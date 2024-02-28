@@ -284,10 +284,24 @@ class XKPasswd {
     const maxDict = this.#dictionary.getLength();
 
     log.trace(`about to generate ${numWords} words`);
+    maxdict: ${this.#dictionary.getMaxWordLength()}`);
+    // get the minimum of the 2 input variables and the longest dictionary word
+    let minLength = Math.min(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMaxWordLength());
+
+    // get the maximum of the 2 input variables and the shortest dictionary word
+    let maxLength = Math.max(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMinWordLength());
+
+    minLength = Math.max(minLength, this.#dictionary.getMinWordLength());
+    maxLength = Math.min(maxLength, this.#dictionary.getMaxWordLength());
 
     const list = [];
     for (let i = 0; i < numWords; i++) {
-      list.push(this.#dictionary.word(this.#rng.randomInt(maxDict)));
+      let word = '';
+      do {
+        word = this.#dictionary.word(this.#rng.randomInt(maxDict));
+      }
+      while (word.length < minLength || word.length > maxLength );
+      list.push(word);
     };
     return list;
   }

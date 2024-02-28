@@ -11,16 +11,20 @@
  */
 class Dictionary {
   #wordListLength; // length of the word list, convenience variable
+  #minWordLength; // shortest word length
+  #maxWordLength; // longest word length
 
   /**
    * Constructor for English Dictionary
    * @constructor
    */
   constructor() {
-    if (this.constructor == Dictionary) {
+    if (this.constructor === Dictionary) {
       throw new Error('You cannot instantiate the abstract class');
     }
     this.#wordListLength = 0;
+    this.#minWordLength = 0;
+    this.#maxWordLength = 0;
   }
 
 
@@ -70,6 +74,31 @@ class Dictionary {
    */
   __setLength(len) {
     this.#wordListLength = len;
+  }
+
+  /**
+   * set min and max word length
+   *
+   * @ private
+   */
+  __setWordLength() {
+    const list = this.wordList();
+    let minlen = list[0].length;
+    let maxlen = minlen;
+    for (let i = 1 ; i < this.#wordListLength; i++) {
+      minlen = Math.min(minlen, list[i].length);
+      maxlen = Math.max(maxlen, list[i].length);
+    }
+    this.#minWordLength = minlen;
+    this.#maxWordLength = maxlen;
+  }
+
+  getMinWordLength() {
+    return this.#minWordLength;
+  }
+
+  getMaxWordLength() {
+    return this.#maxWordLength;
   }
 }
 
