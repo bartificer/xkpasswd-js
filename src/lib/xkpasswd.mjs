@@ -354,7 +354,9 @@ class XKPasswd {
       separator = '';
     }
 
+    log.trace(`__paddingChar: ${this.#config.padding_character}`);
     switch (this.#config.padding_character) {
+    case undefined:
     case 'NONE':
       return '';
     case 'SEPARATOR':
