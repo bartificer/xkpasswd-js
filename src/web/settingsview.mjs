@@ -135,7 +135,7 @@ class SettingsView {
      * event or the type value
      */
   __togglePaddingType = (e) => {
-    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
     switch (paddingType) {
     case 'NONE':
@@ -189,7 +189,7 @@ class SettingsView {
      * event or the type value
      */
   __togglePaddingCharType = (e) => {
-    const paddingType = (typeof e == 'string') ? e : $(e.currentTarget).val();
+    const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     if (typeof e != 'string') {
       e.stopPropagation();
     }
