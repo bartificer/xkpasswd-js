@@ -35,7 +35,7 @@ class PasswordView {
     },
   };
 
-  #passwordArea;
+  #passwordList;
   #passwordErrorContainer;
   #passwordStatsContainer;
   #passwordStrength;
@@ -47,7 +47,7 @@ class PasswordView {
    * @constructor
    */
   constructor() {
-    this.#passwordArea = $('textarea#generated_password');
+    this.#passwordList = $('ul#generated_password');
     this.#passwordErrorContainer = $('#passwordErrorContainer');
     this.#passwordStatsContainer = $('#password_stats_container');
     this.#passwordStrength = $('#password_strength');
@@ -56,7 +56,7 @@ class PasswordView {
     this.#entropySuggestion = $('#entropy_suggestion');
     this.#numberOfPasswords = $('#selectAmount');
 
-    this.#passwordArea.val('');
+    this.#passwordList.html('');
 
     this.__hideStats();
   };
@@ -70,12 +70,40 @@ class PasswordView {
   renderPassword(passAndStats, num) {
     log.trace(`renderPassword: ${JSON.stringify(passAndStats)}`);
 
-    const passwds = passAndStats.passwords.join('\n');
-    this.#passwordArea.val(passwds);
-    // Set passwordArea height to accommodate number of passwords
-    this.#passwordArea.attr('rows', num);
-    log.trace(
-      `texarea value changed to [${this.#passwordArea.val()}]`);
+    // Clear out existing events.
+    const existingListItems = this.#passwordList.find('button');
+    for (const item of existingListItems) {
+      if (item && item.hasOwnProperty('removeEventListener')) {
+        item.removeEventListener('click');
+      }
+    }
+
+    // Clear the existing list
+    this.#passwordList.html('');
+
+    // Populate the password list.
+    if (passAndStats.passwords) {
+      let htmlPwdList='';
+      // eslint-disable-next-line guard-for-in
+      for (const pwdIndex in passAndStats.passwords) {
+        // eslint-disable-next-line max-len
+        htmlPwdList = htmlPwdList.concat(`<li><button id="copyclip_${pwdIndex}" class="btn-clipboard bi-clipboard""></button>${passAndStats.passwords[pwdIndex]}</li>`);
+      }
+      this.#passwordList.html(htmlPwdList);
+
+      // Add event handlers for the copy buttons
+      // eslint-disable-next-line guard-for-in
+      for (const pwdIndex in passAndStats.passwords) {
+        const btn = $(`#copyclip_${pwdIndex}`);
+        if (btn && (btn.length > 0)) {
+          btn[0].addEventListener('click', async ()=>{
+            // eslint-disable-next-line max-len
+            await navigator.clipboard.writeText(passAndStats.passwords[pwdIndex]);
+          });
+        }
+      }
+    }
+
     this.__renderDetailedStats(passAndStats.stats);
   };
 
