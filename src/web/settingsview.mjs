@@ -35,7 +35,7 @@ class SettingsView {
    * Update the fields in the settings with
    * the contents of the current preset
    *
-   * @param {object} preset - settings beloning by the current preset
+   * @param {object} preset - settings belonging by the current preset
    */
   renderSettings(preset) {
     // get the current preset
