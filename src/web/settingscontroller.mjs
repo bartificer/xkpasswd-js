@@ -25,6 +25,8 @@ class SettingsController {
     this.#view = view;
 
     this.#view.bindSaveSettings(this.saveSettings);
+    const config = this.#model.getPreset().config();
+    this.updateSettings(config);
     log.trace('SettingsController constructor executed');
   }
 
