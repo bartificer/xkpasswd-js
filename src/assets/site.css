@@ -7,7 +7,6 @@ body {
   --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-font-family: var(--bs-font-sans-serif);
   font-family: 'Noto Sans', sans-serif;
-  font-weight: bold;
 }
 
 #main {
@@ -84,5 +83,5 @@ body {
 .link { color: #0602e8; }
 
 .input-group-text {
-  font-weight: 800;
+  font-weight: 400;
 }
