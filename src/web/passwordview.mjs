@@ -87,7 +87,8 @@ class PasswordView {
       // eslint-disable-next-line guard-for-in
       for (const pwdIndex in passAndStats.passwords) {
         // eslint-disable-next-line max-len
-        htmlPwdList = htmlPwdList.concat(`<li><button id="copyclip_${pwdIndex}" class="btn-clipboard bi-clipboard""></button>${passAndStats.passwords[pwdIndex]}</li>`);
+        htmlPwdList = htmlPwdList.concat(`<li><button id="copyclip_${pwdIndex}" 
+          class="btn btn-clipboard bi-clipboard"></button>${passAndStats.passwords[pwdIndex]}</li>`);
       }
       this.#passwordList.html(htmlPwdList);
 
