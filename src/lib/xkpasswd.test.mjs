@@ -75,7 +75,6 @@ describe('Test XKPassword class', () => {
       const r = me.__separator();
       expect(r).toBe('x');
     });
-
   });
 
   describe('Test internal __paddingChar function', () => {
@@ -169,7 +168,6 @@ describe('Test XKPassword class', () => {
       me.setPreset(preset);
       const r = me.__paddingChar('-');
       expect(r).toBe('q');
-
     });
   });
 
@@ -188,7 +186,6 @@ describe('Test XKPassword class', () => {
 
       expect(pw).toHaveLength(5);
       expect(pw).toBe('abcde');
-
     });
   });
 

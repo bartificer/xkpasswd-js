@@ -129,7 +129,7 @@ const thePresets = {
       'and dictionary are known.',
     config: {
       padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
-      separator_alphabet: '- + = . * _ | ~, '.split(' '),
+      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
       word_length_min: 5,
       word_length_max: 5,
       num_words: 2,
