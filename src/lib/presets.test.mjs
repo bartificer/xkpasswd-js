@@ -16,6 +16,7 @@ describe('Test class Presets', () => {
       word_length_max: 8,
       num_words: 1,
       separator_character: 'RANDOM',
+      case_transform: 'CAPITALISE',
       separator_alphabet: ['+', '-'],
       padding_digits_before: 2,
       padding_digits_after: 2,
@@ -24,7 +25,6 @@ describe('Test class Presets', () => {
       padding_alphabet: ['?', '!'],
       padding_characters_before: 2,
       padding_characters_after: 2,
-      case_transform: 'CAPITALIZE',
       random_increment: 'AUTO',
     },
   };
@@ -70,22 +70,22 @@ describe('Test class Presets', () => {
     test('if the param is an object, it should return CUSTOM', () => {
       const preset = new Presets(mock);
       expect(preset.name()).toBe('CUSTOM');
-      expect(preset.config().case_transform).toBe('CAPITALIZE');
+      expect(preset.config().case_transform).toBe('CAPITALISE');
     });
     test('if the param is undefined, it should return DEFAULT', () => {
       const preset = new Presets();
       expect(preset.name()).toBe('DEFAULT');
-      expect(preset.config().case_transform).toBe('ALTERNATE');
+      expect(preset.config().case_transform).toBe('CAPITALISE');
     });
     test('if the param is an unknown string, it should return DEFAULT', () => {
       const preset = new Presets('FAKE');
       expect(preset.name()).toBe('DEFAULT');
-      expect(preset.config().case_transform).toBe('ALTERNATE');
+      expect(preset.config().case_transform).toBe('CAPITALISE');
     });
     test('if the param is not a string, it should return DEFAULT', () => {
       const preset = new Presets(42);
       expect(preset.name()).toBe('DEFAULT');
-      expect(preset.config().case_transform).toBe('ALTERNATE');
+      expect(preset.config().case_transform).toBe('CAPITALISE');
     });
   });
 
