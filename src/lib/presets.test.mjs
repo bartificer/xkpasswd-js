@@ -126,8 +126,8 @@ describe('Test class Presets', () => {
       const alfa = preset.config().padding_alphabet;
       const alfaDef = def.config().symbol_alphabet;
 
-      expect(preset.getPaddingAlphabet()).toEqual(alfa);
-      expect(def.getPaddingAlphabet()).toEqual(alfaDef);
+      expect(preset.__getPaddingAlphabet()).toEqual(alfa);
+      expect(def.__getPaddingAlphabet()).toEqual(alfaDef);
     });
   });
 });

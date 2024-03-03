@@ -311,13 +311,21 @@ class Presets {
    * Get the list of separator characters
    * or default to the list of symbol characters
    *
+   * @private
+   *
+   * @param {Object} config - the config to test
    * @return {Array} the list of characters
    */
-  getSeparatorAlphabet() {
+  __getSeparatorAlphabet(config) {
+    // if there is no parameter, use the current config
+    const tmpConfig =
+      (is.undefined(config)) ? this.#current.config : config;
+
     let alphabet =
-        (is.not.undefined(this.#current.config.separator_alphabet) ?
-          this.#current.config.separator_alphabet :
-          this.#current.config.symbol_alphabet);
+        (is.not.undefined(tmpConfig.separator_alphabet) ?
+          tmpConfig.separator_alphabet :
+          tmpConfig.symbol_alphabet);
+
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
@@ -327,13 +335,20 @@ class Presets {
    * Get the list of padding characters
    * or default to the list of symbol characters
    *
+   * @private
+   *
+   * @param {Object} config - the config to test
    * @return {Array} the list of characters
    */
-  getPaddingAlphabet() {
+  __getPaddingAlphabet(config) {
+    // if there is no parameter, use the current config
+    const tmpConfig =
+      (is.undefined(config)) ? this.#current.config : config;
+
     let alphabet =
-          (is.not.undefined(this.#current.config.padding_alphabet) ?
-            this.#current.config.padding_alphabet :
-            this.#current.config.symbol_alphabet);
+          (is.not.undefined(tmpConfig.padding_alphabet) ?
+            tmpConfig.padding_alphabet :
+            tmpConfig.symbol_alphabet);
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
