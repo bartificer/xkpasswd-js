@@ -187,6 +187,16 @@ const thePresets = {
 /**
  * Class that handles all presets
  *
+ *  A preset is an object that defines a predefined set of
+ * configurable settings.
+ * A preset object consists of 3 parts:
+ * * name - the name of the preset,
+ *  which is just the object index in the list
+ * * description - a description of the preset
+ * * config - the set of configurable settings
+ *
+ * The configurable settings are described in the documentation.
+ *
  * @class Presets
  */
 class Presets {
