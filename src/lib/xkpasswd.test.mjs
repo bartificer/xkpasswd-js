@@ -97,7 +97,8 @@ describe('Test XKPassword class', () => {
       expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
     });
 
-    test('Check if it returns a character from the DEFAULT.symbol_alphabet if alphabet is empty', () => {
+    // eslint-disable-next-line max-len
+    test('it returns a character from the DEFAULT.symbol_alphabet if alphabet is empty', () => {
       const preset = {
         description: 'mock preset',
         config: {
