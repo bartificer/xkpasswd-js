@@ -131,4 +131,22 @@ describe('Test RandomBasic', () => {
       expect(() => me.randomNumbers(1.5)).toThrow('not an integer');
     });
   });
+
+  describe('Check function randomChar', () => {
+    test('it returns an empty string when undefined', () => {
+      const actual = me.randomChar(undefined);
+      expect(actual).toBe('');
+    });
+    test('it returns the same character when charset.length = 1', () => {
+      const actual = me.randomChar('x');
+      expect(actual).toBe('x');
+    });
+    // eslint-disable-next-line max-len
+    test('it returns a character from the charset when charset.length > 1', () => {
+      const charset = 'qwertyjngfdcsx';
+      const actual = me.randomChar(charset);
+      expect(actual.length).toBe(1);
+      expect(charset.includes(actual)).toBe(true);
+    });
+  });
 });

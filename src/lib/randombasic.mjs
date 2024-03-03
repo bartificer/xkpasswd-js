@@ -20,6 +20,9 @@ class RandomBasic {
    * @return {char} - random character
    */
   randomChar(charset) {
+    if (is.undefined(charset)) {
+      return '';
+    };
     const c = cryptoRandomString({
       length: 1,
       characters: charset.toString(),
