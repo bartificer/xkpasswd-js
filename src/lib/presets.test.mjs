@@ -89,17 +89,36 @@ describe('Test class Presets', () => {
     });
   });
 
+  describe('Test simple getters', () => {
+    test('description return the description', () => {
+      const description = me.getDefault().description;
+
+      const newPreset = new Presets();
+      expect(newPreset.description()).toEqual(description);
+    });
+
+    test('getPresets returns list of keys', () => {
+      const expected = ['DEFAULT', 'WEB32', 'WEB16', 'WIFI',
+        'APPLEID', 'NTLM', 'SECURITYQ', 'XKCD'];
+
+      const newPreset = new Presets();
+      expect(newPreset.getPresets()).toEqual(expected);
+    });
+  });
+
   describe('Test function getSeparatorAlphabet', () => {
     test('if separator_alphabet exists, it is chosen', () => {
       const preset = new Presets(mock);
-      const def = new Presets();
       const alfa = preset.config().separator_alphabet;
+
+      const def = new Presets();
       const alfaDef = def.config().symbol_alphabet;
 
-      expect(preset.getSeparatorAlphabet()).toEqual(alfa);
-      expect(def.getSeparatorAlphabet()).toEqual(alfaDef);
+      expect(preset.__getSeparatorAlphabet()).toEqual(alfa);
+      expect(def.__getSeparatorAlphabet()).toEqual(alfaDef);
     });
   });
+
   describe('Test function getPaddingAlphabet', () => {
     test('if padding_alphabet exists, it is chosen', () => {
       const preset = new Presets(mock);
