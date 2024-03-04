@@ -86,10 +86,17 @@ class PasswordView {
       let htmlPwdList='';
       // eslint-disable-next-line guard-for-in
       for (const pwdIndex in passAndStats.passwords) {
-        // eslint-disable-next-line max-len
-        htmlPwdList = htmlPwdList.concat(`<li><button id="copyclip_${pwdIndex}"
-          class="btn btn-clipboard bi-clipboard">
-          </button>${passAndStats.passwords[pwdIndex]}</li>`);
+        // Make the index a number so we can perform math as needed.
+        const theIndex = Number.parseInt(pwdIndex);
+        htmlPwdList = htmlPwdList.concat(`
+            <li>
+                <button id="copyclip_${theIndex}"
+                        class="btn btn-clipboard bi-clipboard"
+                        aria-label="Copy Password #${theIndex+1}">
+                </button>
+                ${passAndStats.passwords[theIndex]}
+            </li>
+        `);
       }
       this.#passwordList.html(htmlPwdList);
 
