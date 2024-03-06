@@ -37,7 +37,7 @@ describe('Test XKPassword class', () => {
     test('it returns a character in the alphabet list', () => {
       const r = me.__separator();
 
-      expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
+      expect(alphabet.toString().includes(r)).toBe(true);
     });
 
     test('separator NONE returns empty string', () => {
