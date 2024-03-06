@@ -52,6 +52,9 @@ class XKPasswd {
   setPreset(preset) {
     this.#preset = new Presets(preset);
     this.#config = this.#preset.config();
+
+    // Refresh the statistics
+    this.#statsClass = new Statistics(this.#config);
   }
 
   /**
