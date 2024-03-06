@@ -404,4 +404,67 @@ describe('Test XKPassword class', () => {
       expect(typeof pwArray[0]).toBe('string');
     });
   });
+
+  describe('Test all presets', () => {
+    // make sure all the presets are tested to avoid
+    // that some of them suddenly produce 'null' as password
+    test('Test XKCD preset', () => {
+      me.setPreset('XKCD');
+      const password = me.password();
+      expect(password).toMatch(/([a-zA-Z]{4,8}-){4}[a-zA-Z]{4,8}/);
+    });
+
+    test('Test SECURITYQ preset', () => {
+      me.setPreset('SECURITYQ');
+      const password = me.password();
+      expect(password).toMatch(/([a-zA-Z]{4,8}\s){5}[a-zA-Z]{4,8}[.!?]/);
+    });
+
+    test('Test NTLM preset', () => {
+      me.setPreset('NTLM');
+      const password = me.password();
+      expect(password)
+        .toMatch(/[a-zA-Z]{5}[-+=.*_|~,][a-zA-Z]{5}[!@$%^&*+=:|~?]/);
+    });
+
+    test('Test APPLEID preset', () => {
+      me.setPreset('APPLEID');
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /[-:.!?@&]\d\d([-:.@}][a-zA-Z]{4,7}){3}[-:.@}]\d\d[-:.!?@&]/;
+
+      expect(password).toMatch(re);
+    });
+
+    test('Test WIFI preset', () => {
+      me.setPreset('WIFI');
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /\d{4}([-+=.*_|~,][a-zA-Z]{4,8}){6}[-+=.*_|~,]\d{4}[!@$%^&*+=:|~?]{2,26}/;
+
+      expect(password).toMatch(re);
+    });
+
+    test('Test WEB16 preset', () => {
+      me.setPreset('WEB16');
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /[a-zA-Z]{4}([!@$%^&*-_+=:|~?/.][a-zA-Z]{4}){2}[!@$%^&*-_+=:|~?/.]\d\d/;
+
+      expect(password).toMatch(re);
+    });
+
+    test('Test WEB32 preset', () => {
+      me.setPreset('WEB32');
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /[!@$%^&*+=:|~]\d\d([-+=.*_|~][a-zA-Z]{4,5}){4}[-+=.*_|~]\d\d[!@$%^&*+=:|~]/;
+
+      expect(password).toMatch(re);
+    });
+  });
 });
