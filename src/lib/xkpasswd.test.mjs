@@ -30,6 +30,7 @@ describe('Test XKPassword class', () => {
 
     test('it returns a character', () => {
       const r = me.__separator();
+
       expect(typeof r).toBe('string');
       expect(r).toHaveLength(1);
     });
@@ -88,6 +89,7 @@ describe('Test XKPassword class', () => {
 
     test('Check if it returns a character', () => {
       const r = me.__paddingChar('+');
+
       expect(typeof r).toBe('string');
       expect(r).toHaveLength(1);
     });
@@ -142,6 +144,7 @@ describe('Test XKPassword class', () => {
           padding_character: 'SEPARATOR',
         },
       };
+
       me.setPreset(preset);
       const r = me.__paddingChar('-');
       expect(r).toBe('-');

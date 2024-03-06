@@ -169,7 +169,7 @@ class XKPasswd {
       num = 1;
     }
     const passwords = [];
-    for (let i = 0; i < num ; i++) {
+    for (let i = 0; i < num; i++) {
       passwords.push(this.password());
     }
 
@@ -280,22 +280,25 @@ class XKPasswd {
    * @private
    */
   __randomWords() {
-
     const numWords = this.#config.num_words;
     const maxDict = this.#dictionary.getLength();
 
     log.trace(`__randomwords, mindict: ${this.#dictionary.getMinWordLength()}
     maxdict: ${this.#dictionary.getMaxWordLength()}`);
+
     // get the minimum of the 2 input variables and the longest dictionary word
-    let minLength = Math.min(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMaxWordLength());
+    let minLength = Math.min(this.#config.word_length_min,
+      this.#config.word_length_max, this.#dictionary.getMaxWordLength());
 
     // get the maximum of the 2 input variables and the shortest dictionary word
-    let maxLength = Math.max(this.#config.word_length_min, this.#config.word_length_max, this.#dictionary.getMinWordLength());
+    let maxLength = Math.max(this.#config.word_length_min,
+      this.#config.word_length_max, this.#dictionary.getMinWordLength());
 
     minLength = Math.max(minLength, this.#dictionary.getMinWordLength());
     maxLength = Math.min(maxLength, this.#dictionary.getMaxWordLength());
 
-    log.trace(`about to generate ${numWords} words ${minLength} - ${maxLength}`);
+    log.trace(`about to generate ${numWords} words
+      ${minLength} - ${maxLength}`);
 
     const list = [];
     for (let i = 0; i < numWords; i++) {
