@@ -11,6 +11,8 @@ import log from 'loglevel';
 /**
  * This object contains all predefined config sets
  */
+/* 2024-03-02 this is the original configuration setup
+ * it gives a lot of problems
 const thePresets = {
   DEFAULT: {
     description:
@@ -182,6 +184,181 @@ const thePresets = {
     },
   },
 };
+*/
+
+const thePresets = {
+  DEFAULT: {
+    description:
+      'The default preset resulting in a password consisting of ' +
+      '3 random words of between 4 and 8 letters with alternating ' +
+      'case separated by a random character, with two random digits ' +
+      'before and after, and padded with two random characters front and back',
+    config: {
+      // eslint-disable-next-line max-len
+      symbol_alphabet: '! @ $ % ^ & * - _ + = : | ~ ? / . ;'.split(' '),
+      word_length_min: 4,
+      word_length_max: 8,
+      num_words: 3,
+      case_transform: 'CAPITALISE',
+      separator_type: 'RANDOM',
+      padding_digits_before: 2,
+      padding_digits_after: 2,
+      padding_type: 'FIXED',
+      padding_character_type: 'RANDOM',
+      padding_characters_before: 2,
+      padding_characters_after: 2,
+      random_function: RandomBasic,
+      random_increment: 'AUTO',
+    },
+  },
+  WEB32: {
+    description:
+      'A preset for websites that allow passwords up to 32 characteres long.',
+    config: {
+      word_length_min: 4,
+      word_length_max: 5,
+      num_words: 4,
+      case_transform: 'ALTERNATE',
+      separator_type: 'RANDOM',
+      separator_alphabet: '- + = . * _ | ~ '.split(' '),
+      padding_digits_before: 2,
+      padding_digits_after: 2,
+      padding_type: 'FIXED',
+      padding_character_type: 'RANDOM',
+      padding_alphabet: '! @ $ % ^ & * + = : | ~ '.split(' '),
+      padding_characters_before: 1,
+      padding_characters_after: 1,
+      allow_accents: 0,
+    },
+  },
+  WEB16: {
+    description:
+      'A preset for websites that insist passwords not be longer ' +
+      'than 16 characters. WARNING - only use this preset if you ' +
+      'have to, it is too short to be acceptably secure and will ' +
+      'always generate entropy warnings for the case where the ' +
+      'config and dictionary are known.',
+    config: {
+      symbol_alphabet: '! @ $ % ^ & * - _ + = : | ~ ? / . '.split(' '),
+      word_length_min: 4,
+      word_length_max: 4,
+      num_words: 3,
+      case_transform: 'RANDOM',
+      separator_type: 'RANDOM',
+      padding_type: 'NONE',
+      padding_digits_before: 0,
+      padding_digits_after: 2,
+      allow_accents: 0,
+    },
+  },
+  WIFI: {
+    description:
+      'A preset for generating 63 character long WPA2 keys ' +
+      '(most routers allow 64 characters, but some only 63, ' +
+      'hence the odd length).',
+    config: {
+      word_length_min: 4,
+      word_length_max: 8,
+      num_words: 6,
+      case_transform: 'RANDOM',
+      separator_type: 'RANDOM',
+      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
+      padding_type: 'ADAPTIVE',
+      pad_to_length: 63,
+      padding_digits_before: 4,
+      padding_digits_after: 4,
+      padding_character_type: 'RANDOM',
+      padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
+      allow_accents: 0,
+    },
+  },
+  APPLEID: {
+    description:
+      'A preset respecting the many prerequisites Apple places ' +
+      'on Apple ID passwords. The preset also limits itself to ' +
+      'symbols found on the iOS letter and number keyboards ' +
+      '(i.e. not the awkward to reach symbol keyboard)',
+    config: {
+      word_length_min: 4,
+      word_length_max: 7,
+      num_words: 3,
+      case_transform: 'RANDOM',
+      separator_type: 'RANDOM',
+      separator_alphabet: '- : . @ } '.split(' '),
+      padding_type: 'FIXED',
+      padding_digits_before: 2,
+      padding_digits_after: 2,
+      padding_character_type: 'RANDOM',
+      padding_characters_before: 1,
+      padding_characters_after: 1,
+      padding_alphabet: '- : . ! ? @ &'.split(' '),
+      allow_accents: 0,
+    },
+  },
+  NTLM: {
+    description:
+      'A preset for 14 character Windows NTLMv1 password. ' +
+      'WARNING - only use this preset if you have to, it is ' +
+      'too short to be acceptably secure and will always ' +
+      'generate entropy warnings for the case where the config ' +
+      'and dictionary are known.',
+    config: {
+      word_length_min: 5,
+      word_length_max: 5,
+      num_words: 2,
+      case_transform: 'INVERT',
+      separator_type: 'RANDOM',
+      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
+      padding_digits_before: 1,
+      padding_digits_after: 0,
+      padding_type: 'FIXED',
+      padding_character_type: 'RANDOM',
+      padding_characters_before: 0,
+      padding_characters_after: 1,
+      padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
+      allow_accents: 0,
+    },
+  },
+  SECURITYQ: {
+    description: 'A preset for creating fake answers to security questions.',
+    config: {
+      word_length_min: 4,
+      word_length_max: 8,
+      num_words: 6,
+      case_transform: 'NONE',
+      separator_type: 'FIXED',
+      separator_character: ' ',
+      padding_digits_before: 0,
+      padding_digits_after: 0,
+      padding_type: 'FIXED',
+      padding_character_type: 'RANDOM',
+      padding_alphabet: '. ! ?'.split(' '),
+      padding_characters_before: 0,
+      padding_characters_after: 1,
+      allow_accents: 0,
+    },
+  },
+  XKCD: {
+    description:
+      'A preset for generating passwords similar ' +
+      'to the example in the original XKCD cartoon, ' +
+      'but with an extra word, a dash to separate ' +
+      'the random words, and the capitalisation randomised ' +
+      'to add sufficient entropy to avoid warnings.',
+    config: {
+      word_length_min: 4,
+      word_length_max: 8,
+      num_words: 5,
+      case_transform: 'RANDOM',
+      separator_type: 'FIXED',
+      separator_character: '-',
+      padding_type: 'NONE',
+      padding_digits_before: 0,
+      padding_digits_after: 0,
+      allow_accents: 0,
+    },
+  },
+};
 
 
 /**
@@ -256,9 +433,7 @@ class Presets {
       }
     };
 
-    // fix the padding and separator alphabet
-    this.#current.config.separator_alphabet = this.getSeparatorAlphabet();
-    this.#current.config.padding_alphabet = this.getPaddingAlphabet();
+    this.#current.config = this.__normalize(this.#current.config);
 
     log.trace(`Preset constructor set to ${this.#presetName}`);
   }
@@ -318,6 +493,57 @@ class Presets {
   }
 
   /**
+   * Normalize the config object
+   *
+   * This means that all elements of the config are present and set
+   * to a default. This makes the values of all properties much more
+   * consistent for use later on.
+   *
+   * @private
+   *
+   * @param {Object} config - object with properties set
+   * @return {Object} - the normalised config
+   */
+  __normalize(config) {
+    // create a clone so we can safely reference the original value
+    const newConfig = {...config};
+
+    // set the min and max word lengths
+    const [min, max] = this.__getMinMaxWordLength(
+      config.min_word_length, config.max_word_length);
+    newConfig.min_word_length = min;
+    newConfig.max_word_length = max;
+
+    // make sure num_words >= 2
+    newConfig.num_words = Math.max(2, config.num_words);
+
+    // get the separator configuration
+    const {separatorType,
+      separatorCharacter,
+      separatorAlphabet} = this.__getSeparatorConfig(config);
+
+    // console.log(`
+    // separatorType: ${separatorType} - ${config.separator_type}
+    // separatorCharacter: ${separatorCharacter} - ${config.separator_character}
+    // separatorAlphabet: ${separatorAlphabet} - ${config.separator_alphabet}
+    // `);
+    newConfig.separator_type = separatorType;
+    newConfig.separator_character = separatorCharacter;
+    newConfig.separator_alphabet = separatorAlphabet;
+
+    // get the padding character configuration
+    const {paddingCharType,
+      paddingCharacter,
+      paddingAlphabet} = this.__getPaddingCharacterConfig(config);
+
+    newConfig.padding_character_type = paddingCharType;
+    newConfig.padding_character = paddingCharacter;
+    newConfig.padding_alphabet = paddingAlphabet;
+
+    return newConfig;
+  }
+
+  /**
    * Get the list of separator characters
    * or default to the list of symbol characters
    *
@@ -362,6 +588,163 @@ class Presets {
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
+  }
+
+  /**
+   * Get the min and max word length
+   *
+   * @private
+   *
+   * @param {number} min - minimum word length
+   * @param {number} max - maximum word length
+   * @return {object} - min and max numbers
+   */
+  __getMinMaxWordLength(min, max) {
+    // make sure min and max are in the right order
+    // only positive values >= 3 (see documentation)
+    let minLength = Math.max(3, min);
+    let maxLength = Math.max(3, max);
+
+    // make sure min and max are not reversed
+    const tmp = Math.min(minLength, maxLength);
+    maxLength = Math.max(minLength, maxLength);
+    minLength = tmp;
+
+    return [minLength, maxLength];
+  }
+
+  /**
+   * Get the separator configuration
+   *
+   * @param {object} config - the config to fix
+   *
+   * @return {object} - the object with the normalized properties
+   */
+  __getSeparatorConfig(config) {
+    const newConfig = {};
+
+    /* old config:
+        - separator_character = NONE, RANDOM or char
+        - separator_type does not exist
+
+      new config:
+        - separator_character = '' or char
+        - separator_type = NONE, RANDOM or FIXED
+    */
+
+    if (is.undefined(config.separator_type)) {
+      // we should be in the old config
+      switch (config.separator_character) {
+      case undefined:
+      case 'NONE':
+        newConfig.separatorType = 'NONE';
+        newConfig.separatorCharacter = '';
+        break;
+      case 'RANDOM':
+        newConfig.separatorType = 'RANDOM';
+        newConfig.separatorCharacter = '';
+        break;
+      default:
+        if (config.separator_character.length > 1) {
+          throw new Error(
+            `Unknown separator code (${config.separator_character}) found`);
+        }
+        newConfig.separatorType = 'FIXED';
+        newConfig.separatorCharacter = config.separator_character;
+      }
+    } else {
+      // we should be in the new config
+      switch (config.separator_type) {
+      case 'NONE':
+      case 'RANDOM':
+        newConfig.separatorType = config.separator_type;
+        newConfig.separatorCharacter = '';
+        break;
+      case 'FIXED':
+        if (is.undefined(config.separator_character) ||
+          config.separator_character.length > 1) {
+          throw new Error(
+            // eslint-disable-next-line max-len
+            `Multiple or unknown separator character(s) (${config.separator_character}) found`);
+        }
+        newConfig.separatorType = 'FIXED';
+        newConfig.separatorCharacter = config.separator_character;
+        break;
+      default:
+        throw new Error(
+          `Unknown separator code (${config.separator_type}) found`);
+      }
+    }
+    newConfig.separatorAlphabet = this.__getSeparatorAlphabet(config);
+    // console.log(`returning config: ${JSON.stringify(config)}`);
+    return newConfig;
+  }
+
+  /**
+   * Get the padding character configuration
+   *
+   * @param {string} config - the config to fix
+   *
+   * @return {object} - the object with the normalized properties
+   */
+  __getPaddingCharacterConfig(config) {
+    const newConfig = {};
+
+    if (is.undefined(config.padding_character_type)) {
+      // we should be in the old config
+      switch (config.padding_character) {
+      case undefined:
+      case 'NONE':
+        newConfig.paddingCharType = 'NONE';
+        newConfig.paddingCharacter = '';
+        break;
+      case 'RANDOM':
+        newConfig.paddingCharType = 'RANDOM';
+        newConfig.paddingCharacter = '';
+        break;
+      case 'SEPARATOR':
+        newConfig.paddingCharType = 'SEPARATOR';
+        newConfig.paddingCharacter = config.separator_character;
+        break;
+      default:
+        if (config.padding_character.length > 1) {
+          throw new Error(
+            `Unknown padding code (${config.padding_character}) found`);
+        }
+        newConfig.paddingCharType = 'FIXED';
+        newConfig.paddingCharacter = config.padding_character;
+      }
+    } else {
+      // we should be in the new config
+      switch (config.padding_character_type) {
+      case 'NONE':
+      case 'RANDOM':
+        newConfig.paddingCharType = config.padding_character_type;
+        newConfig.paddingCharacter = '';
+        break;
+      case 'SEPARATOR':
+        newConfig.paddingCharType = 'SEPARATOR';
+        newConfig.paddingCharacter = config.separator_character;
+        break;
+      case 'FIXED':
+        if (is.undefined(config.padding_character) ||
+          config.padding_character.length > 1) {
+          throw new Error(
+            // eslint-disable-next-line max-len
+            `Multiple or unknown padding character(s) ($config.padding_character)`,
+          );
+        }
+        newConfig.paddingCharType = 'FIXED';
+        newConfig.paddingCharacter = config.padding_character;
+        break;
+      default:
+        throw new Error(
+          `Unknown padding character type (${config.padding_character_type})`);
+      }
+    }
+    newConfig.paddingAlphabet = this.__getPaddingAlphabet(config);
+    // console.log(`returning newConfig: ${JSON.stringify(newConfig)}`);
+    return newConfig;
   }
 }
 

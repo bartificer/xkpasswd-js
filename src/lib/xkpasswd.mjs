@@ -313,27 +313,29 @@ class XKPasswd {
    * Get the separator character to use based on the loaded config.
    *
    * Notes: The character returned is controlled by the config variable
-   *  `separator_character`
+   *  `separator_type`
    *
    * @return {string} separator (could be an empty string)
    *
    * @private
    */
   __separator() {
-    // figure out the separator character
-    const sep = this.#config.separator_character;
-
-    if (sep === 'NONE') {
-      return '';
+    let separator = '';
+    switch (this.#config.separator_type) {
+    case undefined:
+    case 'NONE':
+      break;
+    case 'FIXED':
+      separator = this.#config.separator_character;
+      break;
+    case 'RANDOM':
+      const alphabet = this.#config.separator_alphabet;
+      separator = this.#rng.randomChar(alphabet.join(''));
+      break;
+    default:
+      break;
     }
-    if (sep === 'RANDOM') {
-      const alphabet = this.#preset.getSeparatorAlphabet();
-      return this.#rng.randomChar(alphabet);
-    }
-    if (sep.length > 1) {
-      return '';
-    }
-    return sep;
+    return separator;
   }
 
   /**
@@ -350,26 +352,25 @@ class XKPasswd {
    * @private
    */
   __paddingChar(separator) {
-    if (is.undefined(separator)) {
-      separator = '';
-    }
-
-    log.trace(`__paddingChar: ${this.#config.padding_character}`);
-    switch (this.#config.padding_character) {
+    let paddingCharacter = '';
+    switch (this.#config.padding_character_type) {
     case undefined:
     case 'NONE':
-      return '';
+      break;
     case 'SEPARATOR':
-      return separator;
+      paddingCharacter = is.undefined(separator) ? '' : separator;
+      break;
     case 'RANDOM':
-      const alphabet = this.#preset.getPaddingAlphabet();
-      return this.#rng.randomChar(alphabet);
+      const alphabet = this.#config.padding_alphabet;
+      paddingCharacter = this.#rng.randomChar(alphabet.join(''));
+      break;
+    case 'FIXED':
+      paddingCharacter = this.#config.padding_character;
+      break;
     default:
-      if (this.#config.padding_character.length > 1) {
-        return '';
-      }
-      return this.#config.padding_character;
+      break;
     }
+    return paddingCharacter;
   }
 
 

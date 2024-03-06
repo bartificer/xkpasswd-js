@@ -52,16 +52,16 @@ describe('Test XKPassword class', () => {
       expect(r).toBe('');
     });
 
-    test('unknown separator returns empty string', () => {
+    test('unknown separator throws an error', () => {
       const preset = {
         description: 'mock preset',
         config: {
           separator_character: 'NOT_DEFINED',
         },
       };
-      me.setPreset(preset);
-      const r = me.__separator();
-      expect(r).toBe('');
+      expect(() => {
+        me.setPreset(preset);
+      }).toThrow('Unknown separator code (NOT_DEFINED) found');
     });
 
     test('character in separator returns character', () => {
@@ -102,7 +102,7 @@ describe('Test XKPassword class', () => {
       const preset = {
         description: 'mock preset',
         config: {
-          padding_character: 'RANDOM',
+          padding_character_type: 'RANDOM',
           padding_alphabet: '',
         },
       };
@@ -115,7 +115,7 @@ describe('Test XKPassword class', () => {
       const preset = {
         description: 'mock preset',
         config: {
-          padding_character: 'SEPARATOR',
+          padding_character_type: 'SEPARATOR',
         },
       };
       me.setPreset(preset);
@@ -127,7 +127,7 @@ describe('Test XKPassword class', () => {
       const preset = {
         description: 'mock preset',
         config: {
-          padding_character: 'NONE',
+          padding_character_type: 'NONE',
         },
       };
       me.setPreset(preset);
@@ -147,16 +147,16 @@ describe('Test XKPassword class', () => {
       expect(r).toBe('-');
     });
 
-    test('unknown padding char returns empty string', () => {
+    test('unknown padding char code throws an error', () => {
       const preset = {
         description: 'mock preset',
         config: {
           padding_character: 'NOT_DEFINED',
         },
       };
-      me.setPreset(preset);
-      const r = me.__paddingChar('-');
-      expect(r).toBe('');
+      expect( () => {
+        me.setPreset(preset);
+      }).toThrow(Error);
     });
 
     test('character in padding char returns character', () => {
@@ -348,7 +348,7 @@ describe('Test XKPassword class', () => {
       preset.config.separator_alphabet = ['+'];
       preset.config.padding_type = 'ADAPTIVE';
       preset.config.pad_to_length = 50;
-      preset.config.padding_character = 'SEPARATOR';
+      preset.config.padding_character_type = 'SEPARATOR';
 
       me.setPreset(preset);
       const password = me.password();
