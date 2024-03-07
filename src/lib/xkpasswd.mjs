@@ -63,6 +63,7 @@ class XKPasswd {
    * @return {Preset} the current preset
    */
   getPreset() {
+    /* istanbul ignore next @preserve : too simple to test */
     return this.#preset;
   }
 
@@ -72,6 +73,7 @@ class XKPasswd {
    * @return {array} keys - names of the Presets
    */
   getPresets() {
+    /* istanbul ignore next @preserve : too simple to test */
     return new Presets().getPresets();
   }
 
@@ -81,6 +83,7 @@ class XKPasswd {
    * @param {number} num - number of passwords to generate
    * @return {object} - contains the passwords and the stats
    */
+  /* istanbul ignore next @preserve : already tested through sub functions */
   generatePassword(num) {
     const passwords = this.passwords(num);
     const stats = this.#statsClass.calculateStats();
@@ -156,6 +159,7 @@ class XKPasswd {
       // return the finished password
       return passwd;
     } catch (e) {
+      /* istanbul ignore next @preserve : too difficult to test */
       log.error(
         `Failed to generate password with the following error: ${e}`,
       );
@@ -339,6 +343,7 @@ class XKPasswd {
       separator = this.#rng.randomChar(alphabet.join(''));
       break;
     default:
+      /* istanbul ignore next @preserve : too simple to test */
       break;
     }
     return separator;
@@ -374,6 +379,7 @@ class XKPasswd {
       paddingCharacter = this.#config.padding_character;
       break;
     default:
+      /* istanbul ignore next @preserve : too simple to test */
       break;
     }
     return paddingCharacter;

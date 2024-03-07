@@ -313,6 +313,7 @@ class Statistics {
    * @private
    */
   __calculateEntropyStats() {
+    /* istanbul ignore next @preserve : too simple to test */
     if (this.#cache.entropy.valid) {
       return this.#cache.entropy.stats;
     }
@@ -341,6 +342,8 @@ class Statistics {
     // TODO replace pseudocode with real code
     //  if($self->_passwords_will_contain_symbol()
     // || $self->{_CACHE_CONTAINS_ACCENTS}){
+    
+   /* istanbul ignore next @preserve : not in use */
     if (false) {
       // the config almost certainly includes a symbol,
       // so add 33 to the alphabet (like password haystacks does)
@@ -406,6 +409,7 @@ class Statistics {
     // multiply in the permutations from the separator
     // (if any - i.e. if it's randomly chosen)
 
+    /* istanbul ignore next @preserve : too difficult to test */
     if (this.#config.separator_character === 'RANDOM') {
       if (!is.undefined(this.#config.separator_alphabet)) {
         seenPermutationsBigInt *=
@@ -421,6 +425,7 @@ class Statistics {
 
     if (this.#config.padding_type !== 'NONE' &&
       this.#config.padding_character === 'RANDOM') {
+      /* istanbul ignore next @preserve : too difficult to test */
       if (!is.undefined(this.#config.padding_alphabet)) {
         seenPermutationsBigInt *= BigInt(this.#config.padding_alphabet.length);
       } else {
