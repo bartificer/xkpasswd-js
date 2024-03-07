@@ -166,14 +166,14 @@
                                 <label for="separator_type" class="input-group-text">Type</label>
                                 <select name="separator_type" id="separator_type" class="form-control">
                                   <option value="NONE" selected="selected">-none-</option>
-                                  <option value="CHAR">Specified Character</option>
+                                  <option value="FIXED">Specified Character</option>
                                   <option value="RANDOM">Random Character</option>
                                 </select>
                                 <!-- specific character -->
-                                <label for="separator_type_char" class="input-group-text">Character</label>
-                                <input name="separator_type_char" id="separator_type_char" class="form-control" type="text" size="1" maxlength="1"
+                                <label for="separator_character" class="input-group-text">Character</label>
+                                <input name="separator_character" id="separator_character" class="form-control" type="text" size="1" maxlength="1"
                                   value="-" />
-                                <div id="separator_type_char_err" class="invalid-feedback">must enter exactly 1
+                                <div id="separator_character_err" class="invalid-feedback">must enter exactly 1
                                   character</div>
                                 <!-- random characters -->
                                 <label for="separator_alphabet" class="input-group-text">Alphabet</label>
@@ -223,21 +223,21 @@
                               <!-- character type -->
                               <div id="padding_char_container">
                                 <div id="character-type" class="input-group mt-2">
-                                  <label for="padding_char_type" class="input-group-text">Padding Type</label>
-                                  <select name="padding_char_type" id="padding_char_type" class="form-select">
+                                  <label for="padding_character_type" class="input-group-text">Padding Type</label>
+                                  <select name="padding_character_type" id="padding_character_type" class="form-select">
                                     <option value="SEPARATOR">Use Separator Character</option>
-                                    <option value="CHAR" selected="selected">Specified Character</option>
+                                    <option value="FIXED" selected="selected">Specified Character</option>
                                     <option value="RANDOM">Random Character</option>
                                   </select>
                                 </div>
 
                                 <!-- padding character -->
                                 <div class="input-group mt-2">
-                                  <label for="padding_char_type_char" class="input-group-text">Padding
+                                  <label for="padding_character" class="input-group-text">Padding
                                     Character</label>
                                   <input class="form-control" type="text" size="1" maxlength="1" value="*"
-                                         name="padding_char_type_char" id="padding_char_type_char" />
-                                  <div id="padding_char_type_char_err" class="invalid-feedback">must enter exactly 1
+                                         name="padding_character" id="padding_character" />
+                                  <div id="padding_character_err" class="invalid-feedback">must enter exactly 1
                                     character</div>
                                 </div>
 

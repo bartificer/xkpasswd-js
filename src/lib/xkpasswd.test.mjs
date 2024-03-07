@@ -91,6 +91,8 @@ describe('Test XKPassword class', () => {
   });
 
   describe('Test internal __paddingChar function', () => {
+    // TODO Denk eraan dat de testen van
+    // __paddingChar zowel met de nieuwe als de oude config moeten testen
     /*
      * The paddingChar function is based on the Preset class
      * so we are going to use that knowledge to test.

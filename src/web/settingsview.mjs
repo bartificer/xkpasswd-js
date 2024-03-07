@@ -17,13 +17,13 @@ class SettingsView {
    */
   constructor() {
     this.__togglePaddingType('NONE');
-    this.__togglePaddingCharType('CHAR');
+    this.__togglePaddingCharType('FIXED');
     this.__toggleSeparatorType('NONE');
 
     $('#padding_type').on('change', (e) => {
       this.__togglePaddingType(e);
     });
-    $('#padding_char_type').on('change', (e) => {
+    $('#padding_character_type').on('change', (e) => {
       this.__togglePaddingCharType(e);
     });
     $('#separator_type').on('change', (e) => {
@@ -49,7 +49,7 @@ class SettingsView {
     // hide everything that should not be visible
     this.__toggleSeparatorType(preset.separator_type);
     this.__togglePaddingType(preset.padding_type);
-    this.__togglePaddingCharType(preset.padding_char_type);
+    this.__togglePaddingCharType(preset.padding_character_type);
   };
 
     /**
@@ -132,31 +132,28 @@ class SettingsView {
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
     switch (separatorType) {
     case 'NONE':
-      $('label[for="separator_type_char"]').hide(this.#aniTime);
-      $('#separator_type_char').hide(this.#aniTime);
+      $('label[for="separator_character"]').hide(this.#aniTime);
+      $('#separator_character').hide(this.#aniTime);
       $('label[for="separator_alphabet"]').hide(this.#aniTime);
       $('#separator_alphabet').hide(this.#aniTime);
       break;
 
-    case 'CHAR':
-      $('label[for="separator_type_char"]').show(this.#aniTime);
-      $('#separator_type_char').show(this.#aniTime);
+    case 'FIXED':
+      $('label[for="separator_character"]').show(this.#aniTime);
+      $('#separator_character').show(this.#aniTime);
       $('label[for="separator_alphabet"]').hide(this.#aniTime);
       $('#separator_alphabet').hide(this.#aniTime);
       break;
 
     case 'RANDOM':
-      $('label[for="separator_type_char"]').hide(this.#aniTime);
-      $('#separator_type_char').hide(this.#aniTime);
+      $('label[for="separator_character"]').hide(this.#aniTime);
+      $('#separator_character').hide(this.#aniTime);
       $('label[for="separator_alphabet"]').show(this.#aniTime);
       $('#separator_alphabet').show(this.#aniTime);
       break;
 
     default:
-      try {
-        log.warn(`WARNING - Received invalid separator_character=
-        ${separatorType}`);
-      } catch (e) {};
+        log.warn(`WARNING - Received invalid separator_type (${separatorType})`);
       break;
     }
 
@@ -236,16 +233,16 @@ class SettingsView {
     log.trace(`__togglePaddingCharType: ${paddingType}`);
 
     switch (paddingType) {
-    case 'CHAR':
-      $('label[for="padding_char_type_char"]').show(this.#aniTime);
-      $('#padding_char_type_char').show(this.#aniTime);
+    case 'FIXED':
+      $('label[for="padding_character"]').show(this.#aniTime);
+      $('#padding_character').show(this.#aniTime);
       $('label[for="padding_alphabet"]').hide(this.#aniTime);
       $('#padding_alphabet').hide(this.#aniTime);
       break;
 
     case 'RANDOM':
-      $('label[for="padding_char_type_char"]').hide(this.#aniTime);
-      $('#padding_char_type_char').hide(this.#aniTime);
+      $('label[for="padding_character"]').hide(this.#aniTime);
+      $('#padding_character').hide(this.#aniTime);
       $('label[for="padding_alphabet"]').show(this.#aniTime);
       $('#padding_alphabet').show(this.#aniTime);
       break;
@@ -255,12 +252,12 @@ class SettingsView {
       // when there is a separator character,
       // if not, switch to single separator char
       if ($('#separator_type').val() == 'NONE') {
-        $('#padding_char_type').val('CHAR');
+        $('#padding_character_type').val('FIXED');
         return;
       }
       // if it is OK to select this option, update the UI appropriately
-      $('label[for="padding_char_type_char"]').hide(this.#aniTime);
-      $('#padding_char_type_char').hide(this.#aniTime);
+      $('label[for="padding_character"]').hide(this.#aniTime);
+      $('#padding_character').hide(this.#aniTime);
       $('label[for="padding_alphabet"]').hide(this.#aniTime);
       $('#padding_alphabet').hide(this.#aniTime);
       break;
