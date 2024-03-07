@@ -196,7 +196,7 @@ class XKPasswd {
    */
   __adaptivePadding(passwd, padChar, maxLen) {
     const pwlen = passwd.length;
-    padChar = (padChar.length === 0) ? ' ' : padChar;
+    padChar = (is.undefined(padChar) || padChar.length === 0) ? ' ' : padChar;
     if (pwlen < maxLen) {
       // if the password is shorter than the target length, pad it out
       while (passwd.length < maxLen) {

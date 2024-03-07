@@ -41,7 +41,19 @@ describe('Test XKPassword class', () => {
       expect(alphabet.toString().includes(r)).toBe(true);
     });
 
-    test('separator NONE returns empty string', () => {
+    test('separator undefined returns empty string', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          separator_character: undefined,
+        },
+      };
+      me.setPreset(preset);
+      const r = me.__separator();
+      expect(r).toBe('');
+    });
+
+        test('separator NONE returns empty string', () => {
       const preset = {
         description: 'mock preset',
         config: {
@@ -176,7 +188,23 @@ describe('Test XKPassword class', () => {
   });
 
   describe('Test internal __adaptivePadding function', () => {
-    test('it add padding when maxLen is bigger', () => {
+    test('it uses a space if padChar is undefined', () => {
+      const passwd = 'abcdef';
+      const pw = me.__adaptivePadding(passwd, undefined, 10);
+
+      expect(pw).toHaveLength(10);
+      expect(pw).toBe(passwd + '    ');
+    });
+
+        test('it uses a space if padChar is empty', () => {
+      const passwd = 'abcdef';
+      const pw = me.__adaptivePadding(passwd, '', 10);
+
+      expect(pw).toHaveLength(10);
+      expect(pw).toBe(passwd + '    ');
+    });
+
+    test('it adds padding when maxLen is bigger', () => {
       const passwd = 'abcdef';
       const pw = me.__adaptivePadding(passwd, '+', 10);
 
@@ -184,7 +212,7 @@ describe('Test XKPassword class', () => {
       expect(pw).toBe(passwd + '++++');
     });
 
-    test('it to truncate when maxLen is smaller', () => {
+    test('it truncates when maxLen is smaller', () => {
       const passwd = 'abcdefghijklmnop';
       const pw = me.__adaptivePadding(passwd, '+', 5);
 
@@ -466,5 +494,23 @@ describe('Test XKPassword class', () => {
 
       expect(password).toMatch(re);
     });
+  });
+
+  describe('Test internal __padWithChar', () => {
+    test('Check with 0 padding', () => {
+      me.setPreset('XKCD'); // preset has no padding_char before or after
+      expect(me.__padWithChar('abc', '-')).toBe('abc');
+    });
+
+    test('Check with padding characters before 0 and after 1', () => {
+      me.setPreset('SECURITYQ'); // preset with matching config
+      expect(me.__padWithChar('abc', '-')).toBe('abc-');
+    });
+
+    test('Check with padding characters before 1 and after 1', () => {
+      me.setPreset('APPLEID'); // preset with matching config
+      expect(me.__padWithChar('abc', '-')).toBe('-abc-');
+    });
+
   });
 });
