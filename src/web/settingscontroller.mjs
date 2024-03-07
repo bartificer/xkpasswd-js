@@ -76,15 +76,16 @@ class SettingsController {
     settings.sep_before_after = parseInt(settings.sep_before_after);
     settings.padding_digits_before = parseInt(settings.padding_digits_before);
     settings.padding_digits_after = parseInt(settings.padding_digits_after);
+    // eslint-disable-next-line max-len
     settings.padding_characters_before = parseInt(settings.padding_characters_before);
+    // eslint-disable-next-line max-len
     settings.padding_characters_after = parseInt(settings.padding_characters_after);
     settings.pad_to_length = parseInt(settings.pad_to_length);
 
     this.#model.setPreset({
       description: 'Custom preset',
-      config: settings
-    });
-  }
+      config: settings});
+  };
 
   /**
    * Prepare the config object as retrieved from XKPasswd library

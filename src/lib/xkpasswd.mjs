@@ -52,6 +52,9 @@ class XKPasswd {
   setPreset(preset) {
     this.#preset = new Presets(preset);
     this.#config = this.#preset.config();
+
+    // Refresh the statistics
+    this.#statsClass = new Statistics(this.#config);
   }
 
   /**
@@ -169,7 +172,7 @@ class XKPasswd {
       num = 1;
     }
     const passwords = [];
-    for (let i = 0; i < num; i++) {
+    for (let i = 0; i < num ; i++) {
       passwords.push(this.password());
     }
 

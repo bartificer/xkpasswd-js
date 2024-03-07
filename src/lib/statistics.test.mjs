@@ -406,10 +406,10 @@ describe('Test class Statistics', () => {
     test('with poor password strength', () => {
       // these are just the entropies
       const stats = {
-        entropyBlind: 179,
-        minEntropyBlind: 20,
-        maxEntropyBlind: 215,
-        entropySeen: 20,
+        entropyBlind: {value: 179},
+        minEntropyBlind: {value: 20},
+        maxEntropyBlind: {value: 215},
+        entropySeen: {value: 20},
       };
 
       expect(me.__passwordStrength(stats)).toBe('POOR');
@@ -418,16 +418,15 @@ describe('Test class Statistics', () => {
     test('with good password strength', () => {
       // these are just the entropies
       const stats = {
-        entropyBlind: 179,
-        minEntropyBlind: 143,
-        maxEntropyBlind: 215,
-        entropySeen: 60,
+        entropyBlind: {value: 179},
+        minEntropyBlind: {value: 143},
+        maxEntropyBlind: {value: 215},
+        entropySeen: {value: 60},
       };
 
       expect(me.__passwordStrength(stats)).toBe('GOOD');
     });
   });
-
 
   describe('Test calculateStats', () => {
     test('on mock (DEFAULT) preset', () => {

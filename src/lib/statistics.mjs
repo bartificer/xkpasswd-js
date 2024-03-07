@@ -561,8 +561,8 @@ class Statistics {
    * @private
    */
   __passwordStrength(stats) {
-    const minEntropyBlind = stats.minEntropyBlind;
-    const entropySeen = stats.entropySeen;
+    const minEntropyBlind = stats.minEntropyBlind.value;
+    const entropySeen = stats.entropySeen.value;
 
     const entropyBlindThreshold = this.#entropyBlindThreshold;
     const entropySeenThreshold = this.#entropySeenThreshold;
@@ -570,12 +570,12 @@ class Statistics {
     // mix of good and bad
     let passwordStrength = 'OK';
 
-    if (minEntropyBlind >= entropyBlindThreshold &&
-      entropySeen >= entropySeenThreshold) {
+    if ((minEntropyBlind >= entropyBlindThreshold) &&
+        (entropySeen >= entropySeenThreshold)) {
       // all good
       passwordStrength = 'GOOD';
-    } else if (minEntropyBlind < entropyBlindThreshold &&
-      entropySeen < entropySeenThreshold) {
+    } else if ((minEntropyBlind < entropyBlindThreshold) &&
+               (entropySeen < entropySeenThreshold)) {
       // all bad
       passwordStrength = 'POOR';
     }
