@@ -29,7 +29,6 @@ describe('Test class Presets', () => {
     },
   };
 
-
   describe('Test function getDefault()', () => {
     /*
      * Because it is a static function, I don't think I need to initialize
@@ -59,6 +58,34 @@ describe('Test class Presets', () => {
       expect(preset.getCurrent()).not.toEqual(def);
       expect(preset.getCurrent()).toEqual(mock);
       expect(preset.name()).toBe('CUSTOM');
+    });
+  });
+
+  describe('Test constructor', () => {
+    test('if the param is a string, it should return a predefined', () => {
+      const preset = new Presets('web16');
+      expect(preset.name()).toBe('WEB16');
+      expect(preset.config().word_length_min).toBe(4);
+    });
+    test('if the param is an object, it should return CUSTOM', () => {
+      const preset = new Presets(mock);
+      expect(preset.name()).toBe('CUSTOM');
+      expect(preset.config().case_transform).toBe('CAPITALIZE');
+    });
+    test('if the param is undefined, it should return DEFAULT', () => {
+      const preset = new Presets();
+      expect(preset.name()).toBe('DEFAULT');
+      expect(preset.config().case_transform).toBe('ALTERNATE');
+    });
+    test('if the param is an unknown string, it should return DEFAULT', () => {
+      const preset = new Presets('FAKE');
+      expect(preset.name()).toBe('DEFAULT');
+      expect(preset.config().case_transform).toBe('ALTERNATE');
+    });
+    test('if the param is not a string, it should return DEFAULT', () => {
+      const preset = new Presets(42);
+      expect(preset.name()).toBe('DEFAULT');
+      expect(preset.config().case_transform).toBe('ALTERNATE');
     });
   });
 

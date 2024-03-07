@@ -40,7 +40,7 @@ describe('Test XKPassword class', () => {
       expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
     });
 
-    test('seperator NONE returns empty string', () => {
+    test('separator NONE returns empty string', () => {
       const preset = {
         description: 'mock preset',
         config: {
@@ -52,7 +52,7 @@ describe('Test XKPassword class', () => {
       expect(r).toBe('');
     });
 
-    test('unknown seperator returns empty string', () => {
+    test('unknown separator returns empty string', () => {
       const preset = {
         description: 'mock preset',
         config: {
@@ -62,6 +62,18 @@ describe('Test XKPassword class', () => {
       me.setPreset(preset);
       const r = me.__separator();
       expect(r).toBe('');
+    });
+
+    test('character in separator returns character', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          separator_character: 'x',
+        },
+      };
+      me.setPreset(preset);
+      const r = me.__separator();
+      expect(r).toBe('x');
     });
   });
 
@@ -81,6 +93,19 @@ describe('Test XKPassword class', () => {
     });
 
     test('Check if it returns a character in the alphabet list', () => {
+      const r = me.__paddingChar('');
+      expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
+    });
+
+    test('Check if it returns a character from the DEFAULT.symbol_alphabet if alphabet is empty', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          padding_character: 'RANDOM',
+          padding_alphabet: '',
+        },
+      };
+      me.setPreset(preset);
       const r = me.__paddingChar('');
       expect(alphabet.toString().indexOf(r)).toBeGreaterThan(-1);
     });
@@ -132,6 +157,18 @@ describe('Test XKPassword class', () => {
       const r = me.__paddingChar('-');
       expect(r).toBe('');
     });
+
+    test('character in padding char returns character', () => {
+      const preset = {
+        description: 'mock preset',
+        config: {
+          padding_character: 'q',
+        },
+      };
+      me.setPreset(preset);
+      const r = me.__paddingChar('-');
+      expect(r).toBe('q');
+    });
   });
 
   describe('Test internal __adaptivePadding function', () => {
@@ -148,12 +185,12 @@ describe('Test XKPassword class', () => {
       const pw = me.__adaptivePadding(passwd, '+', 5);
 
       expect(pw).toHaveLength(5);
-      expect(pw).toBe('abcde'); ;
+      expect(pw).toBe('abcde');
     });
   });
 
   describe('Test function toTitleCase', () => {
-    test('string is lowercase', () => {
+    test('string is lowercase returns Lowercase', () => {
       expect(me.toTitleCase('lowercase')).toBe('Lowercase');
     });
   });
@@ -273,11 +310,11 @@ describe('Test XKPassword class', () => {
     });
 
     test('Check if the password function returns a random password', () => {
-    /*
-     * We check this by getting a password 10 times and check if they are
-     * different or the same.
-     * Success is when they are all different.
-     */
+      /*
+       * We check this by getting a password 10 times and check if they are
+       * different or the same.
+       * Success is when they are all different.
+       */
       const pwds = [];
 
       for (let index = 0; index < 10; index++) {

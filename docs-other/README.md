@@ -14,9 +14,15 @@ npm run cov # run the tests again but this time with test coverage. Coverage sho
 
 ## Hot build and reload
 
-The easiest way to achieve this is opening 2 Terminal windows in the root directory of this project.
+The easiest way to achieve this is opening a Terminal window in the root directory of this project.
 
-In one Terminal enter `npm run watch` to start the automatic build of Webpack. Webpack watches for changes in your files and automatically starts the build.
-In the other Terminal enter `npm run start` to start a local webserver that automatically restarts when there is a new build.
+In the Terminal enter `npm run start` to start a local webserver.
+This script will watch for any change in any file, and automatically start a
+a webpack build and restarts the server when there is a new build.
 
 In your webbrowser enter `http://localhost:8080` to find the webapp.
+
+## JS Docs
+
+If you want to see the docs locally, run `npm run docs`.
+You will find them in /dist/docs and also through the webapp in the Actions menu.

@@ -6,6 +6,7 @@
 
 import {RandomBasic} from './randombasic.mjs';
 import is from 'is-it-check';
+import log from 'loglevel';
 
 /**
  * This object contains all predefined config sets
@@ -128,7 +129,7 @@ const thePresets = {
       'and dictionary are known.',
     config: {
       padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
-      separator_alphabet: '- + = . * _ | ~, '.split(' '),
+      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
       word_length_min: 5,
       word_length_max: 5,
       num_words: 2,
@@ -185,6 +186,8 @@ const thePresets = {
 
 /**
  * Class that handles all presets
+ *
+ * @class Presets
  */
 class Presets {
   // private var holds the current preset
@@ -224,7 +227,7 @@ class Presets {
       this.#presetName = 'DEFAULT';
     } else {
       if (is.string(preset)) {
-        preset = preset.toUppercase();
+        preset = preset.toUpperCase();
         if (this.#presets.indexOf(preset) > -1) {
           this.#current = thePresets[preset];
           this.#presetName = preset;
@@ -241,8 +244,16 @@ class Presets {
           this.#presetName = 'DEFAULT';
         }
       }
-    }
+    };
+
+    // fix the padding and separator alphabet
+    this.#current.config.separator_alphabet = this.getSeparatorAlphabet();
+    this.#current.config.padding_alphabet = this.getPaddingAlphabet();
+
+    log.trace(`Preset constructor set to ${this.#presetName}`);
   }
+
+
   /**
    * Get the default preset
    *
@@ -287,6 +298,14 @@ class Presets {
     return this.#presetName;
   }
 
+  /**
+   * Get the list of available presets
+   *
+   * @return {Array} keys of presets
+   */
+  getPresets() {
+    return this.#presets;
+  }
 
   /**
    * Get the list of separator characters
@@ -295,10 +314,12 @@ class Presets {
    * @return {Array} the list of characters
    */
   getSeparatorAlphabet() {
-    const alphabet =
+    let alphabet =
         (is.not.undefined(this.#current.config.separator_alphabet) ?
           this.#current.config.separator_alphabet :
           this.#current.config.symbol_alphabet);
+    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
   }
 
@@ -309,12 +330,14 @@ class Presets {
    * @return {Array} the list of characters
    */
   getPaddingAlphabet() {
-    const alphabet =
+    let alphabet =
           (is.not.undefined(this.#current.config.padding_alphabet) ?
             this.#current.config.padding_alphabet :
             this.#current.config.symbol_alphabet);
+    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
     return alphabet;
   }
-};
+}
 
 export {Presets};

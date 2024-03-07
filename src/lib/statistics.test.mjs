@@ -200,10 +200,10 @@ describe('Test class Statistics', () => {
       /* eslint-disable max-len */
 
       expect(me.__calculateEntropyStats()).toEqual({
-        minPermutationsBlind: 10408797222153426578715765348940396820955136n,
-        maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
-        permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
-        permutationsSeen: 1399680000n,
+        // minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+        // maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+        // permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+        // permutationsSeen: 1399680000n,
         entropyBlind: 179,
         minEntropyBlind: {
           value: 143,
@@ -406,10 +406,10 @@ describe('Test class Statistics', () => {
     test('with poor password strength', () => {
       // these are just the entropies
       const stats = {
-        entropyBlind: 179,
-        minEntropyBlind: 20,
-        maxEntropyBlind: 215,
-        entropySeen: 20,
+        entropyBlind: {value: 179},
+        minEntropyBlind: {value: 20},
+        maxEntropyBlind: {value: 215},
+        entropySeen: {value: 20},
       };
 
       expect(me.__passwordStrength(stats)).toBe('POOR');
@@ -418,10 +418,10 @@ describe('Test class Statistics', () => {
     test('with good password strength', () => {
       // these are just the entropies
       const stats = {
-        entropyBlind: 179,
-        minEntropyBlind: 143,
-        maxEntropyBlind: 215,
-        entropySeen: 60,
+        entropyBlind: {value: 179},
+        minEntropyBlind: {value: 143},
+        maxEntropyBlind: {value: 215},
+        entropySeen: {value: 60},
       };
 
       expect(me.__passwordStrength(stats)).toBe('GOOD');
@@ -446,10 +446,10 @@ describe('Test class Statistics', () => {
           containsAccents: false,
         },
         entropy: {
-          minPermutationsBlind: 10408797222153426578715765348940396820955136n,
-          maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
-          permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
-          permutationsSeen: 1399680000n,
+          // minPermutationsBlind: 10408797222153426578715765348940396820955136n,
+          // maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
+          // permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          // permutationsSeen: 1399680000n,
           entropyBlind: 179,
           minEntropyBlind: {
             value: 143,

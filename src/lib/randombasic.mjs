@@ -30,7 +30,7 @@ class RandomBasic {
   /**
    * Generate a number of random digits
    *
-   * @param {Integer} num - number of random digits to generate,
+   * @param {number} num - number of random digits to generate,
    *  defaults to empty string if not given
    * @return {Array} - array of random digits
    * @throws Exception when parameter is not a number
@@ -41,8 +41,8 @@ class RandomBasic {
     if (is.null(num) || is.undefined(num) || num <= 0) {
       return '';
     }
-    if (is.not.integer(num)) {
-      const errMsg = 'Parameter "num" is not an integer! [' + num + ']';
+    if (is.not.number(num)) {
+      const errMsg = 'Parameter "num" is not a number! [' + num + ']';
       // log.error('ERROR', errMsg);
       throw new Error(errMsg);
     }

@@ -1285,6 +1285,7 @@ class DictionaryEN extends Dictionary {
   constructor() {
     super();
     super.__setLength(THE_WORDS.length);
+    super.__setWordLength();
   }
 
 
