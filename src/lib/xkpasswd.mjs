@@ -340,7 +340,7 @@ class XKPasswd {
       break;
     case 'RANDOM':
       const alphabet = this.#config.separator_alphabet;
-      separator = this.#rng.randomChar(alphabet.join(''));
+      separator = this.#rng.randomChar(alphabet);
       break;
     default:
       /* istanbul ignore next @preserve : too simple to test */
@@ -373,7 +373,7 @@ class XKPasswd {
       break;
     case 'RANDOM':
       const alphabet = this.#config.padding_alphabet;
-      paddingCharacter = this.#rng.randomChar(alphabet.join(''));
+      paddingCharacter = this.#rng.randomChar(alphabet);
       break;
     case 'FIXED':
       paddingCharacter = this.#config.padding_character;

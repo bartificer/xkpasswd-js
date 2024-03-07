@@ -195,7 +195,7 @@ const thePresets = {
       'before and after, and padded with two random characters front and back',
     config: {
       // eslint-disable-next-line max-len
-      symbol_alphabet: '! @ $ % ^ & * - _ + = : | ~ ? / . ;'.split(' '),
+      symbol_alphabet: '!@$%^&*-_+=:|~?/.;',
       word_length_min: 4,
       word_length_max: 8,
       num_words: 3,
@@ -220,12 +220,12 @@ const thePresets = {
       num_words: 4,
       case_transform: 'ALTERNATE',
       separator_type: 'RANDOM',
-      separator_alphabet: '- + = . * _ | ~ '.split(' '),
+      separator_alphabet: '-+=.*_|~',
       padding_digits_before: 2,
       padding_digits_after: 2,
       padding_type: 'FIXED',
       padding_character_type: 'RANDOM',
-      padding_alphabet: '! @ $ % ^ & * + = : | ~ '.split(' '),
+      padding_alphabet: '!@$%^&*+=:|~',
       padding_characters_before: 1,
       padding_characters_after: 1,
       allow_accents: 0,
@@ -239,7 +239,7 @@ const thePresets = {
       'always generate entropy warnings for the case where the ' +
       'config and dictionary are known.',
     config: {
-      symbol_alphabet: '! @ $ % ^ & * - _ + = : | ~ ? / . '.split(' '),
+      symbol_alphabet: '!@$%^&*-_+=:|~?/.',
       word_length_min: 4,
       word_length_max: 4,
       num_words: 3,
@@ -262,13 +262,13 @@ const thePresets = {
       num_words: 6,
       case_transform: 'RANDOM',
       separator_type: 'RANDOM',
-      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
+      separator_alphabet: '-+=.*_|~,',
       padding_type: 'ADAPTIVE',
       pad_to_length: 63,
       padding_digits_before: 4,
       padding_digits_after: 4,
       padding_character_type: 'RANDOM',
-      padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
+      padding_alphabet: '!@$%^&*+=:|~?',
       allow_accents: 0,
     },
   },
@@ -284,14 +284,14 @@ const thePresets = {
       num_words: 3,
       case_transform: 'RANDOM',
       separator_type: 'RANDOM',
-      separator_alphabet: '- : . @ } '.split(' '),
+      separator_alphabet: '-:.@}',
       padding_type: 'FIXED',
       padding_digits_before: 2,
       padding_digits_after: 2,
       padding_character_type: 'RANDOM',
       padding_characters_before: 1,
       padding_characters_after: 1,
-      padding_alphabet: '- : . ! ? @ &'.split(' '),
+      padding_alphabet: '-:.!?@&',
       allow_accents: 0,
     },
   },
@@ -308,14 +308,14 @@ const thePresets = {
       num_words: 2,
       case_transform: 'INVERT',
       separator_type: 'RANDOM',
-      separator_alphabet: '- + = . * _ | ~ ,'.split(' '),
+      separator_alphabet: '-+=.*_|~,',
       padding_digits_before: 1,
       padding_digits_after: 0,
       padding_type: 'FIXED',
       padding_character_type: 'RANDOM',
       padding_characters_before: 0,
       padding_characters_after: 1,
-      padding_alphabet: '! @ $ % ^ & * + = : | ~ ?'.split(' '),
+      padding_alphabet: '!@$%^&*+=:|~?',
       allow_accents: 0,
     },
   },
@@ -332,7 +332,7 @@ const thePresets = {
       padding_digits_after: 0,
       padding_type: 'FIXED',
       padding_character_type: 'RANDOM',
-      padding_alphabet: '. ! ?'.split(' '),
+      padding_alphabet: '.!?',
       padding_characters_before: 0,
       padding_characters_after: 1,
       allow_accents: 0,
@@ -559,7 +559,7 @@ class Presets {
 
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return alphabet;
+    return is.array(alphabet) ? alphabet.join('') : alphabet;
   }
 
   /**
@@ -582,7 +582,7 @@ class Presets {
             tmpConfig.symbol_alphabet);
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return alphabet;
+    return is.array(alphabet) ? alphabet.join('') : alphabet;
   }
 
   /**

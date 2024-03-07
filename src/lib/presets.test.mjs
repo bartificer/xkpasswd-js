@@ -444,14 +444,14 @@ describe('Test class Presets', () => {
       const config = {...def.config()};
       config.padding_character_type = 'RANDOM';
       config.padding_character = undefined;
-      config.padding_alphabet = ['x', 'y', '!'];
+      config.padding_alphabet = 'xy!';
 
       const me = new Presets();
       const actual = me.__getPaddingCharacterConfig(config);
       const expected = {
         paddingCharType: 'RANDOM',
         paddingCharacter: '',
-        paddingAlphabet: ['x', 'y', '!'],
+        paddingAlphabet: 'xy!',
       };
       expect(actual).toEqual(expected);
     });
@@ -463,7 +463,7 @@ describe('Test class Presets', () => {
       const config = {...def.config()};
       config.padding_character_type = 'FIXED';
       config.padding_character = undefined;
-      config.padding_alphabet = ['x', 'y', '!'];
+      config.padding_alphabet = 'xy!';
 
       const me = new Presets();
       expect(() => {
@@ -477,14 +477,14 @@ describe('Test class Presets', () => {
       const config = {...def.config()};
       config.padding_character_type = 'FIXED';
       config.padding_character = 'A';
-      config.padding_alphabet = ['x', 'y', '!'];
+      config.padding_alphabet = 'xy!';
 
       const me = new Presets();
       const actual = me.__getPaddingCharacterConfig(config);
       const expected = {
         paddingCharType: 'FIXED',
         paddingCharacter: 'A',
-        paddingAlphabet: ['x', 'y', '!'],
+        paddingAlphabet: 'xy!',
       };
       expect(actual).toEqual(expected);
     });
