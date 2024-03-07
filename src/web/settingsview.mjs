@@ -87,8 +87,6 @@ class SettingsView {
      * This removes the need for a 'save' button.
      */
     $('form#passwordSettings').on('change', (e) => {
-      e.preventDefault();
-      e.stopPropagation(); // stop the event bubbling
       const form = e.target.form;
 
       log.trace('starting validity checks.');
@@ -107,7 +105,6 @@ class SettingsView {
         const formData = new FormData(form);
         const data = {};
         [...formData.keys()].forEach((key) => {
-          log.trace(`formData.key = ${key}`);
           const values = formData.getAll(key);
           data[key] = (values.length > 1) ? values : values.join();
         });
@@ -155,10 +152,6 @@ class SettingsView {
     default:
         log.warn(`WARNING - Received invalid separator_type (${separatorType})`);
       break;
-    }
-
-    if (typeof e != 'string') {
-      e.stopPropagation();
     }
   };
 
@@ -211,9 +204,6 @@ class SettingsView {
       } catch (e) {};
       break;
     }
-    if (typeof e != 'string') {
-      e.stopPropagation();
-    }
   };
 
   /**
@@ -227,9 +217,6 @@ class SettingsView {
      */
   __togglePaddingCharType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
-    if (typeof e != 'string') {
-      e.stopPropagation();
-    }
     log.trace(`__togglePaddingCharType: ${paddingType}`);
 
     switch (paddingType) {
@@ -262,9 +249,7 @@ class SettingsView {
       $('#padding_alphabet').hide(this.#aniTime);
       break;
     default:
-      try {
         log.log(`WARNING - Received invalid padding_type=${paddingType}`);
-      } catch (e) {};
       break;
     };
   };
