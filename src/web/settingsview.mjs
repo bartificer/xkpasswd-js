@@ -118,7 +118,6 @@ class SettingsView {
     });
   }
 
-
   /**
      * Toggle visibility of separator type related
      * elements
@@ -160,6 +159,7 @@ class SettingsView {
       } catch (e) {};
       break;
     }
+
     if (typeof e != 'string') {
       e.stopPropagation();
     }

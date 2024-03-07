@@ -502,7 +502,7 @@ class Presets {
    * @private
    *
    * @param {Object} config - object with properties set
-   * @return {Object} - the normalised config
+   * @return {Object} - the normalized config
    */
   __normalize(config) {
     // create a clone so we can safely reference the original value
@@ -522,11 +522,6 @@ class Presets {
       separatorCharacter,
       separatorAlphabet} = this.__getSeparatorConfig(config);
 
-    // console.log(`
-    // separatorType: ${separatorType} - ${config.separator_type}
-    // separatorCharacter: ${separatorCharacter} - ${config.separator_character}
-    // separatorAlphabet: ${separatorAlphabet} - ${config.separator_alphabet}
-    // `);
     newConfig.separator_type = separatorType;
     newConfig.separator_character = separatorCharacter;
     newConfig.separator_alphabet = separatorAlphabet;
