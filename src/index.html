@@ -25,7 +25,7 @@
               <!-- show this up to lg -->
               <source media="(max-width: 768px)" srcset="assets/topBanner.png">
               <!-- else show this -->
-              <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
+              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
             </picture>
           </section>
         </div> <!-- close row for topBanner on mobile screens -->
@@ -301,7 +301,7 @@
           <!-- show this on large and above -->
         <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
         <!-- else show this -->
-        <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
+        <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
         </picture>
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
@@ -313,7 +313,6 @@
           <div class="card-header d-flex align-items-center">
             <span class=" text-uppercase">Passwords</span>
           </div>
-          <label class="visually-hidden" for="generated_password">Generated Passwords</label>
           <div class="card-body">
             <label for="generated_password" class="visually-hidden">Password Area</label>
             <ul id="generated_password" style="list-style-type:none;"></ul>
