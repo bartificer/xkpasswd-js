@@ -52,7 +52,7 @@ class SettingsView {
     this.__togglePaddingCharType(preset.padding_character_type);
   };
 
-    /**
+  /**
    * Bind the form to the event handler.
    *
    * A change in any field of the form will trigger the form
@@ -67,14 +67,13 @@ class SettingsView {
    * @param {Function} handle - pass control to the Controller
    */
   bindSaveSettings(handle) {
-
     /*
      * Check if the form is valid when the user has clicked away from
      * the form. This should help the user find the field with invalid input
      * if he/she has accidentally closed the accordion bar and the generate
      * button is disabled.
-     * Opening the form and clicking in any field should reveal the error message
-     * of the culprit.
+     * Opening the form and clicking in any field should reveal the
+     * error message of the culprit.
      */
     $('form#passwordSettings').on('focusin', (e) => {
       const form = e.target.form;
@@ -93,11 +92,9 @@ class SettingsView {
 
       // check if the form is valid and if not, show the error message
       if (!form.reportValidity()) {
-
         // the form is not valid, so disable the Generate button
         $('#generate').addClass('disabled');
-      }
-      else {
+      } else {
         // the form is valid, so enable the Generate button
         $('#generate').removeClass('disabled');
 
@@ -150,7 +147,8 @@ class SettingsView {
       break;
 
     default:
-        log.warn(`WARNING - Received invalid separator_type (${separatorType})`);
+      // eslint-disable-next-line max-len
+      log.warn(`WARNING - Received invalid separator_type (${separatorType})`);
       break;
     }
   };
@@ -249,7 +247,7 @@ class SettingsView {
       $('#padding_alphabet').hide(this.#aniTime);
       break;
     default:
-        log.log(`WARNING - Received invalid padding_type=${paddingType}`);
+      log.log(`WARNING - Received invalid padding_type=${paddingType}`);
       break;
     };
   };
