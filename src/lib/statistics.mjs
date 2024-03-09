@@ -342,8 +342,8 @@ class Statistics {
     // TODO replace pseudocode with real code
     //  if($self->_passwords_will_contain_symbol()
     // || $self->{_CACHE_CONTAINS_ACCENTS}){
-    
-   /* istanbul ignore next @preserve : not in use */
+
+    /* istanbul ignore next @preserve : not in use */
     if (false) {
       // the config almost certainly includes a symbol,
       // so add 33 to the alphabet (like password haystacks does)

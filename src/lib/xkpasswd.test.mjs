@@ -53,7 +53,7 @@ describe('Test XKPassword class', () => {
       expect(r).toBe('');
     });
 
-        test('separator NONE returns empty string', () => {
+    test('separator NONE returns empty string', () => {
       const preset = {
         description: 'mock preset',
         config: {
@@ -198,7 +198,7 @@ describe('Test XKPassword class', () => {
       expect(pw).toBe(passwd + '    ');
     });
 
-        test('it uses a space if padChar is empty', () => {
+    test('it uses a space if padChar is empty', () => {
       const passwd = 'abcdef';
       const pw = me.__adaptivePadding(passwd, '', 10);
 
@@ -513,6 +513,5 @@ describe('Test XKPassword class', () => {
       me.setPreset('APPLEID'); // preset with matching config
       expect(me.__padWithChar('abc', '-')).toBe('-abc-');
     });
-
   });
 });
