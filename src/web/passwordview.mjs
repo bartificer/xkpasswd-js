@@ -52,7 +52,7 @@ class PasswordView {
   constructor() {
     this.#passwordPresentation = $('#password_presentation');
     this.#passwordPresentationRadio = $('input:radio[name=pwdPresentation]');
-    this.#passwordList = $('ul#generated_password_lst');
+    this.#passwordList = $('#generated_password_lst');
     this.#passwordText = $('#generated_password_txt');
     this.#passwordErrorContainer = $('#passwordErrorContainer');
     this.#passwordStatsContainer = $('#password_stats_container');
@@ -149,17 +149,27 @@ class PasswordView {
         // Make the index a number so we can perform math as needed.
         const theIndex = Number.parseInt(pwdIndex);
 
-        htmlPwdList = htmlPwdList.concat(`
-            <li>
-                <button id="copyclip_${theIndex}"
-                        class="btn btn-clipboard bi-clipboard"
-                        aria-label="Copy Password #${theIndex+1}">
-                </button>
-                ${passAndStats.passwords[theIndex]}
-            </li>
-        `);
-      }
-      this.#passwordList.html(htmlPwdList);
+      //   htmlPwdList = htmlPwdList.concat(`
+      //       <li>
+      //           <button id="copyclip_${theIndex}"
+      //                   class="btn btn-clipboard bi-clipboard"
+      //                   aria-label="Copy Password #${theIndex+1}">
+      //           </button>
+      //           ${passAndStats.passwords[theIndex]}
+      //       </li>
+      //   `);
+      // }
+      htmlPwdList = htmlPwdList.concat(`
+      <a href="#" id="copyclip_${theIndex}"
+        class="list-group-item list-group-item-action px-0"
+        aria-label="Copy Password #${theIndex+1}">
+          <i class="bi bi-clipboard me-3"></i>
+          ${passAndStats.passwords[theIndex]}
+      </a>
+  `);
+}
+
+      this.#passwordList.append(htmlPwdList);
 
       // Add event handlers for the copy buttons
       // eslint-disable-next-line guard-for-in

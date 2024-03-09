@@ -83,7 +83,14 @@ body {
   padding: 0;
 }
 
-.link { color: #0602e8; }
+.password-textbox {
+  overflow: auto;
+  resize: none;
+}
+
+.link {
+  color: #0602e8;
+}
 
 .input-group-text {
   font-weight: 400;
