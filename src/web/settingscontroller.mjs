@@ -56,6 +56,15 @@ class SettingsController {
       description: 'Custom preset',
       config: settings});
   };
+
+  /**
+   * Update settings with the presets
+   *
+   * @param {Object} config - the configuration
+   */
+  updateSettings(config) {
+    this.#view.renderSettings(config);
+  }
 };
 
 export {SettingsController};
