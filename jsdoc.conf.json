@@ -9,8 +9,7 @@
       "./src/",
       "./src/lib/"
     ],
-    "includePattern": ".+\\.(mjs|js|jsdoc)$",
-    "excludePattern": ".*statistics.*"
+    "includePattern": ".+\\.(mjs|js|jsdoc)$"
   },
   "sourceType": "module",
   "plugins": [
