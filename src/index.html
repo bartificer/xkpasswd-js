@@ -25,7 +25,7 @@
               <!-- show this up to lg -->
               <source media="(max-width: 768px)" srcset="assets/topBanner.png">
               <!-- else show this -->
-              <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
+              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
             </picture>
           </section>
         </div> <!-- close row for topBanner on mobile screens -->
@@ -285,7 +285,7 @@
                 <div class="col-3 "> <!-- open col for Generate -->
                   <div class="input-group mt-2">
                     <button id="generate" type="submit" class="btn btn-primary"
-                      aria-label="generate passwords">Generate</button>
+                      aria-label="generate passwords" tabindex="0">Generate</button>
                   </div>
                 </div>
               </div>
@@ -301,7 +301,7 @@
           <!-- show this on large and above -->
         <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
         <!-- else show this -->
-        <img class="img-fluid" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
+        <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
         </picture>
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
@@ -311,12 +311,18 @@
       <section id="password-card" class="order-3">
         <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
           <div class="card-header d-flex align-items-center">
-            <span class=" text-uppercase">Passwords</span>
+            <span class="text-uppercase">Passwords</span>
           </div>
-          <label class="visually-hidden" for="generated_password">Generated Passwords</label>
           <div class="card-body">
-            <label for="generated_password" class="visually-hidden">Password Area</label>
-            <ul id="generated_password" style="list-style-type:none;"></ul>
+            <section id="password_presentation">
+                <input type="radio" name="pwdPresentation" value="lst" aria-description="Present passwords in a list" tabindex="0" checked>
+                <label for="lst" class="bi bi-list-ul" style="margin-left:0.5em;margin-right:1em"></label>
+                <input type="radio" name="pwdPresentation" value="txt" aria-description="Present passwords as a block of text" tabindex="0">
+                <label for="txt" class="bi bi-file-earmark-text" style="margin-left:0.5em;margin-right:1em"></label>
+            </section>
+            <ul id="generated_password_lst" style="list-style-type:none;"></ul>
+            <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
+                      style="overflow:auto;resize:none" rows="3" id="generated_password_txt" aria_label="Bulk password text"></textarea>
 
             <div id="passwordErrorContainer"></div>
 

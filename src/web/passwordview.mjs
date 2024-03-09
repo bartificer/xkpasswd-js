@@ -35,7 +35,10 @@ class PasswordView {
     },
   };
 
+  #passwordPresentation;
+  #passwordPresentationRadio;
   #passwordList;
+  #passwordText;
   #passwordErrorContainer;
   #passwordStatsContainer;
   #passwordStrength;
@@ -47,7 +50,10 @@ class PasswordView {
    * @constructor
    */
   constructor() {
-    this.#passwordList = $('ul#generated_password');
+    this.#passwordPresentation = $('#password_presentation');
+    this.#passwordPresentationRadio = $('input:radio[name=pwdPresentation]');
+    this.#passwordList = $('ul#generated_password_lst');
+    this.#passwordText = $('#generated_password_txt');
     this.#passwordErrorContainer = $('#passwordErrorContainer');
     this.#passwordStatsContainer = $('#password_stats_container');
     this.#passwordStrength = $('#password_strength');
@@ -56,10 +62,73 @@ class PasswordView {
     this.#entropySuggestion = $('#entropy_suggestion');
     this.#numberOfPasswords = $('#selectAmount');
 
-    this.#passwordList.html('');
+    // Register for changes to the password presentation mode.
+    for (const item of this.#passwordPresentationRadio) {
+      try {
+        item.addEventListener('change', async ()=>{
+          this.__updatePasswordUI();
+        });
+      } catch (err) {
+        log.trace('Error registering for password presentation events.');
+      }
+    }
 
+    this.__resetPasswordUI();
     this.__hideStats();
   };
+
+  /**
+   * Reset the password UI elements.
+   */
+  __resetPasswordUI() {
+    this.#passwordPresentation.addClass('d-none');
+    this.#passwordList.html('');
+    this.#passwordText.val('');
+    // Make both password content elements invisble.
+    this.#passwordList.addClass('d-none');
+    this.#passwordText.addClass('d-none');
+
+    // Clear out existing events.
+    const existingListItems = this.#passwordList.find('button');
+    for (const item of existingListItems) {
+      if (item.hasOwnProperty('removeEventListener')) {
+        item.removeEventListener('click');
+      }
+    }
+  }
+
+  /**
+   * Update the password UI elements
+   * based upon the password presentation mode.
+   */
+  __updatePasswordUI() {
+    // Show the presentation selection
+    this.#passwordPresentation.removeClass('d-none');
+
+    // Get the password presentation mode.
+    // eslint-disable-next-line max-len
+    const pwdPresentation = $('input:radio[name=pwdPresentation]:checked').val();
+    if (pwdPresentation === 'lst') {
+      // Hide the text area
+      this.#passwordText.addClass('d-none');
+      // Show the list container
+      this.#passwordList.removeClass('d-none');
+    } else {
+      // Cache the current password text.
+      const currentPasswords = this.#passwordText.val();
+      // Clear the passwords (to help manage focus)
+      this.#passwordText.val('');
+      // Put the passwords back. (focus has been reset).
+      this.#passwordText.val(currentPasswords);
+
+      // Hide the list container
+      this.#passwordList.addClass('d-none');
+      // Show the text area container
+      this.#passwordText.removeClass('d-none');
+      // Select the password text.
+      this.#passwordText[0].select();
+    }
+  }
 
   /**
    * Render the password and statistics
@@ -70,16 +139,7 @@ class PasswordView {
   renderPassword(passAndStats, num) {
     log.trace(`renderPassword: ${JSON.stringify(passAndStats)}`);
 
-    // Clear out existing events.
-    const existingListItems = this.#passwordList.find('button');
-    for (const item of existingListItems) {
-      if (item && item.hasOwnProperty('removeEventListener')) {
-        item.removeEventListener('click');
-      }
-    }
-
-    // Clear the existing list
-    this.#passwordList.html('');
+    this.__resetPasswordUI();
 
     // Populate the password list.
     if (passAndStats.passwords) {
@@ -88,6 +148,7 @@ class PasswordView {
       for (const pwdIndex in passAndStats.passwords) {
         // Make the index a number so we can perform math as needed.
         const theIndex = Number.parseInt(pwdIndex);
+
         htmlPwdList = htmlPwdList.concat(`
             <li>
                 <button id="copyclip_${theIndex}"
@@ -111,6 +172,14 @@ class PasswordView {
           });
         }
       }
+
+      // Update the text area
+      this.#passwordText.val(passAndStats.passwords.join('\n'));
+      // Set passwordArea height to accommodate number of passwords
+      this.#passwordText.attr('rows', num);
+
+      // Update the Password UI elements.
+      this.__updatePasswordUI();
     }
 
     this.__renderDetailedStats(passAndStats.stats);

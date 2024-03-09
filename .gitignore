@@ -109,3 +109,5 @@ xkpasswd-js.code-workspace
 
 # JSDocs directory is under dist
 archive
+
+.DS_Store
