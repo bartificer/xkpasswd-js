@@ -78,6 +78,11 @@ body {
   font-weight: 800;
 }
 
+.password-list {
+  list-style-type: none;
+  padding: 0;
+}
+
 .link { color: #0602e8; }
 
 .input-group-text {
