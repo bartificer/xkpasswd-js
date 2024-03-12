@@ -27,50 +27,6 @@ body {
   max-height: 350px;
 }
 
-.bd-edit {
-  position: relative;
-  display: none;
-  float: right
-}
-
-.bd-edit+.highlight {
-  margin-top: 0
-}
-
-@media (min-width: 768px) {
-  .bd-clipboard,.bd-edit {
-      display:block
-  }
-}
-
-.btn-edit {
-  display: block;
-  padding: .5em;
-  line-height: 1;
-  color: var(--bs-body-color);
-  background-color: var(--bd-pre-bg);
-  border: 0;
-  border-radius: .25rem
-}
-
-.btn-clipboard:hover,.btn-edit:hover {
-  color: var(--bs-link-hover-color)
-}
-
-.btn-clipboard:focus,.btn-edit:focus {
-  z-index: 3
-}
-
-.btn-clipboard {
-  position: relative;
-  color: var(--bs-body-color);
-  padding: .5em;
-  background-color: var(--bd-pre-bg);
-  border-radius: .25rem;
-  z-index: 2;
-  margin: 5px;
-}
-
 .btn-stats {
   --bs-btn-padding-y: .15rem;
   --bs-btn-padding-x: .5rem;
@@ -79,9 +35,6 @@ body {
   font-weight: 800;
 }
 
-.password-list {
-  list-style-type: none;
-  padding: 0;
 /* make the checkmark bold, bigger and green */
 #generated_password_lst button.list-group-item i.bi-check {
   color: rgba(var(--bs-success-rgb)) !important;

@@ -151,16 +151,6 @@ class PasswordView {
 
     // Populate the password list.
 
-      //   htmlPwdList = htmlPwdList.concat(`
-      //       <li>
-      //           <button id="copyclip_${theIndex}"
-      //                   class="btn btn-clipboard bi-clipboard"
-      //                   aria-label="Copy Password #${theIndex+1}">
-      //           </button>
-      //           ${passAndStats.passwords[theIndex]}
-      //       </li>
-      //   `);
-      // }
     let htmlPwdList='';
     // eslint-disable-next-line guard-for-in
     for (const pwdIndex in passAndStats.passwords) {
