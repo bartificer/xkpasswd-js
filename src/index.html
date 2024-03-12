@@ -19,13 +19,14 @@
     <div class="row"> <!-- open row for all content above footer -->
       <section id="main" class="col order-2"> <!-- open section for content right of graphic -->
 
-        <div class="row">  <!-- open row for topBanner on mobile screens -->
+        <div class="row"> <!-- open row for topBanner on mobile screens -->
           <section id="top-art" class="col order-4 d-inline-flex d-lg-none">
             <picture>
               <!-- show this up to lg -->
               <source media="(max-width: 768px)" srcset="assets/topBanner.png">
               <!-- else show this -->
-              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/topBanner.png">
+              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators"
+                src="assets/topBanner.png">
             </picture>
           </section>
         </div> <!-- close row for topBanner on mobile screens -->
@@ -284,8 +285,8 @@
                 </div>
                 <div class="col-3 "> <!-- open col for Generate -->
                   <div class="input-group mt-2">
-                    <button id="generate" type="submit" class="btn btn-primary"
-                      aria-label="generate passwords" tabindex="0">Generate</button>
+                    <button id="generate" type="submit" class="btn btn-primary" aria-label="generate passwords"
+                      tabindex="0">Generate</button>
                   </div>
                 </div>
               </div>
@@ -299,9 +300,10 @@
       <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline"> <!-- open section for graphic -->
         <picture>
           <!-- show this on large and above -->
-        <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
-        <!-- else show this -->
-        <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators" src="assets/sideBanner.png">
+          <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
+          <!-- else show this -->
+          <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators"
+            src="assets/sideBanner.png">
         </picture>
       </section> <!-- close section for graphic -->
     </div> <!-- close opening row -->
@@ -315,14 +317,17 @@
           </div>
           <div class="card-body">
             <section id="password_presentation">
-                <input type="radio" name="pwdPresentation" value="lst" aria-description="Present passwords in a list" tabindex="0" checked>
-                <label for="lst" class="bi bi-list-ul" style="margin-left:0.5em;margin-right:1em"></label>
-                <input type="radio" name="pwdPresentation" value="txt" aria-description="Present passwords as a block of text" tabindex="0">
-                <label for="txt" class="bi bi-file-earmark-text" style="margin-left:0.5em;margin-right:1em"></label>
+              <input type="radio" name="pwdPresentation" value="lst" aria-description="Present passwords in a list"
+                tabindex="0" checked>
+              <label for="lst" class="bi bi-list-ul" style="margin-left:0.5em;margin-right:1em"></label>
+              <input type="radio" name="pwdPresentation" value="txt"
+                aria-description="Present passwords as a block of text" tabindex="0">
+              <label for="txt" class="bi bi-file-earmark-text" style="margin-left:0.5em;margin-right:1em"></label>
             </section>
             <ul id="generated_password_lst" style="list-style-type:none;"></ul>
             <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3"
-                      style="overflow:auto;resize:none" rows="3" id="generated_password_txt" aria_label="Bulk password text"></textarea>
+              style="overflow:auto;resize:none" rows="3" id="generated_password_txt"
+              aria_label="Bulk password text"></textarea>
 
             <div id="passwordErrorContainer"></div>
 
@@ -352,14 +357,16 @@
       <div class="col">
         Inspired by <a href="https://xkcd.com/936/" target="_blank" class="link">XKCD</a> and <a
           href="https://www.grc.com/haystack.htm" target="_blank" class="link">Password Hay Stacks</a> |
-        Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank" class="link">XKPasswd on GitHub</a>
+        Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank" class="link">XKPasswd on
+          GitHub</a>
       </div>
     </footer>
   </div>
 
   <!-- Modal about-->
   <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
-  <div class="modal fade" id="about" fouc="true" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true" style="visibility: hidden;">
+  <div class="modal fade" id="about" fouc="true" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true"
+    style="visibility: hidden;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -395,7 +402,8 @@
 
   <!-- Modal donate -->
   <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
-  <div class="modal fade" id="donate" fouc="true" tabindex="-1" aria-labelledby="donateLabel" aria-hidden="true" style="visibility: hidden;">
+  <div class="modal fade" id="donate" fouc="true" tabindex="-1" aria-labelledby="donateLabel" aria-hidden="true"
+    style="visibility: hidden;">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -409,8 +417,7 @@
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
               <input type="hidden" name="cmd" value="_s-xclick">
               <input type="hidden" name="hosted_button_id" value="HEYHNGKY8EASE">
-              <input type="image" name="submit"
-                src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+              <input type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
                 alt="PayPal - The safer, easier way to pay online!">
 
             </form>
