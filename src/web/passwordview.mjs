@@ -141,13 +141,15 @@ class PasswordView {
 
     this.__resetPasswordUI();
 
+    // return fast if there are no passwords
+    if (!passAndStats.passwords) {
+      // no passwords found
+      this.__hideStats();
+      this.renderPasswordError('No passwords generated');
+      return;
+    }
+
     // Populate the password list.
-    if (passAndStats.passwords) {
-      let htmlPwdList='';
-      // eslint-disable-next-line guard-for-in
-      for (const pwdIndex in passAndStats.passwords) {
-        // Make the index a number so we can perform math as needed.
-        const theIndex = Number.parseInt(pwdIndex);
 
       //   htmlPwdList = htmlPwdList.concat(`
       //       <li>
@@ -159,6 +161,12 @@ class PasswordView {
       //       </li>
       //   `);
       // }
+    let htmlPwdList='';
+    // eslint-disable-next-line guard-for-in
+    for (const pwdIndex in passAndStats.passwords) {
+      // Make the index a number so we can perform math as needed.
+      const theIndex = Number.parseInt(pwdIndex);
+
       htmlPwdList = htmlPwdList.concat(`
       <a href="#" id="copyclip_${theIndex}"
         class="list-group-item list-group-item-action px-0"
@@ -183,14 +191,13 @@ class PasswordView {
         }
       }
 
-      // Update the text area
-      this.#passwordText.val(passAndStats.passwords.join('\n'));
-      // Set passwordArea height to accommodate number of passwords
-      this.#passwordText.attr('rows', num);
+    // Update the text area
+    this.#passwordText.val(passAndStats.passwords.join('\n'));
+    // Set passwordArea height to accommodate number of passwords
+    this.#passwordText.attr('rows', num);
 
-      // Update the Password UI elements.
-      this.__updatePasswordUI();
-    }
+    // Update the Password UI elements.
+    this.__updatePasswordUI();
 
     this.__renderDetailedStats(passAndStats.stats);
   };
