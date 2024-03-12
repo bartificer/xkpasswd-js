@@ -69,7 +69,7 @@ class PasswordView {
           this.__updatePasswordUI();
         });
       } catch (err) {
-        log.trace('Error registering for password presentation events.');
+        log.error('Error registering for password presentation events.');
       }
     }
 
