@@ -120,7 +120,7 @@
                       <!-- This section (id = collapseSettings) is handled by the SettingsController and the SettingsView -->
                       <div id="collapseSettings" class="accordion-collapse collapse" data-bs-parent="#configOptions">
                         <div class="accordion-body">
-                          <form id="passwordSettings">
+                          <form id="passwordSettings" class="needs-validation" novalidate>
                             <!-- word settings -->
                             <div id="section_words" class="container-fluid mb-3">
                               <h5>Words</h5>
@@ -131,15 +131,18 @@
                                 </select>
                                 <label for="num_words" class="input-group-text"># of Words</label>
                                 <input type="number" min="1" max="10" step="1" value="1" class="form-control"
-                                  name="num_words" id="num_words" />
+                                  name="num_words" id="num_words" required />
+                                <div class="invalid-feedback">Enter a number between 1 and 10</div>
                               </div>
                               <div class="input-group mt-2">
                                 <label for="word_length_min" class="input-group-text">Min Length</label>
                                 <input type="number" min="4" max="12" step="1" value="4" class="form-control"
-                                  name="word_length_min" id="word_length_min" />
+                                  name="word_length_min" id="word_length_min" required />
+                                <div class="invalid-feedback">Enter a number between 4 and 12</div>
                                 <label for="word_length_max" class="input-group-text">Max Length</label>
                                 <input type="number" min="4" max="12" step="1" value="4" class="form-control"
-                                  name="word_length_max" id="word_length_max" />
+                                  name="word_length_max" id="word_length_max" required />
+                                <div class="invalid-feedback">Enter a number between 4 and 12</div>
                               </div>
                             </div> <!-- section_words -->
 
@@ -172,16 +175,14 @@
                                 </select>
                                 <!-- specific character -->
                                 <label for="separator_character" class="input-group-text">Character</label>
-                                <input name="separator_character" id="separator_character" class="form-control" type="text" size="1" maxlength="1"
-                                  value="-" />
-                                <div id="separator_character_err" class="invalid-feedback">must enter exactly 1
-                                  character</div>
+                                <input name="separator_character" id="separator_character" class="form-control"
+                                  type="text" size="1" maxlength="1" value="-" />
+                                <div class="invalid-feedback">Enter exactly 1 character</div>
                                 <!-- random characters -->
                                 <label for="separator_alphabet" class="input-group-text">Alphabet</label>
-                                <input name="separator_alphabet" id="separator_alphabet" class="form-control" type="text" size="6"
-                                  minlength="2" maxlength="6" value="" />
-                                <div id="separator_alphabet_err" class="invalid-feedback">must enter at least 2
-                                  characters and no more than 6</div>
+                                <input name="separator_alphabet" id="separator_alphabet" class="form-control"
+                                  type="text" size="6" minlength="2" maxlength="6" value="" />
+                                <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
                               </div>
                             </div> <!-- /section_separator -->
 
@@ -192,12 +193,15 @@
                                 <!-- padding before -->
                                 <label for="padding_digits_before" class="input-group-text">Digit(s) Before</label>
                                 <input type="number" min="0" max="5" step="1" value="2" class="form-control"
-                                  name="padding_digits_before" id="padding_digits_before" />
+                                  name="padding_digits_before" id="padding_digits_before" required />
+                                <div class="invalid-feedback">Enter a number between 0 and 5</div>
 
                                 <!-- padding after -->
                                 <label for="padding_digits_after" class="input-group-text">Digit(s) After</label>
                                 <input type="number" min="0" max="5" step="1" value="2" class="form-control"
-                                  name="padding_digits_after" id="padding_digits_after" />
+                                  name="padding_digits_after" id="padding_digits_after" required />
+                                <div class="invalid-feedback">Enter a number between 0 and 5</div>
+
                               </div>
 
                               <!-- Symbol Padding -->
@@ -210,15 +214,18 @@
                                 </select>
                                 <label for="padding_characters_before" class="input-group-text">Symbol(s) Before</label>
                                 <input type="number" min="0" max="5" step="1" value="0" class="form-control"
-                                  name="padding_characters_before" id="padding_characters_before" />
+                                  name="padding_characters_before" id="padding_characters_before" required />
+                                <div class="invalid-feedback">Enter a number between 0 and 5</div>
+
                                 <label for="padding_characters_after" class="input-group-text">Symbol(s) After</label>
                                 <input type="number" min="0" max="5" step="1" value="0" class="form-control"
-                                  name="padding_characters_after" id="padding_characters_after" />
+                                  name="padding_characters_after" id="padding_characters_after" required />
+                                <div class="invalid-feedback">Enter a number between 0 and 5</div>
+
                                 <label for="pad_to_length" class="input-group-text">Pad to Length</label>
-                                <input type="number" size="3" name="pad_to_length" id="pad_to_length" value="8" min="8" max="999"
-                                  class="form-control" />
-                                <div id="pad_to_length_err" class="invalid-feedback">must be an integer between 8 and
-                                  999</div>
+                                <input type="number" size="3" name="pad_to_length" id="pad_to_length" value="8" min="8"
+                                  max="999" step="1" class="form-control" required />
+                                <div class="invalid-feedback">Enter a number between 8 and 999</div>
                               </div>
 
                               <!-- character type -->
@@ -237,23 +244,21 @@
                                   <label for="padding_character" class="input-group-text">Padding
                                     Character</label>
                                   <input class="form-control" type="text" size="1" maxlength="1" value="*"
-                                         name="padding_character" id="padding_character" />
-                                  <div id="padding_character_err" class="invalid-feedback">must enter exactly 1
-                                    character</div>
+                                    name="padding_character" id="padding_character" />
+                                  <div class="invalid-feedback">Enter exactly 1 character</div>
                                 </div>
 
                                 <!-- padding character alphabet -->
                                 <div class="input-group mt-2">
                                   <label for="padding_alphabet" class="input-group-text">Padding Character
                                     Alphabet</label>
-                                  <input name="padding_alphabet" id="padding_alphabet"
-                                         class="form-control" type="text" size="6"
-                                    minlength="2" maxlength="6" value="" />
-                                  <div id="padding_alphabet_err" class="invalid-feedback">must enter at least 2
-                                    characters</div>
+                                  <input name="padding_alphabet" id="padding_alphabet" class="form-control" type="text"
+                                    size="6" minlength="2" maxlength="6" value="" />
+                                  <div class="invalid-feedback">Enter at least 2 characters</div>
                                 </div>
                               </div> <!-- /padding_char_container -->
                             </div> <!-- /section_padding_digits -->
+                            <button class="btn btn-primary" type="submit">Submit</button>
                           </form>
                         </div> <!-- /accordion-body -->
                       </div> <!-- /collapseSettings -->
