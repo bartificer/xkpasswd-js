@@ -65,7 +65,7 @@ class PasswordView {
     // Register for changes to the password presentation mode.
     for (const item of this.#passwordPresentationRadio) {
       try {
-        item.addEventListener('change', async ()=>{
+        item.addEventListener('change', async () => {
           this.__updatePasswordUI();
         });
       } catch (err) {

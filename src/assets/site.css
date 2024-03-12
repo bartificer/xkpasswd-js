@@ -10,7 +10,7 @@ body {
 }
 
 #main {
-  background-color:inherit;
+  background-color: inherit;
 }
 
 .navbar-brand img {
@@ -20,6 +20,7 @@ body {
 .container {
   height: 350px;
 }
+
 .container .img-fluid {
   display: block;
   width: auto;
