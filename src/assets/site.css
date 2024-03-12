@@ -82,6 +82,10 @@ body {
 .password-list {
   list-style-type: none;
   padding: 0;
+/* make the checkmark bold, bigger and green */
+#generated_password_lst button.list-group-item i.bi-check {
+  color: rgba(var(--bs-success-rgb)) !important;
+  font-weight: 800;
 }
 
 .password-textbox {

@@ -168,28 +168,38 @@ class PasswordView {
       const theIndex = Number.parseInt(pwdIndex);
 
       htmlPwdList = htmlPwdList.concat(`
-      <a href="#" id="copyclip_${theIndex}"
-        class="list-group-item list-group-item-action px-0"
-        aria-label="Copy Password #${theIndex+1}">
-          <i class="bi bi-clipboard me-3"></i>
-          ${passAndStats.passwords[theIndex]}
-      </a>
-  `);
-}
+        <button id="copyclip_${theIndex}"
+          class="list-group-item list-group-item-action px-0"
+          aria-label="Copy Password #${theIndex+1}"><i
+          class="me-3 bi bi-copy"></i>
+            ${passAndStats.passwords[theIndex]}
+        </button>`);
+    }
 
-      this.#passwordList.append(htmlPwdList);
+    this.#passwordList.append(htmlPwdList);
 
-      // Add event handlers for the copy buttons
-      // eslint-disable-next-line guard-for-in
-      for (const pwdIndex in passAndStats.passwords) {
-        const btn = $(`#copyclip_${pwdIndex}`);
-        if (btn && (btn.length > 0)) {
-          btn[0].addEventListener('click', async ()=>{
-            // eslint-disable-next-line max-len
-            await navigator.clipboard.writeText(passAndStats.passwords[pwdIndex]);
-          });
-        }
+    // Add event handlers for the copy buttons
+    // eslint-disable-next-line guard-for-in
+    for (const pwdIndex in passAndStats.passwords) {
+      const btn = $(`#copyclip_${pwdIndex}`);
+      if (btn && (btn.length > 0)) {
+        btn[0].addEventListener('click', async () => {
+          await navigator.clipboard.writeText(passAndStats.passwords[pwdIndex]);
+
+          // Manage icons
+          const existingListItems = this.#passwordList.find(`button`);
+          for (const item of existingListItems) {
+            // Determine the correct icon for the password list items.
+
+            if (`copyclip_${pwdIndex}` !== item.id) {
+              $(item).children('i').removeClass('bi-check').addClass('bi-copy');
+            } else {
+              $(item).children('i').removeClass('bi-copy').addClass('bi-check');
+            }
+          }
+        });
       }
+    }
 
     // Update the text area
     this.#passwordText.val(passAndStats.passwords.join('\n'));
