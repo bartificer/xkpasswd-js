@@ -52,7 +52,7 @@ class PasswordView {
   constructor() {
     this.#passwordPresentation = $('#password_presentation');
     this.#passwordPresentationRadio = $('input:radio[name=pwdPresentation]');
-    this.#passwordList = $('ul#generated_password_lst');
+    this.#passwordList = $('#generated_password_lst');
     this.#passwordText = $('#generated_password_txt');
     this.#passwordErrorContainer = $('#passwordErrorContainer');
     this.#passwordStatsContainer = $('#password_stats_container');
@@ -65,11 +65,11 @@ class PasswordView {
     // Register for changes to the password presentation mode.
     for (const item of this.#passwordPresentationRadio) {
       try {
-        item.addEventListener('change', async ()=>{
+        item.addEventListener('change', async () => {
           this.__updatePasswordUI();
         });
       } catch (err) {
-        log.trace('Error registering for password presentation events.');
+        log.error('Error registering for password presentation events.');
       }
     }
 
@@ -141,46 +141,63 @@ class PasswordView {
 
     this.__resetPasswordUI();
 
-    // Populate the password list.
-    if (passAndStats.passwords) {
-      let htmlPwdList='';
-      // eslint-disable-next-line guard-for-in
-      for (const pwdIndex in passAndStats.passwords) {
-        // Make the index a number so we can perform math as needed.
-        const theIndex = Number.parseInt(pwdIndex);
-
-        htmlPwdList = htmlPwdList.concat(`
-            <li>
-                <button id="copyclip_${theIndex}"
-                        class="btn btn-clipboard bi-clipboard"
-                        aria-label="Copy Password #${theIndex+1}">
-                </button>
-                ${passAndStats.passwords[theIndex]}
-            </li>
-        `);
-      }
-      this.#passwordList.html(htmlPwdList);
-
-      // Add event handlers for the copy buttons
-      // eslint-disable-next-line guard-for-in
-      for (const pwdIndex in passAndStats.passwords) {
-        const btn = $(`#copyclip_${pwdIndex}`);
-        if (btn && (btn.length > 0)) {
-          btn[0].addEventListener('click', async ()=>{
-            // eslint-disable-next-line max-len
-            await navigator.clipboard.writeText(passAndStats.passwords[pwdIndex]);
-          });
-        }
-      }
-
-      // Update the text area
-      this.#passwordText.val(passAndStats.passwords.join('\n'));
-      // Set passwordArea height to accommodate number of passwords
-      this.#passwordText.attr('rows', num);
-
-      // Update the Password UI elements.
-      this.__updatePasswordUI();
+    // return fast if there are no passwords
+    if (!passAndStats.passwords) {
+      // no passwords found
+      this.__hideStats();
+      this.renderPasswordError('No passwords generated');
+      return;
     }
+
+    // Populate the password list.
+
+    let htmlPwdList='';
+    // eslint-disable-next-line guard-for-in
+    for (const pwdIndex in passAndStats.passwords) {
+      // Make the index a number so we can perform math as needed.
+      const theIndex = Number.parseInt(pwdIndex);
+
+      htmlPwdList = htmlPwdList.concat(`
+        <button id="copyclip_${theIndex}"
+          class="list-group-item list-group-item-action px-0"
+          aria-label="Copy Password #${theIndex+1}"><i
+          class="me-3 bi bi-copy"></i>
+            ${passAndStats.passwords[theIndex]}
+        </button>`);
+    }
+
+    this.#passwordList.append(htmlPwdList);
+
+    // Add event handlers for the copy buttons
+    // eslint-disable-next-line guard-for-in
+    for (const pwdIndex in passAndStats.passwords) {
+      const btn = $(`#copyclip_${pwdIndex}`);
+      if (btn && (btn.length > 0)) {
+        btn[0].addEventListener('click', async () => {
+          await navigator.clipboard.writeText(passAndStats.passwords[pwdIndex]);
+
+          // Manage icons
+          const existingListItems = this.#passwordList.find(`button`);
+          for (const item of existingListItems) {
+            // Determine the correct icon for the password list items.
+
+            if (`copyclip_${pwdIndex}` !== item.id) {
+              $(item).children('i').removeClass('bi-check').addClass('bi-copy');
+            } else {
+              $(item).children('i').removeClass('bi-copy').addClass('bi-check');
+            }
+          }
+        });
+      }
+    }
+
+    // Update the text area
+    this.#passwordText.val(passAndStats.passwords.join('\n'));
+    // Set passwordArea height to accommodate number of passwords
+    this.#passwordText.attr('rows', num);
+
+    // Update the Password UI elements.
+    this.__updatePasswordUI();
 
     this.__renderDetailedStats(passAndStats.stats);
   };
