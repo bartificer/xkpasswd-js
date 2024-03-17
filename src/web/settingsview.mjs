@@ -20,6 +20,8 @@ class SettingsView {
     this.__togglePaddingCharType('FIXED');
     this.__toggleSeparatorType('NONE');
 
+    $('#invalidSettings').hide();
+
     $('#padding_type').on('change', (e) => {
       this.__togglePaddingType(e);
     });
@@ -68,36 +70,26 @@ class SettingsView {
    */
   bindSaveSettings(handle) {
     /*
-     * Check if the form is valid when the user has clicked away from
-     * the form. This should help the user find the field with invalid input
-     * if he/she has accidentally closed the accordion bar and the generate
-     * button is disabled.
-     * Opening the form and clicking in any field should reveal the
-     * error message of the culprit.
-     */
-    $('form#passwordSettings').on('focusin', (e) => {
-      const form = e.target.form;
-      form.reportValidity();
-    });
-
-    /*
      * Set an event handler on a change in any field and if the input is
      * valid, process and save the settings.
      * This removes the need for a 'save' button.
      */
+
     $('form#passwordSettings').on('change', (e) => {
       const form = e.target.form;
+      e.preventDefault();
+      e.stopPropagation();
 
       log.trace('starting validity checks.');
 
+      $('#invalidSettings').hide();
       // check if the form is valid and if not, show the error message
       if (!form.reportValidity()) {
-        // the form is not valid, so disable the Generate button
-        $('#generate').addClass('disabled');
-      } else {
-        // the form is valid, so enable the Generate button
-        $('#generate').removeClass('disabled');
+        // the form is not valid
+        form.classList.add('was-validated');
+        $('#invalidSettings').show();
 
+      } else {
         // get the form data and pass it on to the controller handle function
         const formData = new FormData(form);
         const data = {};
