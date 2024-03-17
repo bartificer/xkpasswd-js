@@ -17,12 +17,20 @@ class PresetView {
   #presetHeader;
 
   /**
+   * @private presetDescription - reference to the HTML div that will contain
+   * the description of the current preset
+   */
+  #presetDescription;
+
+  /**
    * @constructor
    */
   constructor() {
     this.#presetGroup = $('#preset-btn-group');
     this.#presetHeader = $('#currentPreset');
+    this.#presetDescription = $('#presetDescription');
 
+    this.#presetDescription.hide();
     log.trace('PresetView constructor executed');
   };
 
@@ -47,6 +55,16 @@ class PresetView {
       this.#presetGroup.append(button);
     });
   };
+
+  /**
+   * This function shows the description of the currently selected preset
+   *
+   * @param {string} description - the description of the preset
+   */
+  displayDescription(description) {
+    this.#presetDescription.html(description).show();
+  }
+
   /**
    * This is the function that is called
    * when one of the preset buttons is clicked
