@@ -157,34 +157,30 @@ class SettingsView {
   __togglePaddingType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
+
+    const paddingCharBefore = $('#padding_characters_before').parent().parent();
+    const paddingCharAfter = $('#padding_characters_after').parent().parent();
+    const padToLength = $('#pad_to_length').parent().parent();
+
     switch (paddingType) {
     case 'NONE':
-      $('label[for="padding_characters_before"]').hide(this.#aniTime);
-      $('#padding_characters_before').hide(this.#aniTime);
-      $('label[for="padding_characters_after"]').hide(this.#aniTime);
-      $('#padding_characters_after').hide(this.#aniTime);
-      $('label[for="pad_to_length"]').hide(this.#aniTime);
-      $('#pad_to_length').hide(this.#aniTime);
+      paddingCharBefore.hide(this.#aniTime);
+      paddingCharAfter.hide(this.#aniTime);
+      padToLength.hide(this.#aniTime);
       $('div#padding_char_container').hide(this.#aniTime);
       break;
 
     case 'FIXED':
-      $('label[for="padding_characters_before"]').show(this.#aniTime);
-      $('#padding_characters_before').show(this.#aniTime);
-      $('label[for="padding_characters_after"]').show(this.#aniTime);
-      $('#padding_characters_after').show(this.#aniTime);
-      $('label[for="pad_to_length"]').hide(this.#aniTime);
-      $('#pad_to_length').hide(this.#aniTime);
+      paddingCharBefore.show(this.#aniTime);
+      paddingCharAfter.show(this.#aniTime);
+      padToLength.hide(this.#aniTime);
       $('div#padding_char_container').show(this.#aniTime);
       break;
 
     case 'ADAPTIVE':
-      $('label[for="padding_characters_before"]').hide(this.#aniTime);
-      $('#padding_characters_before').hide(this.#aniTime);
-      $('label[for="padding_characters_after"]').hide(this.#aniTime);
-      $('#padding_characters_after').hide(this.#aniTime);
-      $('label[for="pad_to_length"]').show(this.#aniTime);
-      $('#pad_to_length').show(this.#aniTime);
+      paddingCharBefore.hide(this.#aniTime);
+      paddingCharAfter.hide(this.#aniTime);
+      padToLength.show(this.#aniTime);
       $('div#padding_char_container').show(this.#aniTime);
       break;
 
@@ -209,19 +205,21 @@ class SettingsView {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__togglePaddingCharType: ${paddingType}`);
 
+    // we need to hide the entire section, including the `input-group` and it's
+    // parent div otherwise the pad_to_length will not float next to the
+    // padding type element
+    const paddingCharacter = $('#padding_character').parent().parent();
+    const paddingAlphabet = $('#padding_alphabet').parent().parent();
+
     switch (paddingType) {
     case 'FIXED':
-      $('label[for="padding_character"]').show(this.#aniTime);
-      $('#padding_character').show(this.#aniTime);
-      $('label[for="padding_alphabet"]').hide(this.#aniTime);
-      $('#padding_alphabet').hide(this.#aniTime);
+      paddingCharacter.show(this.#aniTime);
+      paddingAlphabet.hide(this.#aniTime);
       break;
 
     case 'RANDOM':
-      $('label[for="padding_character"]').hide(this.#aniTime);
-      $('#padding_character').hide(this.#aniTime);
-      $('label[for="padding_alphabet"]').show(this.#aniTime);
-      $('#padding_alphabet').show(this.#aniTime);
+      paddingCharacter.hide(this.#aniTime);
+      paddingAlphabet.show(this.#aniTime);
       break;
 
     case 'SEPARATOR':
@@ -233,10 +231,8 @@ class SettingsView {
         return;
       }
       // if it is OK to select this option, update the UI appropriately
-      $('label[for="padding_character"]').hide(this.#aniTime);
-      $('#padding_character').hide(this.#aniTime);
-      $('label[for="padding_alphabet"]').hide(this.#aniTime);
-      $('#padding_alphabet').hide(this.#aniTime);
+      paddingCharacter.hide(this.#aniTime);
+      paddingAlphabet.hide(this.#aniTime);
       break;
     default:
       log.log(`WARNING - Received invalid padding_type=${paddingType}`);
