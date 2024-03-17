@@ -99,7 +99,7 @@ describe('Test class Presets', () => {
 
     test('getPresets returns list of keys', () => {
       const expected = ['DEFAULT', 'WEB32', 'WEB16', 'WIFI',
-        'APPLEID', 'NTLM', 'SECURITYQ', 'XKCD'];
+        'APPLEID', 'NTLM', 'SECURITYQ', 'XKCD', 'TEMPORARY'];
 
       const newPreset = new Presets();
       expect(newPreset.getPresets()).toEqual(expected);
