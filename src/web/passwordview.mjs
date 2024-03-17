@@ -217,7 +217,11 @@ class PasswordView {
       e.preventDefault();
       e.stopPropagation(); // stop the event bubbling
 
-      const num = parseInt(this.#numberOfPasswords.val());
+      let num = parseInt(this.#numberOfPasswords.val());
+      if (isNaN(num) || num < 1) {
+        num = 1;
+        this.#numberOfPasswords.val(num);
+      }
       handle(num);
     });
   };
