@@ -89,6 +89,10 @@ class SettingsView {
         form.classList.add('was-validated');
         $('#invalidSettings').show();
 
+        // True MVC requires this to be handled by the PasswordView,
+        // but since it's only one line, we don't bother
+        $('#generate').prop('disabled', true);
+
       } else {
         // get the form data and pass it on to the controller handle function
         const formData = new FormData(form);
@@ -97,6 +101,10 @@ class SettingsView {
           const values = formData.getAll(key);
           data[key] = (values.length > 1) ? values : values.join();
         });
+
+        // True MVC requires this to be handled by the PasswordView,
+        // but since it's only one line, we don't bother
+        $('#generate').prop('disabled', false);
 
         log.trace(JSON.stringify(data));
         handle(data);
