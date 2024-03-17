@@ -46,6 +46,7 @@ class PasswordView {
   #seenEntropy;
   #entropySuggestion;
   #numberOfPasswords;
+
   /**
    * @constructor
    */
@@ -68,7 +69,8 @@ class PasswordView {
         item.addEventListener('change', async () => {
           this.__updatePasswordUI();
         });
-      } catch (err) {
+      }
+      catch (err) {
         log.error('Error registering for password presentation events.');
       }
     }
@@ -113,7 +115,8 @@ class PasswordView {
       this.#passwordText.addClass('d-none');
       // Show the list container
       this.#passwordList.removeClass('d-none');
-    } else {
+    }
+    else {
       // Cache the current password text.
       const currentPasswords = this.#passwordText.val();
       // Clear the passwords (to help manage focus)
@@ -151,7 +154,7 @@ class PasswordView {
 
     // Populate the password list.
 
-    let htmlPwdList='';
+    let htmlPwdList = '';
     // eslint-disable-next-line guard-for-in
     for (const pwdIndex in passAndStats.passwords) {
       // Make the index a number so we can perform math as needed.
@@ -160,7 +163,7 @@ class PasswordView {
       htmlPwdList = htmlPwdList.concat(`
         <button id="copyclip_${theIndex}"
           class="list-group-item list-group-item-action px-0"
-          aria-label="Copy Password #${theIndex+1}"><i
+          aria-label="Copy Password #${theIndex + 1}"><i
           class="me-3 bi bi-copy"></i>
             ${passAndStats.passwords[theIndex]}
         </button>`);
@@ -183,7 +186,8 @@ class PasswordView {
 
             if (`copyclip_${pwdIndex}` !== item.id) {
               $(item).children('i').removeClass('bi-check').addClass('bi-copy');
-            } else {
+            }
+            else {
               $(item).children('i').removeClass('bi-copy').addClass('bi-check');
             }
           }
@@ -213,7 +217,11 @@ class PasswordView {
       e.preventDefault();
       e.stopPropagation(); // stop the event bubbling
 
-      const num = parseInt(this.#numberOfPasswords.val());
+      let num = parseInt(this.#numberOfPasswords.val());
+      if (isNaN(num) || num < 1) {
+        num = 1;
+        this.#numberOfPasswords.val(num);
+      }
       handle(num);
     });
   };
@@ -253,7 +261,7 @@ class PasswordView {
       `  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`,
       '</div>',
     ].join('');
-      /* eslint-enable max-len */
+    /* eslint-enable max-len */
 
     this.#passwordErrorContainer.append(alertBox);
 
@@ -289,7 +297,8 @@ class PasswordView {
         `<span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
         `id="entropy_min">${min.value} bits</span>`,
       ].join('');
-    } else {
+    }
+    else {
       // make a template for two values
       template = [
         `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
