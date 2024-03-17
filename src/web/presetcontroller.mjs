@@ -50,6 +50,8 @@ class PresetController {
 
     // Tell the SettingsController to update
     const config = this.#model.getPreset().config();
+    const description = this.#model.getPreset().description();
+    this.#view.displayDescription(description);
     this.#settingsController.updateSettings(config);
   };
 }

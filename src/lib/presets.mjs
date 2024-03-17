@@ -192,7 +192,7 @@ const thePresets = {
       'The default preset resulting in a password consisting of ' +
       '3 random words of between 4 and 8 letters with alternating ' +
       'case separated by a random character, with two random digits ' +
-      'before and after, and padded with two random characters front and back',
+      'before and after, and padded with two random characters front and back.',
     config: {
       // eslint-disable-next-line max-len
       symbol_alphabet: '!@$%^&*-_+=:|~?/.;',
@@ -213,7 +213,7 @@ const thePresets = {
   },
   WEB32: {
     description:
-      'A preset for websites that allow passwords up to 32 characteres long.',
+      'A preset for websites that allow passwords up to 32 characters long.',
     config: {
       word_length_min: 4,
       word_length_max: 5,
@@ -277,7 +277,7 @@ const thePresets = {
       'A preset respecting the many prerequisites Apple places ' +
       'on Apple ID passwords. The preset also limits itself to ' +
       'symbols found on the iOS letter and number keyboards ' +
-      '(i.e. not the awkward to reach symbol keyboard)',
+      '(i.e. not the awkward to reach symbol keyboard).',
     config: {
       word_length_min: 4,
       word_length_max: 7,
@@ -358,6 +358,23 @@ const thePresets = {
       allow_accents: 0,
     },
   },
+  TEMPORARY: {
+    description: 'A preset for creating temporary phone friendly passwords.' +
+      ' WARNING - They are not secure and should be changed immediately.',
+    config: {
+      word_length_min: 4,
+      word_length_max: 4,
+      num_words: 2,
+      case_transform: 'CAPITALISE',
+      separator_type: 'FIXED',
+      separator_character: '-',
+      padding_digits_before: 0,
+      padding_digits_after: 2,
+      padding_type: 'NONE',
+      allow_accents: 0,
+    },
+  },
+
 };
 
 

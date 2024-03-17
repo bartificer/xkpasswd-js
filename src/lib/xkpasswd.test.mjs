@@ -496,6 +496,17 @@ describe('Test XKPassword class', () => {
 
       expect(password).toMatch(re);
     });
+
+    test('Test TEMPORARY preset', () => {
+      me.setPreset('TEMPORARY');
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /([A-Z][a-z]{3}[-]){2}\d\d/;
+
+      expect(password).toMatch(re);
+    });
+
   });
 
   describe('Test internal __padWithChar', () => {
