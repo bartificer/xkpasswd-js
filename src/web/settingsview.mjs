@@ -82,6 +82,9 @@ class SettingsView {
 
       log.trace('starting validity checks.');
 
+      // remove the green marks
+      form.classList.remove('was-validated');
+
       $('#invalidSettings').hide();
       // check if the form is valid and if not, show the error message
       if (!form.reportValidity()) {
