@@ -27,6 +27,24 @@ body {
   max-height: 350px;
 }
 
+/* remove the spinner buttons in Webkit based browsers
+   such as Safari, Chrome and Arc
+ */
+#main input[type='number']::-webkit-inner-spin-button,
+#main input[type='number']::-webkit-outer-spin-button  {
+  /* -webkit-appearance: none; */
+  appearance: none;
+  margin: 0;
+}
+
+/* remove the spinner buttons in Mozilla based browsers
+   such as Firefox
+*/
+
+#main input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .btn-stats {
   --bs-btn-padding-y: .15rem;
   --bs-btn-padding-x: .5rem;
