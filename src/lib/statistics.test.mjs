@@ -2,8 +2,8 @@
  * Test class Statistics
  */
 
+import {expect, jest, test, describe} from '@jest/globals';
 import {Statistics} from './statistics.mjs';
-
 describe('Test class Statistics', () => {
   const mock = {
     description: 'Mock preset - this is a copy of the DEFAULT preset',

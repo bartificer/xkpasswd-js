@@ -1,6 +1,7 @@
 /**
  * Testing class RandomBasic
  */
+import {expect, jest, test, describe} from '@jest/globals';
 import {RandomBasic} from './randombasic.mjs';
 
 /* helper function to find duplicates */

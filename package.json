@@ -24,6 +24,7 @@
     "docdash": "^2.0.2",
     "eslint": "^8.56.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-plugin-jest": "^27.9.0",
     "html-webpack-plugin": "^5.6.0",
     "jest": "^29.7.0",
     "jsdoc": "^4.0.2",

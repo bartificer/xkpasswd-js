@@ -2,6 +2,7 @@
  * Test class Presets
  */
 
+import {expect, jest, test, describe} from '@jest/globals';
 import {Presets} from './presets.mjs';
 
 describe('Test class Presets', () => {
