@@ -75,7 +75,7 @@ class SettingsView {
      * This removes the need for a 'save' button.
      */
 
-    $('form#passwordSettings').on('change', (e) => {
+    $('form#passwordSettings').on('keyup change', (e) => {
       const form = e.target.form;
       e.preventDefault();
       e.stopPropagation();
