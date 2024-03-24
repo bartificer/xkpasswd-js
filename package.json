@@ -32,17 +32,6 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
-  "jest": {
-    "testEnvironment": "jest-environment-node",
-    "transform": {},
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/archive/"
-    ],
-    "testMatch": [
-      "**/?*.test.mjs"
-    ]
-  },
   "scripts": {
     "docs": "docDir='./dist/docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --template node_modules/docdash",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",

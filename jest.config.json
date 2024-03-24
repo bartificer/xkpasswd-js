@@ -1,0 +1,12 @@
+{
+    "testEnvironment": "jest-environment-node",
+    "preset": "jest-puppeteer",
+    "transform": {},
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/archive/"
+    ],
+    "testMatch": [
+      "**/?*.test.mjs"
+    ]
+  }
