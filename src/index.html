@@ -194,17 +194,20 @@
                               </div>
                               <div class="col-sm-12 col-md-6 mt-2">
                                 <div class="input-group">
-                                <!-- specific character -->
-                                <label for="separator_character" class="input-group-text">Character</label>
-                                <input name="separator_character" id="separator_character" class="form-control rounded-end"
-                                  type="text" size="1" maxlength="1" value="-" />
-                                <div class="invalid-feedback">Enter exactly 1 character</div>
-                                <!-- random characters -->
-                                <label for="separator_alphabet" class="input-group-text rounded-start">Alphabet</label>
-                                <input name="separator_alphabet" id="separator_alphabet" class="form-control rounded-end"
-                                  type="text" size="6" minlength="2" maxlength="6" value="" />
-                                <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
-                              </div>
+                                  <!-- specific character -->
+                                  <label for="separator_character" class="input-group-text">Character</label>
+                                  <input name="separator_character" id="separator_character" class="form-control rounded-end"
+                                    type="text" size="1" minlength="1" maxlength="1" value="-" />
+                                  <div class="invalid-feedback">Enter exactly 1 character</div>
+                                </div>
+                                <div class="input-group">
+                                  <!-- random characters -->
+                                  <div class="input-group">
+                                  <label for="separator_alphabet" class="input-group-text rounded-start">Alphabet</label>
+                                  <input name="separator_alphabet" id="separator_alphabet" class="form-control rounded-end"
+                                    type="text" size="6" minlength="2" maxlength="6" value="" />
+                                  <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
+                                </div>
                               </div>
                             </div> <!-- /section_separator -->
 
