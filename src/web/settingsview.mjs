@@ -127,6 +127,12 @@ class SettingsView {
   __toggleSeparatorType = (e) => {
     const separatorType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
+
+    // always remove it, just add it only in case of 'RANDOM'
+    $('#separator_alphabet').prop('required', false);
+    // always remove it, just add it only in case of 'FIXED'
+    $('#separator_character').prop('required', false);
+
     switch (separatorType) {
     case 'NONE':
       $('label[for="separator_character"]').hide(this.#aniTime);
@@ -140,6 +146,7 @@ class SettingsView {
       $('#separator_character').show(this.#aniTime);
       $('label[for="separator_alphabet"]').hide(this.#aniTime);
       $('#separator_alphabet').hide(this.#aniTime);
+      $('#separator_character').prop('required', true);
       break;
 
     case 'RANDOM':
@@ -147,6 +154,7 @@ class SettingsView {
       $('#separator_character').hide(this.#aniTime);
       $('label[for="separator_alphabet"]').show(this.#aniTime);
       $('#separator_alphabet').show(this.#aniTime);
+      $('#separator_alphabet').prop('required', true);
       break;
 
     default:
@@ -222,15 +230,22 @@ class SettingsView {
     const paddingCharacter = $('#padding_character').parent().parent();
     const paddingAlphabet = $('#padding_alphabet').parent().parent();
 
+    // always remove it, just add it only in case of 'RANDOM'
+    $('#padding_alphabet').prop('required', false);
+    // always remove it, just add it only in case of 'FIXED'
+    $('#padding_character').prop('required', false);
+
     switch (paddingType) {
     case 'FIXED':
       paddingCharacter.show(this.#aniTime);
       paddingAlphabet.hide(this.#aniTime);
+      $('#padding_character').prop('required', true);
       break;
 
     case 'RANDOM':
       paddingCharacter.hide(this.#aniTime);
       paddingAlphabet.show(this.#aniTime);
+      $('#padding_alphabet').prop('required', true);
       break;
 
     case 'SEPARATOR':
