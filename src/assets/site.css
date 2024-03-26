@@ -53,12 +53,12 @@ body {
   font-weight: 800;
 }
 
-/* make the checkmark bold, bigger and green
- * 2024-03-19 alas, doesn't work with Bootstrap icons, only the color
+/* make the checkmark bigger and green
  */
 #generated_password_lst button.list-group-item i.bi-check {
   color: rgba(var(--bs-success-rgb)) !important;
-  font-weight: 800;
+  font-size: 1.5rem;
+  line-height: 1rem;
 }
 
 .password-textbox {
