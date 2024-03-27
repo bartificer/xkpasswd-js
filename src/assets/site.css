@@ -27,6 +27,12 @@ body {
   max-height: 350px;
 }
 
+/* remove the padding from the outermost row class */
+/*div.container > div.row>* {*/
+/*  padding-left: 0 !important;*/
+/*  padding-right: 0 !important;*/
+/*}*/
+
 /* remove the spinner buttons in Webkit based browsers
    such as Safari, Chrome and Arc
  */
