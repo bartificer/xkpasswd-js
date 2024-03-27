@@ -1,5 +1,7 @@
 /**
  * Test class Statistics
+ *
+ * @jest-environment jest-environment-node
  */
 
 import {expect, jest, test, describe} from '@jest/globals';

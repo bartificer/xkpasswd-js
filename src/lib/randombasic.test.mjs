@@ -1,5 +1,7 @@
 /**
  * Testing class RandomBasic
+ *
+ * @jest-environment jest-environment-node
  */
 import {expect, jest, test, describe} from '@jest/globals';
 import {RandomBasic} from './randombasic.mjs';

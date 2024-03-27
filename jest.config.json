@@ -1,12 +1,32 @@
 {
-    "testEnvironment": "jest-environment-node",
-    "preset": "jest-puppeteer",
-    "transform": {},
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/archive/"
-    ],
-    "testMatch": [
-      "**/?*.test.mjs"
-    ]
-  }
+  "projects": [
+    {
+      "displayName": "unit",
+      "testEnvironment": "jest-environment-node",
+      "transform": {},
+      "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/archive/"
+      ],
+      "testMatch": [
+        "<rootDir>/src/lib/**/?*.test.mjs"
+      ]
+    },
+    {
+      "displayName": "puppeteer",
+      "preset": "jest-puppeteer",
+      "transform": {},
+      "testPathIgnorePatterns": [
+        "/node_modules/",
+        "/archive/",
+        "src/lib/"
+      ],
+      "testMatch": [
+        "**/?*.test.mjs"
+      ],
+      "globalSetup": "jest-environment-puppeteer/setup",
+      "globalTeardown": "jest-environment-puppeteer/teardown",
+      "testEnvironment": "jest-environment-puppeteer"
+    }
+  ]
+}
