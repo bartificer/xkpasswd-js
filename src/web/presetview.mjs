@@ -62,6 +62,15 @@ class PresetView {
    * @param {string} description - the description of the preset
    */
   displayDescription(description) {
+    if (description.includes('WARNING')) {
+      this.#presetDescription
+        .addClass('border-danger bg-danger-subtle')
+        .removeClass('border-primary-subtle bg-primary-subtle');
+    } else {
+      this.#presetDescription
+        .removeClass('border-danger bg-danger-subtle')
+        .addClass('border-primary-subtle bg-primary-subtle');
+    }
     this.#presetDescription.html(description).show();
   }
 
