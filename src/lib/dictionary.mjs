@@ -5,6 +5,7 @@
  * @module Dictionary
  */
 
+import log from 'loglevel';
 /**
  * class for a Dictionary
  * @class
