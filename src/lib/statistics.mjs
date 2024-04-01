@@ -6,10 +6,12 @@
 
 import log from 'loglevel';
 import is from 'is-it-check';
+import {Dictionary} from './dictionary.mjs';
 
 /** Calculate statistics */
 class Statistics {
   #config; // the config that needs to be calculated
+  #dictionary; // the dictionary that needs to be calculated
   #cache; // a cache of stats
 
   // entropy thresholds
@@ -21,9 +23,11 @@ class Statistics {
  * @constructor
  *
  * @param {object} config - the current config
+ * @param {Dictionary} dict - the current dictionary
  */
-  constructor(config) {
+  constructor(config, dict) {
     this.#config = config;
+    this.#dictionary = dict;
     this.#cache = {
       config: {
         stats: {},
@@ -40,6 +44,12 @@ class Statistics {
     };
     this.configStats(true);
 
+    if (dict) {
+      log.trace(`dict found: ${dict} --> ${this.#dictionary}`);
+    }
+    else {
+      log.trace(`no dict found`);
+    }
   }
 
   /**
@@ -625,13 +635,34 @@ class Statistics {
    * @private
    */
   __calculateDictionaryStats() {
+    log.trace(`dict = ${this.#dictionary.getLength()} words`);
+
+    let filteredWords = [];
+    filteredWords = this.#dictionary.filteredWordList(
+      this.#config.word_length_min, this.#config.word_length_max);
+
+    log.trace(`_calcDictStats:
+     config: ${JSON.stringify(this.#config)}
+     num filtered words: ${filteredWords.length}`);
+
+    const numWordsTotal = this.#dictionary.getLength();
+    const numWordsFiltered = filteredWords.length;
+
+    let minlen = filteredWords[0] ? filteredWords[0].length : 0;
+    let maxlen = minlen;
+    for (let i = 1; i < numWordsFiltered; i++) {
+      minlen = Math.min(minlen, filteredWords[i].length);
+      maxlen = Math.max(maxlen, filteredWords[i].length);
+    }
+
     return {
       source: '',
-      numWordsTotal: 0,
-      numWordsFiltered: 0,
-      percentWordsAvailable: 0,
-      filterMinLength: 0,
-      filterMaxLength: 0,
+      numWordsTotal: numWordsTotal,
+      numWordsFiltered: numWordsFiltered,
+      percentWordsAvailable:
+        Math.round((numWordsFiltered / numWordsTotal) * 100),
+      filterMinLength: minlen,
+      filterMaxLength: maxlen,
       containsAccents: false,
     };
   }

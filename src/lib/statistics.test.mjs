@@ -1,10 +1,13 @@
 /**
  * Test class Statistics
  */
+/* jest-testenvironment: jsdom */
 
 import {Statistics} from './statistics.mjs';
+import {DictionaryEN} from './dictionaryEN.mjs';
 
 describe('Test class Statistics', () => {
+  const mockDict = new DictionaryEN();
   const mock = {
     description: 'Mock preset - this is a copy of the DEFAULT preset',
     config: {
@@ -38,7 +41,7 @@ describe('Test class Statistics', () => {
         case_transform: 'CAPITALISE',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expectedNumber =
         mockConfig.num_words +
@@ -60,7 +63,7 @@ describe('Test class Statistics', () => {
         case_transform: 'CAPITALISE',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expectedNumber =
         mockConfig.num_words + 1 +
@@ -82,7 +85,7 @@ describe('Test class Statistics', () => {
         case_transform: 'RANDOM',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expectedNumber =
         mockConfig.num_words + mockConfig.num_words +
@@ -104,7 +107,7 @@ describe('Test class Statistics', () => {
         case_transform: 'CAPITALISE',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expectedNumber =
         mockConfig.num_words + 1 +
@@ -115,7 +118,7 @@ describe('Test class Statistics', () => {
     });
 
     test('on mock (DEFAULT) preset', () => {
-      const me = new Statistics(mock.config);
+      const me = new Statistics(mock.config, mockDict);
 
       const expectedNumber = 9;
 
@@ -124,7 +127,7 @@ describe('Test class Statistics', () => {
   });
 
   describe('Test function __calculateDictionaryStats', () => {
-    test('TODO add something meaningful', () => {
+    test('returns an empty list if min and max are undefined', () => {
       const mockConfig = {
         num_words: 1,
         separator_character: 'NONE',
@@ -134,25 +137,80 @@ describe('Test class Statistics', () => {
         case_transform: 'CAPITALISE',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        source: '',
-        numWordsTotal: 0,
+        numWordsTotal: 1259,
         numWordsFiltered: 0,
         percentWordsAvailable: 0,
         filterMinLength: 0,
         filterMaxLength: 0,
         containsAccents: false,
+        source: '',
       });
     });
+
+    test('returns a list even if min and max are reversed', () => {
+      const mockConfig = {
+        num_words: 1,
+        word_length_min: 8,
+        word_length_max: 4,
+        separator_character: 'NONE',
+        padding_digits_before: 3,
+        padding_digits_after: 3,
+        padding_character: 'RANDOM',
+        case_transform: 'CAPITALISE',
+      };
+
+      const me = new Statistics(mockConfig, mockDict);
+
+      const result = me.__calculateDictionaryStats();
+      expect(result).toBeDefined();
+      expect(result).toEqual({
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      });
+    });
+
+    test('returns an empty list if min and max are longer than max word length', () => {
+      const mockConfig = {
+        num_words: 1,
+        word_length_min: 20,
+        word_length_max: 20,
+        separator_character: 'NONE',
+        padding_digits_before: 3,
+        padding_digits_after: 3,
+        padding_character: 'RANDOM',
+        case_transform: 'CAPITALISE',
+      };
+
+      const me = new Statistics(mockConfig, mockDict);
+
+      const result = me.__calculateDictionaryStats();
+      expect(result).toBeDefined();
+      expect(result).toEqual({
+        numWordsTotal: 1259,
+        numWordsFiltered: 0,
+        percentWordsAvailable: 0,
+        filterMinLength: 0,
+        filterMaxLength: 0,
+        containsAccents: false,
+        source: '',
+      });
+    });
+
   });
 
   describe('Test function configStats', () => {
     test('on mock (DEFAULT) set', () => {
-      const me = new Statistics(mock.config);
+      const me = new Statistics(mock.config, mockDict);
 
       const expected = {
         // (num_words * word_length) + baseLength
@@ -181,7 +239,7 @@ describe('Test class Statistics', () => {
         random_increment: 'AUTO',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict, mockDict);
 
       const expected = {
         minLength: 25,
@@ -195,14 +253,17 @@ describe('Test class Statistics', () => {
 
   describe('Test internal function __calculateEntropyStats', () => {
     test('on mock (DEFAULT) set', () => {
-      const me = new Statistics(mock.config);
+      const me = new Statistics(mock.config, mockDict);
 
       /* eslint-disable max-len */
 
       expect(me.__calculateEntropyStats()).toEqual({
-        // minPermutationsBlind: 10408797222153426578715765348940396820955136n,
-        // maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
-        // permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+        // minPermutationsBlind:
+        // 10408797222153426578715765348940396820955136n,
+        // maxPermutationsBlind:
+        // 33581556514373188787421088705325971513167489664257311885404143616n,
+        // permutationsBlind:
+        // 591222134364399413463902591994678504204696392694759424n,
         // permutationsSeen: 1399680000n,
         entropyBlind: 179,
         minEntropyBlind: {
@@ -239,7 +300,7 @@ describe('Test class Statistics', () => {
         case_transform: 'ALTERNATE',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minEntropyBlind: {
@@ -280,7 +341,7 @@ describe('Test class Statistics', () => {
         case_transform: 'UPPER',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minEntropyBlind: {
@@ -307,7 +368,7 @@ describe('Test class Statistics', () => {
     test('when seen is above threshold should result in GOOD', () => {
       // only use the relevant keys
       const mockConfig = {
-      // eslint-disable-next-line max-len
+        // eslint-disable-next-line max-len
         symbol_alphabet: ['!', '@', '$', '%', '^', '&', '*', '-', '_', '+', '=', ':', '|', '~', '?', '/', '.', ';'],
         word_length_min: 4,
         word_length_max: 8,
@@ -322,7 +383,7 @@ describe('Test class Statistics', () => {
         case_transform: 'RANDOM',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minEntropyBlind: {
@@ -361,7 +422,7 @@ describe('Test class Statistics', () => {
         case_transform: 'LOWER',
       };
 
-      const me = new Statistics(mockConfig);
+      const me = new Statistics(mockConfig, mockDict);
 
 
       const expected = {
@@ -387,7 +448,7 @@ describe('Test class Statistics', () => {
   });
 
   describe('Test internal function __passwordStrength', () => {
-    const me = new Statistics(mock.config);
+    const me = new Statistics(mock.config, mockDict);
 
     test('on DEFAULT preset', () => {
       // these are just the entropies
@@ -430,24 +491,27 @@ describe('Test class Statistics', () => {
 
   describe('Test calculateStats', () => {
     test('on mock (DEFAULT) preset', () => {
-      const me = new Statistics(mock.config);
+      const me = new Statistics(mock.config, mockDict);
 
       /* eslint-disable max-len */
 
       const expected = {
         dictionary: {
           source: '',
-          numWordsTotal: 0,
-          numWordsFiltered: 0,
-          percentWordsAvailable: 0,
-          filterMinLength: 0,
-          filterMaxLength: 0,
+          numWordsTotal: 1259,
+          numWordsFiltered: 1194,
+          percentWordsAvailable: 95,
+          filterMinLength: 4,
+          filterMaxLength: 8,
           containsAccents: false,
         },
         entropy: {
-          // minPermutationsBlind: 10408797222153426578715765348940396820955136n,
-          // maxPermutationsBlind: 33581556514373188787421088705325971513167489664257311885404143616n,
-          // permutationsBlind: 591222134364399413463902591994678504204696392694759424n,
+          // minPermutationsBlind:
+          // 10408797222153426578715765348940396820955136n,
+          // maxPermutationsBlind:
+          // 33581556514373188787421088705325971513167489664257311885404143616n,
+          // permutationsBlind:
+          // 591222134364399413463902591994678504204696392694759424n,
           // permutationsSeen: 1399680000n,
           entropyBlind: 179,
           minEntropyBlind: {

@@ -34,8 +34,9 @@ class XKPasswd {
     this.#preset = new Presets();
     this.#config = this.#preset.config();
     this.#rng = new RandomBasic();
-    this.#dictionary = new DictionaryEN();
-    this.#statsClass = new Statistics(this.#config);
+    const dict = new DictionaryEN();
+    this.#dictionary = dict;
+    this.#statsClass = new Statistics(this.#config, dict);
     this.#stats = {};
 
     // the number of passwords this instance has generated
@@ -54,7 +55,7 @@ class XKPasswd {
     this.#config = this.#preset.config();
 
     // Refresh the statistics
-    this.#statsClass = new Statistics(this.#config);
+    this.#statsClass = new Statistics(this.#config, this.#dictionary);
   }
 
   /**

@@ -67,6 +67,57 @@ class Dictionary {
   }
 
   /**
+   * Get the length of the shortest word in the list
+   *
+   * @return {number} - length
+   */
+  getMinWordLength() {
+    return this.#minWordLength;
+  }
+
+  /**
+   * Get the length of the largest word in the list
+   * @return {number} - length
+   */
+  getMaxWordLength() {
+    return this.#maxWordLength;
+  }
+
+  /**
+   * Find the list of words with a length that
+   * falls in the range of the min and max parameters
+   *
+   * @param {number} minLen - minimum length
+   * @param {number} maxLen - maximum length
+   * @return {Array} - list of filtered words
+   */
+  filteredWordList(minLen, maxLen) {
+    const maxDict = this.getLength();
+
+    // if undefined, make it 0
+    minLen = minLen ? minLen : 0;
+    maxLen = maxLen ? maxLen : 0;
+    // get the minimum of the 2 input variables
+    const minLength = Math.min(minLen, maxLen);
+
+    // get the maximum of the 2 input variables
+    const maxLength = Math.max(minLen, maxLen);
+
+    log.trace(`about to filter words with ${minLength} - ${maxLength}`);
+
+    const list = [];
+    let word = '';
+    for (let i = 0; i < maxDict; i++) {
+      word = this.word(i);
+      if (word.length >= minLength && word.length <= maxLength) {
+        list.push(word);
+      }
+    }
+    log.trace(`pushed words: ${list.length}`);
+    return list;
+  }
+
+  /**
    * Set the length of the word list
    *
    * @param {integer} len - length of the list
@@ -92,14 +143,6 @@ class Dictionary {
     }
     this.#minWordLength = minlen;
     this.#maxWordLength = maxlen;
-  }
-
-  getMinWordLength() {
-    return this.#minWordLength;
-  }
-
-  getMaxWordLength() {
-    return this.#maxWordLength;
   }
 }
 
