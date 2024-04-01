@@ -78,15 +78,15 @@ class Dictionary {
   }
 
   /**
-   * set min and max word length
+   * Set the word length min and max values
    *
-   * @ private
+   * @private
    */
   __setWordLength() {
     const list = this.wordList();
     let minlen = list[0].length;
     let maxlen = minlen;
-    for (let i = 1 ; i < this.#wordListLength; i++) {
+    for (let i = 1; i < this.#wordListLength; i++) {
       minlen = Math.min(minlen, list[i].length);
       maxlen = Math.max(maxlen, list[i].length);
     }
