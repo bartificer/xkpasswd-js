@@ -1270,7 +1270,7 @@ const THE_WORDS = [
   'yesterday',
   'young',
   'your',
-  'yourself',
+  'yourself'
 ];
 
 /**
