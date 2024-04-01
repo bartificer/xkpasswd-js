@@ -40,7 +40,6 @@ class Statistics {
     };
     this.configStats(true);
 
-    log.setLevel('error');
   }
 
   /**
