@@ -289,16 +289,16 @@ class PasswordView {
       // make a template for one value
 
       template = [
-        `<span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `<span class="btn btn-stats ${this.__getStatsClass(min.state)}"`,
         `id="entropy_min">${min.value} bits</span>`,
       ].join('');
     }
     else {
       // make a template for two values
       template = [
-        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass(min.state)}"`,
         `id="entropy_min">${min.value} bits</span> and `,
-        `<span class="btn btn-stats ${this.__getStatsClass([max.state])}"`,
+        `<span class="btn btn-stats ${this.__getStatsClass(max.state)}"`,
         `id="entropy_max">${max.value} bits</span>`,
       ].join('');
     }
@@ -310,8 +310,12 @@ class PasswordView {
     this.#blindEntropy.empty().append(template);
 
     // full knowledge (seen) entropy
+        for (let key in this.#stats_classes) {
+        this.#seenEntropy.removeClass(this.#stats_classes[key].class);
+    }
+
     this.#seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
-      .addClass(this.#stats_classes[stats.entropy.entropySeen.state]);
+      .addClass(this.__getStatsClass(stats.entropy.entropySeen.state));
 
     const suggestion =
       // eslint-disable-next-line max-len
