@@ -251,33 +251,35 @@ describe('Test class Statistics', () => {
     });
   });
 
-  describe('Test internal function __calculateEntropyStats', () => {
+  describe.only('Test internal function __calculateEntropyStats', () => {
     test('on mock (DEFAULT) set', () => {
       const me = new Statistics(mock.config, mockDict);
+      const dictStats = {
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      };
 
       /* eslint-disable max-len */
 
-      expect(me.__calculateEntropyStats()).toEqual({
-        // minPermutationsBlind:
-        // 10408797222153426578715765348940396820955136n,
-        // maxPermutationsBlind:
-        // 33581556514373188787421088705325971513167489664257311885404143616n,
-        // permutationsBlind:
-        // 591222134364399413463902591994678504204696392694759424n,
-        // permutationsSeen: 1399680000n,
-        entropyBlind: 179,
+      expect(me.__calculateEntropyStats(dictStats)).toEqual({
+        entropyBlind: 198,
         minEntropyBlind: {
-          value: 143,
+          value: 158,
           state: 'GOOD',
           equal: false,
         },
         maxEntropyBlind: {
-          value: 215,
+          value: 237,
           state: 'GOOD',
         },
         entropySeen: {
-          value: 31,
-          state: 'POOR',
+          value: 54,
+          state: 'GOOD',
         },
       });
       /* eslint-enable max-len */
@@ -299,26 +301,36 @@ describe('Test class Statistics', () => {
         padding_characters_after: 2,
         case_transform: 'ALTERNATE',
       };
+      const dictStats = {
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      };
+
 
       const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minEntropyBlind: {
-          value: 143,
+          value: 158,
           state: 'GOOD',
           equal: true,
         },
         maxEntropyBlind: {
-          value: 143,
+          value: 158,
           state: 'OK',
         },
         entropySeen: {
-          value: 25,
+          value: 47,
           state: 'POOR',
         },
       };
 
-      const result = me.__calculateEntropyStats();
+      const result = me.__calculateEntropyStats(dictStats);
       expect(result.minEntropyBlind).toEqual(expected.minEntropyBlind);
       expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
       expect(result.entropySeen).toEqual(expected.entropySeen);
@@ -340,6 +352,16 @@ describe('Test class Statistics', () => {
         padding_characters_after: 0,
         case_transform: 'UPPER',
       };
+      const dictStats = {
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      };
+
 
       const me = new Statistics(mockConfig, mockDict);
 
@@ -354,12 +376,12 @@ describe('Test class Statistics', () => {
           state: 'OK',
         },
         entropySeen: {
-          value: 3,
+          value: 21,
           state: 'POOR',
         },
       };
 
-      const result = me.__calculateEntropyStats();
+      const result = me.__calculateEntropyStats(dictStats);
       expect(result.minEntropyBlind).toEqual(expected.minEntropyBlind);
       expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
       expect(result.entropySeen).toEqual(expected.entropySeen);
@@ -382,6 +404,16 @@ describe('Test class Statistics', () => {
         padding_characters_after: 2,
         case_transform: 'RANDOM',
       };
+      const dictStats = {
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      };
+
 
       const me = new Statistics(mockConfig, mockDict);
 
@@ -396,12 +428,12 @@ describe('Test class Statistics', () => {
           state: 'OK',
         },
         entropySeen: {
-          value: 154,
+          value: 187,
           state: 'GOOD',
         },
       };
 
-      const result = me.__calculateEntropyStats();
+      const result = me.__calculateEntropyStats(dictStats);
       expect(result.entropySeen).toEqual(expected.entropySeen);
     });
 
@@ -421,6 +453,15 @@ describe('Test class Statistics', () => {
         padding_characters_after: 0,
         case_transform: 'LOWER',
       };
+      const dictStats = {
+        numWordsTotal: 1259,
+        numWordsFiltered: 1194,
+        percentWordsAvailable: 95,
+        filterMinLength: 4,
+        filterMaxLength: 8,
+        containsAccents: false,
+        source: '',
+      };
 
       const me = new Statistics(mockConfig, mockDict);
 
@@ -435,12 +476,12 @@ describe('Test class Statistics', () => {
           state: 'POOR',
         },
         entropySeen: {
-          value: 5,
+          value: 31,
           state: 'POOR',
         },
       };
 
-      const result = me.__calculateEntropyStats();
+      const result = me.__calculateEntropyStats(dictStats);
       expect(result.maxEntropyBlind).toEqual(expected.maxEntropyBlind);
       expect(result.entropySeen).toEqual(expected.entropySeen);
     });

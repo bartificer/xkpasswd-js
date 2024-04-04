@@ -243,7 +243,7 @@ class Statistics {
     const configStats = this.configStats();
 
     // deal with the entropy stats
-    const entropyStats = this.__calculateEntropyStats();
+    const entropyStats = this.__calculateEntropyStats(dictStats);
 
     // add them to the password object
     stats.password = {
@@ -316,11 +316,12 @@ class Statistics {
    *       search-space of 33 symbols is assumed (same as password
    *       haystacks page)
    *
+   * @param {object} dictStats - dictionary statistics
    * @return {object} - entropy stats
    * @throws {Error} - Exception on error
    * @private
    */
-  __calculateEntropyStats() {
+  __calculateEntropyStats(dictStats) {
     /* istanbul ignore next @preserve : too simple to test */
     if (this.#cache.entropy.valid) {
       return this.#cache.entropy.stats;
@@ -383,11 +384,7 @@ class Statistics {
 
     // calculate the seen permutations
 
-    // TODO figure this cache thing out
-    // let num_words = scalar @{$self->{_CACHE_DICTIONARY_LIMITED}};
-
-    // For now
-    const numWords = this.#config.num_words;
+    const numWords = dictStats.numWordsFiltered;
     const numWordsConfig = this.#config.num_words; // convenience variable
     const numWordsBigInt = BigInt(numWords);
     let seenPermutationsBigInt = BigInt('0');
