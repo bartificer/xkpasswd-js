@@ -8,11 +8,6 @@ import log from 'loglevel';
  */
 class PasswordView {
   /**
-   * @private {number} aniTime - set time to show/hide elements
-   */
-  #aniTime = 250;
-
-  /**
    *  set the Bootstrap classes for the various values
    * @private
    */
