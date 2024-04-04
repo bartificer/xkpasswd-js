@@ -424,7 +424,6 @@ describe('Test class Statistics', () => {
 
       const me = new Statistics(mockConfig, mockDict);
 
-
       const expected = {
         minEntropyBlind: {
           value: 18,

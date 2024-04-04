@@ -86,7 +86,7 @@ class PasswordView {
     this.#passwordPresentation.addClass('d-none');
     this.#passwordList.html('');
     this.#passwordText.val('');
-    // Make both password content elements invisble.
+    // Make both password content elements invisible.
     this.#passwordList.addClass('d-none');
     this.#passwordText.addClass('d-none');
 
@@ -157,7 +157,7 @@ class PasswordView {
     let htmlPwdList = '';
     // eslint-disable-next-line guard-for-in
     for (const pwdIndex in passAndStats.passwords) {
-      // Make the index a number so we can perform math as needed.
+      // Make the index a number, so we can perform math as needed.
       const theIndex = Number.parseInt(pwdIndex);
 
       htmlPwdList = htmlPwdList.concat(`
@@ -207,7 +207,7 @@ class PasswordView {
   };
 
   /**
-   * bind the Generate button to the eventhandler
+   * bind the Generate button to the event handler
    * @param {Function} handle - pass control to the Controller
    */
   bindGeneratePassword(handle) {
@@ -366,6 +366,6 @@ class PasswordView {
   __getStatsDisplay(strength) {
     return this.#stats_classes[strength].display;
   }
-};
+}
 
 export {PasswordView};

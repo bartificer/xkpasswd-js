@@ -688,7 +688,8 @@ class Presets {
       }
     }
     newConfig.separatorAlphabet = this.__getSeparatorAlphabet(config);
-    // console.log(`returning config: ${JSON.stringify(config)}`);
+
+    log.trace(`returning config: ${JSON.stringify(config)}`);
     return newConfig;
   }
 

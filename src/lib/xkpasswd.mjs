@@ -164,7 +164,7 @@ class XKPasswd {
       log.error(
         `Failed to generate password with the following error: ${e}`,
       );
-    };
+    }
   }
 
   /**
@@ -316,7 +316,7 @@ class XKPasswd {
       }
       while (word.length < minLength || word.length > maxLength );
       list.push(word);
-    };
+    }
     return list;
   }
 
