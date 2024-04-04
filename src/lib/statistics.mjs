@@ -348,12 +348,7 @@ class Statistics {
 
     log.trace('alphabetCount: ' + alphabetCount);
 
-    // TODO replace pseudocode with real code
-    //  if($self->_passwords_will_contain_symbol()
-    // || $self->{_CACHE_CONTAINS_ACCENTS}){
-
-    /* istanbul ignore next @preserve : not in use */
-    if (false) {
+    if (this.__passwordsWillContainSymbol()) {
       // the config almost certainly includes a symbol,
       // so add 33 to the alphabet (like password haystacks does)
       alphabetCount += 33;
@@ -661,6 +656,79 @@ class Statistics {
       filterMaxLength: maxlen,
       containsAccents: false,
     };
+  }
+
+  /**
+   * A function to check if passwords generated with the loaded
+   * config would contain a symbol
+   *
+   * Returns    : true if the config will produce passwords with a symbol, or false
+   *              otherwise
+   * Notes      : This function is used by _calculate_entropy_stats() to figure out
+   *              whether or not there are symbols in the alphabet when calculating
+   *              the brute-force entropy.
+   * @private
+   * @return {boolean} if the config will produce passwords with a symbol
+   * @see __calculateEntropyStats
+   */
+
+  __passwordsWillContainSymbol () {
+
+    // match anything but letters and digits and ignore whitespace
+    const re = /[^0-9a-zA-Z]/s;
+
+    if (this.#config.padding_type !== 'NONE') {
+      if (this.#config.padding_character_type === 'RANDOM') {
+        if (this.#config.padding_alphabet) {
+          if (this.#config.padding_alphabet.match(re)) {
+            // if we have just one non-word character
+            return true;
+          }
+        }
+        else {
+          if (this.#config.symbol_alphabet &&
+            this.#config.symbol_alphabet.match(re)) {
+            // if we have just one non-word character
+            return true;
+          }
+        }
+      }
+      else {
+        if (this.#config.padding_character &&
+          this.#config.padding_character.match(re)) {
+          // the padding character is not a word character
+          return true;
+        }
+      }
+    }
+
+    // then check the separator
+    if (this.#config.separator_type !== 'NONE') {
+      if (this.#config.separator_type === 'RANDOM') {
+        if (this.#config.separator_alphabet) {
+          if (this.#config.separator_alphabet.match(re)) {
+            // if we have just one non-word character
+            return true;
+          }
+        }
+        else {
+          if (this.#config.symbol_alphabet &&
+            this.#config.symbol_alphabet.match(re)) {
+            // if we have just one non-word character
+            return true;
+          }
+        }
+      }
+      else {
+        if (this.#config.separator_character &&
+          this.#config.separator_character.match(re)) {
+          // the separator is not a word character
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 }
 
