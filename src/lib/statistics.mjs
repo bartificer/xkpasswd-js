@@ -402,7 +402,7 @@ class Statistics {
       // multiply by two for the one random decision about
       // whether or capitalise the odd or even words
       seenPermutationsBigInt *= BigInt(2);
-
+      break;
     case 'RANDOM':
       // multiply by two for each word
 
