@@ -236,6 +236,12 @@ class SettingsView {
     $('#padding_character').prop('required', false);
 
     switch (paddingType) {
+    case 'NONE':
+      paddingCharacter.hide(this.#aniTime);
+      paddingAlphabet.hide(this.#aniTime);
+      $('#padding_character').prop('required', false);
+      break;
+
     case 'FIXED':
       paddingCharacter.show(this.#aniTime);
       paddingAlphabet.hide(this.#aniTime);
