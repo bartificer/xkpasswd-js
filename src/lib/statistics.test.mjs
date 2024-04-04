@@ -120,6 +120,13 @@ describe('Test class Statistics', () => {
     test('on mock (DEFAULT) preset', () => {
       const me = new Statistics(mock.config, mockDict);
 
+      /*
+       * separator: random
+       * padding: random
+       * num words: 3
+       * digits: 2 + 2
+       * total: 2 + 2 + 3 + 1 + 1 = 9
+       */
       const expectedNumber = 9;
 
       expect(me.__randomNumbersRequired()).toBe(expectedNumber);
