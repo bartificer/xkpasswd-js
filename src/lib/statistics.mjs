@@ -603,7 +603,7 @@ class Statistics {
    *
    * TODO do we really need this function?
    *
-   * @return {integer} the number of random numbers required
+   * @return {number} the number of random numbers required
    */
   __randomNumbersRequired() {
     let randomNumbers = 0;
