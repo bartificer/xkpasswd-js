@@ -5,7 +5,6 @@
  */
 
 import log from 'loglevel';
-import is from 'is-it-check';
 import {Dictionary} from './dictionary.mjs';
 
 /** Calculate statistics */
@@ -96,7 +95,7 @@ class Statistics {
 
     let minLength = 0;
     let maxLength = 0;
-    const separator = (config.separator_character == 'RANDOM' ? 1 : 0);
+    const separator = (config.separator_type === 'RANDOM' ? 1 : 0);
 
     if (config.padding_type === 'ADAPTIVE') {
       minLength = maxLength = config.pad_to_length;
@@ -419,8 +418,8 @@ class Statistics {
     // (if any - i.e. if it's randomly chosen)
 
     /* istanbul ignore next @preserve : too difficult to test */
-    if (this.#config.separator_character === 'RANDOM') {
-      if (!is.undefined(this.#config.separator_alphabet)) {
+    if (this.#config.separator_type === 'RANDOM') {
+      if (this.#config.separator_alphabet) {
         seenPermutationsBigInt *=
           BigInt(this.#config.separator_alphabet.length);
       } else {
@@ -433,9 +432,9 @@ class Statistics {
     // (if any - i.e. if it's randomly chosen)
 
     if (this.#config.padding_type !== 'NONE' &&
-      this.#config.padding_character === 'RANDOM') {
+      this.#config.padding_character_type === 'RANDOM') {
       /* istanbul ignore next @preserve : too difficult to test */
-      if (!is.undefined(this.#config.padding_alphabet)) {
+      if (this.#config.padding_alphabet) {
         seenPermutationsBigInt *= BigInt(this.#config.padding_alphabet.length);
       } else {
         seenPermutationsBigInt *= BigInt(this.#config.symbol_alphabet.length);
@@ -612,11 +611,11 @@ class Statistics {
     if (this.#config.case_transform === 'RANDOM') {
       randomNumbers += this.#config.num_words;
     }
-    if (this.#config.separator_character == 'RANDOM') {
+    if (this.#config.separator_type === 'RANDOM') {
       randomNumbers++;
     }
-    if (!is.undefined(this.#config.padding_character) &&
-       this.#config.padding_character === 'RANDOM') {
+    if ((this.#config.padding_character_type !== undefined) &&
+       this.#config.padding_character_type === 'RANDOM') {
       randomNumbers++;
     }
     randomNumbers += this.#config.padding_digits_before;

@@ -12,15 +12,15 @@ describe('Test class Statistics', () => {
     description: 'Mock preset - this is a copy of the DEFAULT preset',
     config: {
       // eslint-disable-next-line max-len
-      symbol_alphabet: ['!', '@', '$', '%', '^', '&', '*', '-', '_', '+', '=', ':', '|', '~', '?', '/', '.', ';'],
+      symbol_alphabet: '!@$%^&*-_+=:|~?/.;',
       word_length_min: 4,
       word_length_max: 8,
       num_words: 3,
-      separator_character: 'RANDOM',
+      separator_type: 'RANDOM',
       padding_digits_before: 2,
       padding_digits_after: 2,
       padding_type: 'FIXED',
-      padding_character: 'RANDOM',
+      padding_character_type: 'RANDOM',
       padding_characters_before: 2,
       padding_characters_after: 2,
       case_transform: 'ALTERNATE',
@@ -34,10 +34,10 @@ describe('Test class Statistics', () => {
       // only properties necessary for the function
       const mockConfig = {
         num_words: 1,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 2,
         padding_digits_after: 2,
-        padding_character: 'SEPARATOR',
+        padding_character_type: 'SEPARATOR',
         case_transform: 'CAPITALISE',
       };
 
@@ -56,10 +56,10 @@ describe('Test class Statistics', () => {
 
       const mockConfig = {
         num_words: 1,
-        separator_character: 'RANDOM',
+        separator_type: 'RANDOM',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'SEPARATOR',
+        padding_character_type: 'SEPARATOR',
         case_transform: 'CAPITALISE',
       };
 
@@ -78,10 +78,10 @@ describe('Test class Statistics', () => {
 
       const mockConfig = {
         num_words: 1,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'SEPARATOR',
+        padding_character_type: 'SEPARATOR',
         case_transform: 'RANDOM',
       };
 
@@ -100,10 +100,10 @@ describe('Test class Statistics', () => {
 
       const mockConfig = {
         num_words: 1,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         case_transform: 'CAPITALISE',
       };
 
@@ -130,10 +130,10 @@ describe('Test class Statistics', () => {
     test('returns an empty list if min and max are undefined', () => {
       const mockConfig = {
         num_words: 1,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         case_transform: 'CAPITALISE',
       };
 
@@ -157,10 +157,10 @@ describe('Test class Statistics', () => {
         num_words: 1,
         word_length_min: 8,
         word_length_max: 4,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         case_transform: 'CAPITALISE',
       };
 
@@ -184,10 +184,10 @@ describe('Test class Statistics', () => {
         num_words: 1,
         word_length_min: 20,
         word_length_max: 20,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 3,
         padding_digits_after: 3,
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         case_transform: 'CAPITALISE',
       };
 
@@ -227,12 +227,12 @@ describe('Test class Statistics', () => {
         word_length_min: 4,
         word_length_max: 8,
         num_words: 3,
-        separator_character: 'RANDOM',
+        separator_type: 'RANDOM',
         padding_digits_before: 2,
         padding_digits_after: 2,
         padding_type: 'ADAPTIVE',
         pad_to_length: 25,
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         padding_characters_before: 2,
         padding_characters_after: 2,
         case_transform: 'ALTERNATE',
@@ -286,15 +286,15 @@ describe('Test class Statistics', () => {
     test('when min and max are equal', () => {
       // only use the relevant keys
       const mockConfig = {
-        symbol_alphabet: ['!', '@'],
+        symbol_alphabet: '!@',
         word_length_min: 4,
         word_length_max: 4,
         num_words: 3,
-        separator_character: 'RANDOM',
+        separator_type: 'RANDOM',
         padding_digits_before: 2,
         padding_digits_after: 2,
         padding_type: 'FIXED',
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         padding_characters_before: 2,
         padding_characters_after: 2,
         case_transform: 'ALTERNATE',
@@ -327,15 +327,15 @@ describe('Test class Statistics', () => {
     test('when equal and less than threshold should result in POOR', () => {
       // only use the relevant keys
       const mockConfig = {
-        symbol_alphabet: ['!', '@'],
+        symbol_alphabet: '!@',
         word_length_min: 4,
         word_length_max: 4,
         num_words: 2,
-        separator_character: '+',
+        separator_type: '+',
         padding_digits_before: 0,
         padding_digits_after: 0,
         padding_type: 'NONE',
-        padding_character: 'NONE',
+        padding_character_type: 'NONE',
         padding_characters_before: 0,
         padding_characters_after: 0,
         case_transform: 'UPPER',
@@ -369,15 +369,15 @@ describe('Test class Statistics', () => {
       // only use the relevant keys
       const mockConfig = {
         // eslint-disable-next-line max-len
-        symbol_alphabet: ['!', '@', '$', '%', '^', '&', '*', '-', '_', '+', '=', ':', '|', '~', '?', '/', '.', ';'],
+        symbol_alphabet: '!@$%^&*-_+=:|~?/.;',
         word_length_min: 4,
         word_length_max: 8,
         num_words: 4,
-        separator_character: 'RANDOM',
+        separator_type: 'RANDOM',
         padding_digits_before: 20,
         padding_digits_after: 20,
         padding_type: 'FIXED',
-        padding_character: 'RANDOM',
+        padding_character_type: 'RANDOM',
         padding_characters_before: 2,
         padding_characters_after: 2,
         case_transform: 'RANDOM',
@@ -408,15 +408,15 @@ describe('Test class Statistics', () => {
     test('when max is below threshold should result in POOR', () => {
       // only use the relevant keys
       const mockConfig = {
-        symbol_alphabet: ['-'],
+        symbol_alphabet: '-',
         word_length_min: 4,
         word_length_max: 5,
         num_words: 3,
-        separator_character: 'NONE',
+        separator_type: 'NONE',
         padding_digits_before: 0,
         padding_digits_after: 0,
         padding_type: 'FIXED',
-        padding_character: 'SEPARATOR',
+        padding_character_type: 'SEPARATOR',
         padding_characters_before: 0,
         padding_characters_after: 0,
         case_transform: 'LOWER',
