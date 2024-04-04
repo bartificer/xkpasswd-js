@@ -98,13 +98,13 @@ class Statistics {
     let maxLength = 0;
     const separator = (config.separator_character == 'RANDOM' ? 1 : 0);
 
-    if (config.padding_type == 'ADAPTIVE') {
+    if (config.padding_type === 'ADAPTIVE') {
       minLength = maxLength = config.pad_to_length;
     } else {
       // calculate the length of everything but the words themselves
 
       let baseLength = 0;
-      if (config.padding_type == 'FIXED') {
+      if (config.padding_type === 'FIXED') {
         baseLength += config.padding_characters_before +
           config.padding_characters_after;
       }
@@ -114,7 +114,7 @@ class Statistics {
       if (config.padding_digits_after > 0) {
         baseLength += config.padding_digits_after + separator;
       }
-      if (separator == 1) {
+      if (separator === 1) {
         baseLength += config.num_words - 1;
       }
 
@@ -522,7 +522,7 @@ class Statistics {
     };
 
     // first the blind entropy
-    if (minEntropyBlind == maxEntropyBlind) {
+    if (minEntropyBlind === maxEntropyBlind) {
       entropy.minEntropyBlind.equal = true;
       if (minEntropyBlind >= entropyBlindThreshold) {
         entropy.minEntropyBlind.state = 'GOOD';
