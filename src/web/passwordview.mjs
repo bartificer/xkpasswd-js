@@ -8,11 +8,6 @@ import log from 'loglevel';
  */
 class PasswordView {
   /**
-   * @private {number} aniTime - set time to show/hide elements
-   */
-  #aniTime = 250;
-
-  /**
    *  set the Bootstrap classes for the various values
    * @private
    */
@@ -86,7 +81,7 @@ class PasswordView {
     this.#passwordPresentation.addClass('d-none');
     this.#passwordList.html('');
     this.#passwordText.val('');
-    // Make both password content elements invisble.
+    // Make both password content elements invisible.
     this.#passwordList.addClass('d-none');
     this.#passwordText.addClass('d-none');
 
@@ -157,7 +152,7 @@ class PasswordView {
     let htmlPwdList = '';
     // eslint-disable-next-line guard-for-in
     for (const pwdIndex in passAndStats.passwords) {
-      // Make the index a number so we can perform math as needed.
+      // Make the index a number, so we can perform math as needed.
       const theIndex = Number.parseInt(pwdIndex);
 
       htmlPwdList = htmlPwdList.concat(`
@@ -207,7 +202,7 @@ class PasswordView {
   };
 
   /**
-   * bind the Generate button to the eventhandler
+   * bind the Generate button to the event handler
    * @param {Function} handle - pass control to the Controller
    */
   bindGeneratePassword(handle) {
@@ -294,16 +289,16 @@ class PasswordView {
       // make a template for one value
 
       template = [
-        `<span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `<span class="btn btn-stats ${this.__getStatsClass(min.state)}"`,
         `id="entropy_min">${min.value} bits</span>`,
       ].join('');
     }
     else {
       // make a template for two values
       template = [
-        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass([min.state])}"`,
+        `&nbsp;between <span class="btn btn-stats ${this.__getStatsClass(min.state)}"`,
         `id="entropy_min">${min.value} bits</span> and `,
-        `<span class="btn btn-stats ${this.__getStatsClass([max.state])}"`,
+        `<span class="btn btn-stats ${this.__getStatsClass(max.state)}"`,
         `id="entropy_max">${max.value} bits</span>`,
       ].join('');
     }
@@ -311,12 +306,15 @@ class PasswordView {
 
     log.trace(`template built: ${template}`);
 
-
     this.#blindEntropy.empty().append(template);
 
     // full knowledge (seen) entropy
+        for (let key in this.#stats_classes) {
+        this.#seenEntropy.removeClass(this.#stats_classes[key].class);
+    }
+
     this.#seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
-      .addClass(this.#stats_classes[stats.entropy.entropySeen.state]);
+      .addClass(this.__getStatsClass(stats.entropy.entropySeen.state));
 
     const suggestion =
       // eslint-disable-next-line max-len
@@ -340,6 +338,10 @@ class PasswordView {
 
     // render strength
     this.#passwordStrength.text(statsText);
+    for (let key in this.#stats_classes) {
+        this.#passwordStrength.removeClass(this.#stats_classes[key].class);
+    }
+
     this.#passwordStrength.addClass(statsClass);
   };
 
@@ -366,6 +368,6 @@ class PasswordView {
   __getStatsDisplay(strength) {
     return this.#stats_classes[strength].display;
   }
-};
+}
 
 export {PasswordView};

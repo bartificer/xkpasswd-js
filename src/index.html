@@ -203,10 +203,11 @@
                                 <div class="input-group">
                                   <!-- random characters -->
                                   <div class="input-group">
-                                  <label for="separator_alphabet" class="input-group-text rounded-start">Alphabet</label>
-                                  <input name="separator_alphabet" id="separator_alphabet" class="form-control rounded-end"
-                                    type="text" size="6" minlength="2" maxlength="6" value="" />
-                                  <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
+                                    <label for="separator_alphabet" class="input-group-text rounded-start">Alphabet</label>
+                                    <input name="separator_alphabet" id="separator_alphabet" class="form-control rounded-end"
+                                      type="text" size="6" minlength="2" maxlength="6" value="" />
+                                    <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
+                                  </div>
                                 </div>
                               </div>
                             </div> <!-- /section_separator -->
@@ -328,7 +329,7 @@
             <form id="generatePasswords"> <!-- open input area for gen pw -->
               <div class="row">
                 <div class="col-8 col-md-6 mb-3">
-                  <!-- Technically the label should be there but it's an audible repeat of span class -->
+                  <!-- Technically the label should be there, but it's an audible repeat of span class -->
                   <!-- <label class="visually-hidden" for="selectAmount">Number of passwords</label> -->
                   <div class="input-group mt-2">
                     <span class="input-group-text"># of passwords</span>
@@ -388,13 +389,12 @@
           <div class="card-footer">
             <div id="password_stats_container" class="pt-1 fs-6">
               <h6><i class="bi bi-graph-up"></i> Statistics</h6>
-              <div class="border border-warning bg-warning my-1 text-center">Statistics are not yet correct.</div>
               <p class="fw-lighter lh-1 ">
                 <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-success"
                   id="password_strength">test</span>
               </p>
               <p class="fw-light">
-                <span class="fw-bolder">Entropy</span><span id="entropy_blind">
+                <span class="fw-bolder">Entropy</span>&nbsp;<span id="entropy_blind">
                 </span> blind & <span class="btn btn-stats btn-warning" id="entropy_seen">seen</span>&nbsp;with
                 full knowledge
                 <br />
