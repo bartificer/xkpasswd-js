@@ -258,7 +258,7 @@ describe('Test class Statistics', () => {
     });
   });
 
-  describe.only('Test internal function __calculateEntropyStats', () => {
+  describe('Test internal function __calculateEntropyStats', () => {
     test('on mock (DEFAULT) set', () => {
       const me = new Statistics(mock.config, mockDict);
       const dictStats = {
@@ -553,26 +553,19 @@ describe('Test class Statistics', () => {
           containsAccents: false,
         },
         entropy: {
-          // minPermutationsBlind:
-          // 10408797222153426578715765348940396820955136n,
-          // maxPermutationsBlind:
-          // 33581556514373188787421088705325971513167489664257311885404143616n,
-          // permutationsBlind:
-          // 591222134364399413463902591994678504204696392694759424n,
-          // permutationsSeen: 1399680000n,
-          entropyBlind: 179,
+          entropyBlind: 198,
           minEntropyBlind: {
-            value: 143,
+            value: 158,
             state: 'GOOD',
             equal: false,
           },
           maxEntropyBlind: {
-            value: 215,
+            value: 237,
             state: 'GOOD',
           },
           entropySeen: {
-            value: 31,
-            state: 'POOR',
+            value: 54,
+            state: 'GOOD',
           },
           blindThreshold: 78,
           seenThreshold: 52,
@@ -581,7 +574,7 @@ describe('Test class Statistics', () => {
           minLength: 24,
           maxLength: 36,
           randomNumbersRequired: 9,
-          passwordStrength: 'OK',
+          passwordStrength: 'GOOD',
         },
       };
       /* eslint-enable max-len */
