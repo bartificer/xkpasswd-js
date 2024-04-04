@@ -306,7 +306,6 @@ class PasswordView {
 
     log.trace(`template built: ${template}`);
 
-
     this.#blindEntropy.empty().append(template);
 
     // full knowledge (seen) entropy
