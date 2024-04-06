@@ -18,7 +18,7 @@ class SettingsController {
   /**
    * @constructor
    *
-   * @param {SettingsModel} model - new SettingsModel
+   * @param {Object} model - new SettingsModel
    * @param {SettingsView} view - new SettingsView
    */
   constructor(model, view) {

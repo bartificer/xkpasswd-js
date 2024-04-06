@@ -212,14 +212,14 @@ class SettingsView {
   };
 
   /**
-     * Toggle visibility of padding type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __togglePaddingCharType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__togglePaddingCharType: ${paddingType}`);

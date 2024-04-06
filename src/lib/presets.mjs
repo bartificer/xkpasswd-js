@@ -706,7 +706,7 @@ class Presets {
   /**
    * Get the padding character configuration
    *
-   * @param {string} config - the config to fix
+   * @param {object} config - the config to fix
    *
    * @return {object} - the object with the normalized properties
    */
