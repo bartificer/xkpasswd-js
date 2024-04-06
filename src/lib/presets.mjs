@@ -766,7 +766,7 @@ class Presets {
       }
     }
     newConfig.paddingAlphabet = this.__getPaddingAlphabet(config);
-    // console.log(`returning newConfig: ${JSON.stringify(newConfig)}`);
+    log.trace(`returning newConfig: ${JSON.stringify(newConfig)}`);
     return newConfig;
   }
 }
