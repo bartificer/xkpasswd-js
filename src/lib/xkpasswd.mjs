@@ -61,7 +61,7 @@ class XKPasswd {
   /**
    * Get the current preset
    *
-   * @return {Preset} the current preset
+   * @return {Presets} the current preset
    */
   getPreset() {
     /* istanbul ignore next @preserve : too simple to test */
