@@ -50,11 +50,11 @@ class Dictionary {
   /**
    * Return a word from the list
    *
-   * @param {integer} index
+   * @param {number} index
    * @return {string} - the word at the index position
    */
   word(index) {
-    return null;
+    return '';
   }
 
   /**
