@@ -398,6 +398,7 @@ class Presets {
   #current;
   #presetName;
   #presets = Object.keys(thePresets);
+  #max_alphabet = 20;
 
   /**
    * Constructor: set either the default preset
@@ -576,7 +577,11 @@ class Presets {
 
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return is.array(alphabet) ? alphabet.join('') : alphabet;
+
+    // make sure the alphabet is not longer than the max length
+    return is.array(alphabet) ?
+      alphabet.join('').substring(0, this.#max_alphabet) :
+      alphabet.substring(0, this.#max_alphabet);
   }
 
   /**
@@ -599,7 +604,12 @@ class Presets {
             tmpConfig.symbol_alphabet);
     alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return is.array(alphabet) ? alphabet.join('') : alphabet;
+
+    // make sure the alphabet is not longer than the max length
+    return is.array(alphabet) ?
+      alphabet.join('').substring(0, this.#max_alphabet) :
+      alphabet.substring(0, this.#max_alphabet);
+
   }
 
   /**
