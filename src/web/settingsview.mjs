@@ -55,7 +55,7 @@ class SettingsView {
   };
 
   /**
-   * Bind the form to the event handler.
+   * Bind the settings form to the event handler.
    *
    * A change in any field of the form will trigger the form
    * validation. If the field input is not valid, an error message will be shown
@@ -96,7 +96,8 @@ class SettingsView {
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', true);
 
-      } else {
+      }
+      else {
         // get the form data and pass it on to the controller handle function
         const formData = new FormData(form);
         const data = {};
@@ -116,14 +117,15 @@ class SettingsView {
   }
 
   /**
-     * Toggle visibility of separator type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+  /**
+   * Toggle visibility of separator type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __toggleSeparatorType = (e) => {
     const separatorType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
@@ -133,7 +135,7 @@ class SettingsView {
     // always remove it, just add it only in case of 'FIXED'
     $('#separator_character').prop('required', false);
 
-    switch (separatorType) {
+    switch(separatorType) {
     case 'NONE':
       $('label[for="separator_character"]').hide(this.#aniTime);
       $('#separator_character').hide(this.#aniTime);
@@ -165,14 +167,14 @@ class SettingsView {
   };
 
   /**
-     * Toggle visibility of padding type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __togglePaddingType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
@@ -181,7 +183,7 @@ class SettingsView {
     const paddingCharAfter = $('#padding_characters_after').parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
 
-    switch (paddingType) {
+    switch(paddingType) {
     case 'NONE':
       paddingCharBefore.hide(this.#aniTime);
       paddingCharAfter.hide(this.#aniTime);
@@ -235,7 +237,7 @@ class SettingsView {
     // always remove it, just add it only in case of 'FIXED'
     $('#padding_character').prop('required', false);
 
-    switch (paddingType) {
+    switch(paddingType) {
     case 'NONE':
       paddingCharacter.hide(this.#aniTime);
       paddingAlphabet.hide(this.#aniTime);
