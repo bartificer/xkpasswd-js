@@ -332,7 +332,7 @@
                   <!-- Technically the label should be there, but it's an audible repeat of span class -->
                   <!-- <label class="visually-hidden" for="selectAmount">Number of passwords</label> -->
                   <div class="input-group mt-2">
-                    <span class="input-group-text"># of passwords</span>
+                    <label class="input-group-text" for="selectAmount"># of passwords</label>
                     <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
                       id="selectAmount" aria-describedby="enterNumberOfPasswords" />
                     <!-- doesn't show as stepper on iOS or Chromium -->
@@ -380,8 +380,9 @@
             </div>
             <div id="generated_password_lst" class="list-group list-group-flush"></div>
 
+            <label for="generated_password_txt" class="visually-hidden">Bulk password text</label>
             <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3 password-textbox"
-                       rows="3" id="generated_password_txt" aria_label="Bulk password text"></textarea>
+                       rows="3" id="generated_password_txt"></textarea>
 
             <div id="passwordErrorContainer"></div>
 
