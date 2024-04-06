@@ -206,9 +206,7 @@ class SettingsView {
       break;
 
     default:
-      try {
-        log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
-      } catch (e) {};
+      log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
       break;
     }
   };
