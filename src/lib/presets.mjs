@@ -448,7 +448,7 @@ class Presets {
           this.#presetName = 'DEFAULT';
         }
       }
-    };
+    }
 
     this.#current.config = this.__normalize(this.#current.config);
 
@@ -522,7 +522,7 @@ class Presets {
    * @return {Object} - the normalized config
    */
   __normalize(config) {
-    // create a clone so we can safely reference the original value
+    // create a clone, so we can safely reference the original value
     const newConfig = {...config};
 
     // set the min and max word lengths
@@ -570,7 +570,7 @@ class Presets {
       (is.undefined(config)) ? this.#current.config : config;
 
     let alphabet =
-        (is.not.undefined(tmpConfig.separator_alphabet) ?
+        (tmpConfig.separator_alphabet ?
           tmpConfig.separator_alphabet :
           tmpConfig.symbol_alphabet);
 
