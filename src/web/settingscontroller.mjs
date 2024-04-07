@@ -43,8 +43,6 @@ class SettingsController {
     log.trace(`controller saveSettings: ${JSON.stringify(settings)}`);
 
     // convert characters back to numbers
-    settings.sep_before_before = parseInt(settings.sep_before_before);
-    settings.sep_before_after = parseInt(settings.sep_before_after);
     settings.padding_digits_before = parseInt(settings.padding_digits_before);
     settings.padding_digits_after = parseInt(settings.padding_digits_after);
     settings.padding_characters_before =
