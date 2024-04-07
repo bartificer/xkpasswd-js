@@ -133,27 +133,24 @@ class SettingsView {
     // always remove it, just add it only in case of 'FIXED'
     $('#separator_character').prop('required', false);
 
+    const separatorCharacter = $('#separator_character').parent();
+    const separatorAlphabet = $('#separator_alphabet').parent();
+
     switch (separatorType) {
     case 'NONE':
-      $('label[for="separator_character"]').hide(this.#aniTime);
-      $('#separator_character').hide(this.#aniTime);
-      $('label[for="separator_alphabet"]').hide(this.#aniTime);
-      $('#separator_alphabet').hide(this.#aniTime);
+      separatorCharacter.hide(this.#aniTime);
+      separatorAlphabet.hide(this.#aniTime);
       break;
 
     case 'FIXED':
-      $('label[for="separator_character"]').show(this.#aniTime);
-      $('#separator_character').show(this.#aniTime);
-      $('label[for="separator_alphabet"]').hide(this.#aniTime);
-      $('#separator_alphabet').hide(this.#aniTime);
+      separatorCharacter.show(this.#aniTime);
+      separatorAlphabet.hide(this.#aniTime);
       $('#separator_character').prop('required', true);
       break;
 
     case 'RANDOM':
-      $('label[for="separator_character"]').hide(this.#aniTime);
-      $('#separator_character').hide(this.#aniTime);
-      $('label[for="separator_alphabet"]').show(this.#aniTime);
-      $('#separator_alphabet').show(this.#aniTime);
+      separatorCharacter.hide(this.#aniTime);
+      separatorAlphabet.show(this.#aniTime);
       $('#separator_alphabet').prop('required', true);
       break;
 
