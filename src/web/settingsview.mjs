@@ -117,6 +117,42 @@ class SettingsView {
   }
 
   /**
+   * Bind the load config form
+   *
+   * @param {Function} handle - pass control to the Controller
+   */
+  bindLoadConfig(handle) {
+    $('form#uploadConfigFile').on('submit', async (e) => {
+      e.preventDefault();
+
+      const files = e.target.elements[0].files;
+
+      // // If there's no file, do nothing
+      if (!files.length) return;
+      //
+      // Create a new FileReader() object
+      let reader = new FileReader();
+
+      // Set up the callback event to run when the file is read
+      reader.onload = (event) => {
+        const json = JSON.parse(event.target.result);
+        log.log(`json: ${JSON.stringify(json)}`);
+        handle(json);
+      };
+
+      // Read the file
+      reader.readAsText(files[0]);
+
+    });
+  }
+
+  /**
+   * Render the error caused by the uploaded configuration
+   */
+  renderConfigError(e) {
+    $('#ConfigError').text(e).show();
+  }
+
   /**
    * Toggle visibility of separator type related
    * elements

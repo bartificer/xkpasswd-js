@@ -48,7 +48,7 @@
                       Actions
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Import Config</a></li>
+                      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#load_config" href="#">Import Config</a></li>
                       <li><a class="dropdown-item" href="#">Export Config</a></li>
                       <li>
                         <hr class="dropdown-divider">
@@ -416,6 +416,39 @@
           GitHub</a>
       </div>
     </footer>
+  </div>
+
+  <!-- Modal load config -->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="modal fade" id="load_config" fouc="true" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true"
+    style="visibility: hidden;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loadConfigLabel">Load config</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h1 class="h3">Load your personal configuration</h1>
+
+            <div id="ConfigError" class="alert alert-danger alert-dismissible" role="alert"
+                 style="visibility: hidden;"></div>
+            <form id="uploadConfigFile">
+              <div class="my-3">
+  		          <label class="form-label" for="configFile">Select the JSON config file to use</label>
+	  	          <input class="form-control" type="file" id="configFile" required
+                       aria-description="press this button to select a json file with your configuration"
+                       accept=".json">
+              </div>
+              <button id="upload" type="submit" class="btn btn-primary" aria-label="upload config file"
+                      tabindex="0">Upload</button>
+	          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Modal about-->

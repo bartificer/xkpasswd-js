@@ -1,0 +1,16 @@
+{
+  "word_length_min": 4,
+  "word_length_max": 7,
+  "num_words": 3,
+  "case_transform": "RANDOM",
+  "separator_type": "RANDOM",
+  "separator_alphabet": "-!:.@}",
+  "padding_type": "FIXED",
+  "padding_digits_before": 2,
+  "padding_digits_after": 3,
+  "padding_character_type": "RANDOM",
+  "padding_characters_before": 1,
+  "padding_characters_after": 1,
+  "padding_alphabet": "-:.!?@&",
+  "allow_accents": 0
+}
