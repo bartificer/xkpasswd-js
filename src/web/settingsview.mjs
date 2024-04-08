@@ -96,7 +96,8 @@ class SettingsView {
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', true);
 
-      } else {
+      }
+      else {
         // get the form data and pass it on to the controller handle function
         const formData = new FormData(form);
         const data = {};
@@ -116,14 +117,52 @@ class SettingsView {
   }
 
   /**
-     * Toggle visibility of separator type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+   * Bind the load config form
+   *
+   * @param {Function} handle - pass control to the Controller
+   */
+  bindLoadConfig(handle) {
+    $('form#uploadConfigFile').on('submit', async (e) => {
+      e.preventDefault();
+
+      const files = e.target.elements[0].files;
+
+      // // If there's no file, do nothing
+      if (!files.length) return;
+      //
+      // Create a new FileReader() object
+      let reader = new FileReader();
+
+      // Set up the callback event to run when the file is read
+      reader.onload = (event) => {
+        const json = JSON.parse(event.target.result);
+        log.trace(`json: ${JSON.stringify(json)}`);
+        handle(json);
+      };
+
+      // Read the file
+      reader.readAsText(files[0]);
+
+    });
+  }
+
+  /**
+   * Render the error caused by the uploaded configuration
+   */
+  renderConfigError(e) {
+    $('#ConfigError').text(e).show();
+  }
+
+
+  /**
+   * Toggle visibility of separator type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __toggleSeparatorType = (e) => {
     const separatorType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
@@ -136,7 +175,7 @@ class SettingsView {
     const separatorCharacter = $('#separator_character').parent();
     const separatorAlphabet = $('#separator_alphabet').parent();
 
-    switch (separatorType) {
+    switch(separatorType) {
     case 'NONE':
       separatorCharacter.hide(this.#aniTime);
       separatorAlphabet.hide(this.#aniTime);
@@ -162,14 +201,14 @@ class SettingsView {
   };
 
   /**
-     * Toggle visibility of padding type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __togglePaddingType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
@@ -178,7 +217,7 @@ class SettingsView {
     const paddingCharAfter = $('#padding_characters_after').parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
 
-    switch (paddingType) {
+    switch(paddingType) {
     case 'NONE':
       paddingCharBefore.hide(this.#aniTime);
       paddingCharAfter.hide(this.#aniTime);
@@ -203,20 +242,23 @@ class SettingsView {
     default:
       try {
         log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
-      } catch (e) {};
+      }
+      catch (e) {
+      }
+      ;
       break;
     }
   };
 
   /**
-     * Toggle visibility of padding type related
-     * elements
-     *
-     * @private
-     *
-     * @param {Event | string } e - either the
-     * event or the type value
-     */
+   * Toggle visibility of padding type related
+   * elements
+   *
+   * @private
+   *
+   * @param {Event | string } e - either the
+   * event or the type value
+   */
   __togglePaddingCharType = (e) => {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__togglePaddingCharType: ${paddingType}`);
@@ -232,7 +274,7 @@ class SettingsView {
     // always remove it, just add it only in case of 'FIXED'
     $('#padding_character').prop('required', false);
 
-    switch (paddingType) {
+    switch(paddingType) {
     case 'NONE':
       paddingCharacter.hide(this.#aniTime);
       paddingAlphabet.hide(this.#aniTime);
@@ -266,7 +308,8 @@ class SettingsView {
     default:
       log.log(`WARNING - Received invalid padding_type=${paddingType}`);
       break;
-    };
+    }
+    ;
   };
 };
 
