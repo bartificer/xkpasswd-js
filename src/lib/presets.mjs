@@ -40,7 +40,7 @@ const thePresets = {
   },
   WEB32: {
     description:
-      'A preset for websites that allow passwords up to 32 characteres long.',
+      'A preset for websites that allow passwords up to 32 characters long.',
     config: {
       padding_alphabet: '! @ $ % ^ & * + = : | ~ '.split(' '),
       separator_alphabet: '- + = . * _ | ~ '.split(' '),
@@ -562,8 +562,8 @@ class Presets {
    *
    * @private
    *
-   * @param {Object} config - the config to test
-   * @return {Array} the list of characters
+   * @param {object} config - the config to test
+   * @return {string} the list of characters
    */
   __getSeparatorAlphabet(config) {
     // if there is no parameter, use the current config
@@ -590,8 +590,8 @@ class Presets {
    *
    * @private
    *
-   * @param {Object} config - the config to test
-   * @return {Array} the list of characters
+   * @param {object} config - the config to test
+   * @return {string} the list of characters
    */
   __getPaddingAlphabet(config) {
     // if there is no parameter, use the current config
