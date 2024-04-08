@@ -575,13 +575,7 @@ class Presets {
           tmpConfig.separator_alphabet :
           tmpConfig.symbol_alphabet);
 
-    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
-      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-
-    // make sure the alphabet is not longer than the max length
-    return is.array(alphabet) ?
-      alphabet.join('').substring(0, this.#max_alphabet) :
-      alphabet.substring(0, this.#max_alphabet);
+   return this.__configureAlphabet(alphabet);
   }
 
   /**
@@ -602,14 +596,27 @@ class Presets {
           (is.not.undefined(tmpConfig.padding_alphabet) ?
             tmpConfig.padding_alphabet :
             tmpConfig.symbol_alphabet);
-    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+
+    return this.__configureAlphabet(alphabet);
+  }
+
+  /**
+   * Helper function to configure the alphabet
+   * or default to the DEFAULT.symbol_alphabet
+   *
+   * @private
+   *
+   * @param {array|string} alphabet - the alphabet to configure
+   * @return {string} - the alphabet as string
+   */
+  __configureAlphabet(alphabet) {
+      alphabet = ((alphabet === undefined || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
 
     // make sure the alphabet is not longer than the max length
     return is.array(alphabet) ?
       alphabet.join('').substring(0, this.#max_alphabet) :
       alphabet.substring(0, this.#max_alphabet);
-
   }
 
   /**
