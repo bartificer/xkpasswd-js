@@ -49,7 +49,7 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#load_config" href="#">Import Config</a></li>
-                      <li><a class="dropdown-item" href="#">Export Config</a></li>
+                      <li><a class="dropdown-item disabled" href="#">Export Config</a></li>
                       <li>
                         <hr class="dropdown-divider">
                       </li>
@@ -427,6 +427,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            This is only a first version of the import. Please create an issue in the GitHub repository if you find
+            an error with processing your particular configuration.
+          </div>
           <h1 class="h3">Load your personal configuration</h1>
 
             <div id="ConfigError" class="alert alert-danger alert-dismissible" role="alert"
