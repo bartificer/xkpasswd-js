@@ -189,6 +189,7 @@ class SettingsView {
    */
   renderConfigError(e) {
     $('#ConfigError').text(e).show();
+    this.showSettings();
     this.disableGenerateButton(true);
     this.setErrorMessage(e.message);
   }
