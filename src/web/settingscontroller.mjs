@@ -80,7 +80,7 @@ class SettingsController {
       this.updateSettings(config);
     }
     catch (e) {
-      this.#view.renderUploadError(e);
+      this.#view.renderConfigError(e);
     }
   }
 }
