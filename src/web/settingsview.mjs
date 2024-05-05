@@ -188,7 +188,6 @@ class SettingsView {
    * Render the error caused by the uploaded configuration
    */
   renderConfigError(e) {
-    $('#ConfigError').text(e).show();
     this.showSettings();
     this.disableGenerateButton(true);
     this.setErrorMessage(e.message);
