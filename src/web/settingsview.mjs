@@ -133,6 +133,8 @@ class SettingsView {
       this.showSettings();
       this.setErrorMessage("");
       this.disableGenerateButton(false);
+      $('#passwordSettings').show();
+
 
       // Set up the callback event to run when the file is read
       reader.onload = (event) => {
@@ -186,10 +188,13 @@ class SettingsView {
 
   /**
    * Render the error caused by the uploaded configuration
+   * Hide the fields because they cannot be updated
+   * Disable the Generate button because behaviour is unpredictable
    */
   renderConfigError(e) {
     this.showSettings();
     this.disableGenerateButton(true);
+    $('#passwordSettings').hide();
     this.setErrorMessage(e.message);
   }
 
