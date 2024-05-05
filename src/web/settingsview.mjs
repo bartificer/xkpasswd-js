@@ -316,7 +316,7 @@ class SettingsView {
       // only allow this option be selected
       // when there is a separator character,
       // if not, switch to single separator char
-      if ($('#separator_type').val() == 'NONE') {
+      if ($('#separator_type').val() === 'NONE') {
         $('#padding_character_type').val('FIXED');
         return;
       }
