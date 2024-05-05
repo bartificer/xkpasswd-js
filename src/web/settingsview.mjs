@@ -182,29 +182,31 @@ class SettingsView {
     log.trace(`__toggleCharSeparatorType: ${separatorType}`);
 
     // always remove it, just add it only in case of 'RANDOM'
-    $('#separator_alphabet').prop('required', false);
+    const separatorCharacter = $('#separator_character');
+    separatorCharacter.prop('required', false);
     // always remove it, just add it only in case of 'FIXED'
-    $('#separator_character').prop('required', false);
+    const separatorAlphabet = $('#separator_alphabet');
+    separatorAlphabet.prop('required', false);
 
-    const separatorCharacter = $('#separator_character').parent();
-    const separatorAlphabet = $('#separator_alphabet').parent();
+    const separatorCharacterParent = separatorCharacter.parent();
+    const separatorAlphabetParent = separatorAlphabet.parent();
 
     switch(separatorType) {
     case 'NONE':
-      separatorCharacter.hide(this.#aniTime);
-      separatorAlphabet.hide(this.#aniTime);
+      separatorCharacterParent.hide(this.#aniTime);
+      separatorAlphabetParent.hide(this.#aniTime);
       break;
 
     case 'FIXED':
-      separatorCharacter.show(this.#aniTime);
-      separatorAlphabet.hide(this.#aniTime);
-      $('#separator_character').prop('required', true);
+      separatorCharacterParent.show(this.#aniTime);
+      separatorAlphabetParent.hide(this.#aniTime);
+      separatorCharacter.prop('required', true);
       break;
 
     case 'RANDOM':
-      separatorCharacter.hide(this.#aniTime);
-      separatorAlphabet.show(this.#aniTime);
-      $('#separator_alphabet').prop('required', true);
+      separatorCharacterParent.hide(this.#aniTime);
+      separatorAlphabetParent.show(this.#aniTime);
+      separatorAlphabet.prop('required', true);
       break;
 
     default:
@@ -230,27 +232,28 @@ class SettingsView {
     const paddingCharBefore = $('#padding_characters_before').parent().parent();
     const paddingCharAfter = $('#padding_characters_after').parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
+    const paddingCharContainer = $('div#padding_char_container');
 
     switch(paddingType) {
     case 'NONE':
       paddingCharBefore.hide(this.#aniTime);
       paddingCharAfter.hide(this.#aniTime);
       padToLength.hide(this.#aniTime);
-      $('div#padding_char_container').hide(this.#aniTime);
+      paddingCharContainer.hide(this.#aniTime);
       break;
 
     case 'FIXED':
       paddingCharBefore.show(this.#aniTime);
       paddingCharAfter.show(this.#aniTime);
       padToLength.hide(this.#aniTime);
-      $('div#padding_char_container').show(this.#aniTime);
+      paddingCharContainer.show(this.#aniTime);
       break;
 
     case 'ADAPTIVE':
       paddingCharBefore.hide(this.#aniTime);
       paddingCharAfter.hide(this.#aniTime);
       padToLength.show(this.#aniTime);
-      $('div#padding_char_container').show(this.#aniTime);
+      paddingCharContainer.show(this.#aniTime);
       break;
 
     default:
@@ -280,31 +283,33 @@ class SettingsView {
     // we need to hide the entire section, including the `input-group` and it's
     // parent div otherwise the pad_to_length will not float next to the
     // padding type element
-    const paddingCharacter = $('#padding_character').parent().parent();
-    const paddingAlphabet = $('#padding_alphabet').parent().parent();
+    const paddingCharacter = $('#padding_character');
+    const paddingAlphabet = $('#padding_alphabet');
+    const paddingCharacterParent = paddingCharacter.parent().parent();
+    const paddingAlphabetParent = paddingAlphabet.parent().parent();
 
     // always remove it, just add it only in case of 'RANDOM'
-    $('#padding_alphabet').prop('required', false);
+    paddingAlphabet.prop('required', false);
     // always remove it, just add it only in case of 'FIXED'
-    $('#padding_character').prop('required', false);
+    paddingCharacter.prop('required', false);
+
+    // hide everything so we only show what's needed
+    paddingCharacterParent.hide(this.#aniTime);
+    paddingAlphabetParent.hide(this.#aniTime);
 
     switch(paddingType) {
     case 'NONE':
-      paddingCharacter.hide(this.#aniTime);
-      paddingAlphabet.hide(this.#aniTime);
-      $('#padding_character').prop('required', false);
+      // nothing more to do here
       break;
 
     case 'FIXED':
-      paddingCharacter.show(this.#aniTime);
-      paddingAlphabet.hide(this.#aniTime);
-      $('#padding_character').prop('required', true);
+      paddingCharacterParent.show(this.#aniTime);
+      paddingCharacter.prop('required', true);
       break;
 
     case 'RANDOM':
-      paddingCharacter.hide(this.#aniTime);
-      paddingAlphabet.show(this.#aniTime);
-      $('#padding_alphabet').prop('required', true);
+      paddingAlphabetParent.show(this.#aniTime);
+      paddingAlphabet.prop('required', true);
       break;
 
     case 'SEPARATOR':
@@ -315,9 +320,6 @@ class SettingsView {
         $('#padding_character_type').val('FIXED');
         return;
       }
-      // if it is OK to select this option, update the UI appropriately
-      paddingCharacter.hide(this.#aniTime);
-      paddingAlphabet.hide(this.#aniTime);
       break;
     default:
       log.log(`WARNING - Received invalid padding_type=${paddingType}`);
