@@ -210,9 +210,9 @@ class SettingsView {
       break;
 
     default:
-      // eslint-disable-next-line max-len
-      log.warn(`WARNING - Received invalid separator_type (${separatorType})`);
-      break;
+      const msg = `WARNING - Received invalid separator_type (${separatorType})`;
+      log.warn(msg);
+      throw (new Error(e));
     }
   };
 
@@ -257,13 +257,9 @@ class SettingsView {
       break;
 
     default:
-      try {
-        log.warn(`WARNING - Received invalid padding_type=${paddingType}`);
-      }
-      catch (e) {
-      }
-      ;
-      break;
+      const msg = `WARNING - Received invalid padding_type=${paddingType}`;
+      log.warn(msg);
+      throw (new Error(msg));
     }
   };
 
@@ -322,8 +318,9 @@ class SettingsView {
       }
       break;
     default:
-      log.log(`WARNING - Received invalid padding_type=${paddingType}`);
-      break;
+      const msg = `WARNING - Received invalid padding_char_type=${paddingType}`;
+      log.warn(msg);
+      throw (new Error(msg));
     }
   };
 }
