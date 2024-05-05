@@ -86,17 +86,17 @@ class SettingsView {
       // remove the green marks
       form.classList.remove('was-validated');
 
-      $('#invalidSettings').hide();
+      this.setErrorMessage('');
       // check if the form is valid and if not, show the error message
       if (!form.reportValidity()) {
         // the form is not valid
         form.classList.add('was-validated');
-        $('#invalidSettings').show();
 
         // True MVC requires this to be handled by the PasswordView,
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', true);
 
+        this.setErrorMessage('Please fix the invalid input before generating passwords.');
       }
       else {
         // get the form data and pass it on to the controller handle function
@@ -135,6 +135,7 @@ class SettingsView {
       // Create a new FileReader() object
       const reader = new FileReader();
       this.showSettings();
+      this.setErrorMessage("");
 
       // Set up the callback event to run when the file is read
       reader.onload = (event) => {
@@ -161,10 +162,26 @@ class SettingsView {
     }).show();
   }
   /**
+   * Set the error message and show it
+   * or hide it on empty message
+   * @param {string }t - text or empty
+   */
+  setErrorMessage(t) {
+    if (t && t.length > 0) {
+      $('#invalidSettings').text(t).show();
+    }
+    else {
+      $('#invalidSettings').text("").hide();
+    }
+
+  }
+
+  /**
    * Render the error caused by the uploaded configuration
    */
   renderConfigError(e) {
     $('#ConfigError').text(e).show();
+    this.setErrorMessage(e.message);
   }
 
 
