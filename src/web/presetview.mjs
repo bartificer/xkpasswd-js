@@ -44,10 +44,9 @@ class PresetView {
   buildPresetButtons(names, handler) {
     // build the buttons
     names.forEach((presetName) => {
-      /* eslint-disable max-len */
-      const btn = `<button type="button" class="btn btn-outline-primary col-sm-6 col-md-4 col-lg-2"
-      data-preset="${presetName}">${presetName}</button>`;
-      /* eslint-enable max-len */
+      const btn = `<button type="button"
+        class="btn btn-outline-primary col-sm-6 col-md-4 col-lg-2"
+        data-preset="${presetName}">${presetName}</button>`;
 
       // add the eventhandlers
       const button = $(btn);
