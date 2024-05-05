@@ -91,12 +91,8 @@ class SettingsView {
       if (!form.reportValidity()) {
         // the form is not valid
         form.classList.add('was-validated');
-
-        // True MVC requires this to be handled by the PasswordView,
-        // but since it's only one line, we don't bother
-        $('#generate').prop('disabled', true);
-
         this.setErrorMessage('Please fix the invalid input before generating passwords.');
+        this.disableGenerateButton(true);
       }
       else {
         // get the form data and pass it on to the controller handle function
@@ -136,6 +132,7 @@ class SettingsView {
       const reader = new FileReader();
       this.showSettings();
       this.setErrorMessage("");
+      this.disableGenerateButton(false);
 
       // Set up the callback event to run when the file is read
       reader.onload = (event) => {
@@ -161,6 +158,17 @@ class SettingsView {
       toggle: false,
     }).show();
   }
+
+  /**
+   * disable the Generate button to avoid errors in password generation
+   * @param {boolean} state - if true then disable the button
+   */
+  disableGenerateButton(state) {
+    // True MVC requires this to be handled by the PasswordView,
+    // but since it's only one line, we don't bother
+    $('#generate').prop('disabled', (state));
+  }
+
   /**
    * Set the error message and show it
    * or hide it on empty message
@@ -181,6 +189,7 @@ class SettingsView {
    */
   renderConfigError(e) {
     $('#ConfigError').text(e).show();
+    this.disableGenerateButton(true);
     this.setErrorMessage(e.message);
   }
 
