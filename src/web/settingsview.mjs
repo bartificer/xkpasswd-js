@@ -129,9 +129,9 @@ class SettingsView {
 
       const files = e.target.elements[0].files;
 
-      // // If there's no file, do nothing
+      // If there's no file, do nothing
       if (!files.length) return;
-      //
+
       // Create a new FileReader() object
       const reader = new FileReader();
       this.showSettings();
@@ -145,7 +145,6 @@ class SettingsView {
 
       // Read the file
       reader.readAsText(files[0]);
-
     });
   }
 
@@ -324,8 +323,7 @@ class SettingsView {
       log.log(`WARNING - Received invalid padding_type=${paddingType}`);
       break;
     }
-    ;
   };
-};
+}
 
 export {SettingsView};
