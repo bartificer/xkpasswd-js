@@ -1,4 +1,5 @@
 import log from 'loglevel';
+import {Collapse} from 'bootstrap';
 
 /**
  * This class handles the rendering of
@@ -124,6 +125,7 @@ class SettingsView {
   bindLoadConfig(handle) {
     $('form#uploadConfigFile').on('submit', async (e) => {
       e.preventDefault();
+      e.stopPropagation();
 
       const files = e.target.elements[0].files;
 
@@ -131,7 +133,8 @@ class SettingsView {
       if (!files.length) return;
       //
       // Create a new FileReader() object
-      let reader = new FileReader();
+      const reader = new FileReader();
+      this.showSettings();
 
       // Set up the callback event to run when the file is read
       reader.onload = (event) => {
@@ -146,6 +149,18 @@ class SettingsView {
     });
   }
 
+  /**
+   * Open the accordion to show the settings
+   */
+  showSettings() {
+    // make sure the settings section is not collapsed
+    Collapse.getOrCreateInstance('#collapseConfig', {
+      toggle: false,
+    }).show();
+    Collapse.getOrCreateInstance('#collapseSettings', {
+      toggle: false,
+    }).show();
+  }
   /**
    * Render the error caused by the uploaded configuration
    */
