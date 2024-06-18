@@ -12,7 +12,7 @@ class SettingsView {
    * @private {number} aniTime - set time to show/hide elements
    */
   #aniTime = 250;
-
+#a;
   /**
    * @constructor
    */
@@ -20,6 +20,7 @@ class SettingsView {
     this.__togglePaddingType('NONE');
     this.__togglePaddingCharType('FIXED');
     this.__toggleSeparatorType('NONE');
+    this.#a = $('#link');
 
     $('#invalidSettings').hide();
 
@@ -48,6 +49,7 @@ class SettingsView {
     keys.forEach((key) => {
       $(`#${key}`).val(preset[key]);
     });
+
 
     // hide everything that should not be visible
     this.__toggleSeparatorType(preset.separator_type);
@@ -107,10 +109,104 @@ class SettingsView {
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', false);
 
+        // let presetArray = {};
+        // let jsonMap = {
+        //   "dict": "d",
+        //   "num_words": "nw",
+        //   "word_length_min": "wli",
+        //   "word_length_max": "wla",
+
+        //   "case_transform": "ct",
+
+        //   "separator_type": "st",
+        //   "separator_character": "sc",
+        //   "separator_alphabet": "sa",
+
+        //   "padding_digits_before": "pdb",
+        //   "padding_digits_after": "pda",
+        //   "padding_type": "pt",
+        //   "pad_to_length": "ptl",
+        //   "padding_character_type": "pct",
+        //   "padding_character": "pc",
+        //   "padding_alphabet": "pa",
+        //   "padding_characters_before": "pcb",
+        //   "padding_characters_after": "pca",
+        // }
+        // Object.keys(jsonMap).forEach( k =>{
+        //   if (
+        //     k == 'separator_character' || k == 'separator_alphabet' ||
+        //     k == 'padding_character' || k == 'padding_alphabet'
+        //   )
+        //   {
+        //     presetArray[jsonMap[k]] = data[k];
+        //   } else {
+        //     presetArray[jsonMap[k]] = data[k];
+        //   }
+        //   // presetArray.push(data[k]);
+        // });
+        // console.log(JSON.stringify(presetArray));
+        // console.log(this.base64URLencode(JSON.stringify(presetArray)));
+        // this.#a.html(presetArray);
+
+        let presetArray = [];
+        const map = [
+          "dict",
+          "num_words",
+          "word_length_min",
+          "word_length_max",
+
+          "case_transform",
+
+          "separator_type",
+          "separator_character",
+          "separator_alphabet",
+
+          "padding_digits_before",
+          "padding_digits_after",
+          "padding_type",
+          "pad_to_length",
+          "padding_character_type",
+          "padding_character",
+          "padding_alphabet",
+          "padding_characters_before",
+          "padding_characters_after"
+        ];
+        map.forEach(k => {
+          if (
+            k == 'separator_character' || k == 'separator_alphabet' ||
+            k == 'padding_character' || k == 'padding_alphabet'
+          )
+          {
+            presetArray.push(this.base64URLencode(data[k]));
+          } else {
+            presetArray.push(data[k]);
+          }
+        });
+
+        // console.log(presetArray.join(","));
+        // console.log(this.base64URLencode(presetArray.join(",")));
+        const url = `${window.location}?c=${this.base64URLencode(presetArray.join(","))}`;
+        this.#a.html(`<a href="${url}" target="_">${url}</a>`);
+        // this.#a.html(`${window.location}?c=${presetArray.join(",")}`);
+
         log.trace(JSON.stringify(data));
         handle(data);
       }
     });
+  }
+
+  base64URLencode(str) {
+    const utf8Arr = new TextEncoder().encode(str);
+    const base64Encoded = btoa(str);
+    return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  base64URLdecode(str) {
+    const base64Encoded = str.replace(/-/g, '+').replace(/_/g, '/');
+    const padding = str.length % 4 === 0 ? '' : '='.repeat(4 - (str.length % 4));
+    const base64WithPadding = base64Encoded + padding;
+    return atob(base64WithPadding)
+      .split('')
+      .map(char => String.fromCharCode(char.charCodeAt(0)));
   }
 
   /**
