@@ -91,6 +91,13 @@ $(() => {
   
   XKP.init(config.getSettings());
 
+  // Display the CUSTOM preset button if loaded custom settings
+  if (config.isLoaded()) {
+    const custom = document.querySelector("[data-preset='CUSTOM']");
+    custom.style.removeProperty("display");
+    custom.classList.add("active");
+  }
+
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content
   // as the page loads and make them visible.

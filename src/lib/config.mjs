@@ -55,6 +55,18 @@ class Config {
   }
 
   /**
+   * Retun true if settings have been loaded
+   * 
+   * @returns {boolean} - true if settings have been loaded, false otherwise
+   */
+  isLoaded() {
+    if ( typeof this.__settings === "undefined" ) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Return the settings object
    * 
    * @returns {object} - the current settings
