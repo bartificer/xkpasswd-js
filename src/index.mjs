@@ -85,10 +85,13 @@ $(() => {
   [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
+  const savedSettingsLink = $('#savedSettingsLink');
+  const copySettingsLink = $('#copySettingsLink');
+
   // Load custom settings if present in the URL
   const config = new Config();
   config.loadFromUrl(document.location);
-  
+
   XKP.init(config.getSettings());
 
   // Display the CUSTOM preset button if loaded custom settings
@@ -96,7 +99,15 @@ $(() => {
     const custom = document.querySelector("[data-preset='CUSTOM']");
     custom.style.removeProperty("display");
     custom.classList.add("active");
+    savedSettingsLink.val(window.location);
+  } else {
+    savedSettingsLink.val("");
   }
+
+  copySettingsLink.bind('click', () => {
+    savedSettingsLink.select();
+    navigator.clipboard.writeText(savedSettingsLink.value);
+  });
 
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content
@@ -108,4 +119,5 @@ $(() => {
       fouc.style.visibility = 'visible';
     }
   }
+
 });

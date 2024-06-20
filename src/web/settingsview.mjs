@@ -118,7 +118,7 @@ class SettingsView {
         // Update the URL with the encoded settings
         const config = new Config(data);
         const url = config.toUrl();
-        this.#savedSettingsLink.html(`<a href="${url}" target="_">${url.truncate()}</a>`);
+        this.#savedSettingsLink.val(url);
 
         log.trace(JSON.stringify(data));
         handle(data);
