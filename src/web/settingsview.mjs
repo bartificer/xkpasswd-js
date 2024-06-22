@@ -260,29 +260,27 @@ class SettingsView {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
 
-    const paddingCharBefore = $('#padding_characters_before').parent().parent();
-    const paddingCharAfter = $('#padding_characters_after').parent().parent();
+    const paddingCharBeforeParent = $('#padding_characters_before').parent().parent();
+    const paddingCharAfterParent = $('#padding_characters_after').parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
     const paddingCharContainer = $('div#padding_char_container');
 
+    paddingCharBeforeParent.hide(this.#aniTime);
+    paddingCharAfterParent.hide(this.#aniTime);
+    padToLength.hide(this.#aniTime);
+
     switch(paddingType) {
     case 'NONE':
-      paddingCharBefore.hide(this.#aniTime);
-      paddingCharAfter.hide(this.#aniTime);
-      padToLength.hide(this.#aniTime);
       paddingCharContainer.hide(this.#aniTime);
       break;
 
     case 'FIXED':
-      paddingCharBefore.show(this.#aniTime);
-      paddingCharAfter.show(this.#aniTime);
-      padToLength.hide(this.#aniTime);
+      paddingCharBeforeParent.show(this.#aniTime);
+      paddingCharAfterParent.show(this.#aniTime);
       paddingCharContainer.show(this.#aniTime);
       break;
 
     case 'ADAPTIVE':
-      paddingCharBefore.hide(this.#aniTime);
-      paddingCharAfter.hide(this.#aniTime);
       padToLength.show(this.#aniTime);
       paddingCharContainer.show(this.#aniTime);
       break;
