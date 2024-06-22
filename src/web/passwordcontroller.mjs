@@ -55,6 +55,13 @@ class PasswordController {
       this.#view.renderPasswordError('ERROR password generation failed!');
     }
   };
+
+  /**
+   * Clear the passwords that are generated
+   */
+  clearPasswords() {
+    this.#view.clearPasswordArea();
+  }
 };
 
 export {PasswordController};
