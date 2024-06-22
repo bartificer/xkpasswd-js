@@ -215,6 +215,7 @@ class SettingsView {
     // always remove it, just add it only in case of 'RANDOM'
     const separatorCharacter = $('#separator_character');
     separatorCharacter.prop('required', false);
+
     // always remove it, just add it only in case of 'FIXED'
     const separatorAlphabet = $('#separator_alphabet');
     separatorAlphabet.prop('required', false);
@@ -225,17 +226,29 @@ class SettingsView {
     switch(separatorType) {
     case 'NONE':
       separatorCharacterParent.hide(this.#aniTime);
+      if (separatorCharacter.val().length < 1) {
+        separatorCharacter.val('|');
+      }
       separatorAlphabetParent.hide(this.#aniTime);
+      if (separatorAlphabet.val().length < 2) {
+        separatorAlphabet.val('|+');
+      }
       break;
 
     case 'FIXED':
       separatorCharacterParent.show(this.#aniTime);
       separatorAlphabetParent.hide(this.#aniTime);
       separatorCharacter.prop('required', true);
+      if (separatorAlphabet.val().length < 2) {
+        separatorAlphabet.val('|+');
+      }
       break;
 
     case 'RANDOM':
       separatorCharacterParent.hide(this.#aniTime);
+      if (separatorCharacter.val().length < 1) {
+        separatorCharacter.val('|');
+      }
       separatorAlphabetParent.show(this.#aniTime);
       separatorAlphabet.prop('required', true);
       break;
