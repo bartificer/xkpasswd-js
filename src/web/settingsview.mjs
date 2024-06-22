@@ -131,7 +131,7 @@ class SettingsView {
       // Create a new FileReader() object
       const reader = new FileReader();
       this.showSettings();
-      this.setErrorMessage("");
+      this.setErrorMessage('');
       this.disableGenerateButton(false);
       $('#passwordSettings').show();
 
@@ -181,7 +181,7 @@ class SettingsView {
       $('#invalidSettings').text(t).show();
     }
     else {
-      $('#invalidSettings').text("").hide();
+      $('#invalidSettings').text('').hide();
     }
 
   }
@@ -319,6 +319,7 @@ class SettingsView {
     paddingAlphabet.prop('required', false);
     // always remove it, just add it only in case of 'FIXED'
     paddingCharacter.prop('required', false);
+
 
     // hide everything so we only show what's needed
     paddingCharacterParent.hide(this.#aniTime);
