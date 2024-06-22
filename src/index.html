@@ -70,7 +70,7 @@
         </header> <!-- close row for nav -->
 
         <section id="content" class="row"> <!-- open row for content below nav -->
-          <div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> <!-- open config col -->
+          <!-- div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> < !-- open config col - - >
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -79,8 +79,8 @@
                 </button>
               </h2>
               <div id="collapseConfig" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
-                <div class="accordion-body">
-                  <div class="accordion" id="configOptions">
+                <div class="accordion-body"> -->
+                  <div class="accordion my-3 mb-lg-3 px-0" id="configOptions">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -89,7 +89,7 @@
                         </button>
                       </h2>
                       <!-- This section (id = collapsePresets) is handled by the PresetController and the PresetView -->
-                      <div id="collapsePresets" class="accordion-collapse collapse show"
+                      <div id="collapsePresets" class="accordion-collapse collapse"
                         data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <div id="preset-btn-group" class="row" role="group" aria-label="Preset group">
@@ -315,10 +315,10 @@
                       </div> <!-- /collapseSettings -->
                     </div> <!-- /accordion-item for settings -->
                   </div> <!-- /accordion configOptions -->
-                </div> <!-- /accordion body -->
-              </div> <!-- /collapseConfig -->
+                <!-- /div> <! - - /accordion body - - >
+              </div> <!- - /collapseConfig - - >
             </div>
-          </div> <!-- close config col -->
+          </div> <!- - close config col -->
 
           <!-- this section (id = generatePassword) is handled by the PasswordController and the PasswordView -->
           <div id="generatePassword" class="mt-2"> <!-- open generate pw - need to split pw box out -->
@@ -364,7 +364,7 @@
     <div class="row"> <!-- open row for password card -->
 
       <!-- this section (id = password-card) is handled by the PasswordController and the PasswordView -->
-      <section id="password-card" class="order-3">
+      <section id="password-card" class="order-3 px-0">
         <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
           <div class="card-header d-flex align-items-center">
             <span class="text-uppercase">Passwords</span>
