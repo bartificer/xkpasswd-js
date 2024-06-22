@@ -16,7 +16,7 @@ class PresetController {
   #view;
 
   /**
-   * @private settings - reference to SettingsController
+   * @private settingsController - reference to SettingsController
    */
   #settingsController;
 
@@ -48,10 +48,12 @@ class PresetController {
     // tell the library which preset to make current
     this.#model.setPreset(preset);
 
-    // Tell the SettingsController to update
-    const config = this.#model.getPreset().config();
+    // tell the view to update the description
     const description = this.#model.getPreset().description();
     this.#view.displayDescription(description);
+
+    // Tell the SettingsController to update
+    const config = this.#model.getPreset().config();
     this.#settingsController.updateSettings(config);
   };
 }
