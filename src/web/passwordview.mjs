@@ -312,8 +312,8 @@ class PasswordView {
     this.#blindEntropy.empty().append(template);
 
     // full knowledge (seen) entropy
-        for (let key in this.#stats_classes) {
-        this.#seenEntropy.removeClass(this.#stats_classes[key].class);
+    for (let key in this.#stats_classes) {
+      this.#seenEntropy.removeClass(this.#stats_classes[key].class);
     }
 
     this.#seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
@@ -342,7 +342,7 @@ class PasswordView {
     // render strength
     this.#passwordStrength.text(statsText);
     for (let key in this.#stats_classes) {
-        this.#passwordStrength.removeClass(this.#stats_classes[key].class);
+      this.#passwordStrength.removeClass(this.#stats_classes[key].class);
     }
 
     this.#passwordStrength.addClass(statsClass);
