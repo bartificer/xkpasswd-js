@@ -62,7 +62,8 @@ const XKP = {
     XKP.presetController = new PresetController(
       XKP.xkpasswd,
       new PresetView(),
-      XKP.settingsController);
+      XKP.settingsController,
+      XKP.passwordController);
   },
 };
 

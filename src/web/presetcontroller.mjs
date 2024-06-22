@@ -21,16 +21,22 @@ class PresetController {
   #settingsController;
 
   /**
+   * @private passwordController - reference to Passwordcontroller
+   */
+  #passwordController;
+  /**
    * @constructor
    *
    * @param {PresetModel} model - reference to PresetModel
    * @param {PresetView} view - reference to PresetView
    * @param {SettingsController} sc - reference to SettingsController
+   * @param {PasswordController} pc - reference to PasswordController
    */
-  constructor(model, view, sc) {
+  constructor(model, view, sc, pc) {
     this.#model = model;
     this.#view = view;
     this.#settingsController = sc;
+    this.#passwordController = pc;
 
     // get the presets from the library
     const names = this.#model.getPresets();
