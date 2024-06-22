@@ -153,9 +153,6 @@ class SettingsView {
    */
   showSettings() {
     // make sure the settings section is not collapsed
-    Collapse.getOrCreateInstance('#collapseConfig', {
-      toggle: false,
-    }).show();
     Collapse.getOrCreateInstance('#collapseSettings', {
       toggle: false,
     }).show();
