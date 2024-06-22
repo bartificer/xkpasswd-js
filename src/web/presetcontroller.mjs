@@ -61,6 +61,9 @@ class PresetController {
     // Tell the SettingsController to update
     const config = this.#model.getPreset().config();
     this.#settingsController.updateSettings(config);
+
+    // Tell the passwordController to erase the passwords
+    this.#passwordController.clearPasswords();
   };
 }
 
