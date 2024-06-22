@@ -55,14 +55,14 @@ const XKP = {
     // setup variables for key parts of the website
     XKP.xkpasswd = new XKPasswd(),
 
+    XKP.passwordController =
+      new PasswordController(XKP.xkpasswd, new PasswordView());
     XKP.settingsController =
       new SettingsController(XKP.xkpasswd, new SettingsView());
     XKP.presetController = new PresetController(
       XKP.xkpasswd,
       new PresetView(),
       XKP.settingsController);
-    XKP.passwordController =
-      new PasswordController(XKP.xkpasswd, new PasswordView());
   },
 };
 
