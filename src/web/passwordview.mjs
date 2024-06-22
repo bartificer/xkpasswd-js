@@ -70,8 +70,7 @@ class PasswordView {
       }
     }
 
-    this.__resetPasswordUI();
-    this.__hideStats();
+    this.clearPasswordArea();
   };
 
   /**
@@ -222,7 +221,12 @@ class PasswordView {
   };
 
   /**
+   * Clear the password area
    */
+  clearPasswordArea() {
+    this.__resetPasswordUI();
+    this.__hideStats();
+  }
 
   /**
    * Show an alert with an error message
