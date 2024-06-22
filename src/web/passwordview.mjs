@@ -221,24 +221,8 @@ class PasswordView {
     });
   };
 
-
   /**
-   * hide statistics section
-   *
-   * @private
    */
-  __hideStats() {
-    this.#passwordStatsContainer.addClass('d-none');
-  };
-
-  /**
-   * show statistics section
-   *
-   * @private
-   */
-  __showStats() {
-    this.#passwordStatsContainer.removeClass('d-none');
-  };
 
   /**
    * Show an alert with an error message
@@ -262,6 +246,25 @@ class PasswordView {
 
     this.__hideStats();
   };
+
+  /**
+   * hide statistics section
+   *
+   * @private
+   */
+  __hideStats() {
+    this.#passwordStatsContainer.addClass('d-none');
+  };
+
+  /**
+   * show statistics section
+   *
+   * @private
+   */
+  __showStats() {
+    this.#passwordStatsContainer.removeClass('d-none');
+  };
+
 
   /**
    * Render the details of the statistics
