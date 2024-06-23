@@ -294,8 +294,8 @@ class SettingsView {
 
     const paddingCharBefore = $('#padding_characters_before');
     const paddingCharAfter = $('#padding_characters_after');
-    const paddingCharBeforeParent = $('#padding_characters_before').parent().parent();
-    const paddingCharAfterParent = $('#padding_characters_after').parent().parent();
+    const paddingCharBeforeParent = paddingCharBefore.parent().parent();
+    const paddingCharAfterParent = paddingCharAfter.parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
     const paddingCharContainer = $('div#padding_char_container');
 
