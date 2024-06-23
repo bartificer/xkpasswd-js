@@ -40,6 +40,10 @@ class PresetController {
     log.trace('PresetController constructor executed');
   }
 
+  changePreset(presetName) {
+    this.#view.pressButton(presetName);
+  }
+
   /**
    * Handle the selection of the preset
    * @param {string} preset - reference to the selected preset

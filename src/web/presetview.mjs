@@ -73,6 +73,11 @@ class PresetView {
     this.#presetDescription.html(description).show();
   }
 
+  pressButton(presetName) {
+    const button = $(`[data-preset='${presetName}']`);
+    button.click();
+  }
+
   /**
    * This is the function that is called
    * when one of the preset buttons is clicked
@@ -88,13 +93,9 @@ class PresetView {
       e.stopPropagation();
       const button = $(e.currentTarget);
       const preset = button.data('preset').toString();
-      const custom = document.querySelector("[data-preset='CUSTOM']");
 
       // make all buttons inactive
       this.#presetGroup.find('button').removeClass('active');
-
-      // Hide the custom button
-      custom.style.display = "none";
 
       // make the selected button active
       button.addClass('active');

@@ -58,6 +58,11 @@ class XKPasswd {
     this.#statsClass = new Statistics(this.#config, this.#dictionary);
   }
 
+  setCustomPreset(settings) {
+    this.#preset = new Presets("CUSTOM");
+    this.#preset.setConfig(settings);
+  }
+
   /**
    * Get the current preset
    *

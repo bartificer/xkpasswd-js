@@ -53,6 +53,8 @@ const XKP = {
    * @memberof XKP
    */
   init: (settings) => {
+    let preset = "DEFAULT";
+
     // setup variables for key parts of the website
     XKP.xkpasswd = new XKPasswd(),
 
@@ -60,8 +62,10 @@ const XKP = {
       new SettingsController(XKP.xkpasswd, new SettingsView());
 
     // If settings are passed by URL update the settingsController
-    if ( typeof settings !== 'undefined' && settings != null) {
+    if (typeof settings !== 'undefined' && settings != null) {
+      XKP.xkpasswd.setCustomPreset(settings);
       XKP.settingsController.importSettings(settings);
+      preset = "CUSTOM";
     }
 
     XKP.presetController = new PresetController(
@@ -70,6 +74,8 @@ const XKP = {
       XKP.settingsController);
     XKP.passwordController =
       new PasswordController(XKP.xkpasswd, new PasswordView());
+
+    XKP.presetController.changePreset(preset);
   },
 
 };
@@ -95,18 +101,21 @@ $(() => {
   XKP.init(config.getSettings());
 
   // Display the CUSTOM preset button if loaded custom settings
+  savedSettingsLink.val("");
   if (config.isLoaded()) {
-    const custom = document.querySelector("[data-preset='CUSTOM']");
-    custom.style.removeProperty("display");
-    custom.classList.add("active");
+    const custom = $("[data-preset='CUSTOM']");
+    custom.show();
+    custom.addClass("active");
     savedSettingsLink.val(window.location);
-  } else {
-    savedSettingsLink.val("");
   }
 
   copySettingsLink.bind('click', () => {
     savedSettingsLink.select();
-    navigator.clipboard.writeText(savedSettingsLink.value);
+    navigator.clipboard.writeText(savedSettingsLink.val());
+    copySettingsLink.children("i").removeClass("bi-copy").fadeIn(500).addClass("bi-check");
+    setTimeout( () => {
+      copySettingsLink.children("i").removeClass("bi-check").addClass("bi-copy");
+    }, 1000);
   });
 
   // Now that the DOM is ready, find all the 'div' elements that

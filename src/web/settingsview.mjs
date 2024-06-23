@@ -15,7 +15,8 @@ class SettingsView {
   #aniTime = 250;
 
   /**
-   * @private {string} savedSettingsLink - set time to show/hide elements
+   * @private {string} savedSettingsLink - Readonly text input to display link
+   * encoded settings
    */
   #savedSettingsLink;
 

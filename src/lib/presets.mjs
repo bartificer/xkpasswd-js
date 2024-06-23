@@ -497,6 +497,10 @@ class Presets {
     return this.#current.config;
   }
 
+  setConfig(settings) {
+    this.#current.config = settings;
+  }
+
   /**
    * Get the description of the preset
    *
