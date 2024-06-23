@@ -1,6 +1,6 @@
 import log from 'loglevel';
 import {Collapse} from 'bootstrap';
-import {Config} from '../lib/config.mjs';
+import {Config} from './config.mjs';
 
 /**
  * This class handles the rendering of

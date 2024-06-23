@@ -31,7 +31,7 @@ import {SettingsView} from './web/settingsview.mjs';
 import {SettingsController} from './web/settingscontroller.mjs';
 import {PasswordView} from './web/passwordview.mjs';
 import {PasswordController} from './web/passwordcontroller.mjs';
-import {Config} from './lib/config.mjs';
+import {Config} from './web/config.mjs';
 
 /**
  * Object defining all custom variables and functions
