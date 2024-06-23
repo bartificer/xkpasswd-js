@@ -53,7 +53,7 @@ const XKP = {
    */
   init: () => {
     // setup variables for key parts of the website
-    XKP.xkpasswd = new XKPasswd(),
+    XKP.xkpasswd = new XKPasswd();
 
     XKP.passwordController =
       new PasswordController(XKP.xkpasswd, new PasswordView());
@@ -73,8 +73,7 @@ const XKP = {
 
 $(() => {
   // enable tooltips
-  const tooltipTriggerList =
-  document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipTriggerList = $('[data-bs-toggle="tooltip"]');
   [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
