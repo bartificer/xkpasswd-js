@@ -149,6 +149,28 @@ class SettingsView {
   }
 
   /**
+   * Handle the saving of the configuration as JSON file
+   *
+   * @param {Function} handle - pass control to the Controller to build
+   * the export JSON
+   */
+  bindSaveConfig(handle) {
+    $('#form#exportConfigFile').on('submit', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const name = e.target.name;
+
+      let jsonBlob = new Blob([handle()], {type: 'application/json'});
+
+      let tempLink = $('a')
+        .attr('href', URL.createObjectURL(jsonBlob))
+        .attr('download', `${name.toLowerCase()}.json`);
+      tempLink.click();
+      URL.revokeObjectURL(tempLink.href);
+    });
+  }
+
+  /**
    * Open the accordion to show the settings
    */
   showSettings() {

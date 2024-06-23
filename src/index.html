@@ -49,7 +49,7 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#load_config" href="#">Import Config</a></li>
-                      <li><a class="dropdown-item disabled" href="#">Export Config</a></li>
+                      <li><a class="dropdown-item" id="save_config" href="#">Export Config</a></li>
                       <li>
                         <hr class="dropdown-divider">
                       </li>
@@ -450,6 +450,42 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal save config -->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. - - >
+  <div class="modal fade" id="save_config" fouc="true" tabindex="-1" aria-labelledby="aboutLabel" aria-hidden="true"
+    style="visibility: hidden;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="saveConfigLabel">Save config</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            This is only a first version of the import. Please create an issue in the GitHub repository if you find
+            an error with processing your particular configuration.
+          </div>
+          <h1 class="h3">Load your personal configuration</h1>
+           <form id="saveConfigFile">
+              <div class="my-3">
+  		          <label class="form-label" for="fileName">Give the name of the config file</label>
+	  	          <input class="form-control" type="text" id="fileName" required
+                       aria-description="enter the filename of the config file"
+                       placeholder="config.json"
+                       >
+              </div>
+              <button id="save" type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                      aria-label="save the config file"
+                      tabindex="0">Save</button>
+	          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 
   <!-- Modal about-->
   <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
