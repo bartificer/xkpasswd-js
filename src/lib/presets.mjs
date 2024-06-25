@@ -375,7 +375,7 @@ const thePresets = {
     },
   },
   CUSTOM: {
-    description: 'A preset loaded from configuration.',      
+    description: 'A preset loaded from configuration.',
     config: {
       word_length_min: 4,
       word_length_max: 4,
@@ -498,7 +498,7 @@ class Presets {
   }
 
   setConfig(settings) {
-    this.#current.config = settings;
+    this.#current.config = this.__normalize(settings);
   }
 
   /**
@@ -570,6 +570,18 @@ class Presets {
     newConfig.padding_character_type = paddingCharType;
     newConfig.padding_character = paddingCharacter;
     newConfig.padding_alphabet = paddingAlphabet;
+
+    // parse number fields to integers
+    Object.keys(newConfig).forEach(key => {
+      if (
+        key == 'word_length_min' || key == 'word_length_max' ||
+        key == 'padding_digits_before' || key == 'padding_digits_after' ||
+        key == 'padding_characters_before' || key == 'padding_characters_after' ||
+        key == 'num_words' || key == 'pad_to_length'
+      ) {
+        newConfig[key] = parseInt(newConfig[key]);
+      }
+    });
 
     return newConfig;
   }

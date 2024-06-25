@@ -1,7 +1,8 @@
+import { Presets } from "../lib/presets.mjs";
 
 /**
  * Return the string truncated to the desired length
- * 
+ *
  * @param {number} length - The length that the string will be truncated to
  * @param {string} suffix - The suffix to append at the end of the truncated string
  * @returns {string} - The truncated string
@@ -35,17 +36,17 @@ const map = [
 
 /**
  * This class handle the loading/saving of custom password configurations
- * 
+ *
  */
 class Config {
   /**
    * @private __settings - Object with the loaded settings
    */
   __settings;
-  
+
   /**
-   * The default class constructor 
-   * 
+   * The default class constructor
+   *
    * @param {Object} settings - Object with the current settings, this can be undefined
    */
   constructor(settings) {
@@ -56,7 +57,7 @@ class Config {
 
   /**
    * Retun true if settings have been loaded
-   * 
+   *
    * @returns {boolean} - true if settings have been loaded, false otherwise
    */
   isLoaded() {
@@ -68,7 +69,7 @@ class Config {
 
   /**
    * Return the settings object
-   * 
+   *
    * @returns {object} - the current settings
    */
   getSettings() {
@@ -78,7 +79,7 @@ class Config {
   /**
    * Loads the settings from a URL and stores them in a private object
    * Return true if successfull or false otherwise
-   * 
+   *
    * @param {string} url - The URL to try to extract the settings
    * @returns {boolean} - true if the settings were loaded from the URL, or false otherwise
    */
@@ -110,7 +111,7 @@ class Config {
 
   /**
    * Return a URL string with the encoded settings string
-   * 
+   *
    * @param {string} url - The URL to add or update with the settings. Defaults to the current browser URL
    * @returns {string} - The URL as string
    */
@@ -122,14 +123,14 @@ class Config {
     }
 
     url.searchParams.set("c", encodedSettings);
-    
+
     return url.toString();
   }
 
   /**
-   * Converts the settings object to a CSV array and returns it as a 
+   * Converts the settings object to a CSV array and returns it as a
    * URL safe base64 encoded string
-   * 
+   *
    * @returns {string} - A base64 encoded string with the settings
    */
   __getEncodedSettings() {
@@ -152,7 +153,7 @@ class Config {
 
   /**
    * Retrun the string as a URL safe base64 encoded string
-   * 
+   *
    * @param {string} str - string to encode as base64 string
    * @returns {string} - A base64 encoded string
    */
@@ -163,7 +164,7 @@ class Config {
 
   /**
    * Return the string decoded from a URL safe base64 encoded string
-   * 
+   *
    * @param {string} str - A base64 encoded string
    * @returns {string} - The decoded string
    */
@@ -178,5 +179,3 @@ class Config {
 }
 
 export {Config};
-
-// http://192.168.20.41/?c=ZW5nbGlzaCw0LDQsOCxDQVBJVEFMSVNFLEZJWEVELExRLElVQWtKVjRtS2kxZkt6MDZmSDRfTHk0NywyLDIsTk9ORSw4LFJBTkRPTSwsSVVBa0pWNG1LaTFmS3owNmZINF9MeTQ3LDIsMg
