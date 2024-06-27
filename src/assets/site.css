@@ -55,7 +55,7 @@ body {
 
 /* make the checkmark bigger and green
  */
-#generated_password_lst button.list-group-item i.bi-check {
+#generated_password_lst button.list-group-item i.bi-check, #copySettingsLink i.bi-check {
   color: rgba(var(--bs-success-rgb)) !important;
   font-size: 1.5rem;
   line-height: 1rem;
