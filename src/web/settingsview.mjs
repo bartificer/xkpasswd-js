@@ -1,5 +1,6 @@
 import log from 'loglevel';
 import {Collapse} from 'bootstrap';
+import {Config} from './config.mjs';
 
 /**
  * This class handles the rendering of
@@ -14,12 +15,19 @@ class SettingsView {
   #aniTime = 250;
 
   /**
+   * @private {string} savedSettingsLink - Readonly text input to display link
+   * encoded settings
+   */
+  #savedSettingsLink;
+
+  /**
    * @constructor
    */
   constructor() {
     this.__togglePaddingType('NONE');
     this.__togglePaddingCharType('FIXED');
     this.__toggleSeparatorType('NONE');
+    this.#savedSettingsLink = $('#savedSettingsLink');
 
     $('#invalidSettings').hide();
 
@@ -48,6 +56,7 @@ class SettingsView {
     keys.forEach((key) => {
       $(`#${key}`).val(preset[key]);
     });
+
 
     // hide everything that should not be visible
     this.__toggleSeparatorType(preset.separator_type);
@@ -106,6 +115,11 @@ class SettingsView {
         // True MVC requires this to be handled by the PasswordView,
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', false);
+
+        // Update the URL with the encoded settings
+        const config = new Config(data);
+        const url = config.toUrl();
+        this.#savedSettingsLink.val(url);
 
         log.trace(JSON.stringify(data));
         handle(data);

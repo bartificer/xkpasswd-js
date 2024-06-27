@@ -31,6 +31,7 @@ import {SettingsView} from './web/settingsview.mjs';
 import {SettingsController} from './web/settingscontroller.mjs';
 import {PasswordView} from './web/passwordview.mjs';
 import {PasswordController} from './web/passwordcontroller.mjs';
+import {Config} from './web/config.mjs';
 
 /**
  * Object defining all custom variables and functions
@@ -51,7 +52,9 @@ const XKP = {
    * @function init
    * @memberof XKP
    */
-  init: () => {
+  init: (settings) => {
+    let preset = "DEFAULT";
+
     // setup variables for key parts of the website
     XKP.xkpasswd = new XKPasswd();
 
@@ -59,12 +62,21 @@ const XKP = {
       new PasswordController(XKP.xkpasswd, new PasswordView());
     XKP.settingsController =
       new SettingsController(XKP.xkpasswd, new SettingsView());
+
+    // If settings are passed by URL update the settingsController
+    if (typeof settings !== 'undefined' && settings != null) {
+      XKP.xkpasswd.setCustomPreset(settings);
+      XKP.settingsController.importSettings(settings);
+      preset = "CUSTOM";
+    }
+
     XKP.presetController = new PresetController(
       XKP.xkpasswd,
       new PresetView(),
       XKP.settingsController,
       XKP.passwordController);
   },
+
 };
 
 /**
@@ -77,7 +89,32 @@ $(() => {
   [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
-  XKP.init();
+  const savedSettingsLink = $('#savedSettingsLink');
+  const copySettingsLink = $('#copySettingsLink');
+
+  // Load custom settings if present in the URL
+  const config = new Config();
+  config.loadFromUrl(document.location);
+
+  XKP.init(config.getSettings());
+
+  // Display the CUSTOM preset button if loaded custom settings
+  savedSettingsLink.val("");
+  if (config.isLoaded()) {
+    const custom = $("[data-preset='CUSTOM']");
+    custom.show();
+    custom.addClass("active");
+    savedSettingsLink.val(window.location);
+  }
+
+  copySettingsLink.bind('click', () => {
+    savedSettingsLink.select();
+    navigator.clipboard.writeText(savedSettingsLink.val());
+    copySettingsLink.children("i").removeClass("bi-copy").fadeIn(500).addClass("bi-check");
+    setTimeout( () => {
+      copySettingsLink.children("i").removeClass("bi-check").addClass("bi-copy");
+    }, 1000);
+  });
 
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content
@@ -89,4 +126,5 @@ $(() => {
       fouc.style.visibility = 'visible';
     }
   }
+
 });
