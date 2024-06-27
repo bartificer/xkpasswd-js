@@ -145,7 +145,7 @@ class SettingsView {
       // Create a new FileReader() object
       const reader = new FileReader();
       this.showSettings();
-      this.setErrorMessage("");
+      this.setErrorMessage('');
       this.disableGenerateButton(false);
       $('#passwordSettings').show();
 
@@ -167,9 +167,6 @@ class SettingsView {
    */
   showSettings() {
     // make sure the settings section is not collapsed
-    Collapse.getOrCreateInstance('#collapseConfig', {
-      toggle: false,
-    }).show();
     Collapse.getOrCreateInstance('#collapseSettings', {
       toggle: false,
     }).show();
@@ -195,7 +192,7 @@ class SettingsView {
       $('#invalidSettings').text(t).show();
     }
     else {
-      $('#invalidSettings').text("").hide();
+      $('#invalidSettings').text('').hide();
     }
 
   }
@@ -229,6 +226,7 @@ class SettingsView {
     // always remove it, just add it only in case of 'RANDOM'
     const separatorCharacter = $('#separator_character');
     separatorCharacter.prop('required', false);
+
     // always remove it, just add it only in case of 'FIXED'
     const separatorAlphabet = $('#separator_alphabet');
     separatorAlphabet.prop('required', false);
@@ -239,17 +237,29 @@ class SettingsView {
     switch(separatorType) {
     case 'NONE':
       separatorCharacterParent.hide(this.#aniTime);
+      if (separatorCharacter.val().length < 1) {
+        separatorCharacter.val('|');
+      }
       separatorAlphabetParent.hide(this.#aniTime);
+      if (separatorAlphabet.val().length < 2) {
+        separatorAlphabet.val('|+');
+      }
       break;
 
     case 'FIXED':
       separatorCharacterParent.show(this.#aniTime);
       separatorAlphabetParent.hide(this.#aniTime);
       separatorCharacter.prop('required', true);
+      if (separatorAlphabet.val().length < 2) {
+        separatorAlphabet.val('|+');
+      }
       break;
 
     case 'RANDOM':
       separatorCharacterParent.hide(this.#aniTime);
+      if (separatorCharacter.val().length < 1) {
+        separatorCharacter.val('|');
+      }
       separatorAlphabetParent.show(this.#aniTime);
       separatorAlphabet.prop('required', true);
       break;
@@ -274,29 +284,35 @@ class SettingsView {
     const paddingType = (typeof e == 'string') ? e : $(e.target).val();
     log.trace(`__toggleCharPaddingType: ${paddingType}`);
 
-    const paddingCharBefore = $('#padding_characters_before').parent().parent();
-    const paddingCharAfter = $('#padding_characters_after').parent().parent();
+    const paddingCharBefore = $('#padding_characters_before');
+    const paddingCharAfter = $('#padding_characters_after');
+    const paddingCharBeforeParent = $('#padding_characters_before').parent().parent();
+    const paddingCharAfterParent = $('#padding_characters_after').parent().parent();
     const padToLength = $('#pad_to_length').parent().parent();
     const paddingCharContainer = $('div#padding_char_container');
 
+    paddingCharBefore.prop('required', false);
+    paddingCharAfter.prop('required', false);
+    paddingCharBeforeParent.hide(this.#aniTime);
+    paddingCharAfterParent.hide(this.#aniTime);
+    padToLength.hide(this.#aniTime);
+
     switch(paddingType) {
     case 'NONE':
-      paddingCharBefore.hide(this.#aniTime);
-      paddingCharAfter.hide(this.#aniTime);
-      padToLength.hide(this.#aniTime);
       paddingCharContainer.hide(this.#aniTime);
       break;
 
     case 'FIXED':
-      paddingCharBefore.show(this.#aniTime);
-      paddingCharAfter.show(this.#aniTime);
-      padToLength.hide(this.#aniTime);
+      paddingCharBefore.prop('required', true);
+      paddingCharAfter.prop('required', true);
+      paddingCharBeforeParent.show(this.#aniTime);
+      paddingCharAfterParent.show(this.#aniTime);
       paddingCharContainer.show(this.#aniTime);
       break;
 
     case 'ADAPTIVE':
-      paddingCharBefore.hide(this.#aniTime);
-      paddingCharAfter.hide(this.#aniTime);
+      paddingCharBefore.val(0);
+      paddingCharAfter.val(0);
       padToLength.show(this.#aniTime);
       paddingCharContainer.show(this.#aniTime);
       break;
@@ -333,6 +349,7 @@ class SettingsView {
     paddingAlphabet.prop('required', false);
     // always remove it, just add it only in case of 'FIXED'
     paddingCharacter.prop('required', false);
+
 
     // hide everything so we only show what's needed
     paddingCharacterParent.hide(this.#aniTime);

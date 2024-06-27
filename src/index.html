@@ -56,6 +56,9 @@
                       <li><a class="dropdown-item" href="docs/index.html">Developer docs</a></li>
                     </ul>
                   </li>
+                  <li class="nav-item"><a class="nav-link text-white" href="https://userguide.xkpasswd.net">User Guide</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
                     <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#about" href="#">About</a>
                   </li>
@@ -70,7 +73,7 @@
         </header> <!-- close row for nav -->
 
         <section id="content" class="row"> <!-- open row for content below nav -->
-          <div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> <!-- open config col -->
+          <!-- div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> < !-- open config col - - >
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -79,8 +82,8 @@
                 </button>
               </h2>
               <div id="collapseConfig" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
-                <div class="accordion-body">
-                  <div class="accordion" id="configOptions">
+                <div class="accordion-body"> -->
+                  <div class="accordion my-3 mb-lg-3 px-0" id="configOptions">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -89,7 +92,7 @@
                         </button>
                       </h2>
                       <!-- This section (id = collapsePresets) is handled by the PresetController and the PresetView -->
-                      <div id="collapsePresets" class="accordion-collapse collapse show"
+                      <div id="collapsePresets" class="accordion-collapse collapse"
                         data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <div id="preset-btn-group" class="row" role="group" aria-label="Preset group">
@@ -335,10 +338,10 @@
                     </div> <!-- /settings-link -->
 
                   </div> <!-- /accordion configOptions -->
-                </div> <!-- /accordion body -->
-              </div> <!-- /collapseConfig -->
+                <!-- /div> <! - - /accordion body - - >
+              </div> <!- - /collapseConfig - - >
             </div>
-          </div> <!-- close config col -->
+          </div> <!- - close config col -->
 
           <!-- this section (id = generatePassword) is handled by the PasswordController and the PasswordView -->
           <div id="generatePassword" class="mt-2"> <!-- open generate pw - need to split pw box out -->
@@ -370,7 +373,7 @@
         </section> <!-- close section for content below nav -->
       </section> <!-- close section for content right of graphic -->
 
-      <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline"> <!-- open section for graphic -->
+      <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline" aria-flowto="password-card"> <!-- open section for graphic -->
         <picture>
           <!-- show this on large and above -->
           <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
@@ -383,7 +386,7 @@
     <div class="row"> <!-- open row for password card -->
 
       <!-- this section (id = password-card) is handled by the PasswordController and the PasswordView -->
-      <section id="password-card" class="order-3">
+      <section id="password-card" class="order-3 px-0">
         <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
           <div class="card-header d-flex align-items-center">
             <span class="text-uppercase">Passwords</span>
@@ -391,9 +394,9 @@
           <div class="card-body">
             <div id="password_presentation">
                 <input id="pw_lst" type="radio" name="pwdPresentation" value="lst" aria-description="Present passwords in a list" tabindex="0" checked>
-                <label for="pw_lst" class="bi bi-list-ul" style="margin-left:0.5em;margin-right:1em"></label>
+                <label for="pw_lst" class="bi bi-list-ul" aria-label="Present passwords in a list" style="margin-left:0.5em;margin-right:1em"></label>
                 <input id="pw_txt" type="radio" name="pwdPresentation" value="txt" aria-description="Present passwords as a block of text" tabindex="0">
-                <label for="pw_txt" class="bi bi-file-earmark-text" style="margin-left:0.5em;margin-right:1em"></label>
+                <label for="pw_txt" class="bi bi-file-earmark-text" aria-label="Present passwords as a block of text" style="margin-left:0.5em;margin-right:1em"></label>
             </div>
             <div id="generated_password_lst" class="list-group list-group-flush"></div>
 

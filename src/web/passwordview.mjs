@@ -70,8 +70,7 @@ class PasswordView {
       }
     }
 
-    this.__resetPasswordUI();
-    this.__hideStats();
+    this.clearPasswordArea();
   };
 
   /**
@@ -221,24 +220,13 @@ class PasswordView {
     });
   };
 
-
   /**
-   * hide statistics section
-   *
-   * @private
+   * Clear the password area
    */
-  __hideStats() {
-    this.#passwordStatsContainer.addClass('d-none');
-  };
-
-  /**
-   * show statistics section
-   *
-   * @private
-   */
-  __showStats() {
-    this.#passwordStatsContainer.removeClass('d-none');
-  };
+  clearPasswordArea() {
+    this.__resetPasswordUI();
+    this.__hideStats();
+  }
 
   /**
    * Show an alert with an error message
@@ -262,6 +250,25 @@ class PasswordView {
 
     this.__hideStats();
   };
+
+  /**
+   * hide statistics section
+   *
+   * @private
+   */
+  __hideStats() {
+    this.#passwordStatsContainer.addClass('d-none');
+  };
+
+  /**
+   * show statistics section
+   *
+   * @private
+   */
+  __showStats() {
+    this.#passwordStatsContainer.removeClass('d-none');
+  };
+
 
   /**
    * Render the details of the statistics
@@ -309,8 +316,8 @@ class PasswordView {
     this.#blindEntropy.empty().append(template);
 
     // full knowledge (seen) entropy
-        for (let key in this.#stats_classes) {
-        this.#seenEntropy.removeClass(this.#stats_classes[key].class);
+    for (let key in this.#stats_classes) {
+      this.#seenEntropy.removeClass(this.#stats_classes[key].class);
     }
 
     this.#seenEntropy.html(stats.entropy.entropySeen.value + ' bits')
@@ -339,7 +346,7 @@ class PasswordView {
     // render strength
     this.#passwordStrength.text(statsText);
     for (let key in this.#stats_classes) {
-        this.#passwordStrength.removeClass(this.#stats_classes[key].class);
+      this.#passwordStrength.removeClass(this.#stats_classes[key].class);
     }
 
     this.#passwordStrength.addClass(statsClass);
