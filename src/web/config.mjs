@@ -94,8 +94,8 @@ class Config {
 
     map.forEach(element => {
       if (
-        element == 'separator_character' || element == 'separator_alphabet' ||
-        element == 'padding_character' || element == 'padding_alphabet'
+        element === 'separator_character' || element === 'separator_alphabet' ||
+        element === 'padding_character' || element === 'padding_alphabet'
       ) {
         settings[element] = this.__base64URLdecode(values.shift());
         settings[element] = settings[element].join("")
@@ -138,8 +138,8 @@ class Config {
 
     map.forEach(element => {
       if (
-        element == 'separator_character' || element == 'separator_alphabet' ||
-        element == 'padding_character' || element == 'padding_alphabet'
+        element === 'separator_character' || element === 'separator_alphabet' ||
+        element === 'padding_character' || element === 'padding_alphabet'
       )
       {
         values.push(this.__base64URLencode(this.__settings[element]));
