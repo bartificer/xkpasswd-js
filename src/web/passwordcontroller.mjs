@@ -19,7 +19,7 @@ class PasswordController {
   /**
    * @constructor
    *
-   * @param {PasswordModel} model - new PasswordModel
+   * @param {XKPasswd} model - new PasswordModel
    * @param {PasswordView} view - new PasswordView
    */
   constructor(model, view) {

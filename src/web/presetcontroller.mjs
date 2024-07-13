@@ -27,7 +27,7 @@ class PresetController {
   /**
    * @constructor
    *
-   * @param {PresetModel} model - reference to PresetModel
+   * @param {XKPasswd} model - reference to PresetModel
    * @param {PresetView} view - reference to PresetView
    * @param {SettingsController} sc - reference to SettingsController
    * @param {PasswordController} pc - reference to PasswordController
