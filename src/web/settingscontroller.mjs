@@ -16,6 +16,10 @@ class SettingsController {
   #view;
 
   /**
+   * @private config - reference to ConfigController
+   */
+  #config;
+  /**
    * @constructor
    *
    * @param {Object} model - new SettingsModel
@@ -30,6 +34,15 @@ class SettingsController {
 
     this.#view.renderSettings(config);
     log.trace('SettingsController constructor executed');
+  }
+
+  /**
+   * Set the config controller separately, so we can use one config controller
+   *
+   * @param {ConfigController} configController - new ConfigController
+   */
+  setConfigController( configController) {
+    this.#config = configController;
   }
 
   /**
@@ -65,6 +78,8 @@ class SettingsController {
    * @param {Object} config - the configuration
    */
   updateSettings(config) {
+    // Update the URL with the encoded settings
+    this.#config.updateLink(config);
     this.#view.renderSettings(config);
   }
 

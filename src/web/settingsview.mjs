@@ -160,6 +160,15 @@ class SettingsView {
     $('#passwordSettings').hide();
   }
 
+  /**
+   * Reset the error indications
+   */
+  resetConfigError() {
+    this.showSettings();
+    this.setErrorMessage('');
+    this.disableGenerateButton(false);
+    $('#passwordSettings').show();
+  }
 
   /**
    * Toggle visibility of separator type related
