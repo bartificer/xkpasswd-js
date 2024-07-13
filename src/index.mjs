@@ -97,7 +97,7 @@ $(() => {
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content
   // as the page loads and make them visible.
-  const foucElements = document.querySelectorAll('div[fouc=\'true\']');
+  const foucElements = $('div[fouc=\'true\']');
   for (const fouc of foucElements) {
     if (fouc.style !== null) {
       // Make the element visible.
