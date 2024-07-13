@@ -1,6 +1,5 @@
 import log from 'loglevel';
 import {Collapse} from 'bootstrap';
-import {Config} from './config.mjs';
 
 /**
  * This class handles the rendering of
@@ -15,19 +14,12 @@ class SettingsView {
   #aniTime = 250;
 
   /**
-   * @private {string} savedSettingsLink - Readonly text input to display link
-   * encoded settings
-   */
-  #savedSettingsLink;
-
-  /**
    * @constructor
    */
   constructor() {
     this.__togglePaddingType('NONE');
     this.__togglePaddingCharType('FIXED');
     this.__toggleSeparatorType('NONE');
-    this.#savedSettingsLink = $('#savedSettingsLink');
 
     $('#invalidSettings').hide();
 
@@ -56,7 +48,6 @@ class SettingsView {
     keys.forEach((key) => {
       $(`#${key}`).val(preset[key]);
     });
-
 
     // hide everything that should not be visible
     this.__toggleSeparatorType(preset.separator_type);
@@ -116,71 +107,9 @@ class SettingsView {
         // but since it's only one line, we don't bother
         $('#generate').prop('disabled', false);
 
-        // Update the URL with the encoded settings
-        const config = new Config(data);
-        const url = config.toUrl();
-        this.#savedSettingsLink.val(url);
-
         log.trace(JSON.stringify(data));
         handle(data);
       }
-    });
-  }
-
-  /**
-   * Bind the load config form
-   *
-   * @param {Function} handle - pass control to the Controller
-   */
-  bindLoadConfig(handle) {
-    $('form#uploadConfigFile').on('submit', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const files = e.target.elements[0].files;
-
-      // If there's no file, do nothing
-      if (!files.length) return;
-
-      // Create a new FileReader() object
-      const reader = new FileReader();
-      this.showSettings();
-      this.setErrorMessage('');
-      this.disableGenerateButton(false);
-      $('#passwordSettings').show();
-
-
-      // Set up the callback event to run when the file is read
-      reader.onload = (event) => {
-        const json = JSON.parse(event.target.result);
-        log.trace(`json: ${JSON.stringify(json)}`);
-        handle(json);
-      };
-
-      // Read the file
-      reader.readAsText(files[0]);
-    });
-  }
-
-  /**
-   * Handle the saving of the configuration as JSON file
-   *
-   * @param {Function} handle - pass control to the Controller to build
-   * the export JSON
-   */
-  bindSaveConfig(handle) {
-    $('#form#exportConfigFile').on('submit', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const name = e.target.name;
-
-      let jsonBlob = new Blob([handle()], {type: 'application/json'});
-
-      let tempLink = $('a')
-        .attr('href', URL.createObjectURL(jsonBlob))
-        .attr('download', `${name.toLowerCase()}.json`);
-      tempLink.click();
-      URL.revokeObjectURL(tempLink.href);
     });
   }
 

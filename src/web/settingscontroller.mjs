@@ -26,8 +26,6 @@ class SettingsController {
     this.#view = view;
 
     this.#view.bindSaveSettings(this.saveSettings);
-    this.#view.bindLoadConfig(this.importSettings);
-    this.#view.bindSaveConfig(this.exportSettings);
     const config = this.#model.getPreset().config();
 
     this.#view.renderSettings(config);
@@ -66,34 +64,6 @@ class SettingsController {
     this.#view.renderSettings(config);
   }
 
-  /**
-   *  Import the settings from the uploaded file
-   *
-   * @param {Object} settings - the object containing the uploaded settings
-   */
-  importSettings = (settings) => {
-    this.#model.setPreset({
-      description: 'Custom preset',
-      config: settings});
-
-    try {
-      const config = this.#model.getPreset().config();
-      this.updateSettings(config);
-    }
-    catch (e) {
-      this.#view.renderConfigError(e);
-    }
-  }
-
-  /**
-   * Convert the settings to a JSON file and return it as a Blob
-   *
-   * @return {string} - the JSON version of the settings
-   */
-  exportSettings = () => {
-    let settings = this.#model.getPreset().config();
-    return JSON.stringify(settings);
-  }
 }
 
 export {SettingsController};

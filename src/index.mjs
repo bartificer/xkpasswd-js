@@ -31,7 +31,8 @@ import {SettingsView} from './web/settingsview.mjs';
 import {SettingsController} from './web/settingscontroller.mjs';
 import {PasswordView} from './web/passwordview.mjs';
 import {PasswordController} from './web/passwordcontroller.mjs';
-import {Config} from './web/config.mjs';
+import {ConfigController} from './web/configcontroller.mjs';
+import {ConfigView} from './web/configview.mjs';
 
 /**
  * Object defining all custom variables and functions
@@ -43,6 +44,7 @@ const XKP = {
   presetController: {},
   settingsController: {},
   passwordController: {},
+  configController: {},
   xkpasswd: {},
 
   /**
@@ -52,9 +54,7 @@ const XKP = {
    * @function init
    * @memberof XKP
    */
-  init: (settings) => {
-    let preset = "DEFAULT";
-
+  init: () => {
     // setup variables for key parts of the website
     XKP.xkpasswd = new XKPasswd();
 
@@ -63,20 +63,23 @@ const XKP = {
     XKP.settingsController =
       new SettingsController(XKP.xkpasswd, new SettingsView());
 
-    // If settings are passed by URL update the settingsController
-    if (typeof settings !== 'undefined' && settings != null) {
-      XKP.xkpasswd.setCustomPreset(settings);
-      XKP.settingsController.importSettings(settings);
-      preset = "CUSTOM";
-    }
+    XKP.configController =
+      new ConfigController(XKP.xkpasswd, new ConfigView(),
+      XKP.settingsController);
 
-    XKP.presetController = new PresetController(
-      XKP.xkpasswd,
-      new PresetView(),
+    // Set the configController in the settingsController
+    // because it's reciprocal.
+
+    XKP.settingsController.setConfigController(XKP.configController);
+
+    XKP.presetController =
+      new PresetController(XKP.xkpasswd, new PresetView(),
       XKP.settingsController,
       XKP.passwordController);
-  },
 
+    // Load custom settings if present in the URL
+    XKP.configController.loadFromUrl(window.location);
+  },
 };
 
 /**
@@ -89,32 +92,7 @@ $(() => {
   [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
-  const savedSettingsLink = $('#savedSettingsLink');
-  const copySettingsLink = $('#copySettingsLink');
-
-  // Load custom settings if present in the URL
-  const config = new Config();
-  config.loadFromUrl(document.location);
-
-  XKP.init(config.getSettings());
-
-  // Display the CUSTOM preset button if loaded custom settings
-  savedSettingsLink.val("");
-  if (config.isLoaded()) {
-    const custom = $("[data-preset='CUSTOM']");
-    custom.show();
-    custom.addClass("active");
-    savedSettingsLink.val(window.location);
-  }
-
-  copySettingsLink.bind('click', () => {
-    savedSettingsLink.select();
-    navigator.clipboard.writeText(savedSettingsLink.val());
-    copySettingsLink.children("i").removeClass("bi-copy").fadeIn(500).addClass("bi-check");
-    setTimeout( () => {
-      copySettingsLink.children("i").removeClass("bi-check").addClass("bi-copy");
-    }, 1000);
-  });
+  XKP.init();
 
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content

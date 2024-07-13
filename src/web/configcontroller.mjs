@@ -9,6 +9,7 @@
 // String.prototype.truncate = function(length = 50, suffix = '(...)') {
 //   return `${this.substring(0, length - suffix.length)}${suffix}`;
 // };
+import log from 'loglevel';
 
 const map = [
   'dict',
@@ -36,64 +37,183 @@ const map = [
 /**
  * This class handle the loading/saving of custom password configurations
  *
+ * There are 2 ways of loading/saving:
+ *
+ * - the origin of this class: using a base64encoded uri
+ * - importing and exporting a JSON file
+ *
  */
-class Config {
+class ConfigController {
+  /**
+   * @private model - reference to password model
+   */
+  #model;
+
+  /**
+   * @private view - reference to ConfigView
+   */
+  #view;
+
+  /**
+   * @private settingsController - reference to SettingsController
+   */
+  #settingsController;
+
   /**
    * @private __settings - Object with the loaded settings
    */
-  __settings;
+  // __settings;
+
 
   /**
    * The default class constructor
+   * @constructor
    *
-   * @param {Object} settings - Object with the current settings, this can be
-   *   undefined
+   * @param {XKPasswd} model - reference to PasswordModel
+   * @param {ConfigView} view - reference to ConfigView
+   * @param {SettingsController} settingsController - reference to
+   *   SettingsController
    */
-  constructor(settings) {
-    if (typeof settings !== 'undefined') {
-      this.__settings = settings;
+  constructor(model, view, settingsController) {
+    // if (typeof settings !== 'undefined') {
+    //   this.__settings = settings;
+    // }
+
+    this.#model = model;
+    this.#view = view;
+    this.#settingsController = settingsController;
+
+    this.#view.bindLoadConfig(this.importSettings);
+    this.#view.bindSaveConfig(this.exportSettings);
+    this.#view.bindCopySettingsLink(this.copyUrl);
+  }
+
+  /**
+   *  Import the settings from the uploaded file
+   *
+   * @param {Object} settings - the object containing the uploaded settings
+   */
+  importSettings = (settings) => {
+    this.#model.setCustomPreset(settings);
+
+    try {
+      // yes, config should be the same as settings, but there is some
+      // conversion going on in the preset class, so we use the one that is
+      // actually stored.
+
+      const config = this.#model.getPreset().config();
+      this.#settingsController.updateSettings(config);
+      const url = this.toUrl(config);
+      this.#view.updateLink(url);
     }
-  }
-
-  /**
-   * Retun true if settings have been loaded
-   *
-   * @returns {boolean} - true if settings have been loaded, false otherwise
-   */
-  isLoaded() {
-    if (typeof this.__settings === 'undefined') {
-      return false;
+    catch (e) {
+      this.#view.renderConfigError(e);
     }
-    return true;
-  }
+  };
 
   /**
-   * Return the settings object
+   * Convert the settings to a JSON object
    *
-   * @returns {object} - the current settings
+   * @return {string} - the JSON version of the settings
    */
-  getSettings() {
-    return this.__settings;
+  exportSettings = () => {
+    let settings = this.#model.getPreset().config();
+    return JSON.stringify(settings);
+  };
+
+  // /**
+  //  * Return true if settings have been loaded
+  //  *
+  //  * @returns {boolean} - true if settings have been loaded, false otherwise
+  //  */
+  // isLoaded() {
+  //   return typeof this.__settings !== 'undefined';
+  // }
+
+  // /**
+  //  * Return the settings object
+  //  *
+  //  * @returns {object} - the current settings
+  //  */
+  // getSettings() {
+  //   return this.__settings;
+  // }
+
+  /**
+   * Update the settingsLink content
+   * @param settings
+   */
+  updateLink(settings) {
+    const url = this.toUrl(settings);
+    this.#view.updateLink(url);
   }
 
   /**
-   * Loads the settings from a URL and stores them in a private object
-   * Return true if successfull or false otherwise
+   * Copy the parameter to the clipboard
+   * @param url
+   */
+  copyUrl(url) {
+    navigator.clipboard.writeText(url);
+  }
+
+
+  /**
+   * Loads the settings from a URL and store them in the model
    *
-   * @param {string} url - The URL to try to extract the settings
-   * @returns {boolean} - true if the settings were loaded from the URL, or
-   *   false otherwise
+   * @param {string} url - The URL to try to extract the settings from
    */
   loadFromUrl(url) {
+    const settings = this.fromUrl(url);
+
+    if (JSON.stringify(settings) !== '{}') {
+      // somehow I cannot get the settings object to match an empty object
+      // without doing this stringify actino
+      this.#model.setCustomPreset(settings);
+      this.#settingsController.updateSettings(settings);
+      this.#view.updateLink(window.location);
+    }
+    // // Display the CUSTOM preset button if loaded custom settings
+    // if (config.isLoaded()) {
+    //   const custom = $('[data-preset=\'CUSTOM\']');
+    //   custom.show();
+    //   custom.addClass('active');
+    //   savedSettingsLink.val(window.location);
+    // }
+// this.__settings = settings;
+  }
+
+  /**
+   * Return a URL string with the encoded settings string
+   *
+   * @param {Object} settings - The settings to encode
+   * @returns {string} - The URL as string
+   */
+  toUrl(settings) {
+    const encodedSettings = this.__getEncodedSettings(settings);
+    const url = new URL(window.location);
+
+    url.searchParams.set('c', encodedSettings);
+
+    return url.toString();
+  }
+
+  /**
+   * Convert an url into a settings object for further processing
+   * Return an empty object if there is no parameter in the url.
+   *
+   * @param url - the url from the window.location or from the settingslink
+   * @return {Object} - empty object if something went wrong, or settings object
+   */
+  fromUrl(url) {
     const params = new URL(url).searchParams;
-    const settings = new Object();
+    const settings = {};
     let values = null;
 
     if (params.get('c') == null) {
-      return false;
+      return {};
     }
 
-    values = this.__base64URLdecode(params.get('c')).join('').split(',');
+    values = this.__base64URLdecode(params.get('c')).split(',');
 
     map.forEach(element => {
       if (
@@ -101,7 +221,6 @@ class Config {
         element === 'padding_character' || element === 'padding_alphabet'
       ) {
         settings[element] = this.__base64URLdecode(values.shift());
-        settings[element] = settings[element].join('');
       }
       else {
         settings[element] = values.shift();
@@ -109,27 +228,7 @@ class Config {
       }
     });
 
-    this.__settings = settings;
-    return true;
-  }
-
-  /**
-   * Return a URL string with the encoded settings string
-   *
-   * @param {URL} url - The URL to add or update with the settings. Defaults
-   *   to the current browser URL
-   * @returns {string} - The URL as string
-   */
-  toUrl(url) {
-    const encodedSettings = this.__getEncodedSettings();
-
-    if (typeof url === 'undefined') {
-      url = new URL(window.location);
-    }
-
-    url.searchParams.set('c', encodedSettings);
-
-    return url.toString();
+    return settings;
   }
 
   /**
@@ -138,7 +237,7 @@ class Config {
    *
    * @returns {string} - A base64 encoded string with the settings
    */
-  __getEncodedSettings() {
+  __getEncodedSettings(settings) {
     let values = [];
 
     map.forEach(element => {
@@ -146,10 +245,10 @@ class Config {
         element === 'separator_character' || element === 'separator_alphabet' ||
         element === 'padding_character' || element === 'padding_alphabet'
       ) {
-        values.push(this.__base64URLencode(this.__settings[element]));
+        values.push(this.__base64URLencode(settings[element]));
       }
       else {
-        values.push(this.__settings[element]);
+        values.push(settings[element]);
       }
     });
 
@@ -164,7 +263,10 @@ class Config {
    */
   __base64URLencode(str) {
     const base64Encoded = btoa(str);
-    return base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return base64Encoded
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
   }
 
   /**
@@ -177,10 +279,10 @@ class Config {
     const base64Encoded = str.replace(/-/g, '+').replace(/_/g, '/');
     const padding = str.length % 4 === 0 ? '' : '='.repeat(4 - (str.length % 4));
     const base64WithPadding = base64Encoded + padding;
-    return atob(base64WithPadding)
+    return (atob(base64WithPadding)
       .split('')
-      .map(char => String.fromCharCode(char.charCodeAt(0)));
+      .map(char => String.fromCharCode(char.charCodeAt(0)))).join('');
   }
 }
 
-export {Config};
+export {ConfigController};

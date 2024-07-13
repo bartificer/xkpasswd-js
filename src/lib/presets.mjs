@@ -374,21 +374,21 @@ const thePresets = {
       allow_accents: 0,
     },
   },
-  CUSTOM: {
-    description: 'A preset loaded from configuration.',
-    config: {
-      word_length_min: 4,
-      word_length_max: 4,
-      num_words: 2,
-      case_transform: 'CAPITALISE',
-      separator_type: 'FIXED',
-      separator_character: '-',
-      padding_digits_before: 0,
-      padding_digits_after: 2,
-      padding_type: 'NONE',
-      allow_accents: 0,
-    },
-  },
+  // CUSTOM: {
+  //   description: 'A preset loaded from configuration.',
+  //   config: {
+  //     word_length_min: 4,
+  //     word_length_max: 4,
+  //     num_words: 2,
+  //     case_transform: 'CAPITALISE',
+  //     separator_type: 'FIXED',
+  //     separator_character: '-',
+  //     padding_digits_before: 0,
+  //     padding_digits_after: 2,
+  //     padding_type: 'NONE',
+  //     allow_accents: 0,
+  //   },
+  // },
 };
 
 
