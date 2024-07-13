@@ -63,14 +63,14 @@ class PresetView {
    * @param {string} description - the description of the preset
    */
   displayDescription(description) {
+    const WARNING = 'border-danger bg-danger-subtle';
+    const NORMAL  = 'border-primary-subtle bg-primary-subtle';
     if (description.includes('WARNING')) {
       this.#presetDescription
-        .addClass('border-danger bg-danger-subtle')
-        .removeClass('border-primary-subtle bg-primary-subtle');
+        .addClass(WARNING).removeClass(NORMAL);
     } else {
       this.#presetDescription
-        .removeClass('border-danger bg-danger-subtle')
-        .addClass('border-primary-subtle bg-primary-subtle');
+        .removeClass(WARNING).addClass(NORMAL);
     }
     this.#presetDescription.html(description).show();
   }
