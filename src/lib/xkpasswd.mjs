@@ -59,8 +59,11 @@ class XKPasswd {
   }
 
   setCustomPreset(settings) {
-    this.#preset = new Presets("CUSTOM");
-    this.#preset.setConfig(settings);
+    const preset = {
+      description: 'Custom preset, created from loaded config',
+      config: settings,
+    }
+    this.#preset = new Presets(preset);
   }
 
   /**

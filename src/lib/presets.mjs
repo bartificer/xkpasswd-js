@@ -458,6 +458,9 @@ class Presets {
         if (is.object(preset)) {
           this.#current = preset;
           this.#presetName = 'CUSTOM';
+          if (this.description() === '') {
+            this.#current.description = 'Your custom configuration';
+          }
         } else {
           this.#current = thePresets.DEFAULT;
           this.#presetName = 'DEFAULT';

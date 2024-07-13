@@ -50,9 +50,13 @@ class SettingsController {
       parseInt(settings.padding_characters_after);
     settings.pad_to_length = parseInt(settings.pad_to_length);
 
-    this.#model.setPreset({
+    this.#model.setCustomPreset({
       description: 'Custom preset',
-      config: settings});
+      config: settings
+    });
+
+    // Update the URL with the encoded settings
+    this.#config.updateLink(settings);
   };
 
   /**
