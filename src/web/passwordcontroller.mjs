@@ -62,6 +62,6 @@ class PasswordController {
   clearPasswords() {
     this.#view.clearPasswordArea();
   }
-};
+}
 
 export {PasswordController};

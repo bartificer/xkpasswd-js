@@ -1,5 +1,5 @@
 /**
- * @file This file only handles the update of the webapp.
+ * @file This file only handles the startup of the webapp.
  *
  * The actual password generation is done in the xkpasswd library.
  *
@@ -104,5 +104,4 @@ $(() => {
       fouc.style.visibility = 'visible';
     }
   }
-
 });

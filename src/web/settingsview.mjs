@@ -149,15 +149,15 @@ class SettingsView {
   }
 
   /**
-   * Render the error caused by the uploaded configuration
+   * Render the error caused by the imported configuration
    * Hide the fields because they cannot be updated
    * Disable the Generate button because behaviour is unpredictable
    */
   renderConfigError(e) {
     this.showSettings();
     this.disableGenerateButton(true);
-    $('#passwordSettings').hide();
     this.setErrorMessage(e.message);
+    $('#passwordSettings').hide();
   }
 
 

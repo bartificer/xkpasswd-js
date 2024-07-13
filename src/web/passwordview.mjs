@@ -284,7 +284,7 @@ class PasswordView {
 
     // Render the detailed stats
 
-    let template = {};
+    let template;
     const min = stats.entropy.minEntropyBlind;
     const max = stats.entropy.maxEntropyBlind;
 
@@ -341,7 +341,7 @@ class PasswordView {
     // we assume that the strength indicator is already calculated
 
     const statsText = this.__getStatsDisplay(passwordStrength);
-    const statsClass = this.__getStatsClass([passwordStrength]);
+    const statsClass = this.__getStatsClass(passwordStrength);
 
     // render strength
     this.#passwordStrength.text(statsText);

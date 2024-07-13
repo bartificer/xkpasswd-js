@@ -21,7 +21,7 @@ class PresetController {
   #settingsController;
 
   /**
-   * @private passwordController - reference to Passwordcontroller
+   * @private passwordController - reference to PasswordController
    */
   #passwordController;
   /**
@@ -46,9 +46,10 @@ class PresetController {
     log.trace('PresetController constructor executed');
   }
 
-  changePreset(presetName) {
-    this.#view.pressButton(presetName);
-  }
+  // changePreset(presetName) {
+  //   this.#view.pressButton(presetName);
+  // }
+  //
 
   /**
    * Handle the selection of the preset
