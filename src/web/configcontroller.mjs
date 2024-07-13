@@ -1,37 +1,36 @@
-import { Presets } from "../lib/presets.mjs";
-
-/**
- * Return the string truncated to the desired length
- *
- * @param {number} length - The length that the string will be truncated to
- * @param {string} suffix - The suffix to append at the end of the truncated string
- * @returns {string} - The truncated string
- */
-String.prototype.truncate = function (length=50, suffix="(...)") {
-  return `${this.substring(0,length-suffix.length)}${suffix}`;
-};
+// /**
+//  * Return the string truncated to the desired length
+//  *
+//  * @param {number} length - The length that the string will be truncated to
+//  * @param {string} suffix - The suffix to append at the end of the truncated
+//  *   string
+//  * @returns {string} - The truncated string
+//  */
+// String.prototype.truncate = function(length = 50, suffix = '(...)') {
+//   return `${this.substring(0, length - suffix.length)}${suffix}`;
+// };
 
 const map = [
-  "dict",
-  "num_words",
-  "word_length_min",
-  "word_length_max",
+  'dict',
+  'num_words',
+  'word_length_min',
+  'word_length_max',
 
-  "case_transform",
+  'case_transform',
 
-  "separator_type",
-  "separator_character",
-  "separator_alphabet",
+  'separator_type',
+  'separator_character',
+  'separator_alphabet',
 
-  "padding_digits_before",
-  "padding_digits_after",
-  "padding_type",
-  "pad_to_length",
-  "padding_character_type",
-  "padding_character",
-  "padding_alphabet",
-  "padding_characters_before",
-  "padding_characters_after"
+  'padding_digits_before',
+  'padding_digits_after',
+  'padding_type',
+  'pad_to_length',
+  'padding_character_type',
+  'padding_character',
+  'padding_alphabet',
+  'padding_characters_before',
+  'padding_characters_after',
 ];
 
 /**
@@ -47,7 +46,8 @@ class Config {
   /**
    * The default class constructor
    *
-   * @param {Object} settings - Object with the current settings, this can be undefined
+   * @param {Object} settings - Object with the current settings, this can be
+   *   undefined
    */
   constructor(settings) {
     if (typeof settings !== 'undefined') {
@@ -61,7 +61,7 @@ class Config {
    * @returns {boolean} - true if settings have been loaded, false otherwise
    */
   isLoaded() {
-    if ( typeof this.__settings === "undefined" ) {
+    if (typeof this.__settings === 'undefined') {
       return false;
     }
     return true;
@@ -81,16 +81,19 @@ class Config {
    * Return true if successfull or false otherwise
    *
    * @param {string} url - The URL to try to extract the settings
-   * @returns {boolean} - true if the settings were loaded from the URL, or false otherwise
+   * @returns {boolean} - true if the settings were loaded from the URL, or
+   *   false otherwise
    */
   loadFromUrl(url) {
     const params = new URL(url).searchParams;
     const settings = new Object();
     let values = null;
 
-    if (params.get("c") == null) { return null; }
+    if (params.get('c') == null) {
+      return false;
+    }
 
-    values = this.__base64URLdecode(params.get("c")).join("").split(",");
+    values = this.__base64URLdecode(params.get('c')).join('').split(',');
 
     map.forEach(element => {
       if (
@@ -98,8 +101,9 @@ class Config {
         element === 'padding_character' || element === 'padding_alphabet'
       ) {
         settings[element] = this.__base64URLdecode(values.shift());
-        settings[element] = settings[element].join("")
-      } else {
+        settings[element] = settings[element].join('');
+      }
+      else {
         settings[element] = values.shift();
         settings[element] = (parseInt(settings[element])) ? parseInt(settings[element]) : settings[element];
       }
@@ -112,7 +116,8 @@ class Config {
   /**
    * Return a URL string with the encoded settings string
    *
-   * @param {string} url - The URL to add or update with the settings. Defaults to the current browser URL
+   * @param {URL} url - The URL to add or update with the settings. Defaults
+   *   to the current browser URL
    * @returns {string} - The URL as string
    */
   toUrl(url) {
@@ -122,7 +127,7 @@ class Config {
       url = new URL(window.location);
     }
 
-    url.searchParams.set("c", encodedSettings);
+    url.searchParams.set('c', encodedSettings);
 
     return url.toString();
   }
@@ -140,19 +145,19 @@ class Config {
       if (
         element === 'separator_character' || element === 'separator_alphabet' ||
         element === 'padding_character' || element === 'padding_alphabet'
-      )
-      {
+      ) {
         values.push(this.__base64URLencode(this.__settings[element]));
-      } else {
+      }
+      else {
         values.push(this.__settings[element]);
       }
     });
 
-    return this.__base64URLencode(values.join(","));
+    return this.__base64URLencode(values.join(','));
   }
 
   /**
-   * Retrun the string as a URL safe base64 encoded string
+   * Return the string as a URL safe base64 encoded string
    *
    * @param {string} str - string to encode as base64 string
    * @returns {string} - A base64 encoded string
