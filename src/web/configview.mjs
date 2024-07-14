@@ -96,7 +96,6 @@ class ConfigView {
    * @param {URL} url - the url to display
    */
   updateLink(url) {
-    log.debug('ConfigView.updateLink');
     this.#savedSettingsLink.val(url);
   }
 }
