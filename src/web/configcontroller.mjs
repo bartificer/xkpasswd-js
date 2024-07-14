@@ -117,8 +117,11 @@ class ConfigController {
    * @return {string} - the JSON version of the settings
    */
   exportSettings = () => {
-    let settings = this.#model.getPreset().config();
-    return JSON.stringify(settings);
+    const settings = this.#model.getPreset().config();
+    const jsonBlob = new Blob([JSON.stringify(settings)],
+      {type: 'application/json'});
+
+    return URL.createObjectURL(jsonBlob);
   };
 
   // /**

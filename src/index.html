@@ -484,23 +484,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="alert alert-warning alert-dismissible" role="alert">
-            This is only a first version of the export. Please create an issue in the GitHub repository if you find
-            an error with processing your particular configuration.
+          <div class="alert alert-info alert-dismissible" role="alert">
+            Click the Save button to download your particular configuration.
           </div>
           <h1 class="h3">Save your personal configuration</h1>
-           <form id="exportConfigFile">
-              <div class="my-3">
-  		          <label class="form-label" for="fileName">Give the name of the config file</label>
-	  	          <input class="form-control" type="text" id="fileName" required
-                       aria-description="enter the filename of the config file"
-                       placeholder="xkpasswd-config.json"
-                       >
-              </div>
-              <button id="save" type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+              <a id="save" class="btn btn-primary" download="xkpasswd-config"
                       aria-label="save the config file"
-                      tabindex="0">Save</button>
-	          </form>
+                      tabindex="0">Save the configuration</a>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

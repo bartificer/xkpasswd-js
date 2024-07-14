@@ -68,18 +68,9 @@ class ConfigView {
    * the export JSON
    */
   bindSaveConfig(handle) {
-    $('#form#exportConfigFile').on('submit', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const name = e.target.name;
-
-      let jsonBlob = new Blob([handle()], {type: 'application/json'});
-
-      let tempLink = $('a')
-        .attr('href', URL.createObjectURL(jsonBlob))
-        .attr('download', `${name.toLowerCase()}.json`);
-      tempLink.click();
-      URL.revokeObjectURL(tempLink.href);
+    $('#save_config').on('show.bs.modal',  (e) => {
+      const url = handle();
+      $('#save').attr('href', url);
     });
   }
 
