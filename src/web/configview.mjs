@@ -83,9 +83,12 @@ class ConfigView {
     this.#settingsDiv.on('click', () => {
       this.#savedSettingsLink.select();
       handle(this.#savedSettingsLink.val());
-      this.#copySettingsLink.children('i').removeClass('bi-copy').fadeIn(500).addClass('bi-check');
+      this.#copySettingsLink.children('i')
+        .removeClass('bi-copy')
+        .fadeIn(500).addClass('bi-check');
       setTimeout(() => {
-        this.#copySettingsLink.children('i').removeClass('bi-check').addClass('bi-copy');
+        this.#copySettingsLink.children('i')
+          .removeClass('bi-check').addClass('bi-copy');
       }, 1000);
     });
   };

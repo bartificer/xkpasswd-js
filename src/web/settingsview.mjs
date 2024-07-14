@@ -340,7 +340,8 @@ class SettingsView {
       }
       break;
     default:
-      const msg = `WARNING - Received invalid padding_char_type=${paddingType}`;
+      const msg =
+        `WARNING - Received invalid padding_char_type=${paddingType}`;
       log.warn(msg);
       throw (new Error(msg));
     }

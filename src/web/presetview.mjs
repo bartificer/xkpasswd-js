@@ -44,7 +44,9 @@ class PresetView {
   buildPresetButtons(names, handler) {
     // build the buttons
     names.forEach((presetName) => {
-      const btn = `<button type="button" ${ presetName === "CUSTOM" ? 'style="display:none"' : "" }
+      const btn =
+        `<button type="button"
+        ${ presetName === "CUSTOM" ? 'style="display:none"' : "" }
         class="btn btn-outline-primary col-sm-6 col-md-4 col-lg-2"
         data-preset="${presetName}">${presetName}</button>`;
 
@@ -73,11 +75,6 @@ class PresetView {
         .removeClass(WARNING).addClass(NORMAL);
     }
     this.#presetDescription.html(description).show();
-  }
-
-  pressButton(presetName) {
-    const button = $(`[data-preset='${presetName}']`);
-    button.click();
   }
 
   /**

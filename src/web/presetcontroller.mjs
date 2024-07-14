@@ -32,7 +32,8 @@ class PresetController {
    * @param {SettingsController} sc - reference to SettingsController
    * @param {PasswordController} pc - reference to PasswordController
    */
-  constructor(model, view, sc, pc) {
+  constructor(model, view,
+    sc, pc) {
     this.#model = model;
     this.#view = view;
     this.#settingsController = sc;
@@ -45,11 +46,6 @@ class PresetController {
     this.#view.buildPresetButtons(names, this.onPresetChanged);
     log.trace('PresetController constructor executed');
   }
-
-  // changePreset(presetName) {
-  //   this.#view.pressButton(presetName);
-  // }
-  //
 
   /**
    * Handle the selection of the preset

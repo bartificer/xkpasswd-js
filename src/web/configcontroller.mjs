@@ -1,16 +1,3 @@
-// /**
-//  * Return the string truncated to the desired length
-//  *
-//  * @param {number} length - The length that the string will be truncated to
-//  * @param {string} suffix - The suffix to append at the end of the truncated
-//  *   string
-//  * @returns {string} - The truncated string
-//  */
-// String.prototype.truncate = function(length = 50, suffix = '(...)') {
-//   return `${this.substring(0, length - suffix.length)}${suffix}`;
-// };
-import log from 'loglevel';
-
 const map = [
   'dict',
   'num_words',
@@ -60,12 +47,6 @@ class ConfigController {
   #settingsController;
 
   /**
-   * @private __settings - Object with the loaded settings
-   */
-  // __settings;
-
-
-  /**
    * The default class constructor
    * @constructor
    *
@@ -75,10 +56,6 @@ class ConfigController {
    *   SettingsController
    */
   constructor(model, view, settingsController) {
-    // if (typeof settings !== 'undefined') {
-    //   this.__settings = settings;
-    // }
-
     this.#model = model;
     this.#view = view;
     this.#settingsController = settingsController;
@@ -124,24 +101,6 @@ class ConfigController {
     return URL.createObjectURL(jsonBlob);
   };
 
-  // /**
-  //  * Return true if settings have been loaded
-  //  *
-  //  * @returns {boolean} - true if settings have been loaded, false otherwise
-  //  */
-  // isLoaded() {
-  //   return typeof this.__settings !== 'undefined';
-  // }
-
-  // /**
-  //  * Return the settings object
-  //  *
-  //  * @returns {object} - the current settings
-  //  */
-  // getSettings() {
-  //   return this.__settings;
-  // }
-
   /**
    * Update the settingsLink content
    * @param settings
@@ -175,14 +134,6 @@ class ConfigController {
       this.#settingsController.updateSettings(settings);
       this.#view.updateLink(window.location);
     }
-    // // Display the CUSTOM preset button if loaded custom settings
-    // if (config.isLoaded()) {
-    //   const custom = $('[data-preset=\'CUSTOM\']');
-    //   custom.show();
-    //   custom.addClass('active');
-    //   savedSettingsLink.val(window.location);
-    // }
-// this.__settings = settings;
   }
 
   /**
@@ -227,7 +178,9 @@ class ConfigController {
       }
       else {
         settings[element] = values.shift();
-        settings[element] = (parseInt(settings[element])) ? parseInt(settings[element]) : settings[element];
+        settings[element] =
+          (parseInt(settings[element])) ?
+            parseInt(settings[element]) : settings[element];
       }
     });
 
@@ -279,8 +232,11 @@ class ConfigController {
    * @returns {string} - The decoded string
    */
   __base64URLdecode(str) {
-    const base64Encoded = str.replace(/-/g, '+').replace(/_/g, '/');
-    const padding = str.length % 4 === 0 ? '' : '='.repeat(4 - (str.length % 4));
+    const base64Encoded = str
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+    const padding =
+      str.length % 4 === 0 ? '' : '='.repeat(4 - (str.length % 4));
     const base64WithPadding = base64Encoded + padding;
     return (atob(base64WithPadding)
       .split('')

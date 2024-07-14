@@ -82,7 +82,6 @@ class SettingsController {
     this.#config.updateLink(config);
     this.#view.renderSettings(config);
   }
-
 }
 
 export {SettingsController};
