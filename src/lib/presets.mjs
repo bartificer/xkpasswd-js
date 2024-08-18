@@ -247,7 +247,7 @@ const thePresets = {
       separator_type: 'RANDOM',
       padding_type: 'NONE',
       padding_digits_before: 0,
-      padding_digits_after: 2,
+      padding_digits_after: 1,
       allow_accents: 0,
     },
   },

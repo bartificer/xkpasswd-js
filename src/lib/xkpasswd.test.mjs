@@ -482,7 +482,7 @@ describe('Test XKPassword class', () => {
       const password = me.password();
 
       // eslint-disable-next-line max-len
-      const re = /[a-zA-Z]{4}([!@$%^&*-_+=:|~?/.][a-zA-Z]{4}){2}[!@$%^&*-_+=:|~?/.]\d\d/;
+      const re = /[a-zA-Z]{4}([!@$%^&*-_+=:|~?/.][a-zA-Z]{4}){2}[!@$%^&*-_+=:|~?/.]\d/;
 
       expect(password).toMatch(re);
     });
