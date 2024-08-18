@@ -222,7 +222,7 @@ const thePresets = {
       separator_type: 'RANDOM',
       separator_alphabet: '-+=.*_|~',
       padding_digits_before: 2,
-      padding_digits_after: 2,
+      padding_digits_after: 3,
       padding_type: 'FIXED',
       padding_character_type: 'RANDOM',
       padding_alphabet: '!@$%^&*+=:|~',
