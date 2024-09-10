@@ -1,3 +1,5 @@
+import log from 'loglevel';
+
 const map = [
   'dict',
   'num_words',
