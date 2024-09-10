@@ -78,8 +78,8 @@ class SettingsController {
     log.trace(`controller updateSettings: ${JSON.stringify(config)}`);
     try {
       this.#view.renderSettings(config);
-    // Update the URL with the encoded settings
-    this.#config.updateLink(config);
+      // Update the URL with the encoded settings
+      this.#config.updateLink(config);
     } catch (e) {
       this.#view.renderConfigError(e);
     }
