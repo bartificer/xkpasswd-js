@@ -53,6 +53,8 @@ class PresetController {
    * @param {string} preset - reference to the selected preset
    */
   onPresetChanged = (preset) => {
+    log.trace(`onPresetChanged: ${preset}`);
+
     // tell the library which preset to make current
     this.#model.setPreset(preset);
 
