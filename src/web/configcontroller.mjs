@@ -65,6 +65,8 @@ class ConfigController {
     this.#view.bindLoadConfig(this.importSettings);
     this.#view.bindSaveConfig(this.exportSettings);
     this.#view.bindCopySettingsLink(this.copyUrl);
+
+    log.trace('ConfigController constructor executed');
   }
 
   /**
@@ -73,6 +75,8 @@ class ConfigController {
    * @param {Object} settings - the object containing the uploaded settings
    */
   importSettings = (settings) => {
+    log.trace(`importSettings: ${JSON.stringify(settings)}`);
+
     this.#model.setCustomPreset(settings);
 
     // yes, config should be the same as settings, but there is some
@@ -89,6 +93,7 @@ class ConfigController {
    * @return {string} - the JSON version of the settings
    */
   exportSettings = () => {
+    log.trace(`exportSettings`);
     const settings = this.#model.getPreset().config();
     const jsonBlob = new Blob([JSON.stringify(settings)],
       {type: 'application/json'});
@@ -101,6 +106,7 @@ class ConfigController {
    * @param settings
    */
   updateLink(settings) {
+    log.trace(`updateLink: ${JSON.stringify(settings)}`);
     const url = this.toUrl(settings);
     this.#view.updateLink(url);
   }
@@ -120,11 +126,12 @@ class ConfigController {
    * @param {string} url - The URL to try to extract the settings from
    */
   loadFromUrl(url) {
+    log.trace(`loadFromUrl: ${url}`);
     const settings = this.fromUrl(url);
 
     if (JSON.stringify(settings) !== '{}') {
       // somehow I cannot get the settings object to match an empty object
-      // without doing this stringify actino
+      // without doing this stringify action
       this.#model.setCustomPreset(settings);
       this.#settingsController.updateSettings(settings);
       this.#view.updateLink(window.location);
@@ -138,6 +145,7 @@ class ConfigController {
    * @returns {string} - The URL as string
    */
   toUrl(settings) {
+    log.trace(`toUrl: ${JSON.stringify(settings)}`);
     const encodedSettings = this.__getEncodedSettings(settings);
     const url = new URL(window.location);
 
@@ -154,6 +162,7 @@ class ConfigController {
    * @return {Object} - empty object if something went wrong, or settings object
    */
   fromUrl(url) {
+    log.trace(`fromUrl: ${url}`);
     const params = new URL(url).searchParams;
     const settings = {};
     let values = null;
