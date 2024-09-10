@@ -63,10 +63,7 @@ class SettingsController {
       parseInt(settings.padding_characters_after);
     settings.pad_to_length = parseInt(settings.pad_to_length);
 
-    this.#model.setCustomPreset({
-      description: 'Custom preset',
-      config: settings
-    });
+    this.#model.setCustomPreset(settings);
 
     // Update the URL with the encoded settings
     this.#config.updateLink(settings);
