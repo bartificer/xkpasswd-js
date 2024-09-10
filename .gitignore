@@ -112,3 +112,5 @@ archive
 
 .DS_Store
 .idea
+test/allison-myxkpasswd.json
+test/allison-myxkpasswd.pl
