@@ -75,19 +75,12 @@ class ConfigController {
   importSettings = (settings) => {
     this.#model.setCustomPreset(settings);
 
-    try {
-      // yes, config should be the same as settings, but there is some
-      // conversion going on in the preset class, so we use the one that is
-      // actually stored.
+    // yes, config should be the same as settings, but there is some
+    // conversion going on in the preset class, so we use the one that is
+    // actually stored.
 
-      const config = this.#model.getPreset().config();
-      this.#settingsController.updateSettings(config);
-      const url = this.toUrl(config);
-      this.#view.updateLink(url);
-    }
-    catch (e) {
-      this.#view.renderConfigError(e);
-    }
+    const config = this.#model.getPreset().config();
+    this.#settingsController.updateSettings(config);
   };
 
   /**
