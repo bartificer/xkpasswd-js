@@ -9,6 +9,7 @@
 
 // import bootstrap plugins
 import {Tooltip} from 'bootstrap';
+import log from 'loglevel';
 
 // import bootstrap CSS and icons
 import 'bootstrap/dist/css/bootstrap.min.css';
