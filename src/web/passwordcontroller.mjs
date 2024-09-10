@@ -27,6 +27,7 @@ class PasswordController {
     this.#view = view;
 
     this.#view.bindGeneratePassword(this.generatePasswords);
+
     log.trace('PasswordController constructor executed');
   }
 
