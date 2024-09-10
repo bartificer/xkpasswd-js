@@ -41,7 +41,9 @@ class SettingsView {
    * @param {object} preset - settings belonging by the current preset
    */
   renderSettings(preset) {
-    // get the current preset
+    this.resetConfigError();
+
+    // get the keys of the preset
     const keys = Object.keys(preset);
 
     // update all fields
@@ -164,7 +166,6 @@ class SettingsView {
    * Reset the error indications
    */
   resetConfigError() {
-    this.showSettings();
     this.setErrorMessage('');
     this.disableGenerateButton(false);
     $('#passwordSettings').show();
