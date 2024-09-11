@@ -21,7 +21,7 @@ class XKPasswd {
 
   #preset; // current preset
   #config; // config section of preset, convenience variable
-  #rng; // random generator
+  #randomGenerator; // random generator
   #statsClass; // Statistics class
   #dictionary; // current dictionary
   #stats; // current stats
@@ -33,9 +33,10 @@ class XKPasswd {
   constructor() {
     this.#preset = new Presets();
     this.#config = this.#preset.config();
-    this.#rng = new RandomBasic();
-    this.#dictionary = new DictionaryEN();
-    this.#statsClass = new Statistics(this.#config);
+    this.#randomGenerator = new RandomBasic();
+    const dict = new DictionaryEN();
+    this.#dictionary = dict;
+    this.#statsClass = new Statistics(this.#config, dict);
     this.#stats = {};
 
     // the number of passwords this instance has generated
@@ -54,13 +55,21 @@ class XKPasswd {
     this.#config = this.#preset.config();
 
     // Refresh the statistics
-    this.#statsClass = new Statistics(this.#config);
+    this.#statsClass = new Statistics(this.#config, this.#dictionary);
+  }
+
+  setCustomPreset(settings) {
+    const preset = {
+      description: 'Custom preset, created from loaded config',
+      config: settings,
+    }
+    this.setPreset(preset);
   }
 
   /**
    * Get the current preset
    *
-   * @return {Preset} the current preset
+   * @return {Presets} the current preset
    */
   getPreset() {
     /* istanbul ignore next @preserve : too simple to test */
@@ -163,7 +172,7 @@ class XKPasswd {
       log.error(
         `Failed to generate password with the following error: ${e}`,
       );
-    };
+    }
   }
 
   /**
@@ -195,14 +204,14 @@ class XKPasswd {
    * @private
    */
   __adaptivePadding(passwd, padChar, maxLen) {
-    const pwlen = passwd.length;
+    const pwLen = passwd.length;
     padChar = (is.undefined(padChar) || padChar.length === 0) ? ' ' : padChar;
-    if (pwlen < maxLen) {
+    if (pwLen < maxLen) {
       // if the password is shorter than the target length, pad it out
       while (passwd.length < maxLen) {
         passwd += padChar;
       }
-    } else if (pwlen > maxLen) {
+    } else if (pwLen > maxLen) {
       // if the password is too long, trim it
       passwd = passwd.substring(0, maxLen);
     }
@@ -257,7 +266,7 @@ class XKPasswd {
 
     case 'RANDOM':
       return words.map((el) =>
-        el = (this.#rng.toss()) ? el.toLowerCase() : el.toUpperCase(),
+        el = (this.#randomGenerator.toss()) ? el.toLowerCase() : el.toUpperCase(),
       );
 
     default:
@@ -290,8 +299,8 @@ class XKPasswd {
     const numWords = this.#config.num_words;
     const maxDict = this.#dictionary.getLength();
 
-    log.trace(`__randomwords, mindict: ${this.#dictionary.getMinWordLength()}
-    maxdict: ${this.#dictionary.getMaxWordLength()}`);
+    log.trace(`__randomWords, minDict: ${this.#dictionary.getMinWordLength()}
+    maxDict: ${this.#dictionary.getMaxWordLength()}`);
 
     // get the minimum of the 2 input variables and the longest dictionary word
     let minLength = Math.min(this.#config.word_length_min,
@@ -311,11 +320,11 @@ class XKPasswd {
     for (let i = 0; i < numWords; i++) {
       let word = '';
       do {
-        word = this.#dictionary.word(this.#rng.randomInt(maxDict));
+        word = this.#dictionary.word(this.#randomGenerator.randomInt(maxDict));
       }
       while (word.length < minLength || word.length > maxLength );
       list.push(word);
-    };
+    }
     return list;
   }
 
@@ -340,7 +349,7 @@ class XKPasswd {
       break;
     case 'RANDOM':
       const alphabet = this.#config.separator_alphabet;
-      separator = this.#rng.randomChar(alphabet);
+      separator = this.#randomGenerator.randomChar(alphabet);
       break;
     default:
       /* istanbul ignore next @preserve : too simple to test */
@@ -373,7 +382,7 @@ class XKPasswd {
       break;
     case 'RANDOM':
       const alphabet = this.#config.padding_alphabet;
-      paddingCharacter = this.#rng.randomChar(alphabet);
+      paddingCharacter = this.#randomGenerator.randomChar(alphabet);
       break;
     case 'FIXED':
       paddingCharacter = this.#config.padding_character;
@@ -406,12 +415,13 @@ class XKPasswd {
    */
   __padWithDigits(passwd, separator) {
     if (this.#config.padding_digits_before > 0) {
-      passwd = this.#rng.randomDigits(this.#config.padding_digits_before) +
-        separator + passwd;
+      passwd = this.#randomGenerator
+          .randomDigits(this.#config.padding_digits_before) +
+          separator + passwd;
     }
     if (this.#config.padding_digits_after > 0) {
       passwd = passwd + separator +
-        this.#rng.randomDigits(this.#config.padding_digits_after);
+        this.#randomGenerator.randomDigits(this.#config.padding_digits_after);
     }
     return passwd;
   }

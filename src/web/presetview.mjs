@@ -36,7 +36,7 @@ class PresetView {
 
   /**
    * Build the preset buttons and add the
-   * eventhandler
+   * event handler
    *
    * @param {Array} names - list of preset names
    * @param {function} handler - handle the change in the Controller
@@ -44,12 +44,13 @@ class PresetView {
   buildPresetButtons(names, handler) {
     // build the buttons
     names.forEach((presetName) => {
-      /* eslint-disable max-len */
-      const btn = `<button type="button" class="btn btn-outline-primary col-sm-6 col-md-4 col-lg-2"
-      data-preset="${presetName}">${presetName}</button>`;
-      /* eslint-enable max-len */
+      const btn =
+        `<button type="button"
+        ${ presetName === "CUSTOM" ? 'style="display:none"' : "" }
+        class="btn btn-outline-primary col-sm-6 col-md-4 col-lg-2"
+        data-preset="${presetName}">${presetName}</button>`;
 
-      // add the eventhandlers
+      // add the event handlers
       const button = $(btn);
       this.__bindSelectPreset(button, handler);
       this.#presetGroup.append(button);
@@ -57,11 +58,22 @@ class PresetView {
   };
 
   /**
-   * This function shows the description of the currently selected preset
+   * This function shows the description of the currently selected preset.
+   * Depending on the occurrence of the word WARNING the box is displayed in
+   * red or blue.
    *
    * @param {string} description - the description of the preset
    */
   displayDescription(description) {
+    const WARNING = 'border-danger bg-danger-subtle';
+    const NORMAL  = 'border-primary-subtle bg-primary-subtle';
+    if (description.includes('WARNING')) {
+      this.#presetDescription
+        .addClass(WARNING).removeClass(NORMAL);
+    } else {
+      this.#presetDescription
+        .removeClass(WARNING).addClass(NORMAL);
+    }
     this.#presetDescription.html(description).show();
   }
 
@@ -107,6 +119,6 @@ class PresetView {
   __setPresetHeader(preset) {
     this.#presetHeader.html(`&mdash; ${preset}`);
   };
-};
+}
 
 export {PresetView};

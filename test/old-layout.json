@@ -1,0 +1,16 @@
+{
+  "symbol_alphabet": ["!", "@", "$", "%", "^", "&", "*", "-", "_", "+", "=", ":", "|", "~", "?", "/", ".", ";"],
+  "word_length_min": 5,
+  "word_length_max": 8,
+  "num_words": 4,
+  "separator_character": "RANDOM",
+  "padding_digits_before": 2,
+  "padding_digits_after": 2,
+  "padding_type": "FIXED",
+  "padding_character": "RANDOM",
+  "padding_characters_before": 2,
+  "padding_characters_after": 3,
+  "case_transform": "ALTERNATE",
+  "random_function": "RandomBasic",
+  "random_increment": "AUTO"
+}

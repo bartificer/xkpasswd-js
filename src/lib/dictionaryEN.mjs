@@ -4,11 +4,10 @@
  * @module DictionaryEN
  */
 
-import is from 'is-it-check';
 import {Dictionary} from './dictionary.mjs';
 
 // version info
-const version = '4.0.0';
+// const version = '4.0.0';
 
 // the word list
 const THE_WORDS = [
@@ -1270,7 +1269,7 @@ const THE_WORDS = [
   'yesterday',
   'young',
   'your',
-  'yourself',
+  'yourself'
 ];
 
 /**
@@ -1310,11 +1309,11 @@ class DictionaryEN extends Dictionary {
   /**
    * Return a word from the list
    *
-   * @param {integer} index
+   * @param {number} index
    * @return {string} - the word at the index position
    */
   word(index) {
-    if (is.undefined(index) || !is.number(index) ||
+    if (index === undefined || (typeof index !== 'number') ||
       index < 0 || index > THE_WORDS.length
     ) {
       throw new Error('Parameter "index" not valid');

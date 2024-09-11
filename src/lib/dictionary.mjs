@@ -5,6 +5,7 @@
  * @module Dictionary
  */
 
+import log from 'loglevel';
 /**
  * class for a Dictionary
  * @class
@@ -49,11 +50,11 @@ class Dictionary {
   /**
    * Return a word from the list
    *
-   * @param {integer} index
+   * @param {number} index
    * @return {string} - the word at the index position
    */
   word(index) {
-    return null;
+    return '';
   }
 
   /**
@@ -63,6 +64,57 @@ class Dictionary {
    */
   getLength() {
     return this.#wordListLength;
+  }
+
+  /**
+   * Get the length of the shortest word in the list
+   *
+   * @return {number} - length
+   */
+  getMinWordLength() {
+    return this.#minWordLength;
+  }
+
+  /**
+   * Get the length of the largest word in the list
+   * @return {number} - length
+   */
+  getMaxWordLength() {
+    return this.#maxWordLength;
+  }
+
+  /**
+   * Find the list of words with a length that
+   * falls in the range of the min and max parameters
+   *
+   * @param {number} minLen - minimum length
+   * @param {number} maxLen - maximum length
+   * @return {Array} - list of filtered words
+   */
+  filteredWordList(minLen, maxLen) {
+    const maxDict = this.getLength();
+
+    // if undefined, make it 0
+    minLen = minLen ? minLen : 0;
+    maxLen = maxLen ? maxLen : 0;
+    // get the minimum of the 2 input variables
+    const minLength = Math.min(minLen, maxLen);
+
+    // get the maximum of the 2 input variables
+    const maxLength = Math.max(minLen, maxLen);
+
+    log.trace(`about to filter words with ${minLength} - ${maxLength}`);
+
+    const list = [];
+    let word = '';
+    for (let i = 0; i < maxDict; i++) {
+      word = this.word(i);
+      if (word.length >= minLength && word.length <= maxLength) {
+        list.push(word);
+      }
+    }
+    log.trace(`pushed words: ${list.length}`);
+    return list;
   }
 
   /**
@@ -77,28 +129,20 @@ class Dictionary {
   }
 
   /**
-   * set min and max word length
+   * Set the word length min and max values
    *
-   * @ private
+   * @private
    */
   __setWordLength() {
     const list = this.wordList();
     let minlen = list[0].length;
     let maxlen = minlen;
-    for (let i = 1 ; i < this.#wordListLength; i++) {
+    for (let i = 1; i < this.#wordListLength; i++) {
       minlen = Math.min(minlen, list[i].length);
       maxlen = Math.max(maxlen, list[i].length);
     }
     this.#minWordLength = minlen;
     this.#maxWordLength = maxlen;
-  }
-
-  getMinWordLength() {
-    return this.#minWordLength;
-  }
-
-  getMaxWordLength() {
-    return this.#maxWordLength;
   }
 }
 

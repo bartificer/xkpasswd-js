@@ -25,7 +25,7 @@
               <!-- show this up to lg -->
               <source media="(max-width: 768px)" srcset="assets/topBanner.png">
               <!-- else show this -->
-              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators"
+              <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generator"
                 src="assets/topBanner.png">
             </picture>
           </section>
@@ -48,14 +48,17 @@
                       Actions
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Import Config</a></li>
-                      <li><a class="dropdown-item" href="#">Export Config</a></li>
+                      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#load_config" href="#">Import Config</a></li>
+                      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#save_config" href="#">Export Config</a></li>
                       <li>
                         <hr class="dropdown-divider">
                       </li>
                       <li><a class="dropdown-item" href="docs/index.html">Developer docs</a></li>
                     </ul>
                   </li>
+                  <li class="nav-item"><a class="nav-link text-white" href="https://userguide.xkpasswd.net">User Guide</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
                     <a class="nav-link text-white" data-bs-toggle="modal" data-bs-target="#about" href="#">About</a>
                   </li>
@@ -70,7 +73,7 @@
         </header> <!-- close row for nav -->
 
         <section id="content" class="row"> <!-- open row for content below nav -->
-          <div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> <!-- open config col -->
+          <!-- div class="accordion mt-3 mb-3 mb-lg-3 col-11 col-md mx-auto" id="passwordConfig"> < !-- open config col - - >
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -79,8 +82,8 @@
                 </button>
               </h2>
               <div id="collapseConfig" class="accordion-collapse collapse" data-bs-parent="#passwordConfig">
-                <div class="accordion-body">
-                  <div class="accordion" id="configOptions">
+                <div class="accordion-body"> -->
+                  <div class="accordion my-3 mb-lg-3 px-0" id="configOptions">
                     <div class="accordion-item">
                       <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -89,7 +92,7 @@
                         </button>
                       </h2>
                       <!-- This section (id = collapsePresets) is handled by the PresetController and the PresetView -->
-                      <div id="collapsePresets" class="accordion-collapse collapse show"
+                      <div id="collapsePresets" class="accordion-collapse collapse"
                         data-bs-parent="#configOptions">
                         <div class="accordion-body">
                           <div id="preset-btn-group" class="row" role="group" aria-label="Preset group">
@@ -112,7 +115,7 @@
                         </div>
                       </div>
                     </div> -->
-                    <div class="accordion-item">
+                    <div class="accordion-item rounded-bottom">
                       <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                           data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
@@ -122,9 +125,9 @@
                       <!-- This section (id = collapseSettings) is handled by the SettingsController and the SettingsView -->
                       <div id="collapseSettings" class="accordion-collapse collapse" data-bs-parent="#configOptions">
                         <div class="accordion-body">
+                          <div id="invalidSettings" class="alert alert-danger alert-dismissible" role="alert">
+                           </div>
                           <form id="passwordSettings" class="needs-validation container-fluid" novalidate>
-                            <div id="invalidSettings" class="alert alert-danger alert-dismissible" role="alert">
-                              Please fix the invalid input before generating passwords.</div>
 
                             <!-- word settings -->
                             <div id="section_words" class="row g-1 mb-3">
@@ -202,11 +205,10 @@
                                 </div>
                                 <div class="input-group">
                                   <!-- random characters -->
-                                  <div class="input-group">
                                   <label for="separator_alphabet" class="input-group-text rounded-start">Alphabet</label>
                                   <input name="separator_alphabet" id="separator_alphabet" class="form-control rounded-end"
-                                    type="text" size="6" minlength="2" maxlength="6" value="" />
-                                  <div class="invalid-feedback">Enter at least 2 characters and no more than 6</div>
+                                    type="text" size="6" minlength="2" maxlength="20" value="" />
+                                  <div class="invalid-feedback">Enter at least 2 characters and no more than 20</div>
                                 </div>
                               </div>
                             </div> <!-- /section_separator -->
@@ -305,8 +307,8 @@
                                     <label for="padding_alphabet" class="input-group-text">Padding Character
                                       Alphabet</label>
                                     <input name="padding_alphabet" id="padding_alphabet" class="form-control rounded-end"
-                                           type="text" size="6" minlength="2" maxlength="6" value="" />
-                                    <div class="invalid-feedback">Enter at least 2 characters</div>
+                                           type="text" size="6" minlength="2" maxlength="20" value="" />
+                                    <div class="invalid-feedback">Enter at least 2 characters and max 20</div>
                                   </div>
                                 </div> <!-- /padding_alphabet -->
                               </div> <!-- /padding_char_container -->
@@ -315,11 +317,31 @@
                         </div> <!-- /accordion-body -->
                       </div> <!-- /collapseSettings -->
                     </div> <!-- /accordion-item for settings -->
+
+                    <!-- settings-link -->
+                    <div id="settings-link" class="row g-1 mt-1 mb-3">
+                      <div class="mt-2 col-md-8 col-md-8">
+                        <div class="input-group">
+                          <label for="savedSettingsLink" class="input-group-text">Settings link</label>
+                          <input class="form-control rounded-end" type="text" placeholder="" readonly disabled="disabled"
+                            name="savedSettingsLink" id="savedSettingsLink" minlength="2" maxlength="20" size="1" />
+                        </div>
+                       </div>
+                       <div class="mt-2 col-sm-8 col-md-4">
+                        <div class="input-group">
+                          <button id="copySettingsLink"
+                          class="list-group-item px-0"
+                          aria-label="Copy link"><i class="me-3 bi bi-copy"></i>Copy
+                        </button>
+                        </div>
+                      </div>
+                    </div> <!-- /settings-link -->
+
                   </div> <!-- /accordion configOptions -->
-                </div> <!-- /accordion body -->
-              </div> <!-- /collapeseConfig -->
+                <!-- /div> <! - - /accordion body - - >
+              </div> <!- - /collapseConfig - - >
             </div>
-          </div> <!-- close config col -->
+          </div> <!- - close config col -->
 
           <!-- this section (id = generatePassword) is handled by the PasswordController and the PasswordView -->
           <div id="generatePassword" class="mt-2"> <!-- open generate pw - need to split pw box out -->
@@ -328,10 +350,10 @@
             <form id="generatePasswords"> <!-- open input area for gen pw -->
               <div class="row">
                 <div class="col-8 col-md-6 mb-3">
-                  <!-- Technically the label should be there but it's an audible repeat of span class -->
+                  <!-- Technically the label should be there, but it's an audible repeat of span class -->
                   <!-- <label class="visually-hidden" for="selectAmount">Number of passwords</label> -->
                   <div class="input-group mt-2">
-                    <span class="input-group-text"># of passwords</span>
+                    <label class="input-group-text" for="selectAmount"># of passwords</label>
                     <input type="number" min="1" max="10" step="1" value="3" class="form-control" name="selectAmount"
                       id="selectAmount" aria-describedby="enterNumberOfPasswords" />
                     <!-- doesn't show as stepper on iOS or Chromium -->
@@ -346,18 +368,17 @@
                 </div>
               </div>
             </form> <!-- close input area for gen pw -->
-
           </div> <!-- close generate pw -->
 
         </section> <!-- close section for content below nav -->
       </section> <!-- close section for content right of graphic -->
 
-      <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline"> <!-- open section for graphic -->
+      <section id="sidebar-left" class="col-2 order-1 d-none d-lg-inline" aria-flowto="password-card"> <!-- open section for graphic -->
         <picture>
           <!-- show this on large and above -->
           <source media="(max-width: 992px)" srcset="assets/sideBanner.png">
           <!-- else show this -->
-          <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generators"
+          <img class="img-fluid" aria-hidden="true" alt="XKPasswd - A Secure Memorable Password Generator"
             src="assets/sideBanner.png">
         </picture>
       </section> <!-- close section for graphic -->
@@ -365,7 +386,7 @@
     <div class="row"> <!-- open row for password card -->
 
       <!-- this section (id = password-card) is handled by the PasswordController and the PasswordView -->
-      <section id="password-card" class="order-3">
+      <section id="password-card" class="order-3 px-0">
         <div class="card mt-3 mt-lg-5 col"> <!-- open password card with stats -->
           <div class="card-header d-flex align-items-center">
             <span class="text-uppercase">Passwords</span>
@@ -373,14 +394,15 @@
           <div class="card-body">
             <div id="password_presentation">
                 <input id="pw_lst" type="radio" name="pwdPresentation" value="lst" aria-description="Present passwords in a list" tabindex="0" checked>
-                <label for="pw_lst" class="bi bi-list-ul" style="margin-left:0.5em;margin-right:1em"></label>
+                <label for="pw_lst" class="bi bi-list-ul" aria-label="Present passwords in a list" style="margin-left:0.5em;margin-right:1em"></label>
                 <input id="pw_txt" type="radio" name="pwdPresentation" value="txt" aria-description="Present passwords as a block of text" tabindex="0">
-                <label for="pw_txt" class="bi bi-file-earmark-text" style="margin-left:0.5em;margin-right:1em"></label>
+                <label for="pw_txt" class="bi bi-file-earmark-text" aria-label="Present passwords as a block of text" style="margin-left:0.5em;margin-right:1em"></label>
             </div>
             <div id="generated_password_lst" class="list-group list-group-flush"></div>
 
+            <label for="generated_password_txt" class="visually-hidden">Bulk password text</label>
             <textarea type="text" readonly class="form-control form-control-plaintext border-0 font-monospace mb-3 password-textbox"
-                       rows="3" id="generated_password_txt" aria_label="Bulk password text"></textarea>
+                       rows="3" id="generated_password_txt"></textarea>
 
             <div id="passwordErrorContainer"></div>
 
@@ -388,13 +410,12 @@
           <div class="card-footer">
             <div id="password_stats_container" class="pt-1 fs-6">
               <h6><i class="bi bi-graph-up"></i> Statistics</h6>
-              <div class="border border-warning bg-warning my-1 text-center">Statistics are not yet correct.</div>
               <p class="fw-lighter lh-1 ">
                 <span class="fw-bolder">Strength </span><span class="btn btn-stats btn-success"
                   id="password_strength">test</span>
               </p>
               <p class="fw-light">
-                <span class="fw-bolder">Entropy</span><span id="entropy_blind">
+                <span class="fw-bolder">Entropy</span>&nbsp;<span id="entropy_blind">
                 </span> blind & <span class="btn btn-stats btn-warning" id="entropy_seen">seen</span>&nbsp;with
                 full knowledge
                 <br />
@@ -408,14 +429,76 @@
     </div>
 
     <footer class="row bg-primary-subtle py-3 mt-3 rounded">
-      <div class="col">
+      <div class="col-11">
         Inspired by <a href="https://xkcd.com/936/" target="_blank" class="link">XKCD</a> and <a
           href="https://www.grc.com/haystack.htm" target="_blank" class="link">Password Hay Stacks</a> |
         Powered by <a href="https://github.com/bartificer/xkpasswd-js" target="_blank" class="link">XKPasswd on
           GitHub</a>
       </div>
+      <div class="col-1"></div>
     </footer>
   </div>
+
+  <!-- Modal load config -->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="modal fade" id="load_config" fouc="true" tabindex="-1" aria-labelledby="loadConfigLabel" aria-hidden="true"
+    style="visibility: hidden;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loadConfigLabel">Load config</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            This is only a first version of the import. Please create an issue in the GitHub repository if you find
+            an error with processing your particular configuration.
+          </div>
+          <h1 class="h3">Load your personal configuration</h1>
+           <form id="uploadConfigFile">
+              <div class="my-3">
+  		          <label class="form-label" for="configFile">Select the JSON config file to use</label>
+	  	          <input class="form-control" type="file" id="configFile" required
+                       aria-description="press this button to select a json file with your configuration"
+                       accept=".json">
+              </div>
+              <button id="upload" type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                      aria-label="upload config file"
+                      tabindex="0">Upload</button>
+	          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal save config -->
+  <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->
+  <div class="modal fade" id="save_config" fouc="true" tabindex="-1" aria-labelledby="saveConfigLabel" aria-hidden="true"
+    style="visibility: hidden;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="saveConfigLabel">Save config</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info alert-dismissible" role="alert">
+            Click the Save button to download your particular configuration.
+          </div>
+          <h1 class="h3">Save your personal configuration</h1>
+              <a id="save" class="btn btn-primary" download="xkpasswd-config"
+                      aria-label="save the config file"
+                      tabindex="0">Save the configuration</a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /save-config -->
 
   <!-- Modal about-->
   <!-- Hidden by default to prevent a flash of unstyled content (FOUC) when the page loads. -->

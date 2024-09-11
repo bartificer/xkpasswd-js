@@ -19,7 +19,7 @@ class PasswordController {
   /**
    * @constructor
    *
-   * @param {PasswordModel} model - new PasswordModel
+   * @param {XKPasswd} model - new PasswordModel
    * @param {PasswordView} view - new PasswordView
    */
   constructor(model, view) {
@@ -27,6 +27,7 @@ class PasswordController {
     this.#view = view;
 
     this.#view.bindGeneratePassword(this.generatePasswords);
+
     log.trace('PasswordController constructor executed');
   }
 
@@ -49,11 +50,19 @@ class PasswordController {
         throw new Error('ERROR - server returned no passwords');
       }
       this.#view.renderPassword(passAndStats, num);
-    } catch (error) {
+    }
+    catch (error) {
       log.error(`Password generation threw an error ${error}`);
       this.#view.renderPasswordError('ERROR password generation failed!');
     }
   };
-};
+
+  /**
+   * Clear the passwords that are generated
+   */
+  clearPasswords() {
+    this.#view.clearPasswordArea();
+  }
+}
 
 export {PasswordController};

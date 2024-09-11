@@ -1,5 +1,5 @@
 /**
- * @file This file only handles the update of the webapp.
+ * @file This file only handles the startup of the webapp.
  *
  * The actual password generation is done in the xkpasswd library.
  *
@@ -31,7 +31,11 @@ import {SettingsView} from './web/settingsview.mjs';
 import {SettingsController} from './web/settingscontroller.mjs';
 import {PasswordView} from './web/passwordview.mjs';
 import {PasswordController} from './web/passwordcontroller.mjs';
+import {ConfigController} from './web/configcontroller.mjs';
+import {ConfigView} from './web/configview.mjs';
 
+// import package.json
+import pkgJson from '../package.json';
 /**
  * Object defining all custom variables and functions
  * @namespace XKP
@@ -42,6 +46,7 @@ const XKP = {
   presetController: {},
   settingsController: {},
   passwordController: {},
+  configController: {},
   xkpasswd: {},
 
   /**
@@ -53,16 +58,29 @@ const XKP = {
    */
   init: () => {
     // setup variables for key parts of the website
-    XKP.xkpasswd = new XKPasswd(),
+    XKP.xkpasswd = new XKPasswd();
 
-    XKP.settingsController =
-      new SettingsController(XKP.xkpasswd, new SettingsView());
-    XKP.presetController = new PresetController(
-      XKP.xkpasswd,
-      new PresetView(),
-      XKP.settingsController);
     XKP.passwordController =
       new PasswordController(XKP.xkpasswd, new PasswordView());
+    XKP.settingsController =
+      new SettingsController(XKP.xkpasswd, new SettingsView());
+
+    XKP.configController =
+      new ConfigController(XKP.xkpasswd, new ConfigView(),
+      XKP.settingsController);
+
+    // Set the configController in the settingsController
+    // because it's reciprocal.
+
+    XKP.settingsController.setConfigController(XKP.configController);
+
+    XKP.presetController =
+      new PresetController(XKP.xkpasswd, new PresetView(),
+      XKP.settingsController,
+      XKP.passwordController);
+
+    // Load custom settings if present in the URL
+    XKP.configController.loadFromUrl(window.location);
   },
 };
 
@@ -72,8 +90,7 @@ const XKP = {
 
 $(() => {
   // enable tooltips
-  const tooltipTriggerList =
-  document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipTriggerList = $('[data-bs-toggle="tooltip"]');
   [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
 
@@ -82,11 +99,14 @@ $(() => {
   // Now that the DOM is ready, find all the 'div' elements that
   // were identified to have the potential to flash unstyled content
   // as the page loads and make them visible.
-  const foucElements = document.querySelectorAll('div[fouc=\'true\']');
+  const foucElements = $('div[fouc=\'true\']');
   for (const fouc of foucElements) {
     if (fouc.style !== null) {
       // Make the element visible.
       fouc.style.visibility = 'visible';
     }
   }
+
+  // set the version in the footer
+  $('footer div.col-1').html(`v${pkgJson.version}`);
 });

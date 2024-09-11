@@ -40,7 +40,7 @@ const thePresets = {
   },
   WEB32: {
     description:
-      'A preset for websites that allow passwords up to 32 characteres long.',
+      'A preset for websites that allow passwords up to 32 characters long.',
     config: {
       padding_alphabet: '! @ $ % ^ & * + = : | ~ '.split(' '),
       separator_alphabet: '- + = . * _ | ~ '.split(' '),
@@ -222,7 +222,7 @@ const thePresets = {
       separator_type: 'RANDOM',
       separator_alphabet: '-+=.*_|~',
       padding_digits_before: 2,
-      padding_digits_after: 2,
+      padding_digits_after: 3,
       padding_type: 'FIXED',
       padding_character_type: 'RANDOM',
       padding_alphabet: '!@$%^&*+=:|~',
@@ -247,7 +247,7 @@ const thePresets = {
       separator_type: 'RANDOM',
       padding_type: 'NONE',
       padding_digits_before: 0,
-      padding_digits_after: 2,
+      padding_digits_after: 1,
       allow_accents: 0,
     },
   },
@@ -374,7 +374,21 @@ const thePresets = {
       allow_accents: 0,
     },
   },
-
+  // CUSTOM: {
+  //   description: 'A preset loaded from configuration.',
+  //   config: {
+  //     word_length_min: 4,
+  //     word_length_max: 4,
+  //     num_words: 2,
+  //     case_transform: 'CAPITALISE',
+  //     separator_type: 'FIXED',
+  //     separator_character: '-',
+  //     padding_digits_before: 0,
+  //     padding_digits_after: 2,
+  //     padding_type: 'NONE',
+  //     allow_accents: 0,
+  //   },
+  // },
 };
 
 
@@ -398,6 +412,7 @@ class Presets {
   #current;
   #presetName;
   #presets = Object.keys(thePresets);
+  #max_alphabet = 20;
 
   /**
    * Constructor: set either the default preset
@@ -443,12 +458,15 @@ class Presets {
         if (is.object(preset)) {
           this.#current = preset;
           this.#presetName = 'CUSTOM';
+          if (this.description() === '') {
+            this.#current.description = 'Your custom configuration';
+          }
         } else {
           this.#current = thePresets.DEFAULT;
           this.#presetName = 'DEFAULT';
         }
       }
-    };
+    }
 
     this.#current.config = this.__normalize(this.#current.config);
 
@@ -480,6 +498,10 @@ class Presets {
    */
   config() {
     return this.#current.config;
+  }
+
+  setConfig(settings) {
+    this.#current.config = this.__normalize(settings);
   }
 
   /**
@@ -522,7 +544,7 @@ class Presets {
    * @return {Object} - the normalized config
    */
   __normalize(config) {
-    // create a clone so we can safely reference the original value
+    // create a clone, so we can safely reference the original value
     const newConfig = {...config};
 
     // set the min and max word lengths
@@ -552,6 +574,18 @@ class Presets {
     newConfig.padding_character = paddingCharacter;
     newConfig.padding_alphabet = paddingAlphabet;
 
+    // parse number fields to integers
+    Object.keys(newConfig).forEach(key => {
+      if (
+        key == 'word_length_min' || key == 'word_length_max' ||
+        key == 'padding_digits_before' || key == 'padding_digits_after' ||
+        key == 'padding_characters_before' || key == 'padding_characters_after' ||
+        key == 'num_words' || key == 'pad_to_length'
+      ) {
+        newConfig[key] = parseInt(newConfig[key]);
+      }
+    });
+
     return newConfig;
   }
 
@@ -561,8 +595,8 @@ class Presets {
    *
    * @private
    *
-   * @param {Object} config - the config to test
-   * @return {Array} the list of characters
+   * @param {object} config - the config to test
+   * @return {string} the list of characters
    */
   __getSeparatorAlphabet(config) {
     // if there is no parameter, use the current config
@@ -570,13 +604,11 @@ class Presets {
       (is.undefined(config)) ? this.#current.config : config;
 
     let alphabet =
-        (is.not.undefined(tmpConfig.separator_alphabet) ?
+        (tmpConfig.separator_alphabet ?
           tmpConfig.separator_alphabet :
           tmpConfig.symbol_alphabet);
 
-    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
-      thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return is.array(alphabet) ? alphabet.join('') : alphabet;
+   return this.__configureAlphabet(alphabet);
   }
 
   /**
@@ -585,8 +617,8 @@ class Presets {
    *
    * @private
    *
-   * @param {Object} config - the config to test
-   * @return {Array} the list of characters
+   * @param {object} config - the config to test
+   * @return {string} the list of characters
    */
   __getPaddingAlphabet(config) {
     // if there is no parameter, use the current config
@@ -597,9 +629,27 @@ class Presets {
           (is.not.undefined(tmpConfig.padding_alphabet) ?
             tmpConfig.padding_alphabet :
             tmpConfig.symbol_alphabet);
-    alphabet = ((is.undefined(alphabet) || (alphabet.length === 0)) ?
+
+    return this.__configureAlphabet(alphabet);
+  }
+
+  /**
+   * Helper function to configure the alphabet
+   * or default to the DEFAULT.symbol_alphabet
+   *
+   * @private
+   *
+   * @param {array|string} alphabet - the alphabet to configure
+   * @return {string} - the alphabet as string
+   */
+  __configureAlphabet(alphabet) {
+      alphabet = ((alphabet === undefined || (alphabet.length === 0)) ?
       thePresets.DEFAULT.config.symbol_alphabet : alphabet);
-    return is.array(alphabet) ? alphabet.join('') : alphabet;
+
+    // make sure the alphabet is not longer than the max length
+    return is.array(alphabet) ?
+      alphabet.join('').substring(0, this.#max_alphabet) :
+      alphabet.substring(0, this.#max_alphabet);
   }
 
   /**
@@ -688,14 +738,15 @@ class Presets {
       }
     }
     newConfig.separatorAlphabet = this.__getSeparatorAlphabet(config);
-    // console.log(`returning config: ${JSON.stringify(config)}`);
+
+    log.trace(`returning config: ${JSON.stringify(config)}`);
     return newConfig;
   }
 
   /**
    * Get the padding character configuration
    *
-   * @param {string} config - the config to fix
+   * @param {object} config - the config to fix
    *
    * @return {object} - the object with the normalized properties
    */
@@ -755,7 +806,7 @@ class Presets {
       }
     }
     newConfig.paddingAlphabet = this.__getPaddingAlphabet(config);
-    // console.log(`returning newConfig: ${JSON.stringify(newConfig)}`);
+    log.trace(`returning newConfig: ${JSON.stringify(newConfig)}`);
     return newConfig;
   }
 }
