@@ -35,6 +35,8 @@ import {PasswordController} from './web/passwordcontroller.mjs';
 import {ConfigController} from './web/configcontroller.mjs';
 import {ConfigView} from './web/configview.mjs';
 
+// import package.json
+import pkgJson from '../package.json';
 /**
  * Object defining all custom variables and functions
  * @namespace XKP
@@ -105,4 +107,7 @@ $(() => {
       fouc.style.visibility = 'visible';
     }
   }
+
+  // set the version in the footer
+  $('footer div.col-1').html(`v${pkgJson.version}`);
 });
