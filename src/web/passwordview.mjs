@@ -36,6 +36,7 @@ class PasswordView {
   #passwordText;
   #passwordErrorContainer;
   #passwordStatsContainer;
+  #passwordLength;
   #passwordStrength;
   #blindEntropy;
   #seenEntropy;
@@ -52,6 +53,7 @@ class PasswordView {
     this.#passwordText = $('#generated_password_txt');
     this.#passwordErrorContainer = $('#passwordErrorContainer');
     this.#passwordStatsContainer = $('#password_stats_container');
+    this.#passwordLength = $('#password_length');
     this.#passwordStrength = $('#password_strength');
     this.#blindEntropy = $('#entropy_blind');
     this.#seenEntropy = $('#entropy_seen');
@@ -280,6 +282,7 @@ class PasswordView {
     log.trace(`entering __renderDetailedStats`);
     log.trace(`stats: ${JSON.stringify(stats)}`);
 
+    this.__renderPasswordLength(stats.password.minLength, stats.password.maxLength);
     this.__renderPasswordStrength(stats.password.passwordStrength);
 
     // Render the detailed stats
@@ -331,6 +334,25 @@ class PasswordView {
 
     this.__showStats();
   };
+
+  /**
+   * Render the password length
+   *
+   * @param {number} minLength - minimum length of password
+   * @param {number} maxLength - maximum length of password
+   */
+  __renderPasswordLength(minLength, maxLength) {
+    let template = "";
+
+    if (minLength === maxLength) {
+      template = minLength;
+    }
+    else {
+      template = `Min ${minLength} Max ${maxLength}`;
+    }
+    this.#passwordLength.text(template);
+  };
+
 
   /**
    * Render the password strength
