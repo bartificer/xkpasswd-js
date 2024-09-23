@@ -6,6 +6,7 @@ class RandomBasic {
   +toss()
   +randomNumbers()
 
+
   .. private functions ..
 
   ~__randomFloat()
@@ -148,7 +149,7 @@ XKPasswd *-- Statistics
 
 Dictionary <|-- DictionaryEN
 
-title: HKPasswd-js version
+title: XKPasswd-js version
 note as N1
  The giant XKPasswd class
  is refactored into multiple classes
