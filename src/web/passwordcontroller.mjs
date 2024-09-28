@@ -50,8 +50,7 @@ class PasswordController {
         throw new Error('ERROR - server returned no passwords');
       }
       this.#view.renderPassword(passAndStats, num);
-    }
-    catch (error) {
+    } catch (error) {
       log.error(`Password generation threw an error ${error}`);
       this.#view.renderPasswordError('ERROR password generation failed!');
     }

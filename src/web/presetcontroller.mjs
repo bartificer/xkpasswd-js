@@ -32,8 +32,7 @@ class PresetController {
    * @param {SettingsController} sc - reference to SettingsController
    * @param {PasswordController} pc - reference to PasswordController
    */
-  constructor(model, view,
-    sc, pc) {
+  constructor(model, view, sc, pc) {
     this.#model = model;
     this.#view = view;
     this.#settingsController = sc;
