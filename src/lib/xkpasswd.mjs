@@ -58,11 +58,16 @@ class XKPasswd {
     this.#statsClass = new Statistics(this.#config, this.#dictionary);
   }
 
+  /**
+   * Create a CUSTOM preset and set the default preset to it.
+   *
+   * @param {object} settings - object containing the settings
+   */
   setCustomPreset(settings) {
     const preset = {
       description: 'Custom preset, created from loaded config',
       config: settings,
-    }
+    };
     this.setPreset(preset);
   }
 
@@ -86,13 +91,14 @@ class XKPasswd {
     return new Presets().getPresets();
   }
 
+  /* istanbul ignore start @preserve : already tested through sub functions */
+
   /**
    * Generate the password(s) and stats
    *
    * @param {number} num - number of passwords to generate
    * @return {object} - contains the passwords and the stats
    */
-  /* istanbul ignore next @preserve : already tested through sub functions */
   generatePassword(num) {
     const passwords = this.passwords(num);
     const stats = this.#statsClass.calculateStats();
@@ -105,6 +111,8 @@ class XKPasswd {
       stats: stats,
     };
   }
+
+  /* istanbul ignore end */
 
   /**
    * Return a password that adheres to the
@@ -185,7 +193,7 @@ class XKPasswd {
       num = 1;
     }
     const passwords = [];
-    for (let i = 0; i < num ; i++) {
+    for (let i = 0; i < num; i++) {
       passwords.push(this.password());
     }
 
@@ -266,7 +274,8 @@ class XKPasswd {
 
     case 'RANDOM':
       return words.map((el) =>
-        el = (this.#randomGenerator.toss()) ? el.toLowerCase() : el.toUpperCase(),
+        el = (this.#randomGenerator.toss()) ?
+          el.toLowerCase() : el.toUpperCase(),
       );
 
     default:
@@ -416,7 +425,7 @@ class XKPasswd {
   __padWithDigits(passwd, separator) {
     if (this.#config.padding_digits_before > 0) {
       passwd = this.#randomGenerator
-          .randomDigits(this.#config.padding_digits_before) +
+        .randomDigits(this.#config.padding_digits_before) +
           separator + passwd;
     }
     if (this.#config.padding_digits_after > 0) {

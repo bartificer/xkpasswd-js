@@ -36,6 +36,7 @@ import {ConfigView} from './web/configview.mjs';
 
 // import package.json
 import pkgJson from '../package.json';
+
 /**
  * Object defining all custom variables and functions
  * @namespace XKP
@@ -67,7 +68,7 @@ const XKP = {
 
     XKP.configController =
       new ConfigController(XKP.xkpasswd, new ConfigView(),
-      XKP.settingsController);
+        XKP.settingsController);
 
     // Set the configController in the settingsController
     // because it's reciprocal.
@@ -76,8 +77,8 @@ const XKP = {
 
     XKP.presetController =
       new PresetController(XKP.xkpasswd, new PresetView(),
-      XKP.settingsController,
-      XKP.passwordController);
+        XKP.settingsController,
+        XKP.passwordController);
 
     // Load custom settings if present in the URL
     XKP.configController.loadFromUrl(window.location);
