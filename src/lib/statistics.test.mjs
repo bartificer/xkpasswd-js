@@ -264,7 +264,7 @@ describe('Test class Statistics', () => {
         random_increment: 'AUTO',
       };
 
-      const me = new Statistics(mockConfig, mockDict, mockDict);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minLength: 25,
