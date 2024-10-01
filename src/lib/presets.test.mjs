@@ -134,7 +134,7 @@ describe('Test class Presets', () => {
   describe('Test function __getMinMaxWordLength', () => {
     const me = new Presets();
 
-    test('it returns min and max in the righ order', () => {
+    test('it returns min and max in the right order', () => {
       let [min, max] = me.__getMinMaxWordLength(4, 7);
       expect(min).toBe(4);
       expect(max).toBe(7);
