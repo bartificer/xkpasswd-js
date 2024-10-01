@@ -149,7 +149,7 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 0,
         percentWordsAvailable: 0,
         filterMinLength: 0,
@@ -176,9 +176,9 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 1194,
-        percentWordsAvailable: 95,
+        percentWordsAvailable: 94,
         filterMinLength: 4,
         filterMaxLength: 8,
         containsAccents: false,
@@ -203,7 +203,7 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 0,
         percentWordsAvailable: 0,
         filterMinLength: 0,
@@ -545,9 +545,9 @@ describe('Test class Statistics', () => {
       const expected = {
         dictionary: {
           source: '',
-          numWordsTotal: 1259,
+          numWordsTotal: 1271,
           numWordsFiltered: 1194,
-          percentWordsAvailable: 95,
+          percentWordsAvailable: 94,
           filterMinLength: 4,
           filterMaxLength: 8,
           containsAccents: false,
