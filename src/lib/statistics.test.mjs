@@ -213,6 +213,24 @@ describe('Test class Statistics', () => {
       });
     });
 
+    test('returns a list larger than 1 word if min and max are greater than 12', () => {
+      const mockConfig = {
+        num_words: 1,
+        word_length_min: 12,
+        word_length_max: 20,
+        separator_type: 'NONE',
+        padding_digits_before: 3,
+        padding_digits_after: 3,
+        padding_character_type: 'RANDOM',
+        case_transform: 'CAPITALISE',
+      };
+
+      const me = new Statistics(mockConfig, mockDict);
+
+      const result = me.__calculateDictionaryStats();
+      expect(result).toBeDefined();
+      expect(result.numWordsFiltered).toEqual(12);
+    });
   });
 
   describe('Test function configStats', () => {
