@@ -149,7 +149,7 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 0,
         percentWordsAvailable: 0,
         filterMinLength: 0,
@@ -176,9 +176,9 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 1194,
-        percentWordsAvailable: 95,
+        percentWordsAvailable: 94,
         filterMinLength: 4,
         filterMaxLength: 8,
         containsAccents: false,
@@ -203,7 +203,7 @@ describe('Test class Statistics', () => {
       const result = me.__calculateDictionaryStats();
       expect(result).toBeDefined();
       expect(result).toEqual({
-        numWordsTotal: 1259,
+        numWordsTotal: 1271,
         numWordsFiltered: 0,
         percentWordsAvailable: 0,
         filterMinLength: 0,
@@ -213,6 +213,24 @@ describe('Test class Statistics', () => {
       });
     });
 
+    test('returns a list larger than 1 word if min and max are greater than 12', () => {
+      const mockConfig = {
+        num_words: 1,
+        word_length_min: 12,
+        word_length_max: 20,
+        separator_type: 'NONE',
+        padding_digits_before: 3,
+        padding_digits_after: 3,
+        padding_character_type: 'RANDOM',
+        case_transform: 'CAPITALISE',
+      };
+
+      const me = new Statistics(mockConfig, mockDict);
+
+      const result = me.__calculateDictionaryStats();
+      expect(result).toBeDefined();
+      expect(result.numWordsFiltered).toEqual(12);
+    });
   });
 
   describe('Test function configStats', () => {
@@ -246,7 +264,7 @@ describe('Test class Statistics', () => {
         random_increment: 'AUTO',
       };
 
-      const me = new Statistics(mockConfig, mockDict, mockDict);
+      const me = new Statistics(mockConfig, mockDict);
 
       const expected = {
         minLength: 25,
@@ -545,9 +563,9 @@ describe('Test class Statistics', () => {
       const expected = {
         dictionary: {
           source: '',
-          numWordsTotal: 1259,
+          numWordsTotal: 1271,
           numWordsFiltered: 1194,
-          percentWordsAvailable: 95,
+          percentWordsAvailable: 94,
           filterMinLength: 4,
           filterMaxLength: 8,
           containsAccents: false,
