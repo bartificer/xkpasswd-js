@@ -393,6 +393,30 @@ describe('Test XKPassword class', () => {
       const expectedChar = '+'; // me.__paddingChar(me.__separator())
       expect(lastChar).toBe(expectedChar);
     });
+
+
+    test('it should return a password with 2 words when only 1 is requested', () => {
+      const preset = Presets.getDefault();
+
+      preset.description = 'mock preset'; // just to make things clear
+      preset.config.num_words = 1;
+      preset.config.word_length_min = 4;
+      preset.config.word_length_max = 8;
+      preset.config.separator_type = 'NONE';
+      preset.config.padding_digits_before = 0;
+      preset.config.padding_digits_after = 0;
+      preset.config.padding_type = 'NONE';
+
+      me.setPreset(preset);
+      const password = me.password();
+
+      // eslint-disable-next-line max-len
+      const re = /^([a-zA-Z]{4,8}){2}$/;
+
+      const num_words = me.getPreset().config().num_words;
+      expect(num_words).toBe(2);
+      expect(password).toMatch(re);
+    });
   });
 
   describe('Test passwords function', () => {
