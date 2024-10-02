@@ -6,7 +6,7 @@
 
 ![To anyone who understands information theory and security and is in an infuriating argument with someone who does not (possibly involving mixed case), I sincerely apologize.](https://imgs.xkcd.com/comics/password_strength.png)
 
-Bart is leading this port of the Perl module to JavaScript with the [NosillaCast community](https://podfeet.com/slack) as part of the on-going Programming By Stealth blog/podcast series](https://pbs.bartificer.net) he produces with [Allison Sheridan](https://www.podfeet.com/blog/about/).
+Bart is leading this port of the Perl module to JavaScript with the [NosillaCast community](https://podfeet.com/slack) as part of the ongoing [Programming By Stealth blog/podcast series](https://pbs.bartificer.net) he produces with [Allison Sheridan](https://www.podfeet.com/blog/about/).
 
 ## Current version of the app
 
@@ -38,7 +38,7 @@ The plan is to develop this port in the following broad stages:
 
 ## Repository Structure
 
-Fundamentally, the repository is a NodeJS project, so it contains the standard NodeJS files. In addition to these standard files, the project's assets are stored in the following structure:
+Fundamentally, the repository is a Node.js project, so it contains the standard Node.js files. In addition to these standard files, the project's assets are stored in the following structure:
 
 * `/buildScripts/` — the folder containing the scripts used to build the bundled versions of the module and the module's documentation site, including its UML diagrams.
 * `/dist/` — the target folder into which the build scripts will publish the bundled versions of the module, ready for distribution. **Do not edit the contents of this folder directly!**
@@ -58,7 +58,7 @@ This project is managed through GitHub. To contribute by starting or commenting 
 
 If you download the raw code you'll need the following to build the project, i.e. transform the raw code into a usable JavaScript module with documentation, you'll need:
 
-1. The most recent LTS (Long Term Support) version of the NodeJS runtime available at [nodejs.org](https://nodejs.org/)
+1. The most recent LTS (Long Term Support) version of the Node.js runtime available at [nodejs.org](https://nodejs.org/)
 2. A POSIX-compliant shell and terminal app capable of running Bash scripts — standard on Linux & Mac, and available for Windows through the Windows Subsystem for Linux (WSL).
    * Microsoft's documentation for installing WSL — [learn.microsoft.com/…](https://learn.microsoft.com/en-us/windows/wsl/install)
    * The official Bash documentation — [www.gnu.org/…](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html)
@@ -117,7 +117,7 @@ When writing documentation, try to keep your additions in the same voice as the 
 
 When contributing to Mermaid Diagrams, add all class members inside the class definition block; don't use the alternative syntax that allows single members to be added in separate statements.
 
-When writing code, be sure to have ESLint enabled in your editor so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
+When writing code, be sure to have ESLint enabled in your editor, so you can see when you break the project's style guide. When choosing variable names, try to be consistent with the other nearby variables.
 
 When writing code, make sure it's in line with the project's ESLint configuration, and try to choose variable names that are in line with others in the surrounding code.
 
