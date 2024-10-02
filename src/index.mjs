@@ -109,5 +109,5 @@ $(() => {
   }
 
   // set the version in the footer
-  $('footer div.col-1').html(`v${pkgJson.version}`);
+  $('footer div#version').html(`v${pkgJson.version}`);
 });
