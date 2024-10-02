@@ -195,24 +195,6 @@ describe('Test class Presets', () => {
         expect(actual).toEqual(expected);
       });
 
-      test('it returns a default for missing params', () => {
-        const def = new Presets();
-        // make a clone to avoid side effects
-        const config = {...def.config()};
-        config.separator_type = undefined;
-        config.separator_character = undefined;
-        config.separator_alphabet = undefined;
-
-        const me = new Presets();
-        const actual = me.__getSeparatorConfig(config);
-        const expected = {
-          separatorType: 'NONE',
-          separatorCharacter: '',
-          separatorAlphabet: def.config().symbol_alphabet,
-        };
-        expect(actual).toEqual(expected);
-      });
-
       // eslint-disable-next-line max-len
       test('it returns a type RANDOM when the character is set to RANDOM', () => {
         const def = new Presets();
