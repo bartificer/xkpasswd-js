@@ -349,7 +349,7 @@ footer {
 }
 
 .type-signature {
-  color: #CA79CA
+  color: var(--signature) !important;
 }
 
 .type-signature:last-child {

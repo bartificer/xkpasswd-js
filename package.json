@@ -42,6 +42,7 @@
   },
   "scripts": {
     "docs": "docDir='./dist/docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --template node_modules/docdash",
+    "docs-dev": "docDir='./dist/docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --private --template node_modules/docdash",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "cov": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage=true",
     "watch": "webpack --watch",
