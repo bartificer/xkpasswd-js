@@ -24,7 +24,6 @@ class Dictionary {
    * This class is abstract and cannot be instantiated directly.
    *
    * @throws {Error} Will throw an error if attempted to instantiate.
-   * @constructor
    */
   constructor() {
     if (this.constructor === Dictionary) {
