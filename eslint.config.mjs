@@ -57,10 +57,8 @@ export default [
       sourceType: 'module',
     },
 
-  // // ...compat.extends('google'),
   // {
   // plugins: {
-  //   jsdoc,
   //   jest,
   // },
   //
