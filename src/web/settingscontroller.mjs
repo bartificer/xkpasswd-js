@@ -1,4 +1,5 @@
 /* istanbul ignore file @preserve */
+
 /**
  * @module web/SettingsController
  */
@@ -23,9 +24,8 @@ class SettingsController {
    * config - reference to ConfigController
    */
   #config;
+  // eslint-disable-next-line jsdoc/require-description
   /**
-   * Constructor
-   *
    * @param {Object} model - new SettingsModel
    * @param {SettingsView} view - new SettingsView
    */
@@ -51,7 +51,7 @@ class SettingsController {
 
   /**
    * Convert the rendered settings back to the model and pass it on
-   * to the [XKPasswd]{@link module:XKPasswd~XKPasswd} class to use for password generation
+   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use for password generation
    *
    * @param {Object} settings - the object containing the new settings
    * @function
