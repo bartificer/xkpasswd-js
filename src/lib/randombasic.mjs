@@ -132,7 +132,8 @@ class RandomBasic {
    * Generate an array of numbers between 0 and 9
    * Array length = parameter `num`
    *
-   * TODO in the Perl version this function was only used to fill a cache of random numbers
+   * TODO in the Perl version this function was only used to fill a cache of
+   * random numbers
    * ? so probably it's not needed anymore.
    *
    * @param {integer} num - number of random numbers to generate,
@@ -155,4 +156,3 @@ class RandomBasic {
 }
 
 export {RandomBasic};
-
