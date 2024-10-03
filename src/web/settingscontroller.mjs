@@ -3,6 +3,7 @@ import log from 'loglevel';
 
 /**
  * @class SettingsController
+ * @constructor
  */
 class SettingsController {
   /**
@@ -20,7 +21,7 @@ class SettingsController {
    */
   #config;
   /**
-   * @constructor
+   * Constructor
    *
    * @param {Object} model - new SettingsModel
    * @param {SettingsView} view - new SettingsView

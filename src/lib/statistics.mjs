@@ -7,7 +7,11 @@
 import log from 'loglevel';
 import {Dictionary} from './dictionary.mjs';
 
-/** Calculate statistics */
+/** Calculate statistics
+ *
+ * @class Statistics
+ * @constructor
+ */
 class Statistics {
   #config; // the config that needs to be calculated
   #dictionary; // the dictionary that needs to be calculated
@@ -19,7 +23,6 @@ class Statistics {
 
   /**
  * Constructor
- * @constructor
  *
  * @param {object} config - the current config
  * @param {Dictionary} dict - the current dictionary
@@ -593,6 +596,8 @@ class Statistics {
    * single password with a given config.
    *
    * TODO do we really need this function?
+   *
+   * @private
    *
    * @return {number} the number of random numbers required
    */

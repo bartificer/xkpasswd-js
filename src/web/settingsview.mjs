@@ -6,6 +6,7 @@ import {Collapse} from 'bootstrap';
  * and interaction with the settings
  *
  * @class SettingsView
+ * @constructor
  */
 class SettingsView {
   /**
@@ -14,7 +15,7 @@ class SettingsView {
   #aniTime = 250;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.__togglePaddingType('NONE');
@@ -138,6 +139,7 @@ class SettingsView {
   /**
    * Set the error message and show it
    * or hide it on empty message
+   *
    * @param {string }t - text or empty
    */
   setErrorMessage(t) {

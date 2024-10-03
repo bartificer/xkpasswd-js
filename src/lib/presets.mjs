@@ -406,6 +406,8 @@ const thePresets = {
  * The configurable settings are described in the documentation.
  *
  * @class Presets
+ * @constructor
+
  */
 class Presets {
   // private var holds the current preset
@@ -422,7 +424,6 @@ class Presets {
    * predefined sets, use that, otherwise
    * assume it's a custom configuration.
    *
-   * @constructor
    *
    * @param {any} preset - either string with
    * name of predefined set or object with
@@ -678,8 +679,9 @@ class Presets {
   /**
    * Get the separator configuration
    *
-   * @param {object} config - the config to fix
+   * @private
    *
+   * @param {object} config - the config to fix
    * @return {object} - the object with the normalized properties
    */
   __getSeparatorConfig(config) {
@@ -746,8 +748,9 @@ class Presets {
   /**
    * Get the padding character configuration
    *
-   * @param {object} config - the config to fix
+   * @private
    *
+   * @param {object} config - the config to fix
    * @return {object} - the object with the normalized properties
    */
   __getPaddingCharacterConfig(config) {

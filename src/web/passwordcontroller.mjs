@@ -4,6 +4,7 @@ import log from 'loglevel';
 
 /**
  * @class PasswordController
+ * @constructor
  */
 class PasswordController {
   /**
@@ -17,7 +18,7 @@ class PasswordController {
   #view;
 
   /**
-   * @constructor
+   * Constructor
    *
    * @param {XKPasswd} model - new PasswordModel
    * @param {PasswordView} view - new PasswordView

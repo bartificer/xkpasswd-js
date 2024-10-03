@@ -1286,13 +1286,11 @@ const THE_WORDS = [
 
 /**
  * class for English Dictionary
- * @class
+ *
+ * @class DictionaryEN
+ * @constructor
  */
 class DictionaryEN extends Dictionary {
-  /**
-   * Constructor for English Dictionary
-   * @constructor
-   */
   constructor() {
     super();
     super.__setLength(THE_WORDS.length);

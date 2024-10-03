@@ -31,6 +31,8 @@ const map = [
  * - the origin of this class: using a base64encoded uri
  * - importing and exporting a JSON file
  *
+ * @class ConfigController
+ * @constructor
  */
 class ConfigController {
   /**
@@ -50,7 +52,6 @@ class ConfigController {
 
   /**
    * The default class constructor
-   * @constructor
    *
    * @param {XKPasswd} model - reference to PasswordModel
    * @param {ConfigView} view - reference to ConfigView
@@ -158,7 +159,7 @@ class ConfigController {
    * Convert an url into a settings object for further processing
    * Return an empty object if there is no parameter in the url.
    *
-   * @param url - the url from the window.location or from the settingslink
+   * @param url - the URL from the window.location or from the settingslink
    * @return {Object} - empty object if something went wrong, or settings object
    */
   fromUrl(url) {
@@ -196,6 +197,8 @@ class ConfigController {
    * URL safe base64 encoded string
    *
    * @returns {string} - A base64 encoded string with the settings
+   *
+   * @private
    */
   __getEncodedSettings(settings) {
     let values = [];
@@ -220,6 +223,8 @@ class ConfigController {
    *
    * @param {string} str - string to encode as base64 string
    * @returns {string} - A base64 encoded string
+   *
+   * @private
    */
   __base64URLencode(str) {
     const base64Encoded = btoa(str);
@@ -234,6 +239,8 @@ class ConfigController {
    *
    * @param {string} str - A base64 encoded string
    * @returns {string} - The decoded string
+   *
+   * @private
    */
   __base64URLdecode(str) {
     const base64Encoded = str

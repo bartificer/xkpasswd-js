@@ -3,6 +3,7 @@ import log from 'loglevel';
 
 /**
  * @class PresetController
+ * @constructor
  */
 class PresetController {
   /**
@@ -25,7 +26,7 @@ class PresetController {
    */
   #passwordController;
   /**
-   * @constructor
+   * Constructor
    *
    * @param {XKPasswd} model - reference to PresetModel
    * @param {PresetView} view - reference to PresetView

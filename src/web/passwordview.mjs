@@ -5,6 +5,7 @@ import log from 'loglevel';
  * and interaction with the password and stats
  *
  * @class PasswordView
+ * @constructor
  */
 class PasswordView {
   /**
@@ -44,7 +45,7 @@ class PasswordView {
   #numberOfPasswords;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.#passwordPresentation = $('#password_presentation');
@@ -340,6 +341,8 @@ class PasswordView {
    *
    * @param {number} minLength - minimum length of password
    * @param {number} maxLength - maximum length of password
+   *
+   * @private
    */
   __renderPasswordLength(minLength, maxLength) {
     let template = "";
@@ -358,6 +361,8 @@ class PasswordView {
    * Render the password strength
    *
    * @param {string} passwordStrength - indication of the password strength
+   *
+   * @private
    */
   __renderPasswordStrength(passwordStrength) {
     // we assume that the strength indicator is already calculated

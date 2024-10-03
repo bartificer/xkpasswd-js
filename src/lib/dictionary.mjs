@@ -8,17 +8,15 @@
 import log from 'loglevel';
 /**
  * class for a Dictionary
- * @class
+ *
+ * @class Dictionary
+ * @constructor
  */
 class Dictionary {
   #wordListLength; // length of the word list, convenience variable
   #minWordLength; // shortest word length
   #maxWordLength; // longest word length
 
-  /**
-   * Constructor for English Dictionary
-   * @constructor
-   */
   constructor() {
     if (this.constructor === Dictionary) {
       throw new Error('You cannot instantiate the abstract class');

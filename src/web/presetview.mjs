@@ -5,6 +5,7 @@ import log from 'loglevel';
  * and interaction with the preset buttons
  *
  * @class PresetView
+ * @constructor
  */
 class PresetView {
   /**
@@ -23,7 +24,7 @@ class PresetView {
   #presetDescription;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.#presetGroup = $('#preset-btn-group');

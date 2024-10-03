@@ -10,7 +10,7 @@ import log from 'loglevel';
 
 /**
  * Generate random numbers
- * @class XKPasswd
+ * @class RandomBasic
  */
 class RandomBasic {
   /**
@@ -35,7 +35,7 @@ class RandomBasic {
    *
    * @param {number} num - number of random digits to generate,
    *  defaults to empty string if not given
-   * @return {Array} - array of random digits
+   * @return {string} - array of random digits
    * @throws Exception when parameter is not a number
    *
    */
@@ -138,7 +138,7 @@ class RandomBasic {
    * TODO in the Perl version this function was only used to fill a cache of random numbers
    * ? so probably it's not needed anymore.
    *
-   * @param {Integer} num - number of random numbers to generate,
+   * @param {integer} num - number of random numbers to generate,
    *  defaults to 1 if not given
    * @return {Array}
    * @throws Exception when parameter is not a number

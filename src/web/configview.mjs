@@ -8,6 +8,7 @@ import log from 'loglevel';
  * and the settingsLink with the base64encoded settings
  *
  * @class ConfigView
+ * @constructor
  */
 class ConfigView {
   /**
