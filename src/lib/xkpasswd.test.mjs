@@ -4,7 +4,6 @@
  * @jest-environment jest-environment-node
  */
 
-import {expect, jest, test, describe} from '@jest/globals';
 import {Presets} from './presets.mjs';
 import {XKPasswd} from './xkpasswd.mjs';
 

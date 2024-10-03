@@ -39,7 +39,21 @@ export default [
       'jsdoc/require-description': 'error',
       'jsdoc/check-values': 'error',
       'jsdoc/informative-docs': 1,
+    },
   },
+  {
+    name: 'test files',
+    files: ["src/**/*.test.mjs"],
+    plugins: {
+      jest
+    },
+    languageOptions: {
+      globals: {
+      ...globals.jest,
+      },
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+    },
 
   // // ...compat.extends('google'),
   // {
