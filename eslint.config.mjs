@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import js from '@eslint/js';
 import {FlatCompat} from '@eslint/eslintrc';
 import jsdoc from 'eslint-plugin-jsdoc';
+import google from 'eslint-config-google';
 import jest from 'eslint-plugin-jest';
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -21,9 +22,10 @@ export default [
     files: ["src/**/*.mjs"],
     ignores: ['src/**/*.test.mjs'],
     plugins: {
-        jsdoc,
+      jsdoc,
     },
-
+    ...js.configs.recommended,
+    ...google,
     ...jsdoc.configs['flat/recommended'],
     settings: {
       jsdoc: {
