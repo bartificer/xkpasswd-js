@@ -578,10 +578,10 @@ class Presets {
     // parse number fields to integers
     Object.keys(newConfig).forEach(key => {
       if (
-        key == 'word_length_min' || key == 'word_length_max' ||
-        key == 'padding_digits_before' || key == 'padding_digits_after' ||
-        key == 'padding_characters_before' || key == 'padding_characters_after' ||
-        key == 'num_words' || key == 'pad_to_length'
+        key === 'word_length_min' || key === 'word_length_max' ||
+        key === 'padding_digits_before' || key === 'padding_digits_after' ||
+        key === 'padding_characters_before' || key === 'padding_characters_after' ||
+        key === 'num_words' || key === 'pad_to_length'
       ) {
         newConfig[key] = parseInt(newConfig[key]);
       }
