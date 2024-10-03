@@ -1,7 +1,5 @@
 /**
  * Testing class XKPassword
- *
- * @jest-environment jest-environment-node
  */
 
 import {Presets} from './presets.mjs';
