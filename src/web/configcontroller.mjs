@@ -1,3 +1,6 @@
+/**
+ * @module web/ConfigController
+ */
 import log from 'loglevel';
 
 const map = [
@@ -24,29 +27,30 @@ const map = [
 ];
 
 /**
- * This class handle the loading/saving of custom password configurations
+ * @class This class handles the loading/saving of custom password
+ * configurations.
  *
  * There are 2 ways of loading/saving:
  *
  * - the origin of this class: using a base64encoded uri
  * - importing and exporting a JSON file
  *
- * @class ConfigController
+ *
  * @constructor
  */
 class ConfigController {
   /**
-   * @private model - reference to password model
+   * {XKPasswd} model - reference to password model
    */
   #model;
 
   /**
-   * @private view - reference to ConfigView
+   * {ConfigView} view - reference to ConfigView
    */
   #view;
 
   /**
-   * @private settingsController - reference to SettingsController
+   * {SettingsController} settingsController - reference to SettingsController
    */
   #settingsController;
 
@@ -74,6 +78,7 @@ class ConfigController {
    *  Import the settings from the uploaded file
    *
    * @param {Object} settings - the object containing the uploaded settings
+   * @function
    */
   importSettings = (settings) => {
     log.trace(`importSettings: ${JSON.stringify(settings)}`);
@@ -92,6 +97,7 @@ class ConfigController {
    * Convert the settings to a JSON object
    *
    * @return {string} - the JSON version of the settings
+   * @function
    */
   exportSettings = () => {
     log.trace(`exportSettings`);
@@ -104,7 +110,7 @@ class ConfigController {
 
   /**
    * Update the settingsLink content
-   * @param settings
+   * @param {Object} settings - configuration to convert to a URL
    */
   updateLink(settings) {
     log.trace(`updateLink: ${JSON.stringify(settings)}`);
@@ -114,7 +120,8 @@ class ConfigController {
 
   /**
    * Copy the parameter to the clipboard
-   * @param url
+   *
+   * @param {string} url - the url to be copied
    */
   copyUrl(url) {
     navigator.clipboard.writeText(url);

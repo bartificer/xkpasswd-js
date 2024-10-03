@@ -1,7 +1,7 @@
 /**
  * Random number generator based on Crypt::RNG:Basic
  *
- * @module RandomBasic
+ * @module lib/RandomBasic
  */
 
 import cryptoRandomString from 'crypto-random-string';

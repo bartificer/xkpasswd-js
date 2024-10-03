@@ -1,7 +1,7 @@
 /**
  * This is the main class that interfaces with the webapp
  *
- * @module XKPasswd
+ * @module lib/XKPasswd
  */
 
 import is from 'is-it-check';
@@ -62,7 +62,7 @@ class XKPasswd {
   /**
    * Create a CUSTOM preset and set the default preset to it.
    *
-   * @param {object} settings - object containing the settings
+   * @param {Object} settings - object containing the settings
    */
   setCustomPreset(settings) {
     const preset = {
@@ -98,7 +98,7 @@ class XKPasswd {
    * Generate the password(s) and stats
    *
    * @param {number} num - number of passwords to generate
-   * @return {object} - contains the passwords and the stats
+   * @return {Object} - contains the passwords and the stats
    */
   generatePassword(num) {
     const passwords = this.passwords(num);

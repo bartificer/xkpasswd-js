@@ -1,7 +1,7 @@
 /**
  * Class with all presets
  *
- * @module Presets
+ * @module lib/Presets
  */
 
 import {RandomBasic} from './randombasic.mjs';
@@ -478,7 +478,7 @@ class Presets {
   /**
    * Get the default preset
    *
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   static getDefault() {
     return thePresets.DEFAULT;
@@ -486,7 +486,7 @@ class Presets {
 
   /**
    * Get the current preset
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   getCurrent() {
     return this.#current;
@@ -495,7 +495,7 @@ class Presets {
   /**
    * Get the config part of the current preset
    *
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   config() {
     return this.#current.config;
@@ -596,7 +596,7 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to test
+   * @param {Object} config - the config to test
    * @return {string} the list of characters
    */
   __getSeparatorAlphabet(config) {
@@ -618,7 +618,7 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to test
+   * @param {Object} config - the config to test
    * @return {string} the list of characters
    */
   __getPaddingAlphabet(config) {
@@ -660,7 +660,7 @@ class Presets {
    *
    * @param {number} min - minimum word length
    * @param {number} max - maximum word length
-   * @return {object} - min and max numbers
+   * @return {Object} - min and max numbers
    */
   __getMinMaxWordLength(min, max) {
     // make sure min and max are in the right order
@@ -681,8 +681,8 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to fix
-   * @return {object} - the object with the normalized properties
+   * @param {Object} config - the config to fix
+   * @return {Object} - the object with the normalized properties
    */
   __getSeparatorConfig(config) {
     const newConfig = {};
@@ -750,8 +750,8 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to fix
-   * @return {object} - the object with the normalized properties
+   * @param {Object} config - the config to fix
+   * @return {Object} - the object with the normalized properties
    */
   __getPaddingCharacterConfig(config) {
     const newConfig = {};

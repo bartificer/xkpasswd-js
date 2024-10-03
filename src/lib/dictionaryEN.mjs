@@ -1,7 +1,7 @@
 /**
- * Class containing an English dictionary
+ * Extended Dictionary class that contains an English dictionary
  *
- * @module DictionaryEN
+ * @module lib/DictionaryEN
  */
 
 import {Dictionary} from './dictionary.mjs';
@@ -1285,12 +1285,19 @@ const THE_WORDS = [
 ];
 
 /**
- * class for English Dictionary
+ * Class representing an English dictionary.
+ * This class extends the generic {@link Dictionary} class.
+ * It provides an English word list and functionality to retrieve words.
  *
- * @class DictionaryEN
+ * @class
+ * @extends {Dictionary}
  * @constructor
  */
 class DictionaryEN extends Dictionary {
+  /**
+   * Constructs an instance of the English Dictionary.
+   * Calls the superclass constructor to initialize the dictionary.
+   */
   constructor() {
     super();
     super.__setLength(THE_WORDS.length);
@@ -1310,17 +1317,19 @@ class DictionaryEN extends Dictionary {
   /**
    * Return the word list of this dictionary
    *
-   * @return {Array} - list of words
+   * @returns {Array<string>} - The list of words in the dictionary.
    */
   wordList() {
     return THE_WORDS;
   }
 
   /**
-   * Return a word from the list
+   * Return a word from the list by its index.
    *
-   * @param {number} index
-   * @return {string} - the word at the index position
+   * @override
+   * @param {number} index - The index of the word in the list.
+   * @throws {Error} Will throw an error if the index is not a valid number.
+   * @returns {string} - The word at the given index.
    */
   word(index) {
     if (index === undefined || (typeof index !== 'number') ||

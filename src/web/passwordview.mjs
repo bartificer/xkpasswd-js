@@ -1,16 +1,17 @@
+/**
+ * @module web/PasswordView
+ */
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * and interaction with the password and stats
+ * @class This class handles the rendering of
+ * and interaction with the password and stats.
  *
- * @class PasswordView
  * @constructor
  */
 class PasswordView {
   /**
    *  set the Bootstrap classes for the various values
-   * @private
    */
   #stats_classes = {
     GOOD: {
@@ -205,7 +206,8 @@ class PasswordView {
 
   /**
    * bind the Generate button to the event handler
-   * @param {Function} handle - pass control to the Controller
+   *
+   * @param {function} handle - pass control to the Controller
    */
   bindGeneratePassword(handle) {
     log.trace('bindGeneratePassword');
@@ -275,7 +277,7 @@ class PasswordView {
 
   /**
    * Render the details of the statistics
-   * @param {object} stats - object holding the statistics
+   * @param {Object} stats - object holding the statistics
    *
    * @private
    */

@@ -1,27 +1,32 @@
+/**
+ * @module web/ConfigView
+ */
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * actions on custom settings
+ * @class This class handles the rendering of
+ * actions on custom settings.
  *
  * This class takes care of the 2 menu items in the Actions menu
- * and the settingsLink with the base64encoded settings
+ * and the settingsLink with the base64encoded settings.
  *
- * @class ConfigView
  * @constructor
  */
 class ConfigView {
   /**
-   * @private {jQuery} savedSettingsLink - Readonly text input to display link
+   * {jQuery} savedSettingsLink - Readonly text input to display link
    * encoded settings
    */
   #savedSettingsLink;
 
   /**
-   * @private {Object} copySettingsLink - copy button to copy the url
+   * {Object} copySettingsLink - copy button to copy the url
    */
   #copySettingsLink;
 
+  /**
+   * {Object} settingsDiv - div containing the settingslink
+   */
   #settingsDiv;
 
   constructor() {
@@ -34,7 +39,7 @@ class ConfigView {
    * Bind the load config form, which is displayed by clicking on the 'import
    * settings' in the menu
    *
-   * @param {Function} handle - pass control to the Controller to parse the JSON
+   * @param {function} handle - pass control to the Controller to parse the JSON
    * file
    */
   bindLoadConfig(handle) {
@@ -65,7 +70,7 @@ class ConfigView {
   /**
    * Handle the saving of the configuration as JSON file
    *
-   * @param {Function} handle - pass control to the Controller to build
+   * @param {function} handle - pass control to the Controller to build
    * the export JSON
    */
   bindSaveConfig(handle) {
@@ -78,7 +83,7 @@ class ConfigView {
   /**
    * Bind the copy button in the settings link
    *
-   * @param {Function} handle - pass control to the Controller to save the link
+   * @param {function} handle - pass control to the Controller to save the link
    */
   bindCopySettingsLink(handle) {
     this.#settingsDiv.on('click', () => {
