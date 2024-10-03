@@ -1,4 +1,42 @@
 {
+  "docdash": {
+    "collapse": true,
+    "menu": {
+      "Bartificer Creations": {
+        "href": "https://bartificer.net/",
+        "target": "_blank"
+      },
+      "Podfeet Podcasts": {
+        "href": "https://podfeet.com/",
+        "target": "_blank"
+      },
+      "XKPasswd": {
+        "href": "https://beta.xkpasswd.net",
+        "target": "_blank"
+      }
+    },
+    "search": true,
+    "sectionOrder": [
+      "Modules",
+      "Classes",
+      "Tutorials"
+    ],
+    "static": true,
+    "sort": true,
+    "typedefs": true,
+    "scripts": [
+      "jsdoc-xkp.css"
+    ]
+  },
+  "templates": {
+    "default": {
+      "staticFiles": {
+        "include": [
+          "src/docs/jsdoc-xkp.css"
+        ]
+      }
+    }
+  },
   "opts": {
     "encoding": "utf8",
     "pedantic": true,
@@ -7,7 +45,8 @@
   "source": {
     "include": [
       "./src/",
-      "./src/lib/"
+      "./src/lib/",
+      "./src/web/"
     ],
     "includePattern": ".+\\.(mjs|js|jsdoc)$"
   },
