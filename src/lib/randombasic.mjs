@@ -22,12 +22,11 @@ class RandomBasic {
   randomChar(charset) {
     if (is.undefined(charset)) {
       return '';
-    };
-    const c = cryptoRandomString({
+    }
+    return cryptoRandomString({
       length: 1,
       characters: charset.toString(),
     });
-    return c;
   }
 
   /**
@@ -50,12 +49,10 @@ class RandomBasic {
       throw new Error(errMsg);
     }
 
-    // const digits = new Array(num).fill(0).map(() => this.randomInt(10));
-    const digits = cryptoRandomString({
+    return cryptoRandomString({
       length: num,
       type: 'numeric',
     });
-    return digits;
   }
 
   /**
