@@ -26,7 +26,10 @@
       ],
       "globalSetup": "jest-environment-puppeteer/setup",
       "globalTeardown": "jest-environment-puppeteer/teardown",
-      "testEnvironment": "jest-environment-puppeteer"
+      "testEnvironment": "jest-environment-puppeteer",
+      "testEnvironmentOptions": {
+        "headless": true
+      }
     }
   ]
 }

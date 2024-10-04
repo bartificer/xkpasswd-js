@@ -1,7 +1,12 @@
 /**
  * Test puppeteer
+ * This is merely a test file to test some Puppeteer tests.
+ *
+ * Everything in here should pass.
+ *
  */
-import {expect, test, describe, jest} from '@jest/globals';
+/* @jest-environment jsdom */
+
 import "expect-puppeteer";
 
 const xkp_url = "http://localhost:8080";
@@ -18,6 +23,10 @@ describe("Google", () => {
 
 describe('About', () => {
   beforeAll(async () => {
-    await page.goto(xkp_url,)
-  })
+    await page.goto(xkp_url);
+  }, 10000);
+
+  test('should display "About" on the page', async () => {
+    await expect(page).toMatchTextContent("About");
+  }, 1000);
 });
