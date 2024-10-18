@@ -103,12 +103,26 @@ class ConfigController {
 
   /**
    * Update the settingsLink content
-   * @param settings
+   * 
+   * @param {object} settings - object containing the settings
+   * @param {string} preset - (Optional) The name of the preset
    */
-  updateLink(settings) {
+  updateLink(settings, preset = null) {
     log.trace(`updateLink: ${JSON.stringify(settings)}`);
-    const url = this.toUrl(settings);
-    this.#view.updateLink(url);
+
+    const link = new URL(window.location);
+
+    // Build the link with the correct search parameters
+    if (preset == null) {
+      const url = this.toUrl(settings);
+      link.href = url;
+      link.searchParams.delete('p');
+    } else { 
+      link.searchParams.delete('c');
+      link.searchParams.set('p', preset.toUpperCase());
+    }
+
+    this.#view.updateLink(link);
   }
 
   /**
@@ -119,22 +133,39 @@ class ConfigController {
     navigator.clipboard.writeText(url);
   }
 
-
   /**
-   * Loads the settings from a URL and store them in the model
+   * Loads the settings from a URL and store them in the model,
+   * and returns the name of the preset if specified.
    *
    * @param {string} url - The URL to try to extract the settings from
+   * @return {string} - The name of the preset or TEMPORARY if custom URL.
    */
   loadFromUrl(url) {
     log.trace(`loadFromUrl: ${url}`);
-    const settings = this.fromUrl(url);
 
-    if (JSON.stringify(settings) !== '{}') {
-      // somehow I cannot get the settings object to match an empty object
-      // without doing this stringify action
-      this.#model.setCustomPreset(settings);
-      this.#settingsController.updateSettings(settings);
-      this.#view.updateLink(window.location);
+    const validParams = ['c', 'p'];
+    const link = new URL(url);
+    const params = link.searchParams;
+    const queryParam = validParams.find(x => params.get(x) !== null);
+
+    switch(queryParam) {
+      case "c":
+        const settings = this.fromUrl(url);
+        if (JSON.stringify(settings) !== '{}') {
+          // somehow I cannot get the settings object to match an empty object
+          // without doing this stringify action
+          this.#model.setCustomPreset(settings);
+          this.#settingsController.updateSettings(settings);
+        }
+        return "TEMPORARY";
+      case "p":
+        const preset = params.get(queryParam).toUpperCase();
+        this.#model.setPreset(preset);
+        link.searchParams.set('p', preset);
+        this.#view.updateLink(link, preset);
+        return preset;
+      default:
+        break;
     }
   }
 
@@ -167,7 +198,7 @@ class ConfigController {
     const settings = {};
     let values = null;
 
-    if (params.get('c') == null) {
+    if (params.get('c') == null && params.get('p') == null) {
       return {};
     }
 
