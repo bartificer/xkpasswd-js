@@ -47,6 +47,10 @@ class SettingsController {
    */
   setConfigController( configController) {
     this.#config = configController;
+
+    // Now that the configController is set, we can update the Config Url
+     const config = this.#model.getPreset().config();
+    this.#config.updateLink(config);
   }
 
   /**
