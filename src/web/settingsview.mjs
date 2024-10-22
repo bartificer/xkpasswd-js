@@ -199,11 +199,11 @@ class SettingsView {
     case 'NONE':
       separatorCharacterParent.hide(this.#aniTime);
       if (separatorCharacter.val().length < 1) {
-        separatorCharacter.val('|');
+        separatorCharacter.val('#');
       }
       separatorAlphabetParent.hide(this.#aniTime);
       if (separatorAlphabet.val().length < 2) {
-        separatorAlphabet.val('|+');
+        separatorAlphabet.val('#+');
       }
       break;
 
@@ -212,14 +212,14 @@ class SettingsView {
       separatorAlphabetParent.hide(this.#aniTime);
       separatorCharacter.prop('required', true);
       if (separatorAlphabet.val().length < 2) {
-        separatorAlphabet.val('|+');
+        separatorAlphabet.val('#+');
       }
       break;
 
     case 'RANDOM':
       separatorCharacterParent.hide(this.#aniTime);
       if (separatorCharacter.val().length < 1) {
-        separatorCharacter.val('|');
+        separatorCharacter.val('#');
       }
       separatorAlphabetParent.show(this.#aniTime);
       separatorAlphabet.prop('required', true);
