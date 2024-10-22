@@ -64,7 +64,7 @@ class ConfigController {
 
     this.#view.bindLoadConfig(this.importSettings);
     this.#view.bindSaveConfig(this.exportSettings);
-    this.#view.bindCopySettingsLink(this.copyUrl);
+    this.#view.bindConfigUrlBox(this.copyUrl);
 
     log.trace('ConfigController constructor executed');
   }
@@ -102,13 +102,13 @@ class ConfigController {
   };
 
   /**
-   * Update the settingsLink content
+   * Update the configUrl content
    * @param settings
    */
   updateLink(settings) {
     log.trace(`updateLink: ${JSON.stringify(settings)}`);
     const url = this.toUrl(settings);
-    this.#view.updateLink(url);
+    this.#view.updateConfigUrl(url);
   }
 
   /**
@@ -134,7 +134,7 @@ class ConfigController {
       // without doing this stringify action
       this.#model.setCustomPreset(settings);
       this.#settingsController.updateSettings(settings);
-      this.#view.updateLink(window.location);
+      this.#view.updateConfigUrl(window.location);
     }
   }
 

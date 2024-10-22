@@ -318,24 +318,26 @@
                       </div> <!-- /collapseSettings -->
                     </div> <!-- /accordion-item for settings -->
 
-                    <!-- settings-link -->
-                    <div id="settings-link" class="row g-1 mt-1 mb-3">
-                      <div class="mt-2 col-md-8 col-md-8">
+                    <!-- configUrlBox -->
+                    <div id="configUrlBox" class="row g-1 mt-1 mb-3">
+                      <div class="mt-2 col-md-8">
                         <div class="input-group">
-                          <label for="savedSettingsLink" class="input-group-text">Settings link</label>
+                          <label for="configUrl" class="input-group-text">
+                            <button id="copyConfigUrlBtn"
+                            class="list-group-item px-0"
+                            aria-label="Copy link"><i class="me-3 bi bi-copy"></i>
+                            </button>
+                            Copy Config URL
+                          </label>
                           <input class="form-control rounded-end" type="text" placeholder="" readonly disabled="disabled"
-                            name="savedSettingsLink" id="savedSettingsLink" minlength="2" maxlength="20" size="1" />
+                                 name="configUrl" id="configUrl" minlength="2" maxlength="20" size="1" />
                         </div>
+                        <div id="bookmarkConfigUrl" class="form-text">Bookmark Config URL to recreate the current settings config
+                        </div>
+
                        </div>
-                       <div class="mt-2 col-sm-8 col-md-4">
-                        <div class="input-group">
-                          <button id="copySettingsLink"
-                          class="list-group-item px-0"
-                          aria-label="Copy link"><i class="me-3 bi bi-copy"></i>Copy
-                        </button>
-                        </div>
-                      </div>
-                    </div> <!-- /settings-link -->
+
+                    </div> <!-- /configUrlBox -->
 
                   </div> <!-- /accordion configOptions -->
                 <!-- /div> <! - - /accordion body - - >
