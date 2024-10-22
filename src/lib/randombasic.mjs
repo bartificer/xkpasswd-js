@@ -1,7 +1,7 @@
 /**
  * Random number generator based on Crypt::RNG:Basic
  *
- * @module RandomBasic
+ * @module lib/RandomBasic
  */
 
 import cryptoRandomString from 'crypto-random-string';
@@ -10,7 +10,7 @@ import log from 'loglevel';
 
 /**
  * Generate random numbers
- * @class XKPasswd
+ * @class RandomBasic
  */
 class RandomBasic {
   /**
@@ -22,12 +22,11 @@ class RandomBasic {
   randomChar(charset) {
     if (is.undefined(charset)) {
       return '';
-    };
-    const c = cryptoRandomString({
+    }
+    return cryptoRandomString({
       length: 1,
       characters: charset.toString(),
     });
-    return c;
   }
 
   /**
@@ -35,7 +34,7 @@ class RandomBasic {
    *
    * @param {number} num - number of random digits to generate,
    *  defaults to empty string if not given
-   * @return {Array} - array of random digits
+   * @return {string} - array of random digits
    * @throws Exception when parameter is not a number
    *
    */
@@ -50,12 +49,10 @@ class RandomBasic {
       throw new Error(errMsg);
     }
 
-    // const digits = new Array(num).fill(0).map(() => this.randomInt(10));
-    const digits = cryptoRandomString({
+    return cryptoRandomString({
       length: num,
       type: 'numeric',
     });
-    return digits;
   }
 
   /**
@@ -135,10 +132,11 @@ class RandomBasic {
    * Generate an array of numbers between 0 and 9
    * Array length = parameter `num`
    *
-   * TODO in the Perl version this function was only used to fill a cache of random numbers
+   * TODO in the Perl version this function was only used to fill a cache of
+   * random numbers
    * ? so probably it's not needed anymore.
    *
-   * @param {Integer} num - number of random numbers to generate,
+   * @param {integer} num - number of random numbers to generate,
    *  defaults to 1 if not given
    * @return {Array}
    * @throws Exception when parameter is not a number
@@ -158,4 +156,3 @@ class RandomBasic {
 }
 
 export {RandomBasic};
-

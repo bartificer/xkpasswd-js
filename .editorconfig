@@ -11,14 +11,3 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
-
-# Matches multiple files with brace expansion notation
-# Set default charset
-[*.{mjs,js}]
-indent_style = space
-indent_size = 2
-
-# Matches the exact files package.json
-[{package.json}]
-indent_style = space
-indent_size = 2

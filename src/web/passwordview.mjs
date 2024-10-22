@@ -1,15 +1,17 @@
+/**
+ * @module web/PasswordView
+ */
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * and interaction with the password and stats
+ * @class This class handles the rendering of
+ * and interaction with the password and stats.
  *
- * @class PasswordView
+ * @constructor
  */
 class PasswordView {
   /**
    *  set the Bootstrap classes for the various values
-   * @private
    */
   #stats_classes = {
     GOOD: {
@@ -44,7 +46,7 @@ class PasswordView {
   #numberOfPasswords;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.#passwordPresentation = $('#password_presentation');
@@ -75,59 +77,6 @@ class PasswordView {
     this.clearPasswordArea();
   };
 
-  /**
-   * Reset the password UI elements.
-   */
-  __resetPasswordUI() {
-    this.#passwordPresentation.addClass('d-none');
-    this.#passwordList.html('');
-    this.#passwordText.val('');
-    // Make both password content elements invisible.
-    this.#passwordList.addClass('d-none');
-    this.#passwordText.addClass('d-none');
-
-    // Clear out existing events.
-    const existingListItems = this.#passwordList.find('button');
-    for (const item of existingListItems) {
-      if (item.hasOwnProperty('removeEventListener')) {
-        item.removeEventListener('click');
-      }
-    }
-  }
-
-  /**
-   * Update the password UI elements
-   * based upon the password presentation mode.
-   */
-  __updatePasswordUI() {
-    // Show the presentation selection
-    this.#passwordPresentation.removeClass('d-none');
-
-    // Get the password presentation mode.
-    // eslint-disable-next-line max-len
-    const pwdPresentation = $('input:radio[name=pwdPresentation]:checked').val();
-    if (pwdPresentation === 'lst') {
-      // Hide the text area
-      this.#passwordText.addClass('d-none');
-      // Show the list container
-      this.#passwordList.removeClass('d-none');
-    }
-    else {
-      // Cache the current password text.
-      const currentPasswords = this.#passwordText.val();
-      // Clear the passwords (to help manage focus)
-      this.#passwordText.val('');
-      // Put the passwords back. (focus has been reset).
-      this.#passwordText.val(currentPasswords);
-
-      // Hide the list container
-      this.#passwordList.addClass('d-none');
-      // Show the text area container
-      this.#passwordText.removeClass('d-none');
-      // Select the password text.
-      this.#passwordText[0].select();
-    }
-  }
 
   /**
    * Render the password and statistics
@@ -204,7 +153,8 @@ class PasswordView {
 
   /**
    * bind the Generate button to the event handler
-   * @param {Function} handle - pass control to the Controller
+   *
+   * @param {function} handle - pass control to the Controller
    */
   bindGeneratePassword(handle) {
     log.trace('bindGeneratePassword');
@@ -254,6 +204,64 @@ class PasswordView {
   };
 
   /**
+   * Reset the password UI elements.
+   *
+   * @private
+   */
+  __resetPasswordUI() {
+    this.#passwordPresentation.addClass('d-none');
+    this.#passwordList.html('');
+    this.#passwordText.val('');
+    // Make both password content elements invisible.
+    this.#passwordList.addClass('d-none');
+    this.#passwordText.addClass('d-none');
+
+    // Clear out existing events.
+    const existingListItems = this.#passwordList.find('button');
+    for (const item of existingListItems) {
+      if (item.hasOwnProperty('removeEventListener')) {
+        item.removeEventListener('click');
+      }
+    }
+  }
+
+  /**
+   * Update the password UI elements
+   * based upon the password presentation mode.
+   *
+   * @private
+   */
+  __updatePasswordUI() {
+    // Show the presentation selection
+    this.#passwordPresentation.removeClass('d-none');
+
+    // Get the password presentation mode.
+    // eslint-disable-next-line max-len
+    const pwdPresentation = $('input:radio[name=pwdPresentation]:checked').val();
+    if (pwdPresentation === 'lst') {
+      // Hide the text area
+      this.#passwordText.addClass('d-none');
+      // Show the list container
+      this.#passwordList.removeClass('d-none');
+    }
+    else {
+      // Cache the current password text.
+      const currentPasswords = this.#passwordText.val();
+      // Clear the passwords (to help manage focus)
+      this.#passwordText.val('');
+      // Put the passwords back. (focus has been reset).
+      this.#passwordText.val(currentPasswords);
+
+      // Hide the list container
+      this.#passwordList.addClass('d-none');
+      // Show the text area container
+      this.#passwordText.removeClass('d-none');
+      // Select the password text.
+      this.#passwordText[0].select();
+    }
+  }
+
+  /**
    * hide statistics section
    *
    * @private
@@ -274,7 +282,7 @@ class PasswordView {
 
   /**
    * Render the details of the statistics
-   * @param {object} stats - object holding the statistics
+   * @param {Object} stats - object holding the statistics
    *
    * @private
    */
@@ -340,6 +348,8 @@ class PasswordView {
    *
    * @param {number} minLength - minimum length of password
    * @param {number} maxLength - maximum length of password
+   *
+   * @private
    */
   __renderPasswordLength(minLength, maxLength) {
     let template = "";
@@ -358,6 +368,8 @@ class PasswordView {
    * Render the password strength
    *
    * @param {string} passwordStrength - indication of the password strength
+   *
+   * @private
    */
   __renderPasswordStrength(passwordStrength) {
     // we assume that the strength indicator is already calculated

@@ -24,33 +24,38 @@ const map = [
 ];
 
 /**
- * This class handle the loading/saving of custom password configurations
+ * @class This class handles the loading/saving of custom password
+ * configurations.
  *
  * There are 2 ways of loading/saving:
  *
  * - the origin of this class: using a base64encoded uri
  * - importing and exporting a JSON file
  *
+ *
+ * @constructor
  */
 class ConfigController {
   /**
-   * @private model - reference to password model
+   * {XKPasswd} model - reference to password model
+   * @private
    */
   #model;
 
   /**
-   * @private view - reference to ConfigView
+   * {ConfigView} view - reference to ConfigView
+   * @private
    */
   #view;
 
   /**
-   * @private settingsController - reference to SettingsController
+   * {SettingsController} settingsController - reference to SettingsController
+   * @private
    */
   #settingsController;
 
   /**
    * The default class constructor
-   * @constructor
    *
    * @param {XKPasswd} model - reference to PasswordModel
    * @param {ConfigView} view - reference to ConfigView
@@ -64,7 +69,7 @@ class ConfigController {
 
     this.#view.bindLoadConfig(this.importSettings);
     this.#view.bindSaveConfig(this.exportSettings);
-    this.#view.bindCopySettingsLink(this.copyUrl);
+    this.#view.bindConfigUrlBox(this.copyUrl);
 
     log.trace('ConfigController constructor executed');
   }
@@ -73,6 +78,7 @@ class ConfigController {
    *  Import the settings from the uploaded file
    *
    * @param {Object} settings - the object containing the uploaded settings
+   * @function
    */
   importSettings = (settings) => {
     log.trace(`importSettings: ${JSON.stringify(settings)}`);
@@ -91,6 +97,7 @@ class ConfigController {
    * Convert the settings to a JSON object
    *
    * @return {string} - the JSON version of the settings
+   * @function
    */
   exportSettings = () => {
     log.trace(`exportSettings`);
@@ -102,9 +109,9 @@ class ConfigController {
   };
 
   /**
-   * Update the settingsLink content
-   * 
-   * @param {object} settings - object containing the settings
+   * Update the configUrl content
+   *
+   * @param {object} settings - configuration to convert to a URL
    * @param {string} preset - (Optional) The name of the preset
    */
   updateLink(settings, preset = null) {
@@ -117,7 +124,7 @@ class ConfigController {
       const url = this.toUrl(settings);
       link.href = url;
       link.searchParams.delete('p');
-    } else { 
+    } else {
       link.searchParams.delete('c');
       link.searchParams.set('p', preset.toUpperCase());
     }
@@ -127,18 +134,20 @@ class ConfigController {
 
   /**
    * Copy the parameter to the clipboard
-   * @param url
+   *
+   * @param {string} url - the url to be copied
    */
   copyUrl(url) {
     navigator.clipboard.writeText(url);
   }
+
 
   /**
    * Loads the settings from a URL and store them in the model,
    * and returns the name of the preset if specified.
    *
    * @param {string} url - The URL to try to extract the settings from
-   * @return {string} - The name of the preset or TEMPORARY if custom URL.
+   * @return {string} - The name of the preset or CUSTOM if custom URL.
    */
   loadFromUrl(url) {
     log.trace(`loadFromUrl: ${url}`);
@@ -157,12 +166,12 @@ class ConfigController {
           this.#model.setCustomPreset(settings);
           this.#settingsController.updateSettings(settings);
         }
-        return "TEMPORARY";
+        return "CUSTOM";
       case "p":
         const preset = params.get(queryParam).toUpperCase();
         this.#model.setPreset(preset);
         link.searchParams.set('p', preset);
-        this.#view.updateLink(link, preset);
+        this.#view.updateConfigUrl(link, preset);
         return preset;
       default:
         break;
@@ -189,7 +198,7 @@ class ConfigController {
    * Convert an url into a settings object for further processing
    * Return an empty object if there is no parameter in the url.
    *
-   * @param url - the url from the window.location or from the settingslink
+   * @param url - the URL from the window.location or from the configUrl
    * @return {Object} - empty object if something went wrong, or settings object
    */
   fromUrl(url) {
@@ -227,6 +236,8 @@ class ConfigController {
    * URL safe base64 encoded string
    *
    * @returns {string} - A base64 encoded string with the settings
+   *
+   * @private
    */
   __getEncodedSettings(settings) {
     let values = [];
@@ -251,6 +262,8 @@ class ConfigController {
    *
    * @param {string} str - string to encode as base64 string
    * @returns {string} - A base64 encoded string
+   *
+   * @private
    */
   __base64URLencode(str) {
     const base64Encoded = btoa(str);
@@ -265,6 +278,8 @@ class ConfigController {
    *
    * @param {string} str - A base64 encoded string
    * @returns {string} - The decoded string
+   *
+   * @private
    */
   __base64URLdecode(str) {
     const base64Encoded = str

@@ -1,20 +1,23 @@
+/**
+ * @module web/SettingsView
+ */
 import log from 'loglevel';
 import {Collapse} from 'bootstrap';
 
 /**
- * This class handles the rendering of
- * and interaction with the settings
+ *@class This class handles the rendering of
+ * and interaction with the settings.
  *
- * @class SettingsView
+ * @constructor
  */
 class SettingsView {
   /**
-   * @private {number} aniTime - set time to show/hide elements
+   * {number} aniTime - set time to show/hide elements
    */
   #aniTime = 250;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.__togglePaddingType('NONE');
@@ -38,7 +41,7 @@ class SettingsView {
    * Update the fields in the settings with
    * the contents of the current preset
    *
-   * @param {object} preset - settings belonging by the current preset
+   * @param {Object} preset - settings belonging by the current preset
    */
   renderSettings(preset) {
     this.resetConfigError();
@@ -69,7 +72,7 @@ class SettingsView {
    * Save the modified settings to generate passwords
    * based on these new settings
    *
-   * @param {Function} handle - pass control to the Controller
+   * @param {function} handle - pass control to the Controller
    */
   bindSaveSettings(handle) {
     /*
@@ -138,6 +141,7 @@ class SettingsView {
   /**
    * Set the error message and show it
    * or hide it on empty message
+   *
    * @param {string }t - text or empty
    */
   setErrorMessage(t) {
@@ -154,6 +158,8 @@ class SettingsView {
    * Render the error caused by the imported configuration
    * Hide the fields because they cannot be updated
    * Disable the Generate button because behaviour is unpredictable
+   *
+   * @param {Error} e - error object with the message to display
    */
   renderConfigError(e) {
     this.showSettings();
@@ -199,11 +205,11 @@ class SettingsView {
     case 'NONE':
       separatorCharacterParent.hide(this.#aniTime);
       if (separatorCharacter.val().length < 1) {
-        separatorCharacter.val('|');
+        separatorCharacter.val('#');
       }
       separatorAlphabetParent.hide(this.#aniTime);
       if (separatorAlphabet.val().length < 2) {
-        separatorAlphabet.val('|+');
+        separatorAlphabet.val('#+');
       }
       break;
 
@@ -212,14 +218,14 @@ class SettingsView {
       separatorAlphabetParent.hide(this.#aniTime);
       separatorCharacter.prop('required', true);
       if (separatorAlphabet.val().length < 2) {
-        separatorAlphabet.val('|+');
+        separatorAlphabet.val('#+');
       }
       break;
 
     case 'RANDOM':
       separatorCharacterParent.hide(this.#aniTime);
       if (separatorCharacter.val().length < 1) {
-        separatorCharacter.val('|');
+        separatorCharacter.val('#');
       }
       separatorAlphabetParent.show(this.#aniTime);
       separatorAlphabet.prop('required', true);

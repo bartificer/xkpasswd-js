@@ -1,7 +1,7 @@
 /**
  * Class with all presets
  *
- * @module Presets
+ * @module lib/Presets
  */
 
 import {RandomBasic} from './randombasic.mjs';
@@ -406,6 +406,8 @@ const thePresets = {
  * The configurable settings are described in the documentation.
  *
  * @class Presets
+ * @constructor
+
  */
 class Presets {
   // private var holds the current preset
@@ -422,7 +424,6 @@ class Presets {
    * predefined sets, use that, otherwise
    * assume it's a custom configuration.
    *
-   * @constructor
    *
    * @param {any} preset - either string with
    * name of predefined set or object with
@@ -477,7 +478,7 @@ class Presets {
   /**
    * Get the default preset
    *
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   static getDefault() {
     return thePresets.DEFAULT;
@@ -485,7 +486,7 @@ class Presets {
 
   /**
    * Get the current preset
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   getCurrent() {
     return this.#current;
@@ -494,7 +495,7 @@ class Presets {
   /**
    * Get the config part of the current preset
    *
-   * @return {object} - the preset
+   * @return {Object} - the preset
    */
   config() {
     return this.#current.config;
@@ -577,10 +578,10 @@ class Presets {
     // parse number fields to integers
     Object.keys(newConfig).forEach(key => {
       if (
-        key == 'word_length_min' || key == 'word_length_max' ||
-        key == 'padding_digits_before' || key == 'padding_digits_after' ||
-        key == 'padding_characters_before' || key == 'padding_characters_after' ||
-        key == 'num_words' || key == 'pad_to_length'
+        key === 'word_length_min' || key === 'word_length_max' ||
+        key === 'padding_digits_before' || key === 'padding_digits_after' ||
+        key === 'padding_characters_before' || key === 'padding_characters_after' ||
+        key === 'num_words' || key === 'pad_to_length'
       ) {
         newConfig[key] = parseInt(newConfig[key]);
       }
@@ -595,7 +596,7 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to test
+   * @param {Object} config - the config to test
    * @return {string} the list of characters
    */
   __getSeparatorAlphabet(config) {
@@ -617,7 +618,7 @@ class Presets {
    *
    * @private
    *
-   * @param {object} config - the config to test
+   * @param {Object} config - the config to test
    * @return {string} the list of characters
    */
   __getPaddingAlphabet(config) {
@@ -659,7 +660,7 @@ class Presets {
    *
    * @param {number} min - minimum word length
    * @param {number} max - maximum word length
-   * @return {object} - min and max numbers
+   * @return {Object} - min and max numbers
    */
   __getMinMaxWordLength(min, max) {
     // make sure min and max are in the right order
@@ -678,9 +679,10 @@ class Presets {
   /**
    * Get the separator configuration
    *
-   * @param {object} config - the config to fix
+   * @private
    *
-   * @return {object} - the object with the normalized properties
+   * @param {Object} config - the config to fix
+   * @return {Object} - the object with the normalized properties
    */
   __getSeparatorConfig(config) {
     const newConfig = {};
@@ -746,9 +748,10 @@ class Presets {
   /**
    * Get the padding character configuration
    *
-   * @param {object} config - the config to fix
+   * @private
    *
-   * @return {object} - the object with the normalized properties
+   * @param {Object} config - the config to fix
+   * @return {Object} - the object with the normalized properties
    */
   __getPaddingCharacterConfig(config) {
     const newConfig = {};

@@ -1,31 +1,37 @@
 /* istanbul ignore file @preserve */
+
+/**
+ * @module web/Presetcontroller
+ */
 import log from 'loglevel';
 
 /**
- * @class PresetController
+ * @class This class handles the Preset buttons
+ *
+ * @constructor
  */
 class PresetController {
   /**
-   * @private model - reference to preset model
+   * model - reference to preset model
    */
   #model;
 
   /**
-   * @private view - reference to PresetView
+   * view - reference to PresetView
    */
   #view;
 
   /**
-   * @private settingsController - reference to SettingsController
+   * settingsController - reference to SettingsController
    */
   #settingsController;
 
   /**
-   * @private passwordController - reference to PasswordController
+   * passwordController - reference to PasswordController
    */
   #passwordController;
   /**
-   * @constructor
+   * Constructor
    *
    * @param {XKPasswd} model - reference to PresetModel
    * @param {PresetView} view - reference to PresetView
@@ -50,14 +56,15 @@ class PresetController {
   /**
    * Handle the selection of the preset
    * @param {string} preset - reference to the selected preset
+   * @function
    */
   onPresetChanged = (preset) => {
     log.trace(`onPresetChanged: ${preset}`);
 
-    // tell the library which preset to make current
+    // Tell the library which preset to make current
     this.#model.setPreset(preset);
 
-    // tell the view to update the description
+    // Tell the view to update the description
     const description = this.#model.getPreset().description();
     this.#view.displayDescription(description);
 

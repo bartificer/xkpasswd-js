@@ -1,39 +1,46 @@
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * actions on custom settings
+ * @class This class handles the rendering of
+ * actions on custom settings.
  *
  * This class takes care of the 2 menu items in the Actions menu
- * and the settingsLink with the base64encoded settings
+ * and the config Url with the base64encoded settings.
  *
- * @class ConfigView
+ * @constructor
  */
 class ConfigView {
   /**
-   * @private {jQuery} savedSettingsLink - Readonly text input to display link
+   * {jQuery} configUrl - Readonly text input to display the url
    * encoded settings
+   * @private
    */
-  #savedSettingsLink;
+  #configUrl;
 
   /**
-   * @private {Object} copySettingsLink - copy button to copy the url
+   * {Object} configURLBtn - copy button to copy the url
+   * @private
    */
-  #copySettingsLink;
+  #configUrlBtn;
 
-  #settingsDiv;
+  /**
+   * {Object} configUrlBox - div containing the button and input text
+   * for the config url
+   * @private
+   */
+  #configUrlBox;
 
   constructor() {
-    this.#savedSettingsLink = $('#savedSettingsLink');
-    this.#copySettingsLink = $('#copySettingsLink');
-    this.#settingsDiv = $('#settings-link');
+    this.#configUrl = $('#configUrl');
+    this.#configUrlBtn = $('#copyConfigUrlBtn');
+    this.#configUrlBox = $('#configUrlBox');
   }
 
   /**
    * Bind the load config form, which is displayed by clicking on the 'import
    * settings' in the menu
    *
-   * @param {Function} handle - pass control to the Controller to parse the JSON
+   * @param {function} handle - pass control to the Controller to parse the JSON
    * file
    */
   bindLoadConfig(handle) {
@@ -64,7 +71,7 @@ class ConfigView {
   /**
    * Handle the saving of the configuration as JSON file
    *
-   * @param {Function} handle - pass control to the Controller to build
+   * @param {function} handle - pass control to the Controller to build
    * the export JSON
    */
   bindSaveConfig(handle) {
@@ -75,31 +82,31 @@ class ConfigView {
   }
 
   /**
-   * Bind the copy button in the settings link
+   * Bind the copy button in the configUrlBox
    *
-   * @param {Function} handle - pass control to the Controller to save the link
+   * @param {function} handle - pass control to the Controller to save the link
    */
-  bindCopySettingsLink(handle) {
-    this.#settingsDiv.on('click', () => {
-      this.#savedSettingsLink.select();
-      handle(this.#savedSettingsLink.val());
-      this.#copySettingsLink.children('i')
+  bindConfigUrlBox(handle) {
+    this.#configUrlBox.on('click', () => {
+      this.#configUrl.select();
+      handle(this.#configUrl.val());
+      this.#configUrlBtn.children('i')
         .removeClass('bi-copy')
         .fadeIn(500).addClass('bi-check');
       setTimeout(() => {
-        this.#copySettingsLink.children('i')
+        this.#configUrlBtn.children('i')
           .removeClass('bi-check').addClass('bi-copy');
       }, 1000);
     });
   };
 
   /**
-   * Update the settings link
+   * Update the  config url
    *
    * @param {URL} url - the url to display
    */
-  updateLink(url) {
-    this.#savedSettingsLink.val(url);
+  updateConfigUrl(url) {
+    this.#configUrl.val(url);
   }
 }
 
