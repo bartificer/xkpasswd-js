@@ -1,13 +1,13 @@
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * actions on custom settings
+ * @class This class handles the rendering of
+ * actions on custom settings.
  *
  * This class takes care of the 2 menu items in the Actions menu
- * and the settingsLink with the base64encoded settings
+ * and the config Url with the base64encoded settings.
  *
- * @class ConfigView
+ * @constructor
  */
 class ConfigView {
   /**
@@ -37,7 +37,7 @@ class ConfigView {
    * Bind the load config form, which is displayed by clicking on the 'import
    * settings' in the menu
    *
-   * @param {Function} handle - pass control to the Controller to parse the JSON
+   * @param {function} handle - pass control to the Controller to parse the JSON
    * file
    */
   bindLoadConfig(handle) {
@@ -68,7 +68,7 @@ class ConfigView {
   /**
    * Handle the saving of the configuration as JSON file
    *
-   * @param {Function} handle - pass control to the Controller to build
+   * @param {function} handle - pass control to the Controller to build
    * the export JSON
    */
   bindSaveConfig(handle) {
@@ -81,7 +81,7 @@ class ConfigView {
   /**
    * Bind the copy button in the configUrlBox
    *
-   * @param {Function} handle - pass control to the Controller to save the link
+   * @param {function} handle - pass control to the Controller to save the link
    */
   bindConfigUrlBox(handle) {
     this.#configUrlBox.on('click', () => {
@@ -98,12 +98,12 @@ class ConfigView {
   };
 
   /**
-   * Update the config url
+   * Update the settings link
    *
    * @param {URL} url - the url to display
    */
-  updateConfigUrl(url) {
-    this.#configUrl.val(url);
+  updateLink(url) {
+    this.#savedSettingsLink.val(url);
   }
 }
 

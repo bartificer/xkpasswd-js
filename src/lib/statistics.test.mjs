@@ -1,7 +1,6 @@
 /**
  * Test class Statistics
  */
-/* jest-testenvironment: jsdom */
 
 import {Statistics} from './statistics.mjs';
 import {DictionaryEN} from './dictionaryEN.mjs';

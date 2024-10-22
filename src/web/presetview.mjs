@@ -1,29 +1,32 @@
+/**
+ * @module web/PresetView
+ */
 import log from 'loglevel';
 
 /**
- * This class handles the rendering of
- * and interaction with the preset buttons
+ * @class This class handles the rendering of
+ * and interaction with the preset buttons.
  *
- * @class PresetView
+ * @constructor
  */
 class PresetView {
   /**
-   * @private presetGroup - reference to the HTML preset group
+   * presetGroup - reference to the HTML preset group
    */
   #presetGroup;
   /**
-   * @private presetHeader - reference to the HTML preset header
+   * presetHeader - reference to the HTML preset header
    */
   #presetHeader;
 
   /**
-   * @private presetDescription - reference to the HTML div that will contain
+   * presetDescription - reference to the HTML div that will contain
    * the description of the current preset
    */
   #presetDescription;
 
   /**
-   * @constructor
+   * Constructor
    */
   constructor() {
     this.#presetGroup = $('#preset-btn-group');

@@ -1,13 +1,17 @@
 /**
  * This class deals with everything statistical
  *
- * @module stats
+ * @module lib/Statistics
  */
 
 import log from 'loglevel';
 import {Dictionary} from './dictionary.mjs';
 
-/** Calculate statistics */
+/** Calculate statistics
+ *
+ * @class Statistics
+ * @constructor
+ */
 class Statistics {
   #config; // the config that needs to be calculated
   #dictionary; // the dictionary that needs to be calculated
@@ -19,9 +23,8 @@ class Statistics {
 
   /**
  * Constructor
- * @constructor
  *
- * @param {object} config - the current config
+ * @param {Object} config - the current config
  * @param {Dictionary} dict - the current dictionary
  */
   constructor(config, dict) {
@@ -78,7 +81,7 @@ class Statistics {
    *
    * @param {boolean} suppressWarnings - suppress warnings, defaults to false
    * @throws Error on exception
-   * @return {object} - stats object on this config
+   * @return {Object} - stats object on this config
    */
   configStats(suppressWarnings = false) {
     // TODO do we need to validate the config? If so, how
@@ -226,7 +229,7 @@ class Statistics {
    *   * randomnumbers_source - the name of the class used to
    *        generate random numbers
    *
-   * @return {object} stats - the statistics
+   * @return {Object} stats - the statistics
    * @throws Error on exception
    *
    */
@@ -316,8 +319,8 @@ class Statistics {
    *       search-space of 33 symbols is assumed (same as password
    *       haystacks page)
    *
-   * @param {object} dictStats - dictionary statistics
-   * @return {object} - entropy stats
+   * @param {Object} dictStats - dictionary statistics
+   * @return {Object} - entropy stats
    * @throws {Error} - Exception on error
    * @private
    */
@@ -560,7 +563,7 @@ class Statistics {
    * Notes: the stats object passed are just
    * the entropies, not the full stats object
    *
-   * @param {object} stats - object holding the entropies
+   * @param {Object} stats - object holding the entropies
    * @return {string} - password strength code
    *
    * @private
@@ -594,6 +597,8 @@ class Statistics {
    *
    * TODO do we really need this function?
    *
+   * @private
+   *
    * @return {number} the number of random numbers required
    */
   __randomNumbersRequired() {
@@ -621,7 +626,7 @@ class Statistics {
   /**
    * Calculate Dictionary statistics
    *
-   * @return {object} - the statistics
+   * @return {Object} - the statistics
    *
    * @private
    */

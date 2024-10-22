@@ -1,23 +1,29 @@
 /* istanbul ignore file @preserve */
 
+/**
+ * @module web/PasswordController
+ */
 import log from 'loglevel';
 
 /**
- * @class PasswordController
+ * @class This class handles the section of the actual passwords.
+ * So the generation of the passwords and statistics.
+ *
+ * @constructor
  */
 class PasswordController {
   /**
-   * @private model - reference to password model
+   * model - reference to password model
    */
   #model;
 
   /**
-   * @private view - reference to PasswordView
+   * view - reference to PasswordView
    */
   #view;
 
   /**
-   * @constructor
+   * Constructor
    *
    * @param {XKPasswd} model - new PasswordModel
    * @param {PasswordView} view - new PasswordView
@@ -32,10 +38,13 @@ class PasswordController {
   }
 
   /**
-   * Handle the password generation.
+   * Handle the password generation. This method is passed to the
+   * [bindGeneratePassword method of the PasswordView class]{@link PasswordView#bindGeneratePassword}
+   * as the
+   * function to handle the actual generation of the passwords.
    *
-   * @function generatePasswords
    * @param {number} num - number of passwords to generate
+   * @function
    */
   generatePasswords = (num) => {
     // call generatePasswords from library

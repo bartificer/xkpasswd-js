@@ -1,27 +1,31 @@
 /* istanbul ignore file @preserve */
+
+/**
+ * @module web/SettingsController
+ */
 import log from 'loglevel';
 
 /**
- * @class SettingsController
+ * @class This class handles the entire Settings pane
+ * @constructor
  */
 class SettingsController {
   /**
-   * @private model - reference to settings model
+   * model - reference to settings model
    */
   #model;
 
   /**
-   * @private view - reference to SettingsView
+   * view - reference to SettingsView
    */
   #view;
 
   /**
-   * @private config - reference to ConfigController
+   * config - reference to ConfigController
    */
   #config;
+  // eslint-disable-next-line jsdoc/require-description
   /**
-   * @constructor
-   *
    * @param {Object} model - new SettingsModel
    * @param {SettingsView} view - new SettingsView
    */
@@ -47,9 +51,10 @@ class SettingsController {
 
   /**
    * Convert the rendered settings back to the model and pass it on
-   * to the XKpasswd class to use for password generation
+   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use for password generation
    *
    * @param {Object} settings - the object containing the new settings
+   * @function
    */
   saveSettings = (settings) => {
     log.trace(`controller saveSettings: ${JSON.stringify(settings)}`);

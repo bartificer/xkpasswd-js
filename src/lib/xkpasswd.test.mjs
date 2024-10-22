@@ -223,9 +223,9 @@ describe('Test XKPassword class', () => {
     });
   });
 
-  describe('Test function toTitleCase', () => {
+  describe('Test internal function __toTitleCase', () => {
     test('string is lowercase returns Lowercase', () => {
-      expect(me.toTitleCase('lowercase')).toBe('Lowercase');
+      expect(me.__toTitleCase('lowercase')).toBe('Lowercase');
     });
   });
 

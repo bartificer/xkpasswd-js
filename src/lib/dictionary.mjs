@@ -1,14 +1,18 @@
 /**
- * Abstract class to implement various dictionaries
+ * Generic class to implement various dictionaries
  *
- * @namespace XKP
- * @module Dictionary
+ * @module lib/Dictionary
+ * @abstract
  */
 
 import log from 'loglevel';
 /**
- * class for a Dictionary
- * @class
+ * Class for a Dictionary. This class should not be instantiated
+ * but rather used to extended with various dictionaries. This class
+ * provides the necessary functions to use the dictionary.
+ *
+ * @class Dictionary
+ * @constructor
  */
 class Dictionary {
   #wordListLength; // length of the word list, convenience variable
@@ -16,8 +20,10 @@ class Dictionary {
   #maxWordLength; // longest word length
 
   /**
-   * Constructor for English Dictionary
-   * @constructor
+   * Constructor for the Dictionary class.
+   * This class is abstract and cannot be instantiated directly.
+   *
+   * @throws {Error} Will throw an error if attempted to instantiate.
    */
   constructor() {
     if (this.constructor === Dictionary) {

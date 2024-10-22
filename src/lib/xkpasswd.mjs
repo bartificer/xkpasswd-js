@@ -1,7 +1,7 @@
 /**
  * This is the main class that interfaces with the webapp
  *
- * @module XKPasswd
+ * @module lib/XKPasswd
  */
 
 import is from 'is-it-check';
@@ -14,7 +14,9 @@ import {Statistics} from './statistics.mjs';
 
 /**
  * Main class
+ *
  * @class XKPasswd
+ * @constructor
  */
 class XKPasswd {
   #passwordCounter;
@@ -28,7 +30,6 @@ class XKPasswd {
 
   /**
    * constructor
-   * @constructor
    */
   constructor() {
     this.#preset = new Presets();
@@ -61,7 +62,7 @@ class XKPasswd {
   /**
    * Create a CUSTOM preset and set the default preset to it.
    *
-   * @param {object} settings - object containing the settings
+   * @param {Object} settings - object containing the settings
    */
   setCustomPreset(settings) {
     const preset = {
@@ -97,7 +98,7 @@ class XKPasswd {
    * Generate the password(s) and stats
    *
    * @param {number} num - number of passwords to generate
-   * @return {object} - contains the passwords and the stats
+   * @return {Object} - contains the passwords and the stats
    */
   generatePassword(num) {
     const passwords = this.passwords(num);
@@ -234,6 +235,8 @@ class XKPasswd {
    *   config variable.
    * - Treat this as a private function
    *
+   * @private
+   *
    * @param {array} words - array of words to be transformed
    * @return {array} - array of transformed words
    * @throws exception when there is a problem
@@ -259,7 +262,7 @@ class XKPasswd {
       return words.map((el) => el = el.toLowerCase());
 
     case 'CAPITALISE':
-      return words.map( (el) => el = this.toTitleCase(el));
+      return words.map( (el) => el = this.__toTitleCase(el));
 
     case 'INVERT':
       // return words in uppercase but first letter is lowercase
@@ -287,8 +290,10 @@ class XKPasswd {
    * Turn the string into a title case
    * @param {string} str - string to be converted
    * @return {string} - converted string
+   *
+   * @private
    */
-  toTitleCase(str) {
+  __toTitleCase(str) {
     return str.toLowerCase().
       replaceAll(/(?:^|\s|-)\S/g, (x) => x.toUpperCase());
   }
@@ -410,6 +415,8 @@ class XKPasswd {
    * TODO - should this be implemented? there is no config option for it
    * @param {any} words
    * @return {any}
+   *
+   * @private
    */
   __substituteCharacters(words) {
     return words;
@@ -421,6 +428,8 @@ class XKPasswd {
    * @param {any} passwd
    * @param {any} separator
    * @return {any} - the padded password
+   *
+   * @private
    */
   __padWithDigits(passwd, separator) {
     if (this.#config.padding_digits_before > 0) {
@@ -441,6 +450,9 @@ class XKPasswd {
    * @param {any} passwd
    * @param {any} padChar
    * @return {any} - the padded password
+   *
+   * @private
+   *
    */
   __padWithChar(passwd, padChar) {
     if (this.#config.padding_characters_before > 0) {
