@@ -51,7 +51,8 @@ class SettingsController {
 
   /**
    * Convert the rendered settings back to the model and pass it on
-   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use for password generation
+   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use
+   * for password generation
    *
    * @param {Object} settings - the object containing the new settings
    * @function
