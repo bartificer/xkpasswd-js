@@ -37,17 +37,20 @@ const map = [
  */
 class ConfigController {
   /**
-   * @private {XKPasswd} model - reference to password model
+   * {XKPasswd} model - reference to password model
+   * @private
    */
   #model;
 
   /**
-   * @private {ConfigView} view - reference to ConfigView
+   * {ConfigView} view - reference to ConfigView
+   * @private
    */
   #view;
 
   /**
-   * @private {SettingsController} settingsController - reference to SettingsController
+   * {SettingsController} settingsController - reference to SettingsController
+   * @private
    */
   #settingsController;
 

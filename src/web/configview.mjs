@@ -11,19 +11,22 @@ import log from 'loglevel';
  */
 class ConfigView {
   /**
-   * @private {jQuery} configUrl - Readonly text input to display the url
+   * {jQuery} configUrl - Readonly text input to display the url
    * encoded settings
+   * @private
    */
   #configUrl;
 
   /**
-   * @private {Object} configURLBtn - copy button to copy the url
+   * {Object} configURLBtn - copy button to copy the url
+   * @private
    */
   #configUrlBtn;
 
-  /*
-   * @private {Object} configUrlBox - div containing the button and input text
+  /**
+   * {Object} configUrlBox - div containing the button and input text
    * for the config url
+   * @private
    */
   #configUrlBox;
 
