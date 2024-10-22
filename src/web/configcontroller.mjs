@@ -129,7 +129,7 @@ class ConfigController {
       link.searchParams.set('p', preset.toUpperCase());
     }
 
-    this.#view.updateLink(link);
+    this.#view.updateConfigUrl(link);
   }
 
   /**
