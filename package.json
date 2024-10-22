@@ -1,6 +1,6 @@
 {
   "name": "xkpasswdjs",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "The Official JavaScript Port of Crypt::HSXKPasswd",
   "author": "Bartificer creations",
   "license": "ISC",
