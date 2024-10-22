@@ -98,12 +98,12 @@ class ConfigView {
   };
 
   /**
-   * Update the settings link
+   * Update the  config url
    *
    * @param {URL} url - the url to display
    */
-  updateLink(url) {
-    this.#savedSettingsLink.val(url);
+  updateConfigUrl(url) {
+    this.#configUrl.val(url);
   }
 }
 
