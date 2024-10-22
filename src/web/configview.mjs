@@ -1,6 +1,3 @@
-/**
- * @module web/ConfigView
- */
 import log from 'loglevel';
 
 /**
@@ -8,31 +5,32 @@ import log from 'loglevel';
  * actions on custom settings.
  *
  * This class takes care of the 2 menu items in the Actions menu
- * and the settingsLink with the base64encoded settings.
+ * and the configUrl with the base64encoded settings.
  *
- * @constructor
+ * @class ConfigView
  */
 class ConfigView {
   /**
-   * {jQuery} savedSettingsLink - Readonly text input to display link
+   * @private {jQuery} configUrl - Readonly text input to display the url
    * encoded settings
    */
-  #savedSettingsLink;
+  #configUrl;
 
   /**
-   * {Object} copySettingsLink - copy button to copy the url
+   * @private {Object} configURLBtn - copy button to copy the url
    */
-  #copySettingsLink;
+  #configUrlBtn;
 
-  /**
-   * {Object} settingsDiv - div containing the settingslink
+  /*
+   * @private {Object} configUrlBox - div containing the button and input text
+   * for the config url
    */
-  #settingsDiv;
+  #configUrlBox;
 
   constructor() {
-    this.#savedSettingsLink = $('#savedSettingsLink');
-    this.#copySettingsLink = $('#copySettingsLink');
-    this.#settingsDiv = $('#settings-link');
+    this.#configUrl = $('#configUrl');
+    this.#configUrlBtn = $('#copyConfigUrlBtn');
+    this.#configUrlBox = $('#configUrlBox');
   }
 
   /**
@@ -81,31 +79,31 @@ class ConfigView {
   }
 
   /**
-   * Bind the copy button in the settings link
+   * Bind the copy button in the configUrlBox
    *
    * @param {function} handle - pass control to the Controller to save the link
    */
-  bindCopySettingsLink(handle) {
-    this.#settingsDiv.on('click', () => {
-      this.#savedSettingsLink.select();
-      handle(this.#savedSettingsLink.val());
-      this.#copySettingsLink.children('i')
+  bindConfigUrlBox(handle) {
+    this.#configUrlBox.on('click', () => {
+      this.#configUrl.select();
+      handle(this.#configUrl.val());
+      this.#configUrlBtn.children('i')
         .removeClass('bi-copy')
         .fadeIn(500).addClass('bi-check');
       setTimeout(() => {
-        this.#copySettingsLink.children('i')
+        this.#configUrlBtn.children('i')
           .removeClass('bi-check').addClass('bi-copy');
       }, 1000);
     });
   };
 
   /**
-   * Update the settings link
+   * Update the config url
    *
    * @param {URL} url - the url to display
    */
-  updateLink(url) {
-    this.#savedSettingsLink.val(url);
+  updateConfigUrl(url) {
+    this.#configUrl.val(url);
   }
 }
 
