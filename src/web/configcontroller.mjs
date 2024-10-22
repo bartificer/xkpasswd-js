@@ -37,17 +37,17 @@ const map = [
  */
 class ConfigController {
   /**
-   * {XKPasswd} model - reference to password model
+   * @private {XKPasswd} model - reference to password model
    */
   #model;
 
   /**
-   * {ConfigView} view - reference to ConfigView
+   * @private {ConfigView} view - reference to ConfigView
    */
   #view;
 
   /**
-   * {SettingsController} settingsController - reference to SettingsController
+   * @private {SettingsController} settingsController - reference to SettingsController
    */
   #settingsController;
 
@@ -164,7 +164,7 @@ class ConfigController {
    * Convert an url into a settings object for further processing
    * Return an empty object if there is no parameter in the url.
    *
-   * @param url - the url from the window.location or from the settingslink
+   * @param url - the URL from the window.location or from the configUrl
    * @return {Object} - empty object if something went wrong, or settings object
    */
   fromUrl(url) {

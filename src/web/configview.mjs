@@ -7,7 +7,7 @@ import log from 'loglevel';
  * This class takes care of the 2 menu items in the Actions menu
  * and the configUrl with the base64encoded settings.
  *
- * @class ConfigView
+ * @constructor
  */
 class ConfigView {
   /**
