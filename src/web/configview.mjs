@@ -29,7 +29,7 @@ class ConfigView {
 
   constructor() {
     this.#configUrl = $('#configUrl');
-    this.#configUrlBtn = $('#configUrlBtn');
+    this.#configUrlBtn = $('#copyConfigUrlBtn');
     this.#configUrlBox = $('#configUrlBox');
   }
 
@@ -87,11 +87,11 @@ class ConfigView {
     this.#configUrlBox.on('click', () => {
       this.#configUrl.select();
       handle(this.#configUrl.val());
-      this.#configUrl.children('i')
+      this.#configUrlBtn.children('i')
         .removeClass('bi-copy')
         .fadeIn(500).addClass('bi-check');
       setTimeout(() => {
-        this.#configUrl.children('i')
+        this.#configUrlBtn.children('i')
           .removeClass('bi-check').addClass('bi-copy');
       }, 1000);
     });
