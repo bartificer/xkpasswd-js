@@ -41,6 +41,6 @@ After the re-organisation the repositories should be configured as follows:
 2. [bartificer/xkpasswd-userguide](https://github.com/bartificer/xkpasswd-userguide) 
    1. Host the home page for the library as a whole via GitHub Pages, i.e. an expanded version of the original user guide with a list of *blessed* ports added
    2. Moved to the chosen domain for the library as a whole
-3. [bartificer/xkpasswd-js](https://github.com/bartificer/xkpasswd-js) — both the JavaScript port of the old Perl module and a new web interface
+3. [bartificer/xkpasswd-js](https://github.com/bartificer/xkpasswd-js)
    * Host the JavaScript port of the module to support continued development
    * Host the API documentation for the JavaScript library using GitHub Pages on the `js.xkpasswd.net` subnet
