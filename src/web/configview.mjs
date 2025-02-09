@@ -5,25 +5,28 @@ import log from 'loglevel';
  * actions on custom settings.
  *
  * This class takes care of the 2 menu items in the Actions menu
- * and the configUrl with the base64encoded settings.
+ * and the config Url with the base64encoded settings.
  *
  * @constructor
  */
 class ConfigView {
   /**
-   * @private {jQuery} configUrl - Readonly text input to display the url
+   * {jQuery} configUrl - Readonly text input to display the url
    * encoded settings
+   * @private
    */
   #configUrl;
 
   /**
-   * @private {Object} configURLBtn - copy button to copy the url
+   * {Object} configURLBtn - copy button to copy the url
+   * @private
    */
   #configUrlBtn;
 
-  /*
-   * @private {Object} configUrlBox - div containing the button and input text
+  /**
+   * {Object} configUrlBox - div containing the button and input text
    * for the config url
+   * @private
    */
   #configUrlBox;
 
@@ -98,7 +101,7 @@ class ConfigView {
   };
 
   /**
-   * Update the config url
+   * Update the  config url
    *
    * @param {URL} url - the url to display
    */

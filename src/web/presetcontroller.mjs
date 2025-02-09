@@ -70,10 +70,31 @@ class PresetController {
 
     // Tell the SettingsController to update
     const config = this.#model.getPreset().config();
-    this.#settingsController.updateSettings(config);
+    this.#settingsController.updateSettings(config, preset);
 
     // Tell the passwordController to erase the passwords
     this.#passwordController.clearPasswords();
+  };
+
+  /**
+   * Activate a preset button
+   * 
+   * @param {string} preset - Name of the preset
+   */
+  updatePresetView = (preset) => {
+    log.trace(`updatePresetView: ${preset}`);
+
+    const names = this.#model.getPresets();
+    const presetName = preset.toUpperCase();
+
+    if (names.includes(presetName)) {
+      const button = $(`[data-preset='${presetName}']`);
+      button.addClass('active');
+    }
+
+    const description = this.#model.getPreset().description();
+    this.#view.displayDescription(description);
+    this.#view.setTitle(presetName);
   };
 }
 

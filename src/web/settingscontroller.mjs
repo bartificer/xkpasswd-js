@@ -47,11 +47,16 @@ class SettingsController {
    */
   setConfigController( configController) {
     this.#config = configController;
+
+    // Now that the configController is set, we can update the Config Url
+     const config = this.#model.getPreset().config();
+    this.#config.updateLink(config);
   }
 
   /**
    * Convert the rendered settings back to the model and pass it on
-   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use for password generation
+   * to the [XKPasswd]{@link module:lib/XKPasswd~XKPasswd} class to use
+   * for password generation
    *
    * @param {Object} settings - the object containing the new settings
    * @function
@@ -79,12 +84,11 @@ class SettingsController {
    *
    * @param {Object} config - the configuration
    */
-  updateSettings(config) {
+  updateSettings(config, preset = null) {
     log.trace(`controller updateSettings: ${JSON.stringify(config)}`);
     try {
       this.#view.renderSettings(config);
-      // Update the URL with the encoded settings
-      this.#config.updateLink(config);
+      this.#config.updateLink(config, preset);
     } catch (e) {
       this.#view.renderConfigError(e);
     }

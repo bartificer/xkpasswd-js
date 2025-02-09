@@ -37,17 +37,20 @@ const map = [
  */
 class ConfigController {
   /**
-   * @private {XKPasswd} model - reference to password model
+   * {XKPasswd} model - reference to password model
+   * @private
    */
   #model;
 
   /**
-   * @private {ConfigView} view - reference to ConfigView
+   * {ConfigView} view - reference to ConfigView
+   * @private
    */
   #view;
 
   /**
-   * @private {SettingsController} settingsController - reference to SettingsController
+   * {SettingsController} settingsController - reference to SettingsController
+   * @private
    */
   #settingsController;
 
@@ -108,12 +111,26 @@ class ConfigController {
 
   /**
    * Update the configUrl content
-   * @param {Object} settings - configuration to convert to a URL
+   *
+   * @param {object} settings - configuration to convert to a URL
+   * @param {string} preset - (Optional) The name of the preset
    */
-  updateLink(settings) {
+  updateLink(settings, preset = null) {
     log.trace(`updateLink: ${JSON.stringify(settings)}`);
-    const url = this.toUrl(settings);
-    this.#view.updateConfigUrl(url);
+
+    const link = new URL(window.location);
+
+    // Build the link with the correct search parameters
+    if (preset == null) {
+      const url = this.toUrl(settings);
+      link.href = url;
+      link.searchParams.delete('p');
+    } else {
+      link.searchParams.delete('c');
+      link.searchParams.set('p', preset.toUpperCase());
+    }
+
+    this.#view.updateConfigUrl(link);
   }
 
   /**
@@ -127,20 +144,38 @@ class ConfigController {
 
 
   /**
-   * Loads the settings from a URL and store them in the model
+   * Loads the settings from a URL and store them in the model,
+   * and returns the name of the preset if specified.
    *
    * @param {string} url - The URL to try to extract the settings from
+   * @return {string} - The name of the preset or CUSTOM if custom URL.
    */
   loadFromUrl(url) {
     log.trace(`loadFromUrl: ${url}`);
-    const settings = this.fromUrl(url);
 
-    if (JSON.stringify(settings) !== '{}') {
-      // somehow I cannot get the settings object to match an empty object
-      // without doing this stringify action
-      this.#model.setCustomPreset(settings);
-      this.#settingsController.updateSettings(settings);
-      this.#view.updateConfigUrl(window.location);
+    const validParams = ['c', 'p'];
+    const link = new URL(url);
+    const params = link.searchParams;
+    const queryParam = validParams.find(x => params.get(x) !== null);
+
+    switch(queryParam) {
+      case "c":
+        const settings = this.fromUrl(url);
+        if (JSON.stringify(settings) !== '{}') {
+          // somehow I cannot get the settings object to match an empty object
+          // without doing this stringify action
+          this.#model.setCustomPreset(settings);
+          this.#settingsController.updateSettings(settings);
+        }
+        return "CUSTOM";
+      case "p":
+        const preset = params.get(queryParam).toUpperCase();
+        this.#model.setPreset(preset);
+        link.searchParams.set('p', preset);
+        this.#view.updateConfigUrl(link, preset);
+        return preset;
+      default:
+        break;
     }
   }
 
@@ -173,7 +208,7 @@ class ConfigController {
     const settings = {};
     let values = null;
 
-    if (params.get('c') == null) {
+    if (params.get('c') == null && params.get('p') == null) {
       return {};
     }
 

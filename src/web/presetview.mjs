@@ -81,6 +81,15 @@ class PresetView {
   }
 
   /**
+   * Update the title in the preset view
+   *
+   * @param {string} preset - the selected preset
+   */
+  setTitle(preset) {
+    this.__setPresetHeader(preset);
+  }
+
+  /**
    * This is the function that is called
    * when one of the preset buttons is clicked
    *

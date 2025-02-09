@@ -81,7 +81,12 @@ const XKP = {
         XKP.passwordController);
 
     // Load custom settings if present in the URL
-    XKP.configController.loadFromUrl(window.location);
+    const presetName = XKP.configController.loadFromUrl(window.location);
+
+    if (presetName !== undefined) {
+      XKP.presetController.updatePresetView(presetName);
+    }
+
   },
 };
 
