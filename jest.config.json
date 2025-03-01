@@ -9,7 +9,7 @@
         "/archive/"
       ],
       "testMatch": [
-        "<rootDir>/src/lib/**/?*.test.mjs"
+        "<rootDir>/src/**/?*.test.mjs"
       ]
     },
     {
