@@ -32,7 +32,7 @@
     "default": {
       "staticFiles": {
         "include": [
-          "src/docs/jsdoc-xkp.css"
+          "docs-other/jsdoc-xkp.css"
         ]
       }
     }
