@@ -1,0 +1,75 @@
+/*
+ * Styling for the XKPasswd webapp
+ */
+
+body {
+  --bs-font-sans-serif: 'Noto Sans', sans-serif;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-font-family: var(--bs-font-sans-serif);
+  font-family: 'Noto Sans', sans-serif;
+}
+
+#main {
+  background-color: inherit;
+}
+
+.navbar-brand img {
+  max-height: 4rem;
+}
+
+.container {
+  height: 350px;
+}
+
+.container .img-fluid {
+  display: block;
+  width: auto;
+  max-height: 350px;
+}
+
+/* remove the spinner buttons in Webkit based browsers
+   such as Safari, Chrome and Arc
+ */
+#main input[type='number']::-webkit-inner-spin-button,
+#main input[type='number']::-webkit-outer-spin-button  {
+  /* -webkit-appearance: none; */
+  appearance: none;
+  margin: 0;
+}
+
+/* remove the spinner buttons in Mozilla based browsers
+   such as Firefox
+*/
+
+#main input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.btn-stats {
+  --bs-btn-padding-y: .15rem;
+  --bs-btn-padding-x: .5rem;
+  --bs-btn-font-size: .85rem;
+
+  font-weight: 800;
+}
+
+/* make the checkmark bigger and green
+ */
+#generated_password_lst button.list-group-item i.bi-check, #copySettingsLink i.bi-check {
+  color: rgba(var(--bs-success-rgb)) !important;
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
+
+.password-textbox {
+  overflow: auto;
+  resize: none;
+}
+
+.link {
+  color: #0602e8;
+}
+
+.input-group-text {
+  font-weight: 400;
+}
