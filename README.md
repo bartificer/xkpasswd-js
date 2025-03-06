@@ -2,6 +2,9 @@
 
 # XKPasswdJS — The Official JavaScript Port of Crypt::HSXKPasswd
 
+__UPDATE 2025-03-07__ XKPasswd has come out of beta and can now be found on <a href="https://www.xkpasswd.net/">www.xkpasswd.net</a>
+
+
 [Bart Busschots](https://www.bartb.ie/) created the [Crypt::HSXKPasswd](https://metacpan.org/pod/Crypt::HSXKPasswd) Perl module to be a liberally licensed ([2-clause BSD](https://opensource.org/licenses/BSD-2-Clause)) password generator for producing secure but memorable passwords using the word-based approach made famous by the [*Correct Horse Battery Staple* XKCD comic](https://xkcd.com/936/).
 
 ![To anyone who understands information theory and security and is in an infuriating argument with someone who does not (possibly involving mixed case), I sincerely apologize.](https://imgs.xkcd.com/comics/password_strength.png)
@@ -10,7 +13,7 @@ Bart is leading this port of the Perl module to JavaScript with the [NosillaCast
 
 ## Current version of the app
 
-For anyone interesting in just playing with the current version, which is rather limited in functionality, you can check out the app here: <a href="https://bartificer.github.io/xkpasswd-js/">XKPasswd</a>
+For anyone interesting in just playing with the current version, you can check out the app here: <a href="https://www.xkpasswd.net/">XKPasswd.net</a>
 
 ## Project Plan
 
