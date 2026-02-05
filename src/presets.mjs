@@ -550,9 +550,9 @@ class Presets {
 
     // set the min and max word lengths
     const [min, max] = this.__getMinMaxWordLength(
-      config.min_word_length, config.max_word_length);
-    newConfig.min_word_length = min;
-    newConfig.max_word_length = max;
+      config.word_length_min, config.word_length_max);
+    newConfig.word_length_min = min;
+    newConfig.word_length_max = max;
 
     // make sure num_words >= 2
     newConfig.num_words = Math.max(2, config.num_words);
