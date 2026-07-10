@@ -10,7 +10,17 @@ import log from 'loglevel';
 import {RandomBasic} from './randombasic.mjs';
 import {Presets} from './presets.mjs';
 import {DictionaryEN} from './dictionaryEN.mjs';
+import {DictionaryPTBR} from './dictionaryPTBR.mjs';
 import {Statistics} from './statistics.mjs';
+
+/**
+ * Registry of available dictionaries by language code.
+ * @type {Object.<string, Function>}
+ */
+const DICTIONARIES = {
+  'EN': DictionaryEN,
+  'PT-BR': DictionaryPTBR,
+};
 
 /**
  * Main class
@@ -57,6 +67,41 @@ class XKPasswd {
 
     // Refresh the statistics
     this.#statsClass = new Statistics(this.#config, this.#dictionary);
+  }
+
+  /**
+   * Set the dictionary language.
+   *
+   * @param {string} language - language code (e.g. 'EN', 'PT-BR')
+   * @throws {Error} Will throw an error if the language is not supported.
+   */
+  setDictionary(language) {
+    if (is.undefined(language) || is.not.string(language)) {
+      throw new Error('Parameter "language" must be a string');
+    }
+
+    const lang = language.toUpperCase();
+    const DictClass = DICTIONARIES[lang];
+
+    if (is.undefined(DictClass)) {
+      throw new Error(
+        `Unsupported language "${language}". ` +
+        `Available: ${Object.keys(DICTIONARIES).join(', ')}`,
+      );
+    }
+
+    this.#dictionary = new DictClass();
+    // Refresh the statistics with the new dictionary
+    this.#statsClass = new Statistics(this.#config, this.#dictionary);
+  }
+
+  /**
+   * Get the list of available dictionary languages.
+   *
+   * @return {Array<string>} - array of language codes
+   */
+  getLanguages() {
+    return Object.keys(DICTIONARIES);
   }
 
   /**
