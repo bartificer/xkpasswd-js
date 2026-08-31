@@ -23,6 +23,11 @@ describe('Test language/dictionary selection', () => {
       expect(langs).toContain('EN');
       expect(langs).toContain('PT-BR');
     });
+
+    test('it includes ES', () => {
+      const langs = me.getLanguages();
+      expect(langs).toContain('ES');
+    });
   });
 
   describe('setDictionary()', () => {
@@ -46,6 +51,11 @@ describe('Test language/dictionary selection', () => {
     test('it accepts PT-BR (case-insensitive)', () => {
       expect(() => me.setDictionary('pt-br')).not.toThrow();
       expect(() => me.setDictionary('PT-BR')).not.toThrow();
+    });
+
+    test('it accepts ES (case-insensitive)', () => {
+      expect(() => me.setDictionary('es')).not.toThrow();
+      expect(() => me.setDictionary('ES')).not.toThrow();
     });
   });
 
@@ -88,6 +98,54 @@ describe('Test language/dictionary selection', () => {
     });
 
     test('passwords function returns correct number with PT-BR', () => {
+      const pwArray = me.passwords(3);
+      expect(pwArray).toHaveLength(3);
+      pwArray.forEach((pw) => {
+        expect(typeof pw).toBe('string');
+        expect(pw.length).toBeGreaterThan(0);
+      });
+    });
+  });
+
+  describe('Password generation with ES dictionary', () => {
+    beforeEach(() => {
+      me.setDictionary('ES');
+    });
+
+    test('it generates a password string', () => {
+      const password = me.password();
+      expect(typeof password).toBe('string');
+      expect(password.length).toBeGreaterThan(0);
+    });
+
+    test('it generates different passwords each time', () => {
+      const passwords = [];
+      for (let i = 0; i < 10; i++) {
+        passwords.push(me.password());
+      }
+      const unique = [...new Set(passwords)];
+      expect(unique.length).toBe(10);
+    });
+
+    test('it works with XKCD preset', () => {
+      me.setPreset('XKCD');
+      me.setDictionary('ES');
+      const password = me.password();
+      expect(typeof password).toBe('string');
+      // XKCD preset: 5 words, 4-8 chars, separated by dash
+      expect(password).toMatch(/([a-zA-Z]{4,8}-){4}[a-zA-Z]{4,8}/);
+    });
+
+    test('it works with TEMPORARY preset', () => {
+      me.setPreset('TEMPORARY');
+      me.setDictionary('ES');
+      const password = me.password();
+      expect(typeof password).toBe('string');
+      // TEMPORARY: 2 words, 4 chars, capitalised, dash separator, 2 digits
+      expect(password).toMatch(/([A-Z][a-z]{3}[-]){2}\d\d/);
+    });
+
+    test('passwords function returns correct number with ES', () => {
       const pwArray = me.passwords(3);
       expect(pwArray).toHaveLength(3);
       pwArray.forEach((pw) => {

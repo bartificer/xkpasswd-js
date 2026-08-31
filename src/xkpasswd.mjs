@@ -11,6 +11,7 @@ import {RandomBasic} from './randombasic.mjs';
 import {Presets} from './presets.mjs';
 import {DictionaryEN} from './dictionaryEN.mjs';
 import {DictionaryPTBR} from './dictionaryPTBR.mjs';
+import {DictionaryES} from './dictionaryES.mjs';
 import {Statistics} from './statistics.mjs';
 
 /**
@@ -20,6 +21,7 @@ import {Statistics} from './statistics.mjs';
 const DICTIONARIES = {
   'EN': DictionaryEN,
   'PT-BR': DictionaryPTBR,
+  'ES': DictionaryES,
 };
 
 /**
